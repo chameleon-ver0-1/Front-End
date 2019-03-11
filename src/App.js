@@ -4,7 +4,9 @@ import axios from 'axios';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 //MARKUP: add component down here jihu
-import Login from  './components/independent/login/Login';
+
+// import Index from './components/independent/index';
+import { Auth} from './components/independent';
 
 
 
@@ -13,13 +15,11 @@ class App extends Component {
   componentDidMount() {
 
   }
-
   render() {
     return (
       <Router>
         <div className="App">
-          <Login/>
-
+          <Auth/>
         </div>
       </Router>
     );
