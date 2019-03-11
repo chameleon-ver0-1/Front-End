@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class SignIn extends Component {
   render() {
     return (
-      <h2>Hello Jihu</h2>
+      <h2>Hello Yoonyoung</h2>
     )
   }
 }
