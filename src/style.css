@@ -1,18 +1,13 @@
 /* MARKUP: global style */
 * {
-  --main-bg-color: #f4f4f4;
-  --main-txt-color: #333;
-  --header-bg-color: #333;
-  --header-txt-color: #f4f4f4;
+  --main-color: #333;
 }
 
 body {
   margin: 0;
   padding: 0;
   line-height: 1.5;
-  background: var(--main-bg-color);
   font-family: Arial, Helvetica, sans-serif;
-  color: var(--main-txt-color);
   font-size: 14px;
 }
 
