@@ -1,0 +1,93 @@
+
+@import '../../../../style.css';
+
+* {
+  /* margin: 0px;
+  padding: 0px; */
+}
+
+
+.nav2-container {
+
+  display: flex;
+  background: var(--greenish-teal);
+
+  width: 100vw;
+  height: 64px;
+
+  border-bottom: 1px solid var(--white-two)
+
+}
+.logo2 {
+  /* TODO: font size 적용하기 */
+
+  flex: 1;
+
+  padding-top:17px;
+  padding-left: 37px;
+  padding-bottom:19px;
+
+  overflow: hidden;
+
+  color: white;
+
+
+}
+
+.nav-right {
+  flex:1;
+  display:flex;
+  justify-content: flex-end;
+  padding-top:  16px;
+  padding-right: 29px;
+
+
+}
+
+.notice-btn {
+  width:20px;
+  height:28px;
+
+  padding-right: 32px;
+
+  background:none;
+  background-image: url('../../assets/notice.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.userProfile {
+
+  padding-right: 13px;
+
+  width:38px;
+  height: 37px;
+}
+
+.userInfo-container {
+  padding-right: 30px;
+
+  width:125px;
+}
+
+.userName {
+  color:white;
+  font-size:0.83rem;
+}
+
+.userDepartment  {
+  color:white;
+  font-size:0.6rem;
+
+}
+
+.moreInfo {
+  padding-top: 17px;
+  padding-bottom: 14px;
+
+  width:17px;
+  height: 11px;
+
+  background-image: url('../../assets/more-info.png');
+  background:none;
+}

@@ -7,6 +7,7 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 // import Index from './components/independent/index';
 import { Auth} from './components/independent';
+import { Navbar, Navbar2, Menu } from './components/common';
 
 
 
@@ -19,7 +20,9 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Auth/>
+          {/* <Auth/> */}
+          <Navbar2/>
+          <Menu/>
         </div>
       </Router>
     );

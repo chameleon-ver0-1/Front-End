@@ -1,5 +1,6 @@
 /* MARKUP: global style */
 :root {
+
   --greenish-teal: #34c88a;
   --pinkish-grey: #c0c0c0;
   --light-black: #202020;
@@ -12,38 +13,20 @@
   --white-four: #f6f6f6;
   --white-five: #ececec;
   --white-six: #fefefe;
+
 }
 
 body {
-  margin: 0;
-  padding: 0;
+
   line-height: 1.5;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 16px;
+  font-size: 20px;
+
 }
 
-.wrapper {
-display: flex;
-flex-flow:row wrap;
-}
 
-.inline-box {
-display: flex;
-}
 .wrapper > * {
 
 flex: 1 100%;
-}
-
-@media all and (min-width: 800px) {
-.menubar-box { flex: 1;}
-}
-
-
-@media all and (min-width: 800px) {
-.mainbar {order: 1}
-.menubar-box {order: 2}
-.footer-bar { order:3}
-
 }
 
