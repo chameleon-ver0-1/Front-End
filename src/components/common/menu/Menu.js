@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import './menu.style.css';
 
 export class menu extends Component {
   render() {
