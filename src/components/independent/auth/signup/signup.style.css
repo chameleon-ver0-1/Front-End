@@ -1,8 +1,10 @@
+@import '../../../../style.css';
+
 .login-input2{
   width: 147px;
   height: 38px;
   object-fit: contain;
   border-radius: 18.8px;
-  border: solid 1px #c0c0c0;
+  border: solid 1px var(--pinkish-grey);
 }
 

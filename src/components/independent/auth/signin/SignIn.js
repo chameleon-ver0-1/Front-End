@@ -35,7 +35,7 @@ class SignIn extends Component {
               type="text"
               name="username"
               className="login-input"
-              placeholder="이메일"/>
+              placeholder="이메일 주소를 입력해주세요"/>
           </div>
           <br/>
           <div className="input-group">
@@ -45,7 +45,7 @@ class SignIn extends Component {
               type="password"
               name="password"
               className="login-input"
-              placeholder="비밀번호"/>
+              placeholder="비밀번호를 입력해주세요"/>
           </div>
           <br/>
 
@@ -73,6 +73,8 @@ class SignIn extends Component {
            type="button"
            className="kakao-btn"
            onClick={this.submitLogin.bind(this)}>카카오 로그인</button>
+
+
         </div>
       </div>
     );
