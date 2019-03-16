@@ -50,8 +50,10 @@
 
   padding-right: 32px;
 
+  border:none;
+
   background:none;
-  background-image: url('../../assets/notice.png');
+  background-image: url('../../assets/alert_off.png');
   background-repeat: no-repeat;
   background-size: auto;
 }
@@ -88,6 +90,8 @@
   width:17px;
   height: 11px;
 
-  background-image: url('../../assets/more-info.png');
+  border:none;
+
+  background-image: url('../../assets/moreInfo.png');
   background:none;
 }

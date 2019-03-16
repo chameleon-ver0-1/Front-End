@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import './navbar2.style.css';
 
 
-import userProfile from'../../assets/profile-image.png';
-import moreInfo from '../../assets/more-info.png';
+import userProfile from'../../assets/userProfile.png';
+
 
 export class Navbar2 extends Component {
   render() {
@@ -18,7 +18,7 @@ export class Navbar2 extends Component {
             <p className="userName">권주희 Kwonju hee</p>
             <p className="userDepartment">디자인 부서</p>
             </div>
-            <button className="moreInfo" src={moreInfo}></button>
+            <button className="moreInfo"></button>
           </div>
 
 
