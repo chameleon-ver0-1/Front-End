@@ -1,13 +1,15 @@
 @import '../../../../style.css';
 
+
 .header{
+  font-size: 30px;
   position: absolute;
   top: 20%;
   left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .box-container {
-  border:  solid var(--greenish-teal);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -15,7 +17,6 @@
   max-width: 24em;
   min-width: 21em;
   box-shadow: 0px 0px 20px 0px rbga(15,15,15,0.2);
-  border-radius: 6px;
   padding: 50px;
   object-fit: contain;
   align-items: center;
@@ -61,4 +62,11 @@
 .input-group{
   position: relative;
   align-items: center;
+}
+
+.forget-btn{
+  margin: auto;
+  border: none;
+  background: none;
+  color: var(--brownish-grey);
 }

@@ -51,13 +51,17 @@ class SignUp extends Component {
               type="text"
               name="company"
               className="login-input2"
-              placeholder="회사명"/>
+              placeholder="회사명"
 
-              <input
-              type="text"
-              name="company"
-              className="login-input2"
-              placeholder="부서명"/>
+              />
+
+            <button><img src="../../../../assets/search.png" /></button>
+
+            <input
+            type="text"
+            name="company"
+            className="login-input2"
+            placeholder="부서명"/>
           </div>
 
           <br/>

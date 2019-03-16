@@ -74,7 +74,11 @@ class SignIn extends Component {
            className="kakao-btn"
            onClick={this.submitLogin.bind(this)}>카카오 로그인</button>
 
-
+          <br/>
+          <button
+          type="button"
+          className="forget-btn"
+          onClick={this.submitLogin.bind(this)}>아이디/비밀번호를 잊으셨나요?</button>
         </div>
       </div>
     );
