@@ -1,16 +1,29 @@
 import React, { Component } from 'react'
 import './signup.style.css'
+import Modal from "react-responsive-modal";
+// import Popup from '././popup/SignUp';
 
 class SignUp extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      open : false
+    };
   }
+
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
 
   submitRegister(e) {}
 
   render() {
+    const { open } = this.state;
     return (
       <div className="inner-container">
         <div className="header">
@@ -52,10 +65,28 @@ class SignUp extends Component {
               name="company"
               className="login-input2"
               placeholder="회사명"
-
               />
 
-            <button><img src="../../../../assets/search.png" /></button>
+            <button>
+              <img src="../../../../assets/search.png"
+                   onClick={this.onOpenModal}/></button>
+
+              <Modal open={open} onClose={this.onCloseModal} center>
+              <div className="popup">
+                <h3>회사명 검색</h3>
+                <input
+                  type="text"
+                  name="company_pop"
+                  className="login-input"
+                  placeholder="회사명을 입력하세요"
+                  />
+                  <br/>
+                <button
+                type="button"
+                className="ok-btn"
+                onClick={this.onCloseModal}>확인</button>
+              </div>
+              </Modal>
 
             <input
             type="text"

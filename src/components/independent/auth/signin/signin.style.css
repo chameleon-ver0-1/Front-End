@@ -1,6 +1,5 @@
 @import '../../../../style.css';
 
-
 .header{
   font-size: 30px;
   position: absolute;
@@ -14,6 +13,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  margin: center;
   max-width: 24em;
   min-width: 21em;
   box-shadow: 0px 0px 20px 0px rbga(15,15,15,0.2);
