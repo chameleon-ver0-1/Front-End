@@ -62,7 +62,7 @@ class SignIn extends Component {
 
           <Link className="login-btn" to="/issue">로그인</Link>
 
-          <button>
+          <button
            type="button"
            className="google-btn"
            onClick={this.submitLogin.bind(this)}>Google 로그인</button>

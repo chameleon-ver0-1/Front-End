@@ -14,8 +14,8 @@ class Auth extends Component {
   render() {
     return (
       <React.Fragment>
-        <SignIn/>
-        {/* <SignUp/> */}
+        {/* <SignIn/> */}
+        <SignUp/>
       </React.Fragment>
 
     )

@@ -32,11 +32,12 @@
 
 .login-btn{
   background: var(--greenish-teal);
-  width: 313px;
+  width: 353px;
   height: 41px;
   object-fit: contain;
   border-radius: 18.8px;
-  border: solid 1px var(--greenish-teal);
+  border: none;
+  text-decoration: none;
   background-color: var(--greenish-teal);
   color: #ffffff;
 }
