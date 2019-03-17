@@ -1,0 +1,63 @@
+
+@import '../../../../style.css';
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+
+.nav-container {
+
+  display: flex;
+
+  width: 100vw;
+  height: 64px;
+
+  border-bottom: 1px solid var(--white-two)
+
+}
+.logo {
+  /* TODO:font 크기 설정하기 */
+  flex: 1;
+
+  padding-top:17px;
+  padding-left: 37px;
+  padding-bottom:19px;
+
+  overflow: hidden;
+
+  /* font-size:  30px; */
+  color: var(--greenish-teal);
+}
+
+.btn-container {
+  flex:1;
+
+  padding-top:16px;
+  padding-right: 47px;
+
+
+  display:flex;
+  justify-content: flex-end;
+
+}
+
+.btn-p {
+  padding-right: 7px;
+}
+
+.nav-btn {
+  font-size: 1rem;
+  /* TODO : 폰트 사이즈 지정*/
+  /* padding-right: 7px; */
+
+  width: 80px;
+  height: 33px;
+
+  border: 1px solid var(--white-two);
+  border-radius: 16.5px;
+
+  color: var(--brownish-grey);
+
+}

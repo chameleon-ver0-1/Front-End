@@ -1,0 +1,24 @@
+@import '../../../style.css';
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+
+  height: 85vh;
+  width: 0.14vw;
+  background: #ffff;
+
+}
+
+
+
+.link-list {
+
+  width: 15vw;
+  margin-top: 2rem;
+  color: #ccc;
+
+  font-size: 1.2rem;
+  text-align: center;
+  text-decoration: none;
+}
