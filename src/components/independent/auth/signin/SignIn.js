@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 // import styled from 'styled-components'
+import { Link } from 'react-router-dom';
 import './signin.style.css'
 
 class SignIn extends Component {
@@ -59,12 +60,9 @@ class SignIn extends Component {
 
           <br/>
 
-          <button
-            type="button"
-            className="login-btn"
-            onClick={this.submitLogin.bind(this)}>로그인</button>
+          <Link className="login-btn" to="/issue">로그인</Link>
 
-          <button
+          <button>
            type="button"
            className="google-btn"
            onClick={this.submitLogin.bind(this)}>Google 로그인</button>
