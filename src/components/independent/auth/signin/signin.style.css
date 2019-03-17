@@ -2,14 +2,20 @@
 
 .header{
   font-size: 30px;
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
 }
 
 .box-container {
-  position: absolute;
+  background: #8ee0c1;
+  width: 313px;
+  height: 535px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -19,15 +25,34 @@
   box-shadow: 0px 0px 20px 0px rbga(15,15,15,0.2);
   padding: 50px;
   object-fit: contain;
-  align-items: center;
+  align-items: center; */
+
+}
+
+.label{
+  font-size: 14px;
+  margin-top: 18px;
 }
 
 .login-input {
+  margin-top: 9px;
+  margin-bottom: 18px;
   width: 313px;
   height: 39px;
   object-fit: contain;
   border-radius: 18.8px;
   border: solid 1px var(--pinkish-grey);
+}
+
+.checks{
+  margin-top: 8px;
+  margin-bottom: 10px;
+  width: 253px;
+  height: 12px;
+}
+
+.check{
+  font-size: 14px;
 }
 
 .login-btn{
@@ -36,9 +61,17 @@
   height: 41px;
   object-fit: contain;
   border-radius: 18.8px;
-  border: solid 1px var(--greenish-teal);
+  border: none;
+  text-decoration: none;
   background-color: var(--greenish-teal);
   color: #ffffff;
+  margin-top: 28px;
+  margin-bottom: 10px;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-around;
 }
 
 .google-btn{
@@ -59,14 +92,12 @@
   background-color: rgb(255, 255, 255);
 }
 
-.input-group{
-  position: relative;
-  align-items: center;
-}
-
 .forget-btn{
   margin: auto;
   border: none;
   background: none;
   color: var(--brownish-grey);
+  margin-top: 29px;
 }
+
+
