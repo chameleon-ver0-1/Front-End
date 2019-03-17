@@ -1,25 +1,15 @@
 @import '../../../../style.css';
 
+.input-group{
+  /* margin-top: 18px; */
+}
+
 .login-input2{
   width: 147px;
   height: 38px;
   object-fit: contain;
   border-radius: 18.8px;
   border: solid 1px var(--pinkish-grey);
-}
-
-.popup{
-  width: 368px;
-  height: 244px;
-  text-align: center;
-}
-
-.ok-btn{
-  width: 368px;
-  height: 44px;
-  background-color: var(--greenish-teal);
-  border: solid 1px var(--greenish-teal);
-  color: #ffffff;
 }
 
 .search{
