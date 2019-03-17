@@ -68,7 +68,7 @@ class SignUp extends Component {
               />
 
             <button>
-              <img src=""
+              <img src="../../../../assets/signUp/search.png"
                    onClick={this.onOpenModal}/></button>
 
               <Modal className="pop" open={open} onClose={this.onCloseModal} center>
