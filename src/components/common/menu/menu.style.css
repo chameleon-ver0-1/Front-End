@@ -1,23 +1,20 @@
-@import '../../../style.css';
+@import "../../../style.css";
 
 .menu-container {
   display: flex;
   flex-direction: column;
 
-  height: 85vh;
-  width: 0.14vw;
+  background: yellow;
+  height: 95vh;
+  width: 20vw;
   background: #ffff;
-
 }
 
-
-
 .link-list {
-
   width: 15vw;
   margin-top: 2rem;
   color: #ccc;
-
+  /* background: red; */
   font-size: 1.2rem;
   text-align: center;
   text-decoration: none;
