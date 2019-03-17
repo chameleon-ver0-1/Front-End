@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import './popup.style.css'
 import Modal from "react-responsive-modal";
 
-export class SignUp extends Component {
+export default class PopUp extends Component {
 
   render() {
+    const { open } = this.state;
     return(
       <Modal open={open} onClose={this.onCloseModal} center>
         <div className="popup">
