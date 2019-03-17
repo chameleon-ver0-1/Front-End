@@ -6,6 +6,8 @@
     "axios": "^0.18.0",
     "font-awesome": "^4.7.0",
     "material-ui": "^0.20.2",
+    "optional": "^0.1.4",
+    "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-responsive-modal": "^3.6.0",
