@@ -20,8 +20,14 @@ body {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 20px;
 }
+.container {
+  padding: 0px;
+  margin: 0px;
+}
+
 .wrapper {
   display: flex;
+  flex-direction: row;
 }
 
 .wrapper > * {

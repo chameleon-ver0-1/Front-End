@@ -1,0 +1,9 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.hello {
+  /* flex: 2; */
+  background: black;
+  width: 877px;
+}

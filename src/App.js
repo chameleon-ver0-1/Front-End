@@ -6,8 +6,8 @@ import "../node_modules/font-awesome/css/font-awesome.min.css";
 //MARKUP: add component down here jihu
 
 // import Index from './components/independent/index';
-import { Auth, Issue } from "./components/independent";
-import { Navbar, Navbar2, Menu } from "./components/common";
+import { Auth, Issue, ConferenceRoom } from "./components/independent";
+import { Navbar, Navbar2, Menu, Chat } from "./components/common";
 
 class App extends Component {
   componentDidMount() {}
@@ -16,6 +16,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <Navbar />
+
           <div className="wrapper">
             <Menu />
             <Route
@@ -27,8 +28,9 @@ class App extends Component {
                 </React.Fragment>
               )}
             />
-
             <Route path="/issue" component={Issue} />
+            <Route path="/conferenceRoom" component={ConferenceRoom} />
+            <Chat />
           </div>
         </div>
       </Router>
