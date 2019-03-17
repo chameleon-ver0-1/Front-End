@@ -1,0 +1,13 @@
+.popup{
+  width: 368px;
+  height: 244px;
+  text-align: center;
+}
+
+.ok-btn{
+  width: 368px;
+  height: 44px;
+  background-color: var(--greenish-teal);
+  border: solid 1px var(--greenish-teal);
+  color: #ffffff;
+}

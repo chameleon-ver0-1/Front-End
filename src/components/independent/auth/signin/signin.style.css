@@ -1,0 +1,72 @@
+@import '../../../../style.css';
+
+.header{
+  font-size: 30px;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.box-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: center;
+  max-width: 24em;
+  min-width: 21em;
+  box-shadow: 0px 0px 20px 0px rbga(15,15,15,0.2);
+  padding: 50px;
+  object-fit: contain;
+  align-items: center;
+}
+
+.login-input {
+  width: 313px;
+  height: 39px;
+  object-fit: contain;
+  border-radius: 18.8px;
+  border: solid 1px var(--pinkish-grey);
+}
+
+.login-btn{
+  background: var(--greenish-teal);
+  width: 313px;
+  height: 41px;
+  object-fit: contain;
+  border-radius: 18.8px;
+  border: solid 1px var(--greenish-teal);
+  background-color: var(--greenish-teal);
+  color: #ffffff;
+}
+
+.google-btn{
+  width: 153px;
+  height: 40px;
+  border: solid 1px var(--greenish-teal);
+  border-radius: 18.8px;
+  color: var(--greenish-teal);
+  background-color: rgb(255, 255, 255);
+}
+
+.kakao-btn{
+  width: 153px;
+  height: 40px;
+  border: solid 1px var(--greenish-teal);
+  border-radius: 18.8px;
+  color: var(--greenish-teal);
+  background-color: rgb(255, 255, 255);
+}
+
+.input-group{
+  position: relative;
+  align-items: center;
+}
+
+.forget-btn{
+  margin: auto;
+  border: none;
+  background: none;
+  color: var(--brownish-grey);
+}
