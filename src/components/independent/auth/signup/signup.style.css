@@ -21,3 +21,16 @@
   border: solid 1px var(--greenish-teal);
   color: #ffffff;
 }
+
+.search{
+  width: 10px;
+  height: 10px;
+  object-fit: contain;
+  background: none;
+  border: none;
+}
+
+.search2{
+  width: 14px;
+  height: 14px;
+}

@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import './signup.style.css'
 import Modal from "react-responsive-modal";
 import Popup from '../popup/Popup';
+import search from '../../../../assets/signUp/search.png';
 
 class SignUp extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      open : false
-    };
+  state = {
+    open: false
   }
+
+  submitRegister(e) { }
+
 
   onOpenModal = () => {
     this.setState({ open: true });
@@ -18,12 +18,10 @@ class SignUp extends Component {
 
   onCloseModal = () => {
     this.setState({ open: false });
-  };
-
-  submitRegister(e) {}
+  }
 
   render() {
-    const { open } = this.state;
+
     return (
       <div className="inner-container">
         <div className="header">
@@ -33,69 +31,57 @@ class SignUp extends Component {
 
           <div className="input-group">
             <label htmlFor="username">이름</label>
-            <br/>
+            <br />
             <input
               type="text"
               name="username"
               className="login-input"
-              placeholder="이름을 입력하세요"/>
+              placeholder="이름을 입력하세요" />
           </div>
 
           <div className="input-group">
             <label htmlFor="email">아이디</label>
-            <br/>
-            <input type="text" name="email" className="login-input" placeholder="이메일 형태의 아이디를 입력하세요"/>
+            <br />
+            <input type="text" name="email" className="login-input" placeholder="이메일 형태의 아이디를 입력하세요" />
           </div>
 
           <div className="input-group">
             <label htmlFor="password">비밀번호</label>
-            <br/>
+            <br />
             <input
               type="password"
               name="password"
               className="login-input"
-              placeholder="영문 및 숫자를 포함하여 8자 이상으로 입력하세요"/>
+              placeholder="영문 및 숫자를 포함하여 8자 이상으로 입력하세요" />
           </div>
 
           <div className="input-group">
             <label htmlFor="company">회사 및 부서</label>
-            <br/>
+            <br />
+            <div>
+              <input
+                type="text"
+                name="company"
+                className="login-input2"
+                placeholder="회사명"
+              >
+              </input>
+
+              <button className="search">
+                <img src={search} className="search2"
+                  onClick={this.onOpenModal} /></button>
+
+            </div>
+            <Popup open={this.state.open} onCloseModal={this.onCloseModal} />
+
             <input
               type="text"
               name="company"
               className="login-input2"
-              placeholder="회사명"
-              />
-
-            <button>
-              <img src="../../../../assets/signUp/search.png"
-                   onClick={this.onOpenModal}/></button>
-
-              <Modal className="pop" open={open} onClose={this.onCloseModal} center>
-                <div className="popup">
-                  <h3>회사명 검색</h3>
-                  <input
-                  type="text"
-                  name="company_pop"
-                  className="login-input"
-                  placeholder="회사명을 입력하세요"
-                  />
-                  <br/>
-                  <button
-                  type="button"
-                  className="ok-btn"
-                  onClick={this.onCloseModal}>확인</button>
-              </div>
-            </Modal>
-
-            <input
-            type="text"
-            name="company"
-            className="login-input2"
-            placeholder="부서명"/>
+              placeholder="부서명" />
           </div>
 
-          <br/>
+          <br />
           <button
             type="button"
             className="login-btn"
