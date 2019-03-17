@@ -1,21 +1,38 @@
 @import "../../../style.css";
+* {
+  margin: 0px;
+  padding: 0px;
+}
 
 .menu-container {
   display: flex;
   flex-direction: column;
 
-  background: yellow;
-  height: 95vh;
-  width: 20vw;
+  height: 705px;
+  width: 192px;
   background: #ffff;
+  /* background: red; */
+  border-right: solid 1px var(--white-two);
 }
 
 .link-list {
-  width: 15vw;
-  margin-top: 2rem;
+  width: 192px;
+  height: 53px;
+  color: #ccc;
+  font-size: 1.2rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.link-list:first-child {
+  margin-top: 25px;
+  width: 192px;
+  height: 53px;
   color: #ccc;
   /* background: red; */
   font-size: 1.2rem;
   text-align: center;
   text-decoration: none;
+
+  border-left: 5px solid var(--greenish-teal);
 }
