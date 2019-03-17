@@ -1,10 +1,7 @@
 @import '../../../../style.css';
 
-.input-group{
-  /* margin-top: 18px; */
-}
-
 .login-input2{
+  margin-top: 9px;
   width: 147px;
   height: 38px;
   object-fit: contain;
@@ -23,4 +20,17 @@
 .search2{
   width: 14px;
   height: 14px;
+}
+
+.join-btn{
+  background: var(--greenish-teal);
+  width: 313px;
+  height: 41px;
+  object-fit: contain;
+  border-radius: 18.8px;
+  border: none;
+  text-decoration: none;
+  background-color: var(--greenish-teal);
+  color: #ffffff;
+  margin-top: 20px;
 }
