@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './navbar2.style.css';
 
 
-import userProfile from'../../assets/userProfile.png';
+import userProfile from'../../../../assets/home/userProfile.png';
 
 
 export class Navbar2 extends Component {

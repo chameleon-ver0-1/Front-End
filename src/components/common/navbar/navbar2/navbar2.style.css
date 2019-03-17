@@ -53,7 +53,7 @@
   border:none;
 
   background:none;
-  background-image: url('../../assets/alert_off.png');
+  background-image: url('../../../../assets/home/alert_off.png');
   background-repeat: no-repeat;
   background-size: auto;
 }
@@ -92,6 +92,6 @@
 
   border:none;
 
-  background-image: url('../../assets/moreInfo.png');
+  background-image: url('../../../../assets//home//moreInfo.png');
   background:none;
 }
