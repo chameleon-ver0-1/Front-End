@@ -16,16 +16,20 @@ class App extends Component {
       <Router>
         <div className="App">
           <Navbar />
-          <Route
-            exact
-            path="/"
-            render={props => (
-              <React.Fragment>
-                <Auth />
-              </React.Fragment>
-            )}
-          />
-          <Route path="/issue" component={Issue} />
+          <div className="wrapper">
+            <Menu />
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <React.Fragment>
+                  <Auth />
+                </React.Fragment>
+              )}
+            />
+
+            <Route path="/issue" component={Issue} />
+          </div>
         </div>
       </Router>
     );
