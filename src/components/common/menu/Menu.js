@@ -17,7 +17,7 @@ export class Menu extends Component {
 
       borderLeft: "5px solid var(--greenish-teal)"
     };
-    if (window.location.pathname === "/auth/signIn") {
+    if (window.location.pathname === "/auth/signIn" || window.location.pathname === "/auth/signUp") {
       return <div />;
     } else {
       return (
