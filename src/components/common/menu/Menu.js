@@ -5,36 +5,36 @@ import "./menu.style.css";
 import { yellow100 } from "material-ui/styles/colors";
 
 export class Menu extends Component {
-  // location.pathname
   render() {
     const active = {
       marginTop: "25px",
       width: "185px",
       height: "53px",
-      color: "#ccc",
+      color: "var(--greenish-teal)",
       fontSize: "1.2rem",
       textAlign: "center",
       textDecoration: "none",
 
       borderLeft: "5px solid var(--greenish-teal)"
     };
+
     return (
       <div className="container">
         <div className="menu-container">
-          <NavLink className="link-list" to="/issue" activeStyle={active}>
+          <NavLink className="link-list" to="/home/issue" activeStyle={active}>
             이슈관리
           </NavLink>
           <NavLink
             className="link-list"
             activeStyle={active}
-            to="/conferenceRoom"
+            to="/home/conferenceRoom"
           >
             회의실
           </NavLink>
           <NavLink
             className="link-list"
             activeStyle={active}
-            to="/conferenceDocument"
+            to="/home/conferenceDocument"
           >
             회의록
           </NavLink>
