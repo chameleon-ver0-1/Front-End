@@ -5,7 +5,7 @@ import userProfile from "../../../assets/home/userProfile.png";
 
 export class Navbar extends Component {
   render() {
-    if (window.location.pathname === "/auth/signIn") {
+    if (window.location.pathname === "/auth/signIn" || window.location.pathname === "/auth/signUp") {
       return (
         <div className="container">
           <div className="nav-container">
