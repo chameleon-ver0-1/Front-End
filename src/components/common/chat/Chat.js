@@ -8,9 +8,10 @@ export class Chat extends Component {
       window.location.pathname === "/home/conferenceDocument"
     ) {
       return (
-        <div className="container">
-          <div className="chat">
-            <div>Hi</div>
+        <div className="chat-container">
+          <div className="chat-header">
+            <p className="chat-header-title">메신저</p>
+            
           </div>
         </div>
       );
