@@ -14,7 +14,7 @@ class SignIn extends Component {
     checked: false
   };
 
-  submitLogin(e) {}
+  submitLogin(e) { }
 
   handleChange = (e) => {
     const { target: { checked } } = e;
@@ -23,60 +23,69 @@ class SignIn extends Component {
 
   render() {
     return (
+
       <div className="inner-container">
-        <div className="header">
-          로그인
-        </div>
+
         <div className="box-container">
 
+          <div className="header">
+            로그인
+        </div>
+
           <div className="input-group">
-            <label htmlFor="username">이메일</label>
-            <br/>
+            <label className="label" htmlFor="username">이메일</label>
+
             <input
               type="text"
               name="username"
               className="login-input"
-              placeholder="이메일 주소를 입력해주세요"/>
+              placeholder="이메일 형식의 아이디를 입력해주세요" />
           </div>
-          <br/>
+
           <div className="input-group">
-            <label htmlFor="password">비밀번호</label>
-            <br/>
+            <label className="label" htmlFor="password">비밀번호</label>
+
             <input
               type="password"
               name="password"
               className="login-input"
-              placeholder="비밀번호를 입력해주세요"/>
-          </div>
-          <br/>
-
-          <div>
-            <input onChange={this.handleChange} id={this.id} type="checkbox" checked={this.state.Checked} />
-            <label htmlFor={this.id}>로그인 상태 유지</label>
-
-            <input onChange={this.handleChange} id={this.id} type="checkbox" checked={this.state.Checked} />
-            <label htmlFor={this.id}>이메일 기억하기</label>
+              placeholder="비밀번호를 입력해주세요" />
           </div>
 
-          <br/>
+          <div className="checks">
+            <input onChange={this.handleChange} id={this.id} type="checkbox" checked={this.state.Checked} />
+            <label className="check" htmlFor={this.id}>로그인 상태 유지</label>
 
-          <Link className="login-btn" to="/issue">로그인</Link>
+            <input onChange={this.handleChange} id={this.id} type="checkbox" checked={this.state.Checked} />
+            <label className="check" htmlFor={this.id}>이메일 기억하기</label>
+          </div>
 
-          <button>
-           type="button"
-           className="google-btn"
-           onClick={this.submitLogin.bind(this)}>Google 로그인</button>
 
-           <button
-           type="button"
-           className="kakao-btn"
-           onClick={this.submitLogin.bind(this)}>카카오 로그인</button>
 
-          <br/>
+          <Link to="/issue">
+            <button className="login-btn">
+              로그인
+            </button>
+          </Link>
+
+          <div className="buttons">
+            <button
+              type="button"
+              className="google-btn"
+              onClick={this.submitLogin.bind(this)}>Google 로그인</button>
+
+            <button
+              type="button"
+              className="kakao-btn"
+              onClick={this.submitLogin.bind(this)}>카카오 로그인</button>
+
+          </div>
+
           <button
-          type="button"
-          className="forget-btn"
-          onClick={this.submitLogin.bind(this)}>아이디/비밀번호를 잊으셨나요?</button>
+            type="button"
+            className="forget-btn"
+            onClick={this.submitLogin.bind(this)}>아이디/비밀번호를 잊으셨나요?</button>
+
         </div>
       </div>
     );

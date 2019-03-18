@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import './signup.style.css'
-import Modal from "react-responsive-modal";
 import Popup from '../popup/Popup';
+import search from '../../../../assets/signUp/search.png';
+import { Link } from 'react-router-dom';
 
 class SignUp extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      open : false
-    };
+  state = {
+    open: false
   }
+
+  submitRegister(e) { }
+
 
   onOpenModal = () => {
     this.setState({ open: true });
@@ -18,73 +18,88 @@ class SignUp extends Component {
 
   onCloseModal = () => {
     this.setState({ open: false });
-  };
-
-  submitRegister(e) {}
+  }
 
   render() {
-    const { open } = this.state;
+
     return (
       <div className="inner-container">
-        <div className="header">
-          회원가입
-        </div>
+
         <div className="box-container">
 
+          <div className="header">
+            회원가입
+          </div>
+
           <div className="input-group">
-            <label htmlFor="username">이름</label>
-            <br/>
+            <label className="label" htmlFor="username">이름</label>
+
             <input
               type="text"
               name="username"
               className="login-input"
-              placeholder="이름을 입력하세요"/>
+              placeholder="이름을 입력하세요" />
           </div>
 
           <div className="input-group">
-            <label htmlFor="email">아이디</label>
-            <br/>
-            <input type="text" name="email" className="login-input" placeholder="이메일 형태의 아이디를 입력하세요"/>
+            <label className="label" htmlFor="username">영문 이름</label>
+
+            <input
+              type="text"
+              name="username"
+              className="login-input"
+              placeholder="영문 이름을 입력하세요" />
           </div>
 
           <div className="input-group">
-            <label htmlFor="password">비밀번호</label>
-            <br/>
+            <label className="label" htmlFor="email">아이디</label>
+
+            <input type="text" name="email" className="login-input" placeholder="이메일 형태의 아이디를 입력하세요" />
+          </div>
+
+          <div className="input-group">
+            <label className="label" htmlFor="password">비밀번호</label>
+
             <input
               type="password"
               name="password"
               className="login-input"
-              placeholder="영문 및 숫자를 포함하여 8자 이상으로 입력하세요"/>
+              placeholder="영문 및 숫자를 포함하여 8자 이상으로 입력하세요" />
           </div>
 
           <div className="input-group">
-            <label htmlFor="company">회사 및 부서</label>
-            <br/>
-            <input
-              type="text"
-              name="company"
-              className="login-input2"
-              placeholder="회사명"
-              />
+            <label className="label" htmlFor="company">회사 및 부서</label>
+            <div className="buttons">
+              <div>
+                <input
+                  type="text"
+                  name="company"
+                  className="login-input2"
+                  placeholder="회사명"
+                >
+                </input>
 
-            <button>
-              <img src="../../../../assets/search.png"
-                   onClick={this.onOpenModal}/></button>
+                <button className="search">
+                  <img src={search} className="search2"
+                    onClick={this.onOpenModal} /></button>
 
-              <Popup/>
+              </div>
+              <Popup open={this.state.open} onCloseModal={this.onCloseModal} />
 
-            <input
-            type="text"
-            name="company"
-            className="login-input2"
-            placeholder="부서명"/>
+              <input
+                type="text"
+                name="company"
+                className="login-input2"
+                placeholder="부서명" />
+            </div>
           </div>
 
-          <br/>
-          <button
-            type="button"
-            className="login-btn"
-            onClick={this.submitRegister.bind(this)}>가입하기</button>
+          <Link to="/signin">
+            <button className="login-btn">
+              가입하기
+            </button>
+          </Link>
+
         </div>
       </div>
     );
