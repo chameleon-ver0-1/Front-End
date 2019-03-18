@@ -17,30 +17,37 @@ export class Menu extends Component {
 
       borderLeft: "5px solid var(--greenish-teal)"
     };
-
-    return (
-      <div className="container">
-        <div className="menu-container">
-          <NavLink className="link-list" to="/home/issue" activeStyle={active}>
-            이슈관리
-          </NavLink>
-          <NavLink
-            className="link-list"
-            activeStyle={active}
-            to="/home/conferenceRoom"
-          >
-            회의실
-          </NavLink>
-          <NavLink
-            className="link-list"
-            activeStyle={active}
-            to="/home/conferenceDocument"
-          >
-            회의록
-          </NavLink>
+    if (window.location.pathname === "/auth/signIn") {
+      return <div />;
+    } else {
+      return (
+        <div className="container">
+          <div className="menu-container">
+            <NavLink
+              className="link-list"
+              to="/home/issue"
+              activeStyle={active}
+            >
+              이슈관리
+            </NavLink>
+            <NavLink
+              className="link-list"
+              activeStyle={active}
+              to="/home/conferenceRoom"
+            >
+              회의실
+            </NavLink>
+            <NavLink
+              className="link-list"
+              activeStyle={active}
+              to="/home/conferenceDocument"
+            >
+              회의록
+            </NavLink>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
