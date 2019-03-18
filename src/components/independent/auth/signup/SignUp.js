@@ -23,11 +23,10 @@ class SignUp extends Component {
   render() {
 
     return (
-      <div className="inner-container">
-
+      <div className="inner-container2">
 
         <div className="box-container">
-          <div className="header">
+          <div className="header2">
             회원가입
         </div>
           <div className="input-group">
@@ -84,7 +83,7 @@ class SignUp extends Component {
               회사 및 부서
             </div>
             <div className="buttons">
-              <div>
+              <div className="text_search">
                 <input
                   type="text"
                   name="company"
@@ -100,11 +99,20 @@ class SignUp extends Component {
               </div>
               <Popup open={this.state.open} onCloseModal={this.onCloseModal} />
 
-              <input
-                type="text"
-                name="company"
-                className="login-input2"
-                placeholder="부서명" />
+              <div className="text_search">
+                <input
+                  type="text"
+                  name="company"
+                  className="login-input2"
+                  placeholder="부서명"
+                >
+                </input>
+
+                <button className="search">
+                  <img src={search} className="search2"
+                    onClick={this.onOpenModal} /></button>
+
+              </div>
             </div>
           </div>
 

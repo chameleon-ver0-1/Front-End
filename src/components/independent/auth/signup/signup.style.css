@@ -1,12 +1,32 @@
 @import '../../../../style.css';
 
-.login-input2{
+.inner-container2{
+  /* background: #666666; */
+  width: 313px;
+  margin: 10px auto;
+}
+.header2{
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.text_search{
   margin-top: 9px;
+  border: solid 1px var(--pinkish-grey);
+  border-radius: 18.8px;
   width: 147px;
   height: 38px;
+}
+
+.login-input2{
+  width: 109px;
+  height: 38px;
   object-fit: contain;
-  border-radius: 18.8px;
-  border: solid 1px var(--pinkish-grey);
+  background: none;
+  padding-left: 20px;
+  border: none;
 }
 
 .search{

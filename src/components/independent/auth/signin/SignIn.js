@@ -13,7 +13,7 @@ class SignIn extends Component {
     checked: false
   };
 
-  submitLogin(e) {}
+  submitLogin(e) { }
 
   handleChange = e => {
     const {
@@ -73,7 +73,7 @@ class SignIn extends Component {
             </label>
           </div>
 
-          <Link to="/home/issue">
+          <Link to="/home/issue" className="linklogin">
             <button className="login-btn">로그인</button>
           </Link>
 
