@@ -16,8 +16,8 @@ class Auth extends Component {
     return (
       <React.Fragment>
         <SignIn />
-        <SignUp />
-        <Connectsignin />
+        {/* <SignUp />
+        <Connectsignin /> */}
       </React.Fragment>
 
     )
