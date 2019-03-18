@@ -13,6 +13,7 @@ export class Issues extends Component {
           </div>
           <div className="issues-body">
             <IssueItem />
+            <IssueItem />
           </div>
         </div>
       );

@@ -1,0 +1,71 @@
+@import "../../../../style.css";
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.issueItem-container {
+  --box-main-color: rgba(0, 0, 0, 0.15);
+  --box-shadow-h-offset: 0.8px;
+  --box-shadow-v-offset: 0.6px;
+  --box-shadow-blur: 3px;
+}
+
+.issueItem-container {
+  width: 202px;
+  height: 68px;
+  padding-top: px;
+
+  margin-top: 19px;
+  margin-left: 18px;
+  margin-right: 18px;
+
+  border-radius: 10px;
+
+  background: var(--light-sage);
+  opacity: 50%;
+
+  box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
+    var(--box-shadow-blur) var(--box-main-color);
+}
+.issueItem-header {
+  display: flex;
+  width: 202px;
+  height: 28px;
+}
+.issueItem-control {
+  display: flex;
+  justify-content: right;
+  align-items: flex-start;
+
+  padding-top: 7px;
+  padding-right: 9px;
+
+  width: 202px;
+  height: 28px;
+
+  display: flex;
+  justify-content: right;
+}
+
+.issue-edit {
+  width: 10px;
+  height: 10px;
+  border: none;
+  /* background: url("../../../../assets/issue/issue_edit.png"); */
+}
+
+.issueName {
+  width: 202px;
+  height: 28px;
+  padding-top: 14px;
+  margin-left: 12px;
+  font-size: 0.7rem;
+
+  color: var(--light-black);
+}
+.issueInfo {
+  margin-left: 15px;
+  margin-top: 6px;
+  font-size: 0.475rem;
+  color: var(--greenish-teal);
+}
