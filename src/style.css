@@ -30,6 +30,6 @@ body {
   flex-direction: row;
 }
 
-.wrapper > * {
+/* .wrapper > * {
   flex: 1 100%;
-}
+} */

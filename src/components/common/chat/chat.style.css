@@ -1,6 +1,5 @@
-.chat {
-  flex: 1;
-  height: 95px;
+.chat-container {
+  margin-right: 10px;
+  height: 100%;
   width: 100px;
-  background: pink;
 }
