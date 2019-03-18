@@ -25,14 +25,16 @@ class SignUp extends Component {
     return (
       <div className="inner-container">
 
-        <div className="box-container">
 
+        <div className="box-container">
           <div className="header">
             회원가입
-          </div>
-
+        </div>
           <div className="input-group">
-            <label className="label" htmlFor="username">이름</label>
+            {/* <label className="label" htmlFor="username">이름</label> */}
+            <div className="label">
+              이름
+            </div>
 
             <input
               type="text"
@@ -42,7 +44,10 @@ class SignUp extends Component {
           </div>
 
           <div className="input-group">
-            <label className="label" htmlFor="username">영문 이름</label>
+            {/* <label className="label" htmlFor="username">영문 이름</label> */}
+            <div className="label">
+              영문 이름
+            </div>
 
             <input
               type="text"
@@ -52,13 +57,19 @@ class SignUp extends Component {
           </div>
 
           <div className="input-group">
-            <label className="label" htmlFor="email">아이디</label>
+            {/* <label className="label" htmlFor="email">아이디</label> */}
+            <div className="label">
+              아이디
+            </div>
 
             <input type="text" name="email" className="login-input" placeholder="이메일 형태의 아이디를 입력하세요" />
           </div>
 
           <div className="input-group">
-            <label className="label" htmlFor="password">비밀번호</label>
+            {/* <label className="label" htmlFor="password">비밀번호</label> */}
+            <div className="label">
+              비밀번호
+            </div>
 
             <input
               type="password"
@@ -68,7 +79,10 @@ class SignUp extends Component {
           </div>
 
           <div className="input-group">
-            <label className="label" htmlFor="company">회사 및 부서</label>
+            {/* <label className="label" htmlFor="company">회사 및 부서</label> */}
+            <div className="label">
+              회사 및 부서
+            </div>
             <div className="buttons">
               <div>
                 <input
@@ -95,7 +109,7 @@ class SignUp extends Component {
           </div>
 
           <Link to="/signin">
-            <button className="login-btn">
+            <button className="join-btn">
               가입하기
             </button>
           </Link>

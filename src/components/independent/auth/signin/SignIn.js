@@ -27,13 +27,14 @@ class SignIn extends Component {
       <div className="inner-container">
 
         <div className="box-container">
-
           <div className="header">
             로그인
-        </div>
-
+          </div>
           <div className="input-group">
-            <label className="label" htmlFor="username">이메일</label>
+            {/* <label className="label" htmlFor="username">이메일</label> */}
+            <div className="label">
+              아이디
+            </div>
 
             <input
               type="text"
@@ -43,7 +44,10 @@ class SignIn extends Component {
           </div>
 
           <div className="input-group">
-            <label className="label" htmlFor="password">비밀번호</label>
+            {/* <label className="label" htmlFor="password">비밀번호</label> */}
+            <div className="label">
+              비밀번호
+            </div>
 
             <input
               type="password"
