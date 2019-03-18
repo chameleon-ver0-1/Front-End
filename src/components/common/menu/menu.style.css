@@ -16,23 +16,11 @@
 }
 
 .link-list {
-  width: 192px;
-  height: 53px;
-  color: #ccc;
-  font-size: 1.2rem;
-  text-align: center;
-  text-decoration: none;
-}
-
-.link-list:first-child {
   margin-top: 25px;
   width: 192px;
   height: 53px;
   color: #ccc;
-  /* background: red; */
   font-size: 1.2rem;
   text-align: center;
   text-decoration: none;
-
-  border-left: 5px solid var(--greenish-teal);
 }

@@ -1,25 +1,51 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 import "./menu.style.css";
+import { yellow100 } from "material-ui/styles/colors";
 
-export class menu extends Component {
+export class Menu extends Component {
   render() {
+    const active = {
+      marginTop: "25px",
+      width: "185px",
+      height: "53px",
+      color: "var(--greenish-teal)",
+      fontSize: "1.2rem",
+      textAlign: "center",
+      textDecoration: "none",
+
+      borderLeft: "5px solid var(--greenish-teal)"
+    };
+
     return (
       <div className="container">
         <div className="menu-container">
-          <Link className="link-list" to="/issue">
+          <NavLink className="link-list" to="/home/issue" activeStyle={active}>
             이슈관리
-          </Link>
-          <Link className="link-list" to="/conferenceRoom">
+          </NavLink>
+          <NavLink
+            className="link-list"
+            activeStyle={active}
+            to="/home/conferenceRoom"
+          >
             회의실
-          </Link>
-          <Link className="link-list" to="/conferenceDocument">
+          </NavLink>
+          <NavLink
+            className="link-list"
+            activeStyle={active}
+            to="/home/conferenceDocument"
+          >
             회의록
-          </Link>
+          </NavLink>
         </div>
       </div>
     );
   }
 }
 
-export default menu;
+Menu.contextType = {
+  router: PropTypes.object
+};
+
+export default Menu;
