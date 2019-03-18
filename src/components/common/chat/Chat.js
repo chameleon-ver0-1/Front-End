@@ -11,7 +11,11 @@ export class Chat extends Component {
         <div className="chat-container">
           <div className="chat-header">
             <p className="chat-header-title">메신저</p>
-            
+            <div className="chat-header-btn">
+              <button className="chat-closeBtn"></button>
+              <button className="chat-"></button>
+            </div>
+
           </div>
         </div>
       );
