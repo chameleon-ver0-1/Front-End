@@ -1,7 +1,6 @@
 @import '../../../../style.css';
 
 .inner-container{
-  /* background: #666666; */
   margin: 60px auto;
 }
 
@@ -28,7 +27,7 @@
   object-fit: contain;
   border-radius: 18.8px;
   border: solid 1px var(--pinkish-grey);
-  padding-left: 20px;
+  padding-left: 15px;
 }
 
 .input-group{
@@ -65,7 +64,6 @@
 }
 
 .linklogin{
-
   text-decoration: none;
   display: flex;
   justify-content: center;
@@ -76,7 +74,7 @@
   justify-content: space-around;
 }
 
-.google-btn{
+.img_button{
   width: 153px;
   height: 40px;
   border: solid 1px var(--greenish-teal);
@@ -85,13 +83,18 @@
   background-color: rgb(255, 255, 255);
 }
 
-.kakao-btn{
-  width: 153px;
+.img{
+  width: 18px;
+  height: 18px;
+  margin-left: 16px;
+  margin-top: 9px;
+}
+
+.otherlogin{
+  background: none;
+  border: none;
   height: 40px;
-  border: solid 1px var(--greenish-teal);
-  border-radius: 18.8px;
-  color: var(--greenish-teal);
-  background-color: rgb(255, 255, 255);
+  margin-left: 13px;
 }
 
 .forget-btn{

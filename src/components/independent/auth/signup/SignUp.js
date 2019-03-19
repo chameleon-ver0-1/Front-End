@@ -82,6 +82,7 @@ class SignUp extends Component {
             <div className="label">
               회사 및 부서
             </div>
+
             <div className="buttons">
               <div className="text_search">
                 <input

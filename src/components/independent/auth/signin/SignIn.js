@@ -2,6 +2,8 @@ import React, { Component } from "react";
 // import styled from 'styled-components'
 import { Link } from "react-router-dom";
 import "./signin.style.css";
+import google from '../../../../assets/signIn/google.png';
+import kakao from '../../../../assets/signIn/kakao.png';
 
 class SignIn extends Component {
   constructor(props) {
@@ -78,21 +80,29 @@ class SignIn extends Component {
           </Link>
 
           <div className="buttons">
-            <button
-              type="button"
-              className="google-btn"
-              onClick={this.submitLogin.bind(this)}
-            >
-              Google 로그인
-            </button>
+            <div className="img_button">
+              <img src={google} className="img" />
 
-            <button
-              type="button"
-              className="kakao-btn"
-              onClick={this.submitLogin.bind(this)}
-            >
-              카카오 로그인
-            </button>
+              <button
+                type="button"
+                className="otherlogin"
+                onClick={this.submitLogin.bind(this)}
+              >
+                Google 로그인
+              </button>
+            </div>
+
+            <div className="img_button">
+              <img src={kakao} className="img" />
+
+              <button
+                type="button"
+                className="otherlogin"
+                onClick={this.submitLogin.bind(this)}
+              >
+                카카오 로그인
+              </button>
+            </div>
           </div>
 
           <button

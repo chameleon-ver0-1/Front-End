@@ -5,11 +5,16 @@
   width: 313px;
   margin: 10px auto;
 }
+
 .header2{
   font-size: 30px;
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
+}
+
+.buttons{
+  justify-content: space-around;
 }
 
 .text_search{
@@ -35,11 +40,13 @@
   object-fit: contain;
   background: none;
   border: none;
+
 }
 
 .search2{
   width: 14px;
   height: 14px;
+  margin-right: 12px;
 }
 
 .join-btn{
