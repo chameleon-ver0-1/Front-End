@@ -29,7 +29,7 @@ class SignUp extends Component {
           <div className="header2">
             회원가입
         </div>
-          <div className="input-group">
+          <div className="input-group2">
             {/* <label className="label" htmlFor="username">이름</label> */}
             <div className="label">
               이름
@@ -42,7 +42,7 @@ class SignUp extends Component {
               placeholder="이름을 입력하세요" />
           </div>
 
-          <div className="input-group">
+          <div className="input-group2">
             {/* <label className="label" htmlFor="username">영문 이름</label> */}
             <div className="label">
               영문 이름
@@ -55,7 +55,7 @@ class SignUp extends Component {
               placeholder="영문 이름을 입력하세요" />
           </div>
 
-          <div className="input-group">
+          <div className="input-group2">
             {/* <label className="label" htmlFor="email">아이디</label> */}
             <div className="label">
               아이디
@@ -64,7 +64,7 @@ class SignUp extends Component {
             <input type="text" name="email" className="login-input" placeholder="이메일 형태의 아이디를 입력하세요" />
           </div>
 
-          <div className="input-group">
+          <div className="input-group2">
             {/* <label className="label" htmlFor="password">비밀번호</label> */}
             <div className="label">
               비밀번호
@@ -77,7 +77,7 @@ class SignUp extends Component {
               placeholder="영문 및 숫자를 포함하여 8자 이상으로 입력하세요" />
           </div>
 
-          <div className="input-group">
+          <div className="input-group2">
             {/* <label className="label" htmlFor="company">회사 및 부서</label> */}
             <div className="label">
               회사 및 부서
@@ -88,7 +88,7 @@ class SignUp extends Component {
                 <input
                   type="text"
                   name="company"
-                  className="login-input2"
+                  className="small-input"
                   placeholder="회사명"
                 >
                 </input>
@@ -104,7 +104,7 @@ class SignUp extends Component {
                 <input
                   type="text"
                   name="company"
-                  className="login-input2"
+                  className="small-input"
                   placeholder="부서명"
                 >
                 </input>

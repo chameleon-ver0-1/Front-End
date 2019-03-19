@@ -10,11 +10,11 @@
   font-size: 30px;
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
 }
 
-.buttons{
-  justify-content: space-around;
+.input-group2{
+  margin-bottom: 18px;
 }
 
 .text_search{
@@ -25,7 +25,7 @@
   height: 38px;
 }
 
-.login-input2{
+.small-input{
   width: 109px;
   height: 38px;
   object-fit: contain;
