@@ -45,9 +45,13 @@
   border: none;
 
   background: none;
-  background-image: url("../../../assets/home/alert_off.png");
   background-repeat: no-repeat;
   background-size: auto;
+}
+.notice_im {
+  padding-top: 4px;
+  width: 20px;
+  height: 28px;
 }
 
 .userProfile {
@@ -60,10 +64,11 @@
 .userInfo-container {
   padding-right: 30px;
 
-  width: 125px;
+  width: 120px;
 }
 
 .userName {
+  width: 200px;
   color: white;
   font-size: 0.83rem;
 }
@@ -74,16 +79,16 @@
 }
 
 .moreInfo {
-  padding-top: 17px;
-  padding-bottom: 14px;
-
   width: 17px;
-  height: 11px;
+  height: 37px;
 
   border: none;
-
-  background-image: url("../../../assets//home/moreInfo.png");
   background: none;
+}
+.moreInfo_im {
+  margin-top: 17px;
+  width: 12px;
+  height: 6px;
 }
 
 /* 1 */

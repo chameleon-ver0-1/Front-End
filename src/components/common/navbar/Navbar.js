@@ -3,9 +3,15 @@ import "./navbar.style.css";
 
 import userProfile from "../../../assets/home/userProfile.png";
 
+import moreInfo from "../../../assets/home/moreInfo.png";
+import notice from "../../../assets/home/alert_off.png";
+
 export class Navbar extends Component {
   render() {
-    if (window.location.pathname === "/auth/signIn" || window.location.pathname === "/auth/signUp") {
+    if (
+      window.location.pathname === "/auth/signIn" ||
+      window.location.pathname === "/auth/signUp"
+    ) {
       return (
         <div className="container">
           <div className="nav-container">
@@ -29,7 +35,9 @@ export class Navbar extends Component {
           <div className="nav2-container">
             <p className="logo2">카멜레On</p>
             <div className="nav-right">
-              <button className="notice-btn" />
+              <button className="notice-btn">
+                <img src={notice} className="notice_im" />
+              </button>
               <img
                 className="userProfile"
                 src={userProfile}
@@ -39,7 +47,9 @@ export class Navbar extends Component {
                 <p className="userName">권주희 Kwonju hee</p>
                 <p className="userDepartment">디자인 부서</p>
               </div>
-              <button className="moreInfo" />
+              <button className="moreInfo">
+                <img src={moreInfo} className="moreInfo_im" />
+              </button>
             </div>
           </div>
         </div>
