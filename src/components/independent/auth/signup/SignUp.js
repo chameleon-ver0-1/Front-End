@@ -114,6 +114,7 @@ class SignUp extends Component {
                     onClick={this.onOpenModal} /></button>
 
               </div>
+
             </div>
           </div>
 
