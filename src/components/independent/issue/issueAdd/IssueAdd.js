@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import "./issueAdd.style.css";
 
 export class IssueAdd extends Component {
   render() {
-    return <div>add</div>;
+    return <button className="add-box">+ TODO 추가하기</button>;
   }
 }
 

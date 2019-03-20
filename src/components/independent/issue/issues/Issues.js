@@ -15,14 +15,17 @@ export class Issues extends Component {
           <div className="issues-body">
             <IssueItem />
             <IssueItem />
-            <IssueAdd />
           </div>
         </div>
       );
     };
     return (
       <div className="issues-3">
-        <IssueBox title="TODO" count="2" />
+        <div>
+          <IssueBox title="TODO" count="2" />
+          <IssueAdd />
+        </div>
+
         <IssueBox title="DOING" count="1" />
         <IssueBox title="DONE" count="3" />
       </div>
