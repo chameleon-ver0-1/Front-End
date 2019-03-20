@@ -1,0 +1,50 @@
+@import "../../../../style.css";
+
+.issues-3 {
+  margin-top: 43px;
+  margin-left: 59px;
+  display: flex;
+}
+
+.issues-box {
+  margin-right: 20px;
+  width: 238px;
+  height: 589px;
+}
+.issues-title {
+  display: flex;
+  justify-content: center;
+  width: 238px;
+  height: 20px;
+  display: flex;
+
+  text-align: center;
+}
+.issues-title-status {
+  font-size: 1.15rem;
+  color: var(--light-black);
+}
+.issues-title-count {
+  margin-left: 11px;
+
+  font-size: 1.15rem;
+  color: var(--white-two);
+}
+
+.issues-body {
+  --box-main-color: rgba(0, 0, 0, 0.1);
+  --box-shadow-h-offset: 0px;
+  --box-shadow-v-offset: 1px;
+  --box-shadow-blur: 5px;
+}
+
+.issues-body {
+  margin-top: 66px;
+  width: 238px;
+  height: 523px;
+
+  padding-top: 19px;
+
+  box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
+    var(--box-shadow-blur) var(--box-main-color);
+}

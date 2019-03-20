@@ -1,5 +1,63 @@
+@import "../../../style.css";
+
 .chat-container {
-  margin-right: 10px;
+  margin-top: 10px;
+  margin-left: 83px;
   height: 100%;
-  width: 100px;
+  width: 677px;
+}
+
+.chat-list-container {
+  --box-main-color: rgba(0, 0, 0, 0.2);
+  --box-shadow-h-offset: 0.8px;
+  --box-shadow-v-offset: 0.6px;
+  --box-shadow-blur: 7px;
+}
+
+.chat-list-container {
+  width: 286px;
+  height: 445px;
+
+  box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
+    var(--box-shadow-blur) var(--box-main-color);
+}
+
+.chat-header {
+  padding-top: 10px;
+  padding-left: 12px;
+  height: 34px;
+  background: var(--white-four);
+
+  color: var(--greenish-teal);
+  font-size: 0.7rem;
+}
+
+.chat-closed {
+  width: 9px;
+  height: 9px;
+  border: none;
+  background: none;
+  background: red;
+}
+
+.chat-closeBtn {
+  width: 9px;
+  height: 9px;
+  border: none;
+  background: none;
+}
+.chat-message-container {
+  --box-main-color: rgba(0, 0, 0, 0.2);
+  --box-shadow-h-offset: 0.8px;
+  --box-shadow-v-offset: 0.6px;
+  --box-shadow-blur: 7px;
+}
+.chat-message-container {
+  margin-top: 10px;
+
+  width: 286px;
+  height: 222px;
+
+  box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
+    var(--box-shadow-blur) var(--box-main-color);
 }
