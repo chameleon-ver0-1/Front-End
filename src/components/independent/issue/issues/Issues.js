@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import IssueItem from "../issueItem/IssueItem";
+import IssueAdd from "../issueAdd/IssueAdd";
 import "./issues.style.css";
 
 export class Issues extends Component {
@@ -14,6 +15,7 @@ export class Issues extends Component {
           <div className="issues-body">
             <IssueItem />
             <IssueItem />
+            <IssueAdd />
           </div>
         </div>
       );

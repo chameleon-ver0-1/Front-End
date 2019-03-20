@@ -1,4 +1,5 @@
 @import "../../../../style.css";
+
 * {
   margin: 0px;
   padding: 0px;
@@ -13,7 +14,6 @@
 .issueItem-container {
   width: 202px;
   height: 68px;
-  padding-top: px;
 
   margin-top: 19px;
   margin-left: 18px;
@@ -32,17 +32,37 @@
 
   width: 202px;
   height: 28px;
-  background: red;
 }
 
 #issueItem-control {
   display: flex;
   justify-content: flex-end;
 
-  padding-top: 7px;
+  width: 202px;
+  height: 17px;
+}
 
+.edit-btn {
+  padding-top: 6px;
+  margin-right: 6px;
+  display: flex;
+  align-items: flex-start;
+  width: 10px;
   height: 10px;
-  background: teal;
+
+  background: none;
+  border: none;
+}
+
+/* .issueItem-container:hover ~ .edit-btn {
+  display: none;
+} */
+
+.edit_im {
+  width: 10px;
+  height: 10px;
+  background-repeat: no-repeat;
+  display: none;
 }
 
 .issueName {
@@ -63,14 +83,36 @@
   font-size: 0.475rem;
   color: var(--greenish-teal);
 }
+#issueItem-detail {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 
-.issueItem-edit {
-  background: none;
-  border: none;
+  width: 202px;
+  height: 12px;
+  padding-bottom: 8px;
 }
 
-.edit_im {
-  width: 10px;
-  height: 10px;
-  background-repeat: no-repeat;
+.comment_im {
+  width: 13px;
+  height: 12px;
+  margin-right: 4px;
+}
+.file_im {
+  width: 13px;
+  height: 12px;
+  margin-right: 7px;
+}
+.comment_count {
+  font-size: 0.55rem;
+  color: var(--brownish-grey);
+
+  margin-right: 10px;
+}
+
+.confYN {
+  margin-left: 5px;
+
+  width: 7px;
+  height: 12px;
 }
