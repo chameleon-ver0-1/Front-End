@@ -32,6 +32,7 @@
   background: none;
   padding-left: 20px;
   border: none;
+  font-size: 12px;
 }
 
 .search{
@@ -60,4 +61,5 @@
   background-color: var(--greenish-teal);
   color: #ffffff;
   margin-top: 20px;
+  font-size: 16px;
 }
