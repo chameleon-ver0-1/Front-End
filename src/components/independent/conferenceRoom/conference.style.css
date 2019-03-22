@@ -5,11 +5,16 @@
   height: 323px;
   /* 283+20+20 */
   border: solid 1px #000000;
+  flex-direction: column;
 }
 
 .conferenceroom.text{
   font-size: 20px;
-  width: 711px;
+
+}
+
+.button_width{
+  text-align: right;
 }
 
 .add_conference{
@@ -17,7 +22,6 @@
   color: var(--greenish-teal);
   background: none;
   border: none;
-  margin-right: 0%;
 }
 
 .conferenceroom_table{
@@ -35,4 +39,16 @@
 
 th,td{
   border-bottom: 1px solid var(--white-two);
+  font-size: 14px;
+  text-align: center;
+}
+
+.par_btn{
+  width: 62px;
+  height: 26px;
+  color: #ffffff;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--greenish-teal);
+  font-size: 12.5px;
 }

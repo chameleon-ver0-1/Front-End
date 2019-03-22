@@ -13,20 +13,36 @@ export class ConferenceRoom extends Component {
       }
     ]
   }
+
   render() {
     const { boards } = this.state;
     return (
       <div className="conferenceroom_container">
+
         <text className="conferenceroom_text">
           현재 진행중인 회의</text>
 
-        <button className="add_conference">+회의 개설하기</button>
+        <div className="button_width">
+          <button className="add_conference">+회의 개설하기</button>
+        </div>
+
         <table className="conferenceroom_table" >
           <tr className="table_head">
             <th>방제목</th>
             <th>개설자</th>
             <th>회의시간</th>
             <th>참여자</th>
+            <th></th>
+          </tr>
+
+          <tr className="table_content">
+            <td>안녕</td>
+            <td>안지후</td>
+            <td>12시</td>
+            <td>5/5</td>
+            <td>
+              <button className="par_btn">참여하기</button>
+            </td>
           </tr>
 
           <tr>
@@ -34,6 +50,29 @@ export class ConferenceRoom extends Component {
             <td>안지후</td>
             <td>12시</td>
             <td>5/5</td>
+            <td>
+              <button className="par_btn">참여하기</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>안녕</td>
+            <td>안지후</td>
+            <td>12시</td>
+            <td>5/5</td>
+            <td>
+              <button className="par_btn">참여하기</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>안녕</td>
+            <td>안지후</td>
+            <td>12시</td>
+            <td id="people">5/5</td>
+            <td id="par">
+              <button className="par_btn">참여하기</button>
+            </td>
           </tr>
 
         </table>
