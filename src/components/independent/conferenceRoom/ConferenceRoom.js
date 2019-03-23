@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import './conference.style.css';
+import { Link } from 'react-router-dom';
 
 export class ConferenceRoom extends Component {
 
@@ -16,6 +17,9 @@ export class ConferenceRoom extends Component {
 
   render() {
     const { boards } = this.state;
+    const movePage = {
+      color: "#34c88a"
+    }
     return (
       <div className="conferenceroom_container">
 
@@ -74,8 +78,16 @@ export class ConferenceRoom extends Component {
               <button className="par_btn">참여하기</button>
             </td>
           </tr>
-
         </table>
+
+        <div className="pagination">
+          <button className="page_button">1</button>
+          <button className="page_button">2</button>
+          <button className="page_button">3</button>
+          <button className="page_button">4</button>
+          <button className="page_button">5</button>
+        </div>
+
 
       </div>
     );

@@ -28,6 +28,7 @@
   width: 711px;
   height: 191px;
   border-collapse: collapse;
+  margin-bottom: 17px;
 }
 
 .table_head{
@@ -43,6 +44,10 @@ th,td{
   text-align: center;
 }
 
+/* tr:hover{
+  background-color: #f6f6f6;
+} */
+
 .par_btn{
   width: 62px;
   height: 26px;
@@ -51,4 +56,19 @@ th,td{
   border: none;
   background-color: var(--greenish-teal);
   font-size: 12.5px;
+}
+
+.pagination{
+  margin: auto;
+  width: 120px;
+  height: 11px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.page_button{
+  font-size: 10px;
+  color: var(--brownish-grey);
+  background: none;
+  border: none;
 }
