@@ -86,9 +86,20 @@ export class ConferenceRoom extends Component {
           <button className="page_button">3</button>
           <button className="page_button">4</button>
           <button className="page_button">5</button>
+          {/* activestyle? */}
         </div>
 
+        <div className="conference_search">
+          <select className="search_select">
+            <option className="search_option" value="방제목">방제목</option>
+            <option className="search_option" value="개설자">개설자</option>
+            <option className="search_option" value="회의시간">회의시간</option>
+          </select>
 
+          <input placeholder="방 제목이나 개설자를 입력하세요" className="search_input"></input>
+
+          <button className="search_button">검색</button>
+        </div>
       </div>
     );
   }

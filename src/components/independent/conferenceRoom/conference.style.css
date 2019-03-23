@@ -6,6 +6,8 @@
   /* 283+20+20 */
   border: solid 1px #000000;
   flex-direction: column;
+  margin-left: 84px;
+  margin-top: 42px;
 }
 
 .conferenceroom.text{
@@ -71,4 +73,34 @@ th,td{
   color: var(--brownish-grey);
   background: none;
   border: none;
+}
+
+.conference_search{
+  margin-left: 217px;
+  margin-top: 16px;
+}
+
+.search_select{
+  width: 57px;
+  height: 27px;
+  font-size: 10px;
+}
+
+.search_option{
+  font-size: 10px;
+}
+
+.search_input{
+  width: 180px;
+  height: 24px;
+  font-size: 10px;
+}
+
+.search_button{
+  font-size: 10px;
+  width: 36px;
+  height: 27px;
+  background-color: var(--greenish-teal);
+  border: none;
+  color: #ffffff;
 }
