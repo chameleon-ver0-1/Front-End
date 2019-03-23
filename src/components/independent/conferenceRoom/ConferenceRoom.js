@@ -21,84 +21,168 @@ export class ConferenceRoom extends Component {
       color: "#34c88a"
     }
     return (
-      <div className="conferenceroom_container">
+      <div>
+        <div className="conferenceroom_container">
 
-        <text className="conferenceroom_text">
-          현재 진행중인 회의</text>
+          <text className="conferenceroom_text">
+            현재 진행중인 회의</text>
 
-        <div className="button_width">
-          <button className="add_conference">+회의 개설하기</button>
+          <div className="button_width">
+            <button className="add_conference">+회의 개설하기</button>
+          </div>
+
+          <table className="conferenceroom_table" >
+            <tr className="table_head">
+              <th>방제목</th>
+              <th>개설자</th>
+              <th>회의시간</th>
+              <th>참여자</th>
+              <th></th>
+            </tr>
+
+            <tr className="table_content">
+              <td>안녕</td>
+              <td>안지후</td>
+              <td>12시</td>
+              <td>5/5</td>
+              <td>
+                <button className="par_btn">참여하기</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>안녕</td>
+              <td>안지후</td>
+              <td>12시</td>
+              <td>5/5</td>
+              <td>
+                <button className="par_btn">참여하기</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>안녕</td>
+              <td>안지후</td>
+              <td>12시</td>
+              <td>5/5</td>
+              <td>
+                <button className="par_btn">참여하기</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>안녕</td>
+              <td>안지후</td>
+              <td>12시</td>
+              <td id="people">5/5</td>
+              <td id="par">
+                <button className="par_btn">참여하기</button>
+              </td>
+            </tr>
+          </table>
+
+          <div className="pagination">
+            <button className="page_button">1</button>
+            <button className="page_button">2</button>
+            <button className="page_button">3</button>
+            <button className="page_button">4</button>
+            <button className="page_button">5</button>
+            {/* activestyle? */}
+          </div>
+
+          <div className="conference_search">
+            <select className="search_select">
+              <option className="search_option" value="방제목">방제목</option>
+              <option className="search_option" value="개설자">개설자</option>
+              <option className="search_option" value="회의시간">회의시간</option>
+            </select>
+
+            <input placeholder="방 제목이나 개설자를 입력하세요" className="search_input"></input>
+
+            <button className="search_button">검색</button>
+          </div>
         </div>
 
-        <table className="conferenceroom_table" >
-          <tr className="table_head">
-            <th>방제목</th>
-            <th>개설자</th>
-            <th>회의시간</th>
-            <th>참여자</th>
-            <th></th>
-          </tr>
+        {/* 반복 되는 것 */}
+        <div className="conferenceroom_container">
 
-          <tr className="table_content">
-            <td>안녕</td>
-            <td>안지후</td>
-            <td>12시</td>
-            <td>5/5</td>
-            <td>
-              <button className="par_btn">참여하기</button>
-            </td>
-          </tr>
+          <text className="conferenceroom_text">
+            현재 진행중인 회의</text>
 
-          <tr>
-            <td>안녕</td>
-            <td>안지후</td>
-            <td>12시</td>
-            <td>5/5</td>
-            <td>
-              <button className="par_btn">참여하기</button>
-            </td>
-          </tr>
+          <div className="button_width">
+            <button className="add_conference">+회의 개설하기</button>
+          </div>
 
-          <tr>
-            <td>안녕</td>
-            <td>안지후</td>
-            <td>12시</td>
-            <td>5/5</td>
-            <td>
-              <button className="par_btn">참여하기</button>
-            </td>
-          </tr>
+          <table className="conferenceroom_table" >
+            <tr className="table_head">
+              <th>방제목</th>
+              <th>개설자</th>
+              <th>회의시간</th>
+              <th>참여자</th>
+              <th></th>
+            </tr>
 
-          <tr>
-            <td>안녕</td>
-            <td>안지후</td>
-            <td>12시</td>
-            <td id="people">5/5</td>
-            <td id="par">
-              <button className="par_btn">참여하기</button>
-            </td>
-          </tr>
-        </table>
+            <tr className="table_content">
+              <td>안녕</td>
+              <td>안지후</td>
+              <td>12시</td>
+              <td>5/5</td>
+              <td>
+                <button className="par_btn">참여하기</button>
+              </td>
+            </tr>
 
-        <div className="pagination">
-          <button className="page_button">1</button>
-          <button className="page_button">2</button>
-          <button className="page_button">3</button>
-          <button className="page_button">4</button>
-          <button className="page_button">5</button>
-          {/* activestyle? */}
-        </div>
+            <tr>
+              <td>안녕</td>
+              <td>안지후</td>
+              <td>12시</td>
+              <td>5/5</td>
+              <td>
+                <button className="par_btn">참여하기</button>
+              </td>
+            </tr>
 
-        <div className="conference_search">
-          <select className="search_select">
-            <option className="search_option" value="방제목">방제목</option>
-            <option className="search_option" value="개설자">개설자</option>
-            <option className="search_option" value="회의시간">회의시간</option>
-          </select>
+            <tr>
+              <td>안녕</td>
+              <td>안지후</td>
+              <td>12시</td>
+              <td>5/5</td>
+              <td>
+                <button className="par_btn">참여하기</button>
+              </td>
+            </tr>
 
-          <input placeholder="방 제목이나 개설자를 입력하세요" className="search_input"></input>
+            <tr>
+              <td>안녕</td>
+              <td>안지후</td>
+              <td>12시</td>
+              <td id="people">5/5</td>
+              <td id="par">
+                <button className="par_btn">참여하기</button>
+              </td>
+            </tr>
+          </table>
 
-          <button className="search_button">검색</button>
+          <div className="pagination">
+            <button className="page_button">1</button>
+            <button className="page_button">2</button>
+            <button className="page_button">3</button>
+            <button className="page_button">4</button>
+            <button className="page_button">5</button>
+            {/* activestyle? */}
+          </div>
+
+          <div className="conference_search">
+            <select className="search_select">
+              <option className="search_option" value="방제목">방제목</option>
+              <option className="search_option" value="개설자">개설자</option>
+              <option className="search_option" value="회의시간">회의시간</option>
+            </select>
+
+            <input placeholder="방 제목이나 개설자를 입력하세요" className="search_input"></input>
+
+            <button className="search_button">검색</button>
+          </div>
         </div>
       </div>
     );
