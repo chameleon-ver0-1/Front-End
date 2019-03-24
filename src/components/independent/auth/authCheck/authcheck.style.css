@@ -1,14 +1,44 @@
 @import '../../../../style.css';
 
-.authNumber_text{
-  font-size: 30px;
+.authCheck_container{
+  width: 339px;
+  height: 300px;
+  /* background: var(--greenish-teal); */
+  margin-left: 37%;
+  margin-top: 95px;
 }
 
-.authNumber_texts{
+.authCheck_text{
+  font-size: 29px;
+}
+
+.authCheck_texts{
+  margin-top: 49px;
+  text-align: center;
   font-size: 14px;
   color: var(--brownish-grey);
 }
 
-.authNumber_reAuth{
+.authCheck_num_div{
+  margin-top: 46px;
+  justify-content: center;
+}
 
+.authCheck_num{
+  margin-right: 5px;
+  width: 60px;
+  height: 76px;
+  border-radius: 20px;
+  border: solid 1px var(--pinkish-grey);
+}
+
+.start_cameleon{
+  margin-top: 57px;
+  justify-content: center;
+  width: 313px;
+  height: 41px;
+  border-radius: 18.8px;
+  border: solid 1px var(--greenish-teal);
+  background-color: var(--greenish-teal);
+  color: #ffffff;
 }
