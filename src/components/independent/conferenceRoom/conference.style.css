@@ -6,8 +6,8 @@
   /* 283+20+20 */
   border-bottom: 1px solid var(--white-two);
   flex-direction: column;
-  margin-left: 20%;
-  margin-top: 8%;
+  margin-left: 18%;
+  margin-top: 7%;
 }
 
 .conferenceroom.text{
@@ -75,13 +75,13 @@ th,td{
 }
 
 .conference_search{
-  margin-left: 217px;
+  margin-left: 210px;
   margin-top: 16px;
   margin-bottom: 21px;
 }
 
 .search_select{
-  width: 57px;
+  width: 70px;
   height: 27px;
   font-size: 10px;
 }
@@ -91,12 +91,14 @@ th,td{
 }
 
 .search_input{
+  margin-left: 2px;
   width: 180px;
   height: 24px;
   font-size: 10px;
 }
 
 .search_button{
+  margin-left: 2px;
   font-size: 10px;
   width: 36px;
   height: 27px;

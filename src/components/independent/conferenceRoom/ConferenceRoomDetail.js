@@ -21,7 +21,7 @@ export class ConferenceRoomDetail extends Component {
         <div className="conferenceroom_container">
 
           <text className="conferenceroom_text">
-            현재 진행중인 회의</text>
+            {this.props.title}</text>
 
           <div className="button_width">
             <button className="add_conference">+회의 개설하기</button>
@@ -97,6 +97,7 @@ export class ConferenceRoomDetail extends Component {
 
             <button className="search_button">검색</button>
           </div>
+
         </div>
       </div>
     )
