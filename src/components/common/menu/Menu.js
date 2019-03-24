@@ -4,23 +4,22 @@ import PropTypes from "prop-types";
 import "./menu.style.css";
 import { yellow100 } from "material-ui/styles/colors";
 
+const active = {
+  marginTop: "25px",
+  width: "185px",
+  height: "53px",
+  color: "var(--greenish-teal)",
+  fontSize: "1.2rem",
+  textAlign: "center",
+  textDecoration: "none",
+  borderLeft: "5px solid var(--greenish-teal)"
+};
+
 export class Menu extends Component {
   render() {
-    const active = {
-      marginTop: "25px",
-      width: "185px",
-      height: "53px",
-      color: "var(--greenish-teal)",
-      fontSize: "1.2rem",
-      textAlign: "center",
-      textDecoration: "none",
-
-      borderLeft: "5px solid var(--greenish-teal)"
-    };
-    if (window.location.pathname === "/auth/signIn" || window.location.pathname === "/auth/signUp") {
-      return <div />;
-    } else {
-      return (
+    const regex = new RegExp("/auth");
+    return (
+      !regex.test(window.location.pathname) && (
         <div className="menu-container">
           <NavLink className="link-list" to="/home/issue" activeStyle={active}>
             이슈관리
@@ -40,8 +39,8 @@ export class Menu extends Component {
             회의록
           </NavLink>
         </div>
-      );
-    }
+      )
+    );
   }
 }
 
