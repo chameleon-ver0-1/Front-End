@@ -5,6 +5,8 @@ import edit from "../../../../assets/issue/issue_edit.png";
 import comment from "../../../../assets/issue/issue_comment.png";
 import file from "../../../../assets/issue/issue_file.png";
 import conference from "../../../../assets/issue/issue_video_conference.png";
+
+import { Draggable } from "react-beautiful-dnd";
 export class IssueItem extends Component {
   editAppear = () => {
     const editBox = document.querySelector(".edit_im");
@@ -34,9 +36,9 @@ export class IssueItem extends Component {
             </button>
           </div>
         </div>
-        <p className="issueName">전체 부서 정기 회의</p>
+        <p className="issueName">{this.props.task.contentTitle}</p>
         <p className="issueInfo">
-          D-day 시간 장소
+          {this.props.task.content}
           <img className="confYN" src={conference} />
         </p>
 

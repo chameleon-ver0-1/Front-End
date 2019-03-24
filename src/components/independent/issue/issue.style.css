@@ -2,8 +2,9 @@
   margin: 0px;
   padding: 0px;
 }
-.hello {
-  /* flex: 2; */
-  background: yellow;
-  width: 877px;
+
+.box-container {
+  display: flex;
+  flex-direction: row;
+  /* width: 600px; */
 }
