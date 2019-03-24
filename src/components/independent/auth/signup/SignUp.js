@@ -6,15 +6,19 @@ import { Link } from 'react-router-dom';
 
 class SignUp extends Component {
   state = {
-    open: false
+    open: false,
+    title: ""
   }
 
   submitRegister(e) { }
 
-
   onOpenModal = () => {
-    this.setState({ open: true });
+    this.setState({ open: true, title: "회사명", placeholder: "회사명을 입력하세요" });
   };
+
+  onOpenModal2 = () => {
+    this.setState({ open: true, title: "부서명", placeholder: "부서명을 입력하세요" });
+  }
 
   onCloseModal = () => {
     this.setState({ open: false });
@@ -98,7 +102,8 @@ class SignUp extends Component {
                     onClick={this.onOpenModal} /></button>
 
               </div>
-              <Popup open={this.state.open} onCloseModal={this.onCloseModal} />
+              <Popup open={this.state.open} title={this.state.title}
+                placeholder={this.state.placeholder} onCloseModal={this.onCloseModal} />
 
               <div className="text_search">
                 <input
@@ -111,10 +116,8 @@ class SignUp extends Component {
 
                 <button className="search">
                   <img src={search} className="search2"
-                    onClick={this.onOpenModal} /></button>
-
+                    onClick={this.onOpenModal2} /></button>
               </div>
-
             </div>
           </div>
 
