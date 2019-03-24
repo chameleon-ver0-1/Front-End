@@ -121,7 +121,7 @@ class SignUp extends Component {
             </div>
           </div>
 
-          <Link to="/auth/signIn">
+          <Link to="/auth/authCheck">
             <button className="join-btn">
               가입하기
             </button>

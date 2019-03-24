@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class AuthNumber extends Component {
+export class AuthCheck extends Component {
   render() {
     return (
       <div>
@@ -11,14 +11,14 @@ export class AuthNumber extends Component {
 
         <button className="authNumber_reAuth">인증번호 재전송</button>
 
-        <Link to="/auth/signIn">
+        {/* <Link to="/auth/signIn">
           <button className="start_cameleon">
             카멜레On 시작하기
             </button>
-        </Link>
+        </Link> */}
       </div>
     )
   }
 }
 
-export default AuthNumber
+export default AuthCheck
