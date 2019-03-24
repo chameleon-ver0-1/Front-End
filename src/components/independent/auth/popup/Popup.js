@@ -5,18 +5,18 @@ import search from '../../../../assets/signUp/search.png';
 
 export default class PopUp extends Component {
   render() {
-    const { open, onCloseModal } = this.props;
+    const { open, title, onCloseModal } = this.props;
     return (
       <Modal open={open} onClose={onCloseModal} center>
         <div className="popup">
-          <h3 className="popup-title">회사명 검색</h3>
+          <h3 className="popup-title">{title}</h3>
 
           <div className="popup-search">
             <input
               type="text"
               name="company_pop"
               className="popup-input"
-              placeholder="회사명을 입력하세요"
+              placeholder={this.props.placeholder}
             />
 
             <button className="search">

@@ -24,6 +24,7 @@
   height: 38px;
   background: none;
   border: none;
+  font-size: 12px;
 }
 
 .ok-btn{
@@ -33,4 +34,5 @@
   background-color: var(--greenish-teal);
   border: solid 1px var(--greenish-teal);
   color: #ffffff;
+  font-size: 16px;
 }
