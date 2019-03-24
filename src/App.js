@@ -6,7 +6,7 @@ import "../node_modules/font-awesome/css/font-awesome.min.css";
 //MARKUP: add component down here jihu
 
 // import Index from './components/independent/index';
-import { SignIn, SignUp } from './components/independent/auth/Auth';
+import { SignIn, SignUp, AuthCheck } from './components/independent/auth/Auth';
 import {
   Issue,
   ConferenceRoom,
@@ -33,7 +33,8 @@ class App extends Component {
                 </React.Fragment>
               )}
             />
-            <Route path="/auth/signUp" component={SignUp}></Route>
+            <Route path="/auth/signUp" component={SignUp} />
+            <Route path="/auth/authCheck" component={AuthCheck} />
             <Route path="/home/issue" component={Issue} />
             <Route path="/home/conferenceRoom" component={ConferenceRoom} />
             <Route
