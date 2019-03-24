@@ -2,17 +2,16 @@
 
 .conferenceroom_container{
   width: 711px;
-  height: 323px;
+  /* height: 323px; */
   /* 283+20+20 */
-  /* border: solid 1px #000000; */
+  border-bottom: 1px solid var(--white-two);
   flex-direction: column;
-  margin-left: 84px;
-  margin-top: 42px;
+  margin-left: 20%;
+  margin-top: 8%;
 }
 
 .conferenceroom.text{
   font-size: 20px;
-
 }
 
 .button_width{
@@ -78,6 +77,7 @@ th,td{
 .conference_search{
   margin-left: 217px;
   margin-top: 16px;
+  margin-bottom: 21px;
 }
 
 .search_select{
