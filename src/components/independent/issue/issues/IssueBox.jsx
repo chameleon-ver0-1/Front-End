@@ -6,6 +6,9 @@ import { Droppable } from "react-beautiful-dnd";
 export class IssueBox extends Component {
   render() {
     const { column, count, tasks } = this.props;
+
+    //TODO: backgroundColor: $(props.isDraggingOver ? 'skyblue':'white');
+
     return (
       <div className="issues-box">
         <div className="issues-title">
@@ -13,11 +16,19 @@ export class IssueBox extends Component {
           <p className="issues-title-count">{count}</p>
         </div>
         <Droppable droppableId={this.props.column.id}>
-          {provided => (
-            <div className="issues-body" ref={provided.innerRef}>
-              {tasks.map(task => (
-                <IssueItem key={task.id} task={task} />
+          {(provided, snapshot) => (
+            <div
+              className="issues-body"
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              isDraggingOver={snapshot.isDraggingOver}
+              // style={}
+            >
+              {tasks.map((task, index) => (
+                <IssueItem key={task.id} task={task} index={index} />
               ))}
+
+              {provided.placeholder}
             </div>
           )}
         </Droppable>
