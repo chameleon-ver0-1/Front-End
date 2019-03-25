@@ -27,7 +27,7 @@ class SignIn extends Component {
   render() {
     return (
       <div className="inner-container">
-        <div className="box-container">
+        <div className="login-container">
           <div className="header">로그인</div>
           <div className="input-group">
             {/* <label className="label" htmlFor="username">이메일</label> */}

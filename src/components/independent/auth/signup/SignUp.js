@@ -29,7 +29,7 @@ class SignUp extends Component {
     return (
       <div className="inner-container2">
 
-        <div className="box-container">
+        <div className="login-container">
           <div className="header2">
             회원가입
         </div>
