@@ -3,14 +3,6 @@
 .issues-3 {
   margin-top: 43px;
   margin-left: 59px;
-  display: flex;
-}
-
-
-.issues-box {
-  margin-right: 20px;
-  width: 238px;
-  height: 589px;
 }
 
 .issues-title {
@@ -38,6 +30,7 @@
   --box-shadow-h-offset: 0px;
   --box-shadow-v-offset: 1px;
   --box-shadow-blur: 5px;
+  flex-grow: 1;
 }
 
 .issues-body {
@@ -49,4 +42,8 @@
 
   box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
     var(--box-shadow-blur) var(--box-main-color);
+}
+
+.issue-big {
+  display: flex;
 }

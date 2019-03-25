@@ -7,31 +7,41 @@ import file from "../../../../assets/issue/issue_file.png";
 import conference from "../../../../assets/issue/issue_video_conference.png";
 
 import { Draggable } from "react-beautiful-dnd";
-import { white } from "material-ui/styles/colors";
+
+import styled from "styled-components";
+
+const Container = styled.div`
+  border: ${props =>
+    props.isDragging ? " solid 1px var(--greenish-teal) " : "none"};
+`;
+
+let ControlBtn = styled.button`
+  // display: block;
+`;
+
+let ControlImg = styled.image`
+  // display: block;
+`;
 
 export class IssueItem extends Component {
-  editAppear = () => {
-    const editBox = document.querySelector(".edit_im");
-    editBox.style.display = "block";
+  state = {
+    mouseCheck: false
+  };
 
-    console.log("1");
+  editAppear = () => {
+
+    console.log(1);
   };
   editDisapear = () => {
-    const editBox = document.querySelector(".edit_im");
-    editBox.style.display = "none";
-    console.log("2");
+
+    console.log(2);
   };
 
-  checkDrag = props => {
-    if (props.isDragging === true) {
-    }
-    // backgroundColor: this.props.isDragging ? "pink" : "white";
-  };
   render() {
     return (
       <Draggable draggableId={this.props.task.id} index={this.props.index}>
         {(provided, snapshot) => (
-          <div
+          <Container
             className="issueItem-container"
             onMouseOver={this.editAppear}
             onMouseOut={this.editDisapear}
@@ -39,16 +49,15 @@ export class IssueItem extends Component {
             {...provided.dragHandleProps}
             ref={provided.innerRef}
             isDragging={snapshot.isDragging}
-            // style={this.checkDrag}
           >
             <div id="issueItem-control">
-              <button className="edit-btn">
-                <img src={edit} className="edit_im" />
-              </button>
+              <ControlBtn className="edit-btn">
+                <ControlImg src={edit} className="edit_im" />
+              </ControlBtn>
               <div id="issueItem-edit">
-                <button className="edit-btn">
-                  <img src={edit} className="edit_im" />
-                </button>
+                <ControlBtn className="edit-btn">
+                  <ControlImg src={edit} className="edit_im" />
+                </ControlBtn>
               </div>
             </div>
             <p className="issueName">{this.props.task.contentTitle}</p>
@@ -62,7 +71,7 @@ export class IssueItem extends Component {
               <p className="comment_count">3</p>
               <img className="file_im" src={file} />
             </div>
-          </div>
+          </Container>
         )}
       </Draggable>
     );
