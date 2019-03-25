@@ -2,7 +2,6 @@
 
 .authCheck_container{
   width: 339px;
-  height: 300px;
   /* background: var(--greenish-teal); */
   margin-left: 37%;
   margin-top: 95px;
@@ -12,20 +11,24 @@
   font-size: 29px;
 }
 
-.authCheck_texts{
+.authCheck_texts_div{
   margin-top: 49px;
   text-align: center;
+}
+
+.authCheck_texts{
   font-size: 14px;
   color: var(--brownish-grey);
 }
 
 .authCheck_num_div{
   margin-top: 46px;
-  justify-content: center;
+  text-align: center;
 }
 
 .authCheck_num{
-  margin-right: 5px;
+  margin-left: 1px;
+  padding: 2px;
   width: 60px;
   height: 76px;
   border-radius: 20px;
@@ -34,8 +37,8 @@
 
 .start_cameleon{
   margin-top: 57px;
-  justify-content: center;
-  width: 313px;
+  text-align: center;
+  width: 330px;
   height: 41px;
   border-radius: 18.8px;
   border: solid 1px var(--greenish-teal);
