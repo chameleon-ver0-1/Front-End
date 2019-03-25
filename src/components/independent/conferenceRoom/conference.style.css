@@ -1,0 +1,45 @@
+@import '../../../style.css';
+
+.conferenceroom_container{
+  margin-left: 15%;
+  margin-top: 7%;
+  width: 712px;
+  height: 199px;
+}
+
+.conferenceroom_text{
+  font-size: 20px;
+}
+
+.add_conference{
+
+}
+
+.add_conference_btn{
+  font-size: 14px;
+  border: none;
+  background: none;
+  color: var(--greenish-teal);
+}
+
+.circle_container{
+  display: flex;
+  flex-direction: row;
+}
+
+.left_right{
+  border: none;
+  background: none;
+  width: 16px;
+  height: 33px;
+}
+
+.left_right_img{
+  width: 16px;
+  height: 33px;
+}
+
+.people{
+  width: 12px;
+  height: 13px;
+}
