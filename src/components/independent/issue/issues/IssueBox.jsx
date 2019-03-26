@@ -5,17 +5,19 @@ import { Droppable } from "react-beautiful-dnd";
 
 import styled from "styled-components";
 const Container = styled.div`
-  margin-right: 20px;
-  width: 238px;
-  height: 589px;
+  margin-right: 25px;
+  width: 249px;
+  height: 540px;
 
   display: flex;
   flex-direction: column;
 `;
 const ItemList = styled.div`
-  background-color: ${props => (props.isDraggingOver ? "skyblue" : "white")};
+  // background-color: ${props => (props.isDraggingOver ? "skyblue" : "white")};
   flex-grow: 1;
   min-height: 100px;
+
+
 `;
 export class IssueBox extends Component {
   render() {
