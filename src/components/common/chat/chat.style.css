@@ -4,7 +4,16 @@
   margin-top: 10px;
   /* margin-left: 3px; */
   height: 100%;
-  width: 677px;
+  width: 500px;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chat-content-container {
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-list-container {

@@ -12,12 +12,11 @@
 }
 
 .issueItem-container {
-  width: 202px;
-  height: 68px;
+  width: 212px;
+  height: 71px;
 
-  margin-top: 19px;
+  margin-top: 20px;
   margin-left: 18px;
-  margin-right: 18px;
 
   border-radius: 10px;
 
@@ -62,7 +61,7 @@
   width: 10px;
   height: 10px;
   background-repeat: no-repeat;
-  display: none;
+  /* display: none; */
 }
 
 .issueName {

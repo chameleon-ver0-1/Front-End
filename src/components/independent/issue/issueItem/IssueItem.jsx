@@ -7,47 +7,73 @@ import file from "../../../../assets/issue/issue_file.png";
 import conference from "../../../../assets/issue/issue_video_conference.png";
 
 import { Draggable } from "react-beautiful-dnd";
-export class IssueItem extends Component {
-  editAppear = () => {
-    const editBox = document.querySelector(".edit_im");
-    editBox.style.display = "block";
 
-    console.log("1");
+import styled from "styled-components";
+
+const Container = styled.div`
+  border: ${props =>
+    props.isDragging ? " solid 1px var(--greenish-teal) " : "none"};
+`;
+
+let ControlBtn = styled.button`
+  // display: block;
+`;
+
+let ControlImg = styled.image`
+  // display: block;
+`;
+
+export class IssueItem extends Component {
+  state = {
+    mouseCheck: false
+  };
+
+  editAppear = () => {
+
+    console.log(1);
   };
   editDisapear = () => {
-    const editBox = document.querySelector(".edit_im");
-    editBox.style.display = "none";
-    console.log("2");
+
+    console.log(2);
   };
+
   render() {
     return (
-      <div
-        className="issueItem-container"
-        onMouseOver={this.editAppear}
-        onMouseOut={this.editDisapear}
-      >
-        <div id="issueItem-control">
-          <button className="edit-btn">
-            <img src={edit} className="edit_im" />
-          </button>
-          <div id="issueItem-edit">
-            <button className="edit-btn">
-              <img src={edit} className="edit_im" />
-            </button>
-          </div>
-        </div>
-        <p className="issueName">{this.props.task.contentTitle}</p>
-        <p className="issueInfo">
-          {this.props.task.content}
-          <img className="confYN" src={conference} />
-        </p>
+      <Draggable draggableId={this.props.task.id} index={this.props.index}>
+        {(provided, snapshot) => (
+          <Container
+            className="issueItem-container"
+            onMouseOver={this.editAppear}
+            onMouseOut={this.editDisapear}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+            isDragging={snapshot.isDragging}
+          >
+            <div id="issueItem-control">
+              <ControlBtn className="edit-btn">
+                <ControlImg src={edit} className="edit_im" />
+              </ControlBtn>
+              <div id="issueItem-edit">
+                <ControlBtn className="edit-btn">
+                  <ControlImg src={edit} className="edit_im" />
+                </ControlBtn>
+              </div>
+            </div>
+            <p className="issueName">{this.props.task.contentTitle}</p>
+            <p className="issueInfo">
+              {this.props.task.content}
+              <img className="confYN" src={conference} />
+            </p>
 
-        <div id="issueItem-detail">
-          <img className="comment_im" src={comment} />
-          <p className="comment_count">3</p>
-          <img className="file_im" src={file} />
-        </div>
-      </div>
+            <div id="issueItem-detail">
+              <img className="comment_im" src={comment} />
+              <p className="comment_count">3</p>
+              <img className="file_im" src={file} />
+            </div>
+          </Container>
+        )}
+      </Draggable>
     );
   }
 }

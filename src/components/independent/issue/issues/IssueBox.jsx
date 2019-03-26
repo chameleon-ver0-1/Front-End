@@ -3,25 +3,50 @@ import IssueItem from "../issueItem/IssueItem";
 
 import { Droppable } from "react-beautiful-dnd";
 
+import styled from "styled-components";
+const Container = styled.div`
+  margin-right: 25px;
+  width: 249px;
+  height: 540px;
+
+  display: flex;
+  flex-direction: column;
+`;
+const ItemList = styled.div`
+  // background-color: ${props => (props.isDraggingOver ? "skyblue" : "white")};
+  flex-grow: 1;
+  min-height: 100px;
+
+
+`;
 export class IssueBox extends Component {
   render() {
     const { column, count, tasks } = this.props;
+
+    //TODO: backgroundColor: $(props.isDraggingOver ? 'skyblue':'white');
+
     return (
-      <div className="issues-box">
+      <Container>
         <div className="issues-title">
           <p className="issues-title-status">{column.title}</p>
           <p className="issues-title-count">{count}</p>
         </div>
-        <Droppable droppableId={this.props.column.id}>
-          {provided => (
-            <div className="issues-body" ref={provided.innerRef}>
-              {tasks.map(task => (
-                <IssueItem key={task.id} task={task} />
+        <Droppable droppableId={column.id}>
+          {(provided, snapshot) => (
+            <ItemList
+              className="issues-body"
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              isDraggingOver={snapshot.isDraggingOver}
+            >
+              {tasks.map((task, index) => (
+                <IssueItem key={task.id} task={task} index={index} />
               ))}
-            </div>
+              {provided.placeholder}
+            </ItemList>
           )}
         </Droppable>
-      </div>
+      </Container>
     );
   }
 }
