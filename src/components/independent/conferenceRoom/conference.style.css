@@ -1,8 +1,8 @@
 @import '../../../style.css';
 
 .conferenceroom_container{
-  margin-left: 15%;
-  margin-top: 7%;
+  margin-left: 83px;
+  margin-top: 42px;
   width: 712px;
   height: 199px;
 }
@@ -12,7 +12,7 @@
 }
 
 .add_conference{
-
+  border-bottom: solid 1px #000000;
 }
 
 .add_conference_btn{
@@ -25,6 +25,7 @@
 .circle_container{
   display: flex;
   flex-direction: row;
+  margin-top: 27px;
 }
 
 .left_right{
@@ -32,6 +33,7 @@
   background: none;
   width: 16px;
   height: 33px;
+
 }
 
 .left_right_img{
@@ -42,4 +44,13 @@
 .people{
   width: 12px;
   height: 13px;
+}
+
+.circle_hori{
+  /*수평*/
+  display: flex;
+  flex-direction: row;
+  width: 34px;
+  height: 14px;
+  justify-content: center;
 }

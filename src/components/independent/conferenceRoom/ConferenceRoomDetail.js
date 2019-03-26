@@ -13,16 +13,19 @@ const Circle_conference = styled.div`
   border: solid 1px var(--greenish-teal);
 `;
 
-const Conference_title = styled.div`
+const Circle_title = styled.div`
   font-size: 14px;
+  text-align: center;
+
 `;
 
-const Conference_name = styled.div`
+const Circle_name = styled.div`
   font-size: 10px;
   color: var(--pinkish-grey);
+  text-align: center;
 `;
 
-const Conference_people = styled.div`
+const Circle_people = styled.div`
   font-size: 12px;
 `;
 
@@ -44,38 +47,38 @@ export class ConferenceRoomDetail extends Component {
             <img src={left} className="left_right_img" /></button>
 
           <Circle_conference>
-            <Conference_title>개발팀 전체 회의</Conference_title>
-            <Conference_name>권주희 Kwon ju hee</Conference_name>
+            <Circle_title>개발팀 전체 회의</Circle_title>
+            <Circle_name>권주희 Kwon ju hee</Circle_name>
             <div className="circle_hori">
               <img src={people} className="people"></img>
-              <Conference_people>5/6</Conference_people>
+              <Circle_people>5/6</Circle_people>
             </div>
           </Circle_conference>
 
           <Circle_conference>
-            <Conference_title>개발팀 전체 회의</Conference_title>
-            <Conference_name>권주희 Kwon ju hee</Conference_name>
+            <Circle_title>개발팀 전체 회의</Circle_title>
+            <Circle_name>권주희 Kwon ju hee</Circle_name>
             <div className="circle_hori">
               <img src={people} className="people"></img>
-              <Conference_people>5/6</Conference_people>
+              <Circle_people>5/6</Circle_people>
             </div>
           </Circle_conference>
 
           <Circle_conference>
-            <Conference_title>개발팀 전체 회의</Conference_title>
-            <Conference_name>권주희 Kwon ju hee</Conference_name>
+            <Circle_title>개발팀 전체 회의</Circle_title>
+            <Circle_name>권주희 Kwon ju hee</Circle_name>
             <div className="circle_hori">
               <img src={people} className="people"></img>
-              <Conference_people>5/6</Conference_people>
+              <Circle_people>5/6</Circle_people>
             </div>
           </Circle_conference>
 
           <Circle_conference>
-            <Conference_title>개발팀 전체 회의</Conference_title>
-            <Conference_name>권주희 Kwon ju hee</Conference_name>
+            <Circle_title>개발팀 전체 회의</Circle_title>
+            <Circle_name>권주희 Kwon ju hee</Circle_name>
             <div className="circle_hori">
               <img src={people} className="people"></img>
-              <Conference_people>5/6</Conference_people>
+              <Circle_people>5/6</Circle_people>
             </div>
           </Circle_conference>
 
