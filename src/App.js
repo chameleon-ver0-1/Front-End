@@ -10,7 +10,8 @@ import { SignIn, SignUp, AuthCheck } from "./components/independent/auth/Auth";
 import {
   Issue,
   ConferenceRoom,
-  ConferenceDocument
+  ConferenceDocument,
+  WebRTCRoom
 } from "./components/independent";
 import { Navbar, Menu, Chat } from "./components/common";
 
@@ -37,6 +38,7 @@ class App extends Component {
               <Route path="/auth/authCheck" component={AuthCheck} />
               <Route path="/home/issue" component={Issue} />
               <Route path="/home/conferenceRoom" component={ConferenceRoom} />
+              <Route path="/room/1" component={WebRTCRoom} />
               <Route
                 path="/home/conferenceDocument"
                 component={ConferenceDocument}
