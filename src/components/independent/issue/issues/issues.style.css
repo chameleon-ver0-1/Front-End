@@ -36,12 +36,12 @@
 .issues-body {
   margin-top: 66px;
 
-  width: 238px;
-  height: 523px;
+  width: 249px;
+  height: 541px;
 
-  padding-top: 19px;
+  /* padding-top: 19px;
   padding-left: 18px;
-  padding-right: 18px;
+  padding-right: 18px; */
 
   box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
     var(--box-shadow-blur) var(--box-main-color);
