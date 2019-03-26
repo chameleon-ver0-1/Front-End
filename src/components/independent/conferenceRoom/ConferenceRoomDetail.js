@@ -11,12 +11,13 @@ const Circle_conference = styled.div`
   width: 128px;
   height: 128px;
   border: solid 1px var(--greenish-teal);
+  margin: auto;
 `;
 
 const Circle_title = styled.div`
   font-size: 14px;
   text-align: center;
-
+  margin-top: 40px;
 `;
 
 const Circle_name = styled.div`
@@ -27,6 +28,19 @@ const Circle_name = styled.div`
 
 const Circle_people = styled.div`
   font-size: 12px;
+`;
+
+const Circle_time = styled.div`
+  border-radius: 64px;
+  width: 34px;
+  height: 34px;
+  background: var(--greenish-teal);
+  font-size: 10px;
+  color: #ffffff;
+  text-align: center;
+  margin-left: 94px;
+  display: flex;
+  align-items: center;
 `;
 
 export class ConferenceRoomDetail extends Component {
@@ -40,8 +54,6 @@ export class ConferenceRoomDetail extends Component {
           <button className="add_conference_btn">+ 회의 개설하기</button>
         </div>
 
-        {/* 실선 */}
-
         <div className="circle_container">
           <button className="left_right">
             <img src={left} className="left_right_img" /></button>
@@ -52,7 +64,9 @@ export class ConferenceRoomDetail extends Component {
             <div className="circle_hori">
               <img src={people} className="people"></img>
               <Circle_people>5/6</Circle_people>
+
             </div>
+            <Circle_time>12:30~</Circle_time>
           </Circle_conference>
 
           <Circle_conference>
@@ -62,6 +76,7 @@ export class ConferenceRoomDetail extends Component {
               <img src={people} className="people"></img>
               <Circle_people>5/6</Circle_people>
             </div>
+            <Circle_time>12:30~</Circle_time>
           </Circle_conference>
 
           <Circle_conference>
@@ -71,6 +86,7 @@ export class ConferenceRoomDetail extends Component {
               <img src={people} className="people"></img>
               <Circle_people>5/6</Circle_people>
             </div>
+            <Circle_time>12:30~</Circle_time>
           </Circle_conference>
 
           <Circle_conference>
@@ -80,6 +96,7 @@ export class ConferenceRoomDetail extends Component {
               <img src={people} className="people"></img>
               <Circle_people>5/6</Circle_people>
             </div>
+            <Circle_time>12:30~</Circle_time>
           </Circle_conference>
 
           <button className="left_right">

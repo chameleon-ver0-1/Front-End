@@ -5,6 +5,7 @@
   margin-top: 42px;
   width: 712px;
   height: 199px;
+  margin-bottom: 122px;
 }
 
 .conferenceroom_text{
@@ -12,7 +13,8 @@
 }
 
 .add_conference{
-  border-bottom: solid 1px #000000;
+  border-bottom: solid 1px var(--white-two);
+  text-align: right;
 }
 
 .add_conference_btn{
@@ -20,6 +22,7 @@
   border: none;
   background: none;
   color: var(--greenish-teal);
+  position: right;
 }
 
 .circle_container{
@@ -33,7 +36,7 @@
   background: none;
   width: 16px;
   height: 33px;
-
+  margin: auto;
 }
 
 .left_right_img{
@@ -47,10 +50,10 @@
 }
 
 .circle_hori{
-  /*수평*/
   display: flex;
   flex-direction: row;
   width: 34px;
   height: 14px;
-  justify-content: center;
+  margin-left: 48px;
+  margin-top: 9px;
 }
