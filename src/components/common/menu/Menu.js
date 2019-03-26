@@ -18,8 +18,11 @@ const active = {
 export class Menu extends Component {
   render() {
     const regex = new RegExp("/auth");
+    const regex2 = new RegExp("/room");
+
     return (
-      !regex.test(window.location.pathname) && (
+      !regex.test(window.location.pathname) &&
+      !regex2.test(window.location.pathname) && (
         <div className="menu-container">
           <NavLink className="link-list" to="/home/issue" activeStyle={active}>
             이슈관리
