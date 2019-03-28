@@ -67,7 +67,7 @@ export class ConferenceRoomDetail extends Component {
 
           <Slider className="slider">
             <Slide index={0} className="slide-index0">
-              <div>
+              <div className="slide_div">
                 <Circle_conference>
                   <Circle_title>개발팀 전체 회의</Circle_title>
                   <Circle_name>권주희 Kwon ju hee</Circle_name>
@@ -112,7 +112,7 @@ export class ConferenceRoomDetail extends Component {
             </Slide>
 
             <Slide index={1}>
-              <div>
+              <div className="slide_div">
                 <Circle_conference>
                   <Circle_title>개발팀 전체 회의</Circle_title>
                   <Circle_name>권주희 Kwon ju hee</Circle_name>
@@ -157,7 +157,7 @@ export class ConferenceRoomDetail extends Component {
             </Slide>
 
             <Slide index={2}>
-              <div>
+              <div className="slide_div">
                 <Circle_conference>
                   <Circle_title>개발팀 전체 회의</Circle_title>
                   <Circle_name>권주희 Kwon ju hee</Circle_name>
@@ -207,21 +207,6 @@ export class ConferenceRoomDetail extends Component {
             <img src={right} className="left_right_img" /></ButtonNext>
         </CarouselProvider>
 
-        <br />
-
-        {/* <CarouselProvider
-          naturalSlideWidth={100}
-          naturalSlideHeight={125}
-          totalSlides={3}
-          className="Carousel-Provier">
-          <Slider>
-            <Slide index={0}>I am first Slide</Slide>
-            <Slide index={1}>I am second Slide</Slide>
-            <Slide index={2}>I am third Slide</Slide>
-          </Slider>
-          <ButtonBack>Back</ButtonBack>
-          <ButtonNext>Next</ButtonNext>
-        </CarouselProvider> */}
       </div>
     );
   }
