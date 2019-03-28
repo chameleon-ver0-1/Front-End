@@ -16,6 +16,7 @@
     "react-responsive-modal": "^3.6.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
+    "skylinkjs": "^0.6.37",
     "styled-components": "^4.2.0"
   },
   "scripts": {
