@@ -29,14 +29,37 @@
   display: flex;
   flex-direction: row;
   margin-top: 27px;
+  height: 500px;
+  width: 700px;
 }
 
-.left_right{
+.slider{
+  width: 700px;
+  height: 500px;
+}
+
+.slide-index0{
+  background: #f6f6;
+  display: flex;
+  flex-direction: row;
+}
+
+.left_right_l{
   border: none;
   background: none;
   width: 16px;
   height: 33px;
-  margin: auto;
+  /* margin: auto; */
+  text-align: left;
+}
+
+.left_right_r{
+  border: none;
+  background: none;
+  width: 16px;
+  height: 33px;
+  /* margin: auto; */
+  text-align: right;
 }
 
 .left_right_img{
@@ -57,3 +80,11 @@
   margin-left: 48px;
   margin-top: 9px;
 }
+
+.circle-box {
+  width: 128px;
+  height: 128px;
+  display: flex;
+  flex-direction: column;
+}
+
