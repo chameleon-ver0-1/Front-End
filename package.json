@@ -9,6 +9,7 @@
     "natural-drag-animation-rbdnd": "^2.0.1",
     "optional": "^0.1.4",
     "prop-types": "^15.7.2",
+    "pure-react-carousel": "^1.19.0",
     "react": "^16.8.4",
     "react-beautiful-dnd": "^10.1.0",
     "react-dom": "^16.8.4",
