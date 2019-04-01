@@ -11,6 +11,7 @@ import {
   Issue,
   ConferenceRoom,
   ConferenceDocument,
+  UserArea,
   WebRTCRoom
 } from "./components/independent";
 import { Navbar, Menu, Chat } from "./components/common";
@@ -38,7 +39,9 @@ class App extends Component {
               <Route path="/auth/authCheck" component={AuthCheck} />
               <Route path="/home/issue" component={Issue} />
               <Route path="/home/conferenceRoom" component={ConferenceRoom} />
-              <Route path="/room/1" component={WebRTCRoom} />
+              {/* TODO: UserArea is not completed */}
+              <Route path="/room/1" component={UserArea} />
+              <Route path="/room/test" component={WebRTCRoom} />
               <Route
                 path="/home/conferenceDocument"
                 component={ConferenceDocument}
