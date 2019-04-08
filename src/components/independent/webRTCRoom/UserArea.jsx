@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import "./webrtc.style.css";
 
-const rtcmulticonnection = require("rtcmulticonnection");
+var predefinedRoomId = "Choyoonyoung";
 
 export class UserArea extends Component {
   componentWillMount() {
@@ -30,12 +31,22 @@ export class UserArea extends Component {
       video: true
     };
 
-    connection.openOrJoin("your-room-id");
+    connection.sdpConstraints.mandatory = {
+      OfferToReceiveAudio: true,
+      OfferToReceiveVideo: true
+    };
+
+    const join = () => {
+      this.disabled = true;
+
+      connection.openOrJoin(predefinedRoomId);
+    };
+
     return (
       <div class="webrtc-container">
-        <div>hi</div>
-        <button>Join button</button>
-        <hr />
+        <button id="btn-open-or-join-room" onClick={join}>
+          Join button
+        </button>
       </div>
     );
   }
