@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import videoCall from "./helpers/simple-peer";
-import { Router } from "react-router-dom";
 import "./webrtc.style.css";
 import io from "socket.io-client";
 
@@ -92,6 +91,7 @@ export class WebRTCRoom extends Component {
   call = otherId => {
     videoCall.connect(otherId);
   };
+  
   renderFull = () => {
     if (this.state.full) {
       return "The room is full";
