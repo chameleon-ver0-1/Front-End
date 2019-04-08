@@ -2,6 +2,24 @@ import React from 'react';
 import './dropdown.style.css';
 import notice from "../../../../assets/home/alert_off.png";
 import alert from "../../../../assets/home/alrert_list.png";
+import user from "../../../../assets/home/userProfile.png";
+import styled, { css } from 'styled-components';
+
+
+const Alert_text = styled.div`
+  margin-left: 5px;
+  font-size: 10px;
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const Alert_time = styled.div`
+  font-size: 8.5px;
+  color: var(--greenish-teal);
+  text-align: bottom;
+  display: flex;
+  flex-direction: row-reverse;
+`;
 
 class Dropdown extends React.Component {
   constructor() {
@@ -44,23 +62,51 @@ class Dropdown extends React.Component {
             <li>
               <div className="alert_div">
                 <img className="alert_img" src={alert}></img>
-                <text className="alert_text">잠시 뒤 예정된 회의 "4월 간행물..."가 있습니다.</text>
-                <text className="alert_time_text">방금</text>
+                <div className="alert_text_div">
+                <Alert_text className="alert_text">잠시 뒤 예정된 회의 "4월 간행물 ..."가 있습니다. </Alert_text>
+                </div>
+                <Alert_time className="alert_time_text">방금</Alert_time>
               </div>
-
             </li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+
+            <li>
+              <div className="alert_div">
+                <img className="alert_img" src={user}></img>
+                <div className="alert_text_div">
+                <Alert_text className="alert_text">조윤영 Cho yoonyoung으로부터 채팅 부재중 3건 </Alert_text>
+                </div>
+                <Alert_time className="alert_time_text">3분</Alert_time>
+              </div>
+            </li>
+
+            <li>
+              <div className="alert_div">
+                <img className="alert_img" src={user}></img>
+                <div className="alert_text_div">
+                <Alert_text className="alert_text">안지후 Ahn jihu으로부터 화상 회의 부재중 1건 </Alert_text>
+                </div>
+                <Alert_time className="alert_time_text">12분</Alert_time>
+              </div>
+            </li>
+
+            <li>
+              <div className="alert_div">
+                <img className="alert_img" src={alert}></img>
+                <div className="alert_text_div">
+                <Alert_text className="alert_text">30분 뒤, 예정된 회의 "4월 간행물 ..."가 있습니다. </Alert_text>
+                </div>
+                <Alert_time className="alert_time_text">30분</Alert_time>
+              </div>
+            </li>
+
+            <li className="alert_all"><a href=""></a>전체보기</li>
+
           </ul>
-        ) :
-          (
-            null
-          )
-        }
+      ) :
+        (
+          null
+        )
+      }
 
       </div>
 

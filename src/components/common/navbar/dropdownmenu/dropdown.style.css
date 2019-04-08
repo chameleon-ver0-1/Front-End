@@ -23,25 +23,16 @@ li a {
   text-decoration: none;
 }
 li {
-  padding: 8px 16px;
+  padding: 8px 10px;
   border-bottom: 1px solid #e5e5e5;
 }
 li:last-child {
   border-bottom: none;
 }
 li:hover {
-  background-color: #e5e5e5;
-  color: white;
+  background-color: var(--light-sage);
 }
-/* .button{
-  width:178px;
-  height:18px;
-  background-color:#ff3232 ;
-  padding:12px;
-  border-radius:5px;
-  font-weight:bold;
-  color:white;
-} */
+
 .button:before{
   content:"";
   position:absolute;
@@ -62,6 +53,7 @@ li:hover {
   background-repeat: no-repeat;
   background-size: auto;
 }
+
 .notice_im {
   padding-top: 4px;
   width: 20px;
@@ -79,21 +71,22 @@ li:hover {
 }
 .alert_div{
   display: flex;
-  align-content: flex-start;
-  justify-content: flex-start;
+  align-content: center;
+  justify-content: space-between;
 }
 
 .alert_img{
   width: 35px;
   height: 35px;
-  margin-right: 3px;
 }
 
-.alert_text{
-  font-size: 10px;
+.alert_text_div{
+  width: 160px;
+  height: 28px;
 }
 
-.alert_time_text{
-  font-size: 8.5px;
+.alert_all{
+  text-align: center;
   color: var(--greenish-teal);
+  font-size: 12px;
 }
