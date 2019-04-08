@@ -6,14 +6,20 @@
     "axios": "^0.18.0",
     "font-awesome": "^4.7.0",
     "material-ui": "^0.20.2",
+    "natural-drag-animation-rbdnd": "^2.0.1",
     "optional": "^0.1.4",
     "prop-types": "^15.7.2",
+    "pure-react-carousel": "^1.19.0",
     "react": "^16.8.4",
+    "react-beautiful-dnd": "^10.1.0",
     "react-dom": "^16.8.4",
     "react-responsive-modal": "^3.6.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
-    "styled-components": "^4.1.3"
+    "simple-peer": "^9.3.0",
+    "skylinkjs": "^0.6.37",
+    "socket.io-client": "^2.2.0",
+    "styled-components": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -29,7 +29,7 @@ class SignUp extends Component {
     return (
       <div className="inner-container2">
 
-        <div className="box-container">
+        <div className="login-container">
           <div className="header2">
             회원가입
         </div>
@@ -121,7 +121,7 @@ class SignUp extends Component {
             </div>
           </div>
 
-          <Link to="/auth/signIn">
+          <Link to="/auth/authCheck">
             <button className="join-btn">
               가입하기
             </button>

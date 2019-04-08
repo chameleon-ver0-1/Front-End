@@ -2,6 +2,7 @@
 
 .inner-container{
   margin: 60px auto;
+  display: flex;
 }
 
 .header{
@@ -11,7 +12,7 @@
   margin-bottom: 50px;
 }
 
-.box-container {
+.login-container {
   margin: auto;
 }
 

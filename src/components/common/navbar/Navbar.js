@@ -13,7 +13,8 @@ export class Navbar extends Component {
   render() {
     if (
       window.location.pathname === "/auth/signIn" ||
-      window.location.pathname === "/auth/signUp"
+      window.location.pathname === "/auth/signUp" ||
+      window.location.pathname === '/auth/authCheck'
     ) {
       return (
         <div className="container">
