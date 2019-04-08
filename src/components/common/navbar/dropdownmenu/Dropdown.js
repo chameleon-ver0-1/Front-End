@@ -1,5 +1,7 @@
 import React from 'react';
 import './dropdown.style.css';
+import notice from "../../../../assets/home/alert_off.png";
+import alert from "../../../../assets/home/alrert_list.png";
 
 class Dropdown extends React.Component {
   constructor() {
@@ -30,18 +32,29 @@ class Dropdown extends React.Component {
 
   render() {
     return (
-      <div className="dropdown" style={{ background: "red", width: "200px" }} >
-        <div className="button" onClick={this.showDropdownMenu}> My Setting </div>
+      <div className="dropdown" >
+
+        <button className="notice-btn">
+          <img src={notice} onClick={this.showDropdownMenu} className="notice_im" />
+        </button>
 
         {this.state.displayMenu ? (
-          <ul>
-            <li><a className="active" href="#Create Page">Create Page</a></li>
-            <li><a href="#Manage Pages">Manage Pages</a></li>
-            <li><a href="#Create Ads">Create Ads</a></li>
-            <li><a href="#Manage Ads">Manage Ads</a></li>
-            <li><a href="#Activity Logs">Activity Logs</a></li>
-            <li><a href="#Setting">Setting</a></li>
-            <li><a href="#Log Out">Log Out</a></li>
+          <ul className="alert_ul">
+            <li className="new_title">최근 알림</li>
+            <li>
+              <div className="alert_div">
+                <img className="alert_img" src={alert}></img>
+                <text className="alert_text">잠시 뒤 예정된 회의 "4월 간행물..."가 있습니다.</text>
+                <text className="alert_time_text">방금</text>
+              </div>
+
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
           </ul>
         ) :
           (

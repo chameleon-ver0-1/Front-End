@@ -1,3 +1,5 @@
+@import '../../../../style.css';
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -31,7 +33,7 @@ li:hover {
   background-color: #e5e5e5;
   color: white;
 }
-.button{
+/* .button{
   width:178px;
   height:18px;
   background-color:#ff3232 ;
@@ -39,7 +41,7 @@ li:hover {
   border-radius:5px;
   font-weight:bold;
   color:white;
-}
+} */
 .button:before{
   content:"";
   position:absolute;
@@ -49,4 +51,49 @@ li:hover {
   border-color: white transparent transparent transparent;
   right:6px;
   top:18px;
+}
+
+.notice-btn {
+  width: 20px;
+  height: 28px;
+  padding-right: 32px;
+  border: none;
+  background: none;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+.notice_im {
+  padding-top: 4px;
+  width: 20px;
+  height: 28px;
+}
+
+.alert_ul{
+  width: 248px;
+  height: 365px;
+}
+
+.new_title{
+  font-size: 12px;
+  color: var(--brownish-grey);
+}
+.alert_div{
+  display: flex;
+  align-content: flex-start;
+  justify-content: flex-start;
+}
+
+.alert_img{
+  width: 35px;
+  height: 35px;
+  margin-right: 3px;
+}
+
+.alert_text{
+  font-size: 10px;
+}
+
+.alert_time_text{
+  font-size: 8.5px;
+  color: var(--greenish-teal);
 }

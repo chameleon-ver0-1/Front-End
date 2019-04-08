@@ -39,11 +39,10 @@ export class Navbar extends Component {
             <p className="logo2">카멜레On</p>
             <div className="nav-right">
 
-              <button className="notice-btn">
+              {/* <button className="notice-btn">
                 <img src={notice} className="notice_im" />
-              </button>
+              </button> */}
               <Dropdown />
-
 
               <img
                 className="userProfile"
