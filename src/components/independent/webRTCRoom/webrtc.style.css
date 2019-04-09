@@ -8,3 +8,8 @@ video {
   padding: 10px;
   width: 100%;
 }
+
+#local-videos-container {
+  width: 100%;
+  height: 100%;
+}

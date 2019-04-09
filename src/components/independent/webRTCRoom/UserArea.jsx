@@ -52,22 +52,24 @@ export class UserArea extends Component {
     var localVideosContainer = document.getElementById(
       "local-videos-container"
     );
+
     var remoteVideosContainer = document.getElementById(
       "remote-videos-container"
     );
 
-    //FIXME:아래 onstream을 제거하면 잘 돌아가지만, 추가하면서 화면이 띄워지지 않는 현상이 벌어짐.
-    connection.onstream = function(event) {
-      var video = event.mediaElement;
-      if (event.type === "local") {
-        localVideosContainer.appendChild(video);
-        console.log("local");
-      }
-      if (event.type === "remote") {
-        remoteVideosContainer.appendChild(video);
-        console.log("remote");
-      }
-    };
+    // FIXME:아래 onstream을 제거하면 잘 돌아가지만, 추가하면서 화면이 띄워지지 않는 현상이 벌어짐.
+    // connection.onstream = event => {
+    //   // var video = event.mediaElement;
+    //   // if (event.type === "local") {
+    //   //   localVideosContainer.appendChild(video);
+    //   //   console.log("local");
+    //   // } else if (event.type === "remote") {
+    //   //   remoteVideosContainer.appendChild(video);
+    //   //   console.log("remote");
+    //   // } else {
+    //   //   console.log("nothing");
+    //   // }
+    // };
 
     return (
       <div class="webrtc-container">
