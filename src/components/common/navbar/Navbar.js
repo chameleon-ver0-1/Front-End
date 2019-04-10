@@ -5,8 +5,11 @@ import userProfile from "../../../assets/home/userProfile.png";
 
 import moreInfo from "../../../assets/home/moreInfo.png";
 import notice from "../../../assets/home/alert_off.png";
+import Dropdown from './dropdownmenu/Dropdown';
 
 export class Navbar extends Component {
+
+
   render() {
     if (
       window.location.pathname === "/auth/signIn" ||
@@ -36,9 +39,9 @@ export class Navbar extends Component {
           <div className="nav2-container">
             <p className="logo2">카멜레On</p>
             <div className="nav-right">
-              <button className="notice-btn">
-                <img src={notice} className="notice_im" />
-              </button>
+
+              <Dropdown />
+
               <img
                 className="userProfile"
                 src={userProfile}
