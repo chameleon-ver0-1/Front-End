@@ -4,20 +4,7 @@
   position: relative;
   display: inline-block;
 }
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  top:45px;
-  right:0px;
-  width: 200px;
-  background-color: white;
-  font-weight:bold;
-  position: absolute;
 
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
 li a {
   color: #000;
   text-decoration: none;
@@ -27,21 +14,7 @@ li {
   border-bottom: 1px solid #e5e5e5;
 }
 li:last-child {
-  border-bottom: none;
-}
-li:hover {
-  background-color: var(--light-sage);
-}
-
-.button:before{
-  content:"";
-  position:absolute;
-  width:0px;
-  height:0px;
-  border: 10px solid;
-  border-color: white transparent transparent transparent;
-  right:6px;
-  top:18px;
+  /* border-bottom: none; */
 }
 
 .notice-btn {
@@ -63,6 +36,17 @@ li:hover {
 .alert_ul{
   width: 248px;
   height: 365px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  top:45px;
+  right:0px;
+  background-color: white;
+  font-weight:bold;
+  position: absolute;
+
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
 }
 
 .alert_title{
@@ -72,6 +56,10 @@ li:hover {
   border-bottom: 1px solid var(--white-two);
   margin-top: 5px;
   margin-left: 3px;
+}
+
+.alert_li:hover {
+  background-color: var(--light-sage);
 }
 
 .alert_div{

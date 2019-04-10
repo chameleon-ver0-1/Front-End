@@ -58,7 +58,7 @@ class Dropdown extends React.Component {
         {this.state.displayMenu ? (
           <ul className="alert_ul">
             <div className="alert_title">최근 알림</div>
-            <li>
+            <li className="alert_li">
               <div className="alert_div">
                 <img className="alert_img" src={alert}></img>
                 <div className="alert_text_div">
@@ -68,7 +68,7 @@ class Dropdown extends React.Component {
               </div>
             </li>
 
-            <li>
+            <li className="alert_li">
               <div className="alert_div">
                 <img className="alert_img" src={user}></img>
                 <div className="alert_text_div">
@@ -78,7 +78,7 @@ class Dropdown extends React.Component {
               </div>
             </li>
 
-            <li>
+            <li className="alert_li">
               <div className="alert_div">
                 <img className="alert_img" src={user}></img>
                 <div className="alert_text_div">
@@ -88,7 +88,7 @@ class Dropdown extends React.Component {
               </div>
             </li>
 
-            <li>
+            <li className="alert_li">
               <div className="alert_div">
                 <img className="alert_img" src={alert}></img>
                 <div className="alert_text_div">
@@ -100,7 +100,6 @@ class Dropdown extends React.Component {
 
             <button className="alert_all">전체보기</button>
           </ul>
-
 
         ) :
           (
