@@ -13,9 +13,6 @@ li {
   padding: 8px 10px;
   border-bottom: 1px solid #e5e5e5;
 }
-li:last-child {
-  /* border-bottom: none; */
-}
 
 .notice-btn {
   width: 20px;
@@ -88,5 +85,4 @@ li:last-child {
   height: 31px;
   border: none;
   background: none;
-
 }

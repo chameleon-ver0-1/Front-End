@@ -5,7 +5,6 @@ import alert from "../../../../assets/home/alrert_list.png";
 import user from "../../../../assets/home/userProfile.png";
 import styled, { css } from 'styled-components';
 
-
 const Alert_text = styled.div`
   margin-top: 3px;
   font-size: 10px;
