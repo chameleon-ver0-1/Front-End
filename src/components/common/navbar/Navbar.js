@@ -52,8 +52,8 @@ export class Navbar extends Component {
               <Bounce when={this.state.show}>
                 <Dropdown />
               </Bounce>
-              <button className="aa">
-                <img src={alert} className="aaa"
+              <button className="notice-btn">
+                <img src={alert} className="notice_im"
                   onClick={this.handleClick} /></button>
 
               <img
