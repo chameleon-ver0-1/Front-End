@@ -5,7 +5,7 @@ import userProfile from "../../../assets/home/userProfile.png";
 import moreInfo from "../../../assets/home/moreInfo.png";
 import notice from "../../../assets/home/alert_off.png";
 import Dropdown from './dropdownmenu/Dropdown';
-import Bounce from 'react-reveal/Bounce';
+import Fade from 'react-reveal/Fade';
 import alert from "../../../assets/home/alert_off.png";
 export class Navbar extends Component {
 
@@ -49,9 +49,9 @@ export class Navbar extends Component {
             <p className="logo2">카멜레On</p>
             <div className="nav-right">
 
-              <Bounce when={this.state.show}>
+              <Fade when={this.state.show}>
                 <Dropdown />
-              </Bounce>
+              </Fade>
               <button className="notice-btn">
                 <img src={alert} className="notice_im"
                   onClick={this.handleClick} /></button>
