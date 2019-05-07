@@ -5,7 +5,6 @@ import alert from "../../../../assets/home/alrert_list.png";
 import user from "../../../../assets/home/userProfile.png";
 import styled, { css } from 'styled-components';
 
-
 const Alert_text = styled.div`
   margin-top: 3px;
   font-size: 10px;
@@ -51,11 +50,15 @@ class Dropdown extends React.Component {
     return (
       <div className="dropdown" >
 
-        <button className="notice-btn">
+        {/* <button className="notice-btn">
           <img src={notice} onClick={this.showDropdownMenu} className="notice_im" />
-        </button>
+        </button> */}
 
-        {this.state.displayMenu ? (
+        {/* {this.state.displayMenu ? ( */}
+
+        <div className="tri_alert">
+          <div className="triangle"></div>
+
           <ul className="alert_ul">
             <div className="alert_title">최근 알림</div>
             <li className="alert_li">
@@ -100,12 +103,12 @@ class Dropdown extends React.Component {
 
             <button className="alert_all">전체보기</button>
           </ul>
-
-        ) :
+        </div>
+        {/* ) :
           (
             null
           )
-        }
+        } */}
 
       </div>
 
