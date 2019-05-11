@@ -1,4 +1,4 @@
-class getHTMLMediaElement {
+export class getHTMLMediaElement {
   render() {
     const getHTMLMediaElement = (mediaElement, config) => {
       config = config || {};
@@ -670,3 +670,4 @@ class getHTMLMediaElement {
     }
   }
 }
+export default getHTMLMediaElement;
