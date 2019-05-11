@@ -142,3 +142,9 @@
 
   color: var(--brownish-grey);
 }
+
+.dropdown_menu{
+  background: #f6f6;
+  width: 100px;
+  height: 100px;
+}

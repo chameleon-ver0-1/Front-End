@@ -2,12 +2,24 @@ import React, { Component } from "react";
 import "./navbar.style.css";
 
 import userProfile from "../../../assets/home/userProfile.png";
-
 import moreInfo from "../../../assets/home/moreInfo.png";
 import notice from "../../../assets/home/alert_off.png";
-
+import Dropdown from './dropdownmenu/Dropdown';
+import Fade from 'react-reveal/Fade';
+import alert from "../../../assets/home/alert_off.png";
 export class Navbar extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { show: false };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState({ show: !this.state.show });
+  }
+
   render() {
+
     if (
       window.location.pathname === "/auth/signIn" ||
       window.location.pathname === "/auth/signUp" ||
@@ -36,9 +48,14 @@ export class Navbar extends Component {
           <div className="nav2-container">
             <p className="logo2">카멜레On</p>
             <div className="nav-right">
+
+              <Fade when={this.state.show}>
+                <Dropdown />
+              </Fade>
               <button className="notice-btn">
-                <img src={notice} className="notice_im" />
-              </button>
+                <img src={alert} className="notice_im"
+                  onClick={this.handleClick} /></button>
+
               <img
                 className="userProfile"
                 src={userProfile}
