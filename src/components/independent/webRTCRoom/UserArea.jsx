@@ -6,7 +6,72 @@ var connection = new window.RTCMultiConnection();
 
 // this line is VERY_important
 connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/";
+// if you want audio+video conferencing
+connection.session = {
+  audio: true,
+  video: true
+};
 
+connection.sdpConstraints.mandatory = {
+  OfferToReceiveAudio: true,
+  OfferToReceiveVideo: true
+};
+
+// FIXME:아래 onstream을 제거하면 잘 돌아가지만, 추가하면서 화면이 띄워지지 않는 현상이 벌어짐.
+// const afterRemoteStreamStartedFlowing = e => {
+//   document.body.appendChild(e.mediaElement);
+// };
+// connection.str = e => {
+//   // var video = event.mediaElement;
+//   // if (event.type === "local") {
+//   //   localVideosContainer.appendChild(video);
+//   //   console.log("local");
+//   // } else if (event.type === "remote") {
+//   //   remoteVideosContainer.appendChild(video);
+//   //   console.log("remote");
+//   // } else {
+//   //   console.log("nothing");
+//   // }
+//   waitUntilRemoteStreamStartsFlowing(this.mediaElement, e);
+// };
+
+// const waitUntilRemoteStreamStartsFlowing = (mediaElement, e) => {
+//   // chrome for android may have some features missing
+//   if (connection.DetectRTC.isMobileDevice) {
+//     return afterRemoteStreamStartedFlowing(e);
+//   }
+
+//   if (!mediaElement.numberOfTimes) mediaElement.numberOfTimes = 0;
+//   mediaElement.numberOfTimes++;
+
+//   if (
+//     !(
+//       mediaElement.readyState <= HTMLMediaElement.HAVE_CURRENT_DATA ||
+//       mediaElement.paused ||
+//       mediaElement.currentTime <= 0
+//     )
+//   ) {
+//     return afterRemoteStreamStartedFlowing(e);
+//   }
+
+//   if (mediaElement.numberOfTimes >= 60) {
+//     // wait 60 seconds while video is delivered!
+//     throw "Failed receiving remote video.";
+//   }
+
+//   setTimeout(function() {
+//     waitUntilRemoteStreamStartsFlowing(mediaElement, e);
+//   }, 900);
+// };
+
+const join = e => {
+  this.disabled = true;
+  connection.openOrJoin(e.target.value || predefinedRoomId);
+};
+
+var localVideosContainer = document.getElementById("local-videos-container");
+
+var remoteVideosContainer = document.getElementById("remote-videos-container");
 export class UserArea extends Component {
   state = {
     roomId: "100"
@@ -34,41 +99,6 @@ export class UserArea extends Component {
   }
 
   render() {
-    // if you want audio+video conferencing
-    connection.session = {
-      audio: true,
-      video: true
-    };
-
-    connection.sdpConstraints.mandatory = {
-      OfferToReceiveAudio: true,
-      OfferToReceiveVideo: true
-    };
-    const join = e => {
-      this.disabled = true;
-      connection.openOrJoin(e.target.value || predefinedRoomId);
-    };
-
-    var localVideosContainer = document.getElementById(
-      "local-videos-container"
-    );
-    var remoteVideosContainer = document.getElementById(
-      "remote-videos-container"
-    );
-
-    //FIXME:아래 onstream을 제거하면 잘 돌아가지만, 추가하면서 화면이 띄워지지 않는 현상이 벌어짐.
-    connection.onstream = function(event) {
-      var video = event.mediaElement;
-      if (event.type === "local") {
-        localVideosContainer.appendChild(video);
-        console.log("local");
-      }
-      if (event.type === "remote") {
-        remoteVideosContainer.appendChild(video);
-        console.log("remote");
-      }
-    };
-
     return (
       <div class="webrtc-container">
         <input
