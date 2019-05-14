@@ -4,6 +4,7 @@ import doc_off from '../../../assets/doc/doc_off.png';
 import doc_on from '../../../assets/doc/doc_on.png';
 import download_off from '../../../assets/doc/download_off.png';
 import download_on from '../../../assets/doc/download_on.png';
+import DocumentData from './document-data';
 
 export class ConferenceDoc extends Component {
 
@@ -14,9 +15,17 @@ export class ConferenceDoc extends Component {
       doctime: '2019.03.21 12:00 ~ 14:00',
       docfile: '',
       docdownload: ''
-    }
+    },
+    DocumentData
 
   }
+
+  // {Object.keys(this.state.columns).map(columnId => {
+  //   const column = this.state.columns[columnId];
+  //   const tasks = column.taskIds.map(
+  //     taskId => this.state.tasks[taskId]
+  //   );
+  // })}
 
   render() {
     return (
