@@ -92,11 +92,14 @@ export class VideoItem extends Component {
         }
         video.srcObject = event.stream;
 
-        var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
+        var height =
+          parseInt(connection.videosContainer.clientHeight / 3) - 100;
+        var width = 20;
         var mediaElement = getHTMLMediaElement.getHTMLMediaElement(video, {
           title: event.userid,
           buttons: ["full-screen"],
           width: width,
+          height: height,
           showOnMouseEnter: false
         });
 
