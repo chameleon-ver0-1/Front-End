@@ -1,15 +1,29 @@
 import React, { Component } from "react";
-// import "./webrtc.style.css";
 import VideoItem from "./VideoItem";
-import VideoNav from './VideoNav';
+import VideoNav from "./VideoNav";
+import VideoMenubar from "./VideoMenubar";
+import styled from "styled-components";
 
+const VideoBaseContainer = styled.div`
+  width: 100%;
+`;
+const SecondBox = styled.div`
+  width: 100%;
+  height: 767px;
+
+  display: flex;
+  flex-direction: column;
+`;
 export class WebRTCRoom extends Component {
   render() {
     return (
-      <div>
-        <VideoNav/>
-        <VideoItem />
-      </div>
+      <VideoBaseContainer>
+        <VideoNav />
+        <SecondBox>
+          <VideoMenubar />
+          <VideoItem />
+        </SecondBox>
+      </VideoBaseContainer>
     );
   }
 }
