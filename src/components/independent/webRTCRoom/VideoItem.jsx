@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import getHTMLMediaElement from "./getHTMLMediaElement.jsx";
-import styled from "styled-components";
+
 import "./webrtc.style.css";
 
 var connection = new window.RTCMultiConnection();
@@ -57,75 +57,68 @@ export class VideoItem extends Component {
       OfferToReceiveVideo: true
     };
     const showVideo = () => {
+      console.log("hi");
       //connection1
-      connection.videosContainer = document.getElementsByClassName(
-        "videos-container"
-      );
-      console.log(connection.videosContainer);
-
+      // connection.videosContainer = document.getElementsByClassName(
+      //   "videos-container"
+      // );
+      // console.log(connection.videosContainer);
       //FIXME: 현재 이 onstream이 안먹히고 있음!!!!!!!!!
-
-      connection.onstream = function(event) {
-        var existing = document.getElementById(event.streamid);
-        if (existing && existing.parentNode) {
-          existing.parentNode.removeChild(existing);
-        }
-        event.mediaElement.removeAttribute("src");
-        event.mediaElement.removeAttribute("srcObject");
-        event.mediaElement.muted = true;
-        event.mediaElement.volume = 0;
-        var video = document.createElement("video");
-        try {
-          video.setAttributeNode(document.createAttribute("autoplay"));
-          video.setAttributeNode(document.createAttribute("playsinline"));
-        } catch (e) {
-          video.setAttribute("autoplay", true);
-          video.setAttribute("playsinline", true);
-        }
-        if (event.type === "local") {
-          video.volume = 0;
-          try {
-            video.setAttributeNode(document.createAttribute("muted"));
-          } catch (e) {
-            video.setAttribute("muted", true);
-          }
-        }
-        video.srcObject = event.stream;
-
-        var height =
-          parseInt(connection.videosContainer.clientHeight / 3) - 100;
-        var width = 20;
-        var mediaElement = getHTMLMediaElement.getHTMLMediaElement(video, {
-          title: event.userid,
-          buttons: ["full-screen"],
-          width: width,
-          height: height,
-          showOnMouseEnter: false
-        });
-
-        connection.videosContainer.appendChild(mediaElement);
-        console.log(connection.videosContainer);
-
-        setTimeout(function() {
-          mediaElement.media.play();
-        }, 5000);
-
-        mediaElement.id = event.streamid;
-
-        // to keep room-id in cache
-        localStorage.setItem(
-          connection.socketMessageEvent,
-          connection.sessionid
-        );
-
-        if (event.type === "local") {
-          connection.socket.on("disconnect", function() {
-            if (!connection.getAllParticipants().length) {
-              window.location.reload();
-            }
-          });
-        }
-      };
+      // connection.onstream = function(event) {
+      //   var existing = document.getElementById(event.streamid);
+      //   if (existing && existing.parentNode) {
+      //     existing.parentNode.removeChild(existing);
+      //   }
+      //   event.mediaElement.removeAttribute("src");
+      //   event.mediaElement.removeAttribute("srcObject");
+      //   event.mediaElement.muted = true;
+      //   event.mediaElement.volume = 0;
+      //   var video = document.createElement("video");
+      //   try {
+      //     video.setAttributeNode(document.createAttribute("autoplay"));
+      //     video.setAttributeNode(document.createAttribute("playsinline"));
+      //   } catch (e) {
+      //     video.setAttribute("autoplay", true);
+      //     video.setAttribute("playsinline", true);
+      //   }
+      //   if (event.type === "local") {
+      //     video.volume = 0;
+      //     try {
+      //       video.setAttributeNode(document.createAttribute("muted"));
+      //     } catch (e) {
+      //       video.setAttribute("muted", true);
+      //     }
+      //   }
+      //   video.srcObject = event.stream;
+      //   var height =
+      //     parseInt(connection.videosContainer.clientHeight / 3) - 100;
+      //   var width = 20;
+      //   var mediaElement = getHTMLMediaElement.getHTMLMediaElement(video, {
+      //     title: event.userid,
+      //     buttons: ["full-screen"],
+      //     width: width,
+      //     height: height,
+      //     showOnMouseEnter: false
+      //   });
+      //   connection.videosContainer.appendChild(mediaElement);
+      //   console.log(connection.videosContainer);
+      //   setTimeout(function() {
+      //     mediaElement.media.play();
+      //   }, 5000);
+      //   mediaElement.id = event.streamid;
+      //   // to keep room-id in cache
+      //   localStorage.setItem(
+      //     connection.socketMessageEvent,
+      //     connection.sessionid
+      //   );
+      //   if (event.type === "local") {
+      //     connection.socket.on("disconnect", function() {
+      //       if (!connection.getAllParticipants().length) {
+      //         window.location.reload();
+      //       }
+      //     });
+      //   }
+      // };
     };
 
     //connection2
@@ -170,7 +163,7 @@ export class VideoItem extends Component {
       ) {
         if (isRoomOpened === true) {
           showRoomURL(connection.sessionid);
-          showVideo();
+          // showVideo();
         } else {
           disableInputButtons(true);
           if (error === "Room not available") {
@@ -254,7 +247,6 @@ export class VideoItem extends Component {
     }
     var txtRoomId = document.getElementsByClassName("room-id"); //FIXME:className으로 해야 작동이 되나 원래는 id로 해야함. 둘의 차이를 잘 모르겠음.
 
-    console.log(txtRoomId);
     txtRoomId.value = roomid; //FIXME:
     txtRoomId.onkeyup = txtRoomId.oninput = txtRoomId.onpaste = function() {
       localStorage.setItem(
@@ -269,7 +261,7 @@ export class VideoItem extends Component {
 
     //TODO: roomid를 직접 받아와야하는 부분
     var roomid = window.params.roomid;
-    console.log(window.params.roomid);
+
     // var roomid = params.roomid; //FIXME:
     if (!roomid && hashString.length) {
       roomid = hashString;
