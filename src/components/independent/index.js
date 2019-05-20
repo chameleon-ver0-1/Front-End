@@ -5,4 +5,6 @@ import ConferenceRoom from "./conferenceRoom/ConferenceRoom";
 import ConferenceDocument from "./conferenceDocument/ConferenceDoc";
 import UserArea from "./webRTCRoom/UserArea";
 import WebRTCRoom from "./webRTCRoom/WebRTCRoom";
-export { Issue, ConferenceRoom, ConferenceDocument, UserArea, WebRTCRoom };
+import ConferenceDocumentDetail from "./conferenceDocument/conferenceDocumentDetail/ConferenceDocDetail";
+
+export { Issue, ConferenceRoom, ConferenceDocument, UserArea, WebRTCRoom, ConferenceDocumentDetail };

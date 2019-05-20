@@ -5,6 +5,7 @@ import doc_on from '../../../assets/doc/doc_on.png';
 import download_off from '../../../assets/doc/download_off.png';
 import download_on from '../../../assets/doc/download_on.png';
 import DocumentData from './document-data';
+import { Link } from "react-router-dom";
 
 export class ConferenceDoc extends Component {
 
@@ -45,7 +46,11 @@ export class ConferenceDoc extends Component {
             </tr>
 
             <tr className="table_content">
-              <td><a>{this.state.boards.doctitle}</a></td>
+              <td>
+                <Link to="/home/conferenceDocument/conferenceDocumentDetail" className="linkdocumentdetail">
+                  <button className="todetail">{this.state.boards.doctitle}</button>
+                </Link>
+              </td>
               <td>{this.state.boards.doctime}</td>
               <td>{this.state.boards.docfile}</td>
               <td>
