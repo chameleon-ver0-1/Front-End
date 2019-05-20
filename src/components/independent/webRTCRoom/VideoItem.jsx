@@ -28,6 +28,8 @@ export class VideoItem extends Component {
     script.async = true;
 
     document.body.appendChild(script);
+
+    ///
   }
   componentDidMount() {}
 
@@ -56,69 +58,76 @@ export class VideoItem extends Component {
       OfferToReceiveAudio: true,
       OfferToReceiveVideo: true
     };
-    const showVideo = () => {
-      console.log("hi");
+
+    connection.onstream = function(event) {
       //connection1
-      // connection.videosContainer = document.getElementsByClassName(
-      //   "videos-container"
-      // );
+      connection.videosContainer = document.getElementById("videos-container");
+      var video = document.createElement("video");
+      // var video = event.mediaElement;
+      video.id = event.streamid;
+
+      console.log("onstream 정상 작동 중");
+
+      var existing = document.getElementById(event.streamid);
+      // if (existing && existing.parentNode) {
+      //   existing.parentNode.removeChild(existing);
+      // }
+      event.mediaElement.removeAttribute("src");
+      event.mediaElement.removeAttribute("srcObject");
+      event.mediaElement.muted = true;
+      event.mediaElement.volume = 0;
+
+      try {
+        video.setAttributeNode(document.createAttribute("autoplay"));
+        video.setAttributeNode(document.createAttribute("playsinline"));
+      } catch (e) {
+        video.setAttribute("autoplay", true);
+        video.setAttribute("playsinline", true);
+      }
+
+      if (event.type === "local") {
+        video.volume = 0;
+        try {
+          video.setAttributeNode(document.createAttribute("muted"));
+        } catch (e) {
+          video.setAttribute("muted", true);
+        }
+      }
+
+      video.srcObject = event.stream;
+
+      var height = parseInt(connection.videosContainer.clientHeight / 3) - 100;
+
+      var width = 20;
+
+      connection.videosContainer.appendChild(video);
+      //FIXME: mediaElement 크기 설정 안먹히는 중
+      var mediaElement = getHTMLMediaElement.getHTMLMediaElement(video, {
+        title: event.userid,
+        buttons: ["full-screen"],
+        width: width,
+        height: height,
+        showOnMouseEnter: false
+      });
+
+      setTimeout(function() {
+        mediaElement.media.play();
+      }, 5000);
+
+      mediaElement.id = event.streamid;
+      // to keep room-id in cache
+      localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
+      if (event.type === "local") {
+        connection.socket.on("disconnect", function() {
+          if (!connection.getAllParticipants().length) {
+            window.location.reload();
+          }
+        });
+      }
+
+      // connection.videosContainer.appendChild(mediaElement);
+      // console.log("append 이후");
       // console.log(connection.videosContainer);
-      //FIXME: 현재 이 onstream이 안먹히고 있음!!!!!!!!!
-      // connection.onstream = function(event) {
-      //   var existing = document.getElementById(event.streamid);
-      //   if (existing && existing.parentNode) {
-      //     existing.parentNode.removeChild(existing);
-      //   }
-      //   event.mediaElement.removeAttribute("src");
-      //   event.mediaElement.removeAttribute("srcObject");
-      //   event.mediaElement.muted = true;
-      //   event.mediaElement.volume = 0;
-      //   var video = document.createElement("video");
-      //   try {
-      //     video.setAttributeNode(document.createAttribute("autoplay"));
-      //     video.setAttributeNode(document.createAttribute("playsinline"));
-      //   } catch (e) {
-      //     video.setAttribute("autoplay", true);
-      //     video.setAttribute("playsinline", true);
-      //   }
-      //   if (event.type === "local") {
-      //     video.volume = 0;
-      //     try {
-      //       video.setAttributeNode(document.createAttribute("muted"));
-      //     } catch (e) {
-      //       video.setAttribute("muted", true);
-      //     }
-      //   }
-      //   video.srcObject = event.stream;
-      //   var height =
-      //     parseInt(connection.videosContainer.clientHeight / 3) - 100;
-      //   var width = 20;
-      //   var mediaElement = getHTMLMediaElement.getHTMLMediaElement(video, {
-      //     title: event.userid,
-      //     buttons: ["full-screen"],
-      //     width: width,
-      //     height: height,
-      //     showOnMouseEnter: false
-      //   });
-      //   connection.videosContainer.appendChild(mediaElement);
-      //   console.log(connection.videosContainer);
-      //   setTimeout(function() {
-      //     mediaElement.media.play();
-      //   }, 5000);
-      //   mediaElement.id = event.streamid;
-      //   // to keep room-id in cache
-      //   localStorage.setItem(
-      //     connection.socketMessageEvent,
-      //     connection.sessionid
-      //   );
-      //   if (event.type === "local") {
-      //     connection.socket.on("disconnect", function() {
-      //       if (!connection.getAllParticipants().length) {
-      //         window.location.reload();
-      //       }
-      //     });
-      //   }
-      // };
     };
 
     //connection2
@@ -163,7 +172,6 @@ export class VideoItem extends Component {
       ) {
         if (isRoomOpened === true) {
           showRoomURL(connection.sessionid);
-          // showVideo();
         } else {
           disableInputButtons(true);
           if (error === "Room not available") {
@@ -210,7 +218,6 @@ export class VideoItem extends Component {
             alert(error);
           } else if (connection.isInitiator === true) {
             showRoomURL(roomid);
-            showVideo();
           }
         })
       );
@@ -316,9 +323,7 @@ export class VideoItem extends Component {
             회의실 개설/참여하기
           </button>
         </div>
-
-        <div className="videos-container" />
-
+        <div id="videos-container" />
         <div id="room-urls" />
       </div>
     );
