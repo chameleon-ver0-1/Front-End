@@ -10,9 +10,14 @@ const VideoBaseContainer = styled.div`
 const SecondBox = styled.div`
   width: 100%;
   height: 767px;
+  background: var(--brownish-grey);
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+`;
+const Videos = styled.div`
+  width: 1303px;
+  background: var(--brownish-grey);
 `;
 export class WebRTCRoom extends Component {
   render() {
