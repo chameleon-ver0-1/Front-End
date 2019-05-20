@@ -1,0 +1,9 @@
+canvas{
+  weight: 500px;
+  height: 200px;
+}
+.canvas-div{
+  width: 711px;
+  height: 200px;
+  background-color: #fafafa;
+}
