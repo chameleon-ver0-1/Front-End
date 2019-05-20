@@ -12,12 +12,14 @@ import {
   ConferenceRoom,
   ConferenceDocument,
   UserArea,
-  WebRTCRoom
+  WebRTCRoom,
+  ConferenceDocumentDetail
 } from "./components/independent";
+
 import { Navbar, Menu, Chat } from "./components/common";
 
 class App extends Component {
-  componentDidMount() {}
+  componentDidMount() { }
   render() {
     return (
       <Router>
@@ -46,6 +48,8 @@ class App extends Component {
                 path="/home/conferenceDocument"
                 component={ConferenceDocument}
               />
+              <Route
+                path="/home/conferenceDocument/conferenceDocumentDetail" component={ConferenceDocumentDetail} />
               <Chat />
             </div>
           </div>

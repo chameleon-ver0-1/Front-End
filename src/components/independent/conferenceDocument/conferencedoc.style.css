@@ -35,6 +35,13 @@ th,td{
   text-align: center;
 }
 
+.todetail{
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  background: none;
+}
+
 .doc_button{
   flex-direction: row;
   margin-right: 15px;
