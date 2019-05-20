@@ -45,7 +45,7 @@ export class ConferenceDoc extends Component {
             </tr>
 
             <tr className="table_content">
-              <td>{this.state.boards.doctitle}</td>
+              <td><a>{this.state.boards.doctitle}</a></td>
               <td>{this.state.boards.doctime}</td>
               <td>{this.state.boards.docfile}</td>
               <td>
