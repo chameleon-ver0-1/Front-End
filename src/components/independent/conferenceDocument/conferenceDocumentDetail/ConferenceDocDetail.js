@@ -31,7 +31,7 @@ class ConferenceDocDetail extends Component {
         backgroundColor: '#fafafa',
         gridSize: 18,
         hover: window.drawBox,
-        click: function (item) {
+        click: function (item) { //수정 해야함
           alert(item[0] + ': ' + item[1]);
         }
       });
@@ -39,42 +39,36 @@ class ConferenceDocDetail extends Component {
 
   render() {
     return (
-      <div>
+      <div className="documentdetaildiv">
         <div className="documentDetailTitle">
           <div className="Title1">4월 간행물 표지 초안</div>
           <div className="Title2">2019.03.13 PM1:00 화상회의</div>
-          <div className="save_buttons">
-            <button>전체본</button>
-            <button>요약본</button>
+          <div>
+            <button className="save_button">전체본</button>
+            <button className="save_button">요약본</button>
           </div>
         </div>
 
         <div className="wordclouddiv">
-          <div>키워드맵</div>
+          <div className="detail_title">키워드맵</div>
           <div className="canvas-div">
             <canvas ref="my-canvas"></canvas>
           </div>
         </div>
-
+        <br />
         <div className="div1">
-          <div>주제1</div>
-          <div>요약 : 주제1에 대한 요약이 이곳에 들어갑니다.</div>
-          <div>요약 : 주제1에 대한 요약이 이곳에 들어갑니다.</div>
-          <div>요약 : 주제1에 대한 요약이 이곳에 들어갑니다.</div>
+          <div className="detail_title">주제1</div>
+          <div className="detail_content">요약 : 주제1에 대한 요약이 이곳에 들어갑니다.</div>
         </div>
-
+        <br />
         <div className="div2">
-          <div>주제2</div>
-          <div>요약 : 주제2에 대한 요약이 이곳에 들어갑니다.</div>
-          <div>요약 : 주제2에 대한 요약이 이곳에 들어갑니다.</div>
-          <div>요약 : 주제2에 대한 요약이 이곳에 들어갑니다.</div>
+          <div className="detail_title">주제2</div>
+          <div className="detail_content">요약 : 주제2에 대한 요약이 이곳에 들어갑니다.</div>
         </div>
-
+        <br />
         <div className="div3">
-          <div>주제1</div>
-          <div>요약 : 주제3에 대한 요약이 이곳에 들어갑니다.</div>
-          <div>요약 : 주제3에 대한 요약이 이곳에 들어갑니다.</div>
-          <div>요약 : 주제3에 대한 요약이 이곳에 들어갑니다.</div>
+          <div className="detail_title">주제1</div>
+          <div className="detail_content">요약 : 주제3에 대한 요약이 이곳에 들어갑니다.</div>
         </div>
 
       </div>

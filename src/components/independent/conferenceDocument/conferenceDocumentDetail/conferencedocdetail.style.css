@@ -1,9 +1,51 @@
+@import '../../../../style.css';
+
 canvas{
   weight: 500px;
   height: 200px;
 }
 .canvas-div{
-  width: 711px;
+  /* width: 711px; */
   height: 200px;
   background-color: #fafafa;
+}
+
+.documentdetaildiv{
+  margin-top: 41px;
+  margin-left: 82px;
+}
+
+.documentDetailTitle{
+  display: flex;
+  flex-direction: row;
+}
+
+.Title1{
+  font-size: 20px;
+}
+
+.Title2{
+  margin-left: 13px;
+  color: var(--brownish-grey);
+  font-size: 14px;
+}
+
+.save_button{
+  font-size: 12px;
+  color: var(--pinkish-grey);
+  background: none;
+  border-radius: 10.8px;
+  border: solid 1px var(--pinkish-grey);
+}
+
+.detail_title{
+  margin-left: 9px;
+  font-size: 16px;
+  color: var(--light-black);
+}
+
+.detail_content{
+  margin-left: 9px;
+  font-size: 16px;
+  color: var(--light-black);
 }
