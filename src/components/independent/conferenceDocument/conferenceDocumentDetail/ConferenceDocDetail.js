@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import WordCloud from 'wordcloud';
 import './conferencedocdetail.style.css';
+import download_off from '../../../../assets/doc/download_off.png';
 
 class ConferenceDocDetail extends Component {
 
@@ -44,8 +45,10 @@ class ConferenceDocDetail extends Component {
           <div className="Title1">4월 간행물 표지 초안</div>
           <div className="Title2">2019.03.13 PM1:00 화상회의</div>
           <div>
-            <button className="save_button">전체본</button>
-            <button className="save_button">요약본</button>
+            <button className="save_button">
+              <img src={download_off} className="downloadimg"></img>전체본</button>
+            <button className="save_button">
+              <img src={download_off} className="downloadimg"></img>요약본</button>
           </div>
         </div>
 
