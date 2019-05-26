@@ -47,7 +47,7 @@ export class ConferenceDoc extends Component {
 
             <tr className="table_content">
               <td>
-                <Link to="/home/conferenceDocument/conferenceDocumentDetail" className="linkdocumentdetail">
+                <Link to="/home/conferenceDocumentDetail" className="linkdocumentdetail">
                   <button className="todetail">{this.state.boards.doctitle}</button>
                 </Link>
               </td>

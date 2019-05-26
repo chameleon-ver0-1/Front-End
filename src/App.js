@@ -49,7 +49,7 @@ class App extends Component {
                 component={ConferenceDocument}
               />
               <Route
-                path="/home/conferenceDocument/conferenceDocumentDetail" component={ConferenceDocumentDetail} />
+                path="/home/conferenceDocumentDetail" component={ConferenceDocumentDetail} />
               <Chat />
             </div>
           </div>

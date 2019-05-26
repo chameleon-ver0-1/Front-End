@@ -44,7 +44,7 @@ class ConferenceDocDetail extends Component {
         <div className="documentDetailTitle">
           <div className="Title1">4월 간행물 표지 초안</div>
           <div className="Title2">2019.03.13 PM1:00 화상회의</div>
-          <div>
+          <div className="save_button_div">
             <button className="save_button">
               <img src={download_off} className="downloadimg"></img>전체본</button>
             <button className="save_button">
@@ -70,7 +70,7 @@ class ConferenceDocDetail extends Component {
         </div>
         <br />
         <div className="div3">
-          <div className="detail_title">주제1</div>
+          <div className="detail_title">주제3</div>
           <div className="detail_content">요약 : 주제3에 대한 요약이 이곳에 들어갑니다.</div>
         </div>
 
