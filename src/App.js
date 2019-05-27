@@ -11,15 +11,15 @@ import {
   Issue,
   ConferenceRoom,
   ConferenceDocument,
-  UserArea,
   WebRTCRoom,
-  ConferenceDocumentDetail
+  ConferenceDocumentDetail,
+  Test
 } from "./components/independent";
 
 import { Navbar, Menu, Chat } from "./components/common";
 
 class App extends Component {
-  componentDidMount() { }
+  componentDidMount() {}
   render() {
     return (
       <Router>
@@ -41,15 +41,17 @@ class App extends Component {
               <Route path="/auth/authCheck" component={AuthCheck} />
               <Route path="/home/issue" component={Issue} />
               <Route path="/home/conferenceRoom" component={ConferenceRoom} />
-              {/* TODO: UserArea is not completed */}
-              <Route path="/room/1" component={UserArea} />
-              <Route path="/room/test" component={WebRTCRoom} />
+              <Route path="/room" component={WebRTCRoom} />
+              <Route path="/test" component={Test} />
+
               <Route
                 path="/home/conferenceDocument"
                 component={ConferenceDocument}
               />
               <Route
-                path="/home/conferenceDocumentDetail" component={ConferenceDocumentDetail} />
+                path="/home/conferenceDocumentDetail"
+                component={ConferenceDocumentDetail}
+              />
               <Chat />
             </div>
           </div>

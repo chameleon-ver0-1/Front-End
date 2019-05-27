@@ -15,10 +15,7 @@ const SecondBox = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const Videos = styled.div`
-  width: 1303px;
-  background: var(--brownish-grey);
-`;
+
 export class WebRTCRoom extends Component {
   render() {
     return (

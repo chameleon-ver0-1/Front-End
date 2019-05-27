@@ -1,3 +1,4 @@
+import React, { Component } from "react";
 export class getHTMLMediaElement {
   render() {
     const getHTMLMediaElement = (mediaElement, config) => {
@@ -5,8 +6,8 @@ export class getHTMLMediaElement {
 
       if (
         !mediaElement.nodeName ||
-        (mediaElement.nodeName.toLowerCase() != "audio" &&
-          mediaElement.nodeName.toLowerCase() != "video")
+        (mediaElement.nodeName.toLowerCase() !== "audio" &&
+          mediaElement.nodeName.toLowerCase() !== "video")
       ) {
         if (!mediaElement.getVideoTracks().length) {
           return getAudioElement(mediaElement, config);
@@ -40,7 +41,7 @@ export class getHTMLMediaElement {
 
       if (
         mediaElement.nodeName &&
-        mediaElement.nodeName.toLowerCase() == "audio"
+        mediaElement.nodeName.toLowerCase() === "audio"
       ) {
         return getAudioElement(mediaElement, config);
       }
@@ -78,7 +79,7 @@ export class getHTMLMediaElement {
         mediaControls.appendChild(muteAudio);
 
         muteAudio.onclick = function() {
-          if (muteAudio.className.indexOf("unmute-audio") != -1) {
+          if (muteAudio.className.indexOf("unmute-audio") !== -1) {
             muteAudio.className = muteAudio.className.replace(
               "unmute-audio selected",
               "mute-audio"
@@ -108,7 +109,7 @@ export class getHTMLMediaElement {
         mediaControls.appendChild(muteVideo);
 
         muteVideo.onclick = function() {
-          if (muteVideo.className.indexOf("unmute-video") != -1) {
+          if (muteVideo.className.indexOf("unmute-video") !== -1) {
             muteVideo.className = muteVideo.className.replace(
               "unmute-video selected",
               "mute-video"
@@ -171,7 +172,7 @@ export class getHTMLMediaElement {
         volumeControl.appendChild(recordAudio);
 
         recordAudio.onclick = function() {
-          if (recordAudio.className.indexOf("stop-recording-audio") != -1) {
+          if (recordAudio.className.indexOf("stop-recording-audio") !== -1) {
             recordAudio.className = recordAudio.className.replace(
               "stop-recording-audio selected",
               "record-audio"
@@ -197,7 +198,7 @@ export class getHTMLMediaElement {
         volumeControl.appendChild(recordVideo);
 
         recordVideo.onclick = function() {
-          if (recordVideo.className.indexOf("stop-recording-video") != -1) {
+          if (recordVideo.className.indexOf("stop-recording-video") !== -1) {
             recordVideo.className = recordVideo.className.replace(
               "stop-recording-video selected",
               "record-video"
@@ -240,7 +241,7 @@ export class getHTMLMediaElement {
         } else volumeControl.appendChild(zoom);
 
         zoom.onclick = function() {
-          if (zoom.className.indexOf("zoom-out") != -1) {
+          if (zoom.className.indexOf("zoom-out") !== -1) {
             zoom.className = zoom.className.replace(
               "zoom-out selected",
               "zoom-in"
@@ -280,7 +281,7 @@ export class getHTMLMediaElement {
         }
 
         function screenStateChange(e) {
-          if (e.srcElement != mediaElementContainer) return;
+          if (e.srcElement !== mediaElementContainer) return;
 
           var isFullScreeMode =
             document.webkitIsFullScreen ||
@@ -302,7 +303,7 @@ export class getHTMLMediaElement {
           if (!isFullScreeMode && config.onZoomout) config.onZoomout();
           if (isFullScreeMode && config.onZoomin) config.onZoomin();
 
-          if (!isFullScreeMode && zoom.className.indexOf("zoom-out") != -1) {
+          if (!isFullScreeMode && zoom.className.indexOf("zoom-out") !== -1) {
             zoom.className = zoom.className.replace(
               "zoom-out selected",
               "zoom-in"
@@ -430,13 +431,13 @@ export class getHTMLMediaElement {
           return;
         }
 
-        if (clasName == "mute-audio" && muteAudio) muteAudio.onclick();
-        if (clasName == "mute-video" && muteVideo) muteVideo.onclick();
+        if (clasName === "mute-audio" && muteAudio) muteAudio.onclick();
+        if (clasName === "mute-video" && muteVideo) muteVideo.onclick();
 
-        if (clasName == "record-audio" && recordAudio) recordAudio.onclick();
-        if (clasName == "record-video" && recordVideo) recordVideo.onclick();
+        if (clasName === "record-audio" && recordAudio) recordAudio.onclick();
+        if (clasName === "record-video" && recordVideo) recordVideo.onclick();
 
-        if (clasName == "stop" && stop) stop.onclick();
+        if (clasName === "stop" && stop) stop.onclick();
 
         return this;
       };
@@ -453,8 +454,8 @@ export class getHTMLMediaElement {
 
       if (
         !mediaElement.nodeName ||
-        (mediaElement.nodeName.toLowerCase() != "audio" &&
-          mediaElement.nodeName.toLowerCase() != "video")
+        (mediaElement.nodeName.toLowerCase() !== "audio" &&
+          mediaElement.nodeName.toLowerCase() !== "video")
       ) {
         var mediaStream = mediaElement;
         mediaElement = document.createElement("audio");
@@ -501,7 +502,7 @@ export class getHTMLMediaElement {
       muteAudio.style["border-top-left-radius"] = "5px";
 
       muteAudio.onclick = function() {
-        if (muteAudio.className.indexOf("unmute-audio") != -1) {
+        if (muteAudio.className.indexOf("unmute-audio") !== -1) {
           muteAudio.className = muteAudio.className.replace(
             "unmute-audio selected",
             "mute-audio"
@@ -520,7 +521,7 @@ export class getHTMLMediaElement {
 
       if (
         !config.buttons ||
-        (config.buttons && config.buttons.indexOf("record-audio") != -1)
+        (config.buttons && config.buttons.indexOf("record-audio") !== -1)
       ) {
         var recordAudio = document.createElement("div");
         recordAudio.className =
@@ -531,7 +532,7 @@ export class getHTMLMediaElement {
         mediaControls.appendChild(recordAudio);
 
         recordAudio.onclick = function() {
-          if (recordAudio.className.indexOf("stop-recording-audio") != -1) {
+          if (recordAudio.className.indexOf("stop-recording-audio") !== -1) {
             recordAudio.className = recordAudio.className.replace(
               "stop-recording-audio selected",
               "record-audio"
@@ -556,7 +557,7 @@ export class getHTMLMediaElement {
       slider.style.marginTop = "11px";
       slider.style.width = " 200px";
 
-      if (config.buttons && config.buttons.indexOf("record-audio") == -1) {
+      if (config.buttons && config.buttons.indexOf("record-audio") === -1) {
         slider.style.width = " 241px";
       }
 
@@ -657,9 +658,9 @@ export class getHTMLMediaElement {
           return;
         }
 
-        if (clasName == "mute-audio" && muteAudio) muteAudio.onclick();
-        if (clasName == "record-audio" && recordAudio) recordAudio.onclick();
-        if (clasName == "stop" && stop) stop.onclick();
+        if (clasName === "mute-audio" && muteAudio) muteAudio.onclick();
+        if (clasName === "record-audio" && recordAudio) recordAudio.onclick();
+        if (clasName === "stop" && stop) stop.onclick();
 
         return this;
       };
