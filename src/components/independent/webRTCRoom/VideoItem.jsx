@@ -96,12 +96,14 @@ export class VideoItem extends Component {
 
       video.srcObject = event.stream;
 
-      var height = parseInt(connection.videosContainer.clientHeight / 3) - 100;
-
-      var width = 20;
+      var width = 500;
+      var height = 40;
+      video.width = width;
+      video.buttons = "full-screen";
 
       connection.videosContainer.appendChild(video);
-      //FIXME: mediaElement 크기 설정 안먹히는 중
+
+      //FIXME: 이 부분 제거해야함.
       var mediaElement = getHTMLMediaElement.getHTMLMediaElement(video, {
         title: event.userid,
         buttons: ["full-screen"],
@@ -124,10 +126,6 @@ export class VideoItem extends Component {
           }
         });
       }
-
-      // connection.videosContainer.appendChild(mediaElement);
-      // console.log("append 이후");
-      // console.log(connection.videosContainer);
     };
 
     //connection2
