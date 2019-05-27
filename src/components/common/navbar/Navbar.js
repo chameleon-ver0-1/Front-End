@@ -42,7 +42,7 @@ export class Navbar extends Component {
       window.location.pathname === "/home/issue" ||
       window.location.pathname === "/home/conferenceRoom" ||
       window.location.pathname === "/home/conferenceDocument" ||
-      window.location.pathname === "/home/conferenceDocument/conferenceDocumentDetail"
+      window.location.pathname === "/home/conferenceDocumentDetail"
     ) {
       return (
         <div className="container">

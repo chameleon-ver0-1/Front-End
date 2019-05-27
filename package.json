@@ -25,7 +25,8 @@
     "simple-peer": "^9.3.0",
     "skylinkjs": "^0.6.37",
     "socket.io-client": "^2.2.0",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "wordcloud": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
