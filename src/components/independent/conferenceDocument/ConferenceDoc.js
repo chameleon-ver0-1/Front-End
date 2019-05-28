@@ -4,31 +4,22 @@ import doc_off from '../../../assets/doc/doc_off.png';
 import doc_on from '../../../assets/doc/doc_on.png';
 import download_off from '../../../assets/doc/download_off.png';
 import download_on from '../../../assets/doc/download_on.png';
-import DocumentData from './document-data';
 import { Link } from "react-router-dom";
+import DocData from './data/doc.json';
 
 export class ConferenceDoc extends Component {
 
-  state = {
-    boards:
-    {
-      doctitle: '4월 간행물 표지 초안',
-      doctime: '2019.03.21 12:00 ~ 14:00',
-      docfile: '',
-      docdownload: ''
-    },
-    DocumentData
-
+  constructor(props) {
+    super(props);
+    this.state = DocData;
   }
 
-  // {Object.keys(this.state.columns).map(columnId => {
-  //   const column = this.state.columns[columnId];
-  //   const tasks = column.taskIds.map(
-  //     taskId => this.state.tasks[taskId]
-  //   );
-  // })}
+  handleClick() {
+    console.log("click");
+  }
 
   render() {
+
     return (
       <div>
         <div className="documentroom_container">
@@ -45,177 +36,26 @@ export class ConferenceDoc extends Component {
               <th></th>
             </tr>
 
-            <tr className="table_content">
-              <td>
-                <Link to="/home/conferenceDocumentDetail" className="linkdocumentdetail">
-                  <button className="todetail">{this.state.boards.doctitle}</button>
-                </Link>
-              </td>
-              <td>{this.state.boards.doctime}</td>
-              <td>{this.state.boards.docfile}</td>
-              <td>
-                <button className="doc_button">
-                  <img src={doc_off} className="doc_buttonimg"
-                  /></button>
-                <button className="doc_button">
-                  <img src={download_off} className="doc_buttonimg"
-                  /></button>
-              </td>
-            </tr>
-
-            <tr className="table_content">
-              <td>{this.state.boards.doctitle}</td>
-              <td>{this.state.boards.doctime}</td>
-              <td>{this.state.boards.docfile}</td>
-              <td>
-                <button className="doc_button">
-                  <img src={doc_off} className="doc_buttonimg"
-                  /></button>
-                <button className="doc_button">
-                  <img src={download_off} className="doc_buttonimg"
-                  /></button>
-              </td>
-            </tr>
-
-            <tr className="table_content">
-              <td>{this.state.boards.doctitle}</td>
-              <td>{this.state.boards.doctime}</td>
-              <td>{this.state.boards.docfile}</td>
-              <td>
-                <button className="doc_button">
-                  <img src={doc_off} className="doc_buttonimg"
-                  /></button>
-                <button className="doc_button">
-                  <img src={download_off} className="doc_buttonimg"
-                  /></button>
-              </td>
-            </tr>
-
-            <tr className="table_content">
-              <td>{this.state.boards.doctitle}</td>
-              <td>{this.state.boards.doctime}</td>
-              <td>{this.state.boards.docfile}</td>
-              <td>
-                <button className="doc_button">
-                  <img src={doc_off} className="doc_buttonimg"
-                  /></button>
-                <button className="doc_button">
-                  <img src={download_off} className="doc_buttonimg"
-                  /></button>
-              </td>
-            </tr>
-
-            <tr className="table_content">
-              <td>{this.state.boards.doctitle}</td>
-              <td>{this.state.boards.doctime}</td>
-              <td>{this.state.boards.docfile}</td>
-              <td>
-                <button className="doc_button">
-                  <img src={doc_off} className="doc_buttonimg"
-                  /></button>
-                <button className="doc_button">
-                  <img src={download_off} className="doc_buttonimg"
-                  /></button>
-              </td>
-            </tr>
-
-            <tr className="table_content">
-              <td>{this.state.boards.doctitle}</td>
-              <td>{this.state.boards.doctime}</td>
-              <td>{this.state.boards.docfile}</td>
-              <td>
-                <button className="doc_button">
-                  <img src={doc_off} className="doc_buttonimg"
-                  /></button>
-                <button className="doc_button">
-                  <img src={download_off} className="doc_buttonimg"
-                  /></button>
-              </td>
-            </tr>
-
-            <tr className="table_content">
-              <td>{this.state.boards.doctitle}</td>
-              <td>{this.state.boards.doctime}</td>
-              <td>{this.state.boards.docfile}</td>
-              <td>
-                <button className="doc_button">
-                  <img src={doc_off} className="doc_buttonimg"
-                  /></button>
-                <button className="doc_button">
-                  <img src={download_off} className="doc_buttonimg"
-                  /></button>
-              </td>
-            </tr>
-
-            <tr className="table_content">
-              <td>{this.state.boards.doctitle}</td>
-              <td>{this.state.boards.doctime}</td>
-              <td>{this.state.boards.docfile}</td>
-              <td>
-                <button className="doc_button">
-                  <img src={doc_off} className="doc_buttonimg"
-                  /></button>
-                <button className="doc_button">
-                  <img src={download_off} className="doc_buttonimg"
-                  /></button>
-              </td>
-            </tr>
-
-            <tr className="table_content">
-              <td>{this.state.boards.doctitle}</td>
-              <td>{this.state.boards.doctime}</td>
-              <td>{this.state.boards.docfile}</td>
-              <td>
-                <button className="doc_button">
-                  <img src={doc_off} className="doc_buttonimg"
-                  /></button>
-                <button className="doc_button">
-                  <img src={download_off} className="doc_buttonimg"
-                  /></button>
-              </td>
-            </tr>
-
-            <tr className="table_content">
-              <td>{this.state.boards.doctitle}</td>
-              <td>{this.state.boards.doctime}</td>
-              <td>{this.state.boards.docfile}</td>
-              <td>
-                <button className="doc_button">
-                  <img src={doc_off} className="doc_buttonimg"
-                  /></button>
-                <button className="doc_button">
-                  <img src={download_off} className="doc_buttonimg"
-                  /></button>
-              </td>
-            </tr>
-
-            <tr className="table_content">
-              <td>{this.state.boards.doctitle}</td>
-              <td>{this.state.boards.doctime}</td>
-              <td>{this.state.boards.docfile}</td>
-              <td>
-                <button className="doc_button">
-                  <img src={doc_off} className="doc_buttonimg"
-                  /></button>
-                <button className="doc_button">
-                  <img src={download_off} className="doc_buttonimg"
-                  /></button>
-              </td>
-            </tr>
-
-            <tr className="table_content">
-              <td>{this.state.boards.doctitle}</td>
-              <td>{this.state.boards.doctime}</td>
-              <td>{this.state.boards.docfile}</td>
-              <td>
-                <button className="doc_button">
-                  <img src={doc_off} className="doc_buttonimg"
-                  /></button>
-                <button className="doc_button">
-                  <img src={download_off} className="doc_buttonimg"
-                  /></button>
-              </td>
-            </tr>
+            {DocData.map((docDetail, index) => {
+              return <tr className="table_content">
+                <td>
+                  <Link to="/home/conferenceDocumentDetail" className="linkdocumentdetail"
+                    onClick="handleClick()">
+                    <button className="todetail">{docDetail.title}</button>
+                  </Link>
+                </td>
+                <td>{docDetail.date}</td>
+                <td></td>
+                <td>
+                  <button className="doc_button">
+                    <img src={doc_off} className="doc_buttonimg"
+                    /></button>
+                  <button className="doc_button">
+                    <img src={download_off} className="doc_buttonimg"
+                    /></button>
+                </td>
+              </tr>
+            })}
 
           </table>
 
