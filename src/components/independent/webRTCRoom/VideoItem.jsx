@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import getHTMLMediaElement from "./getHTMLMediaElement.jsx";
 
+import styled from "styled-components";
 import "./webrtc.style.css";
-
+import { getHTMLMediaElement } from "./getHTMLMediaElement";
 var connection = new window.RTCMultiConnection();
 
 connection.autoCloseEntireSession = true;
@@ -10,6 +10,11 @@ connection.autoCloseEntireSession = true;
 
 // FIXME: 우리 소켓링크로 연결 변경
 connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/";
+
+const VideoFrame = styled.div`
+  width: 100%;
+  padding: 16px;
+`;
 
 export class VideoItem extends Component {
   componentWillMount() {
@@ -24,6 +29,10 @@ export class VideoItem extends Component {
       "https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js";
     script.src =
       "https://rtcmulticonnection.herokuapp.com/node_modules/webrtc-adapter/out/adapter.js";
+    script.src = "./getHTMLMediaElement.jsx";
+
+    script.src = "https://cdn.WebRTC-Experiment.com/getScreenId.js";
+    script.src = "https://webrtc.github.io/adapter/adapter-latest.js";
 
     script.async = true;
 
@@ -96,15 +105,17 @@ export class VideoItem extends Component {
 
       video.srcObject = event.stream;
 
-      var width = 500;
-      var height = 40;
+      var width = 619;
+      var height = 1000;
       video.width = width;
+
       video.buttons = "full-screen";
+      video.style.marginLeft = "16px";
 
       connection.videosContainer.appendChild(video);
 
       //FIXME: 이 부분 제거해야함.
-      var mediaElement = getHTMLMediaElement.getHTMLMediaElement(video, {
+      var mediaElement = getHTMLMediaElement(video, {
         title: event.userid,
         buttons: ["full-screen"],
         width: width,
@@ -158,6 +169,43 @@ export class VideoItem extends Component {
       document.getElementsByClassName("open-room").disabled = !enable;
       document.getElementsByClassName("join-room").disabled = !enable;
       document.getElementsByClassName("room-id").disabled = !enable;
+    };
+
+    //TODO: 화면 공유 버튼 on/off state에 따라서 함수 실행시키기
+    //화면  공유 기능
+    const getScreenId = (error, sourceId, screen_constraints) => {
+      if (
+        navigator.userAgent.indexOf("Edge") !== -1 &&
+        (!!navigator.msSaveOrOpenBlob || !!navigator.msSaveBlob)
+      ) {
+        navigator.getDisplayMedia(screen_constraints).then(
+          stream => {
+            document.querySelector("video").srcObject = stream;
+          },
+          error => {
+            alert("Please make sure to use Edge 17 or higher.");
+          }
+        );
+        return;
+      }
+      //TODO: 화면 공유 버튼 on/off state에 따라서 함수 실행시키기
+      //chrome extension 설치 여부 detection
+      // const getChromeExtensionStatus = status => {
+      //   if (status === "installed-enabled") alert("installed");
+      //   if (status === "installed-disabled") alert("installed but disabled");
+      //   // etc.
+      // };
+
+      navigator.mediaDevices
+        .getUserMedia(screen_constraints)
+        .then(function(stream) {
+          document.querySelector("video").srcObject = stream;
+
+          // share this "MediaStream" object using RTCPeerConnection API
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
     };
 
     /*신규 화상회의 방 개설하기 */
@@ -298,10 +346,9 @@ export class VideoItem extends Component {
     }
 
     return (
-      <div id="video-home-container">
-        <h1>Video Conferencing using RTCMultiConnection</h1>
-
+      <VideoFrame id="video-home-container">
         <div>
+          <div id="videos-container" />
           <input
             type="text"
             id="room-id"
@@ -321,9 +368,8 @@ export class VideoItem extends Component {
             회의실 개설/참여하기
           </button>
         </div>
-        <div id="videos-container" />
         <div id="room-urls" />
-      </div>
+      </VideoFrame>
     );
   }
 }
