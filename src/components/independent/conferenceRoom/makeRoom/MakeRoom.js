@@ -4,6 +4,7 @@ import Modal from "react-responsive-modal";
 import { render } from 'react-dom';
 import { TAG } from './tag';
 import { WithContext as ReactTags } from 'react-tag-input';
+import { Link } from "react-router-dom";
 
 const suggestions = TAG.map((tag) => {
   return {
@@ -24,7 +25,7 @@ class MakeRoom extends Component {
     super(props);
 
     this.state = {
-      tags: [{ id: 'Web', text: 'Web' }],
+      tags: [{ id: '화상회의', text: '화상회의' }],
       suggestions: suggestions,
     };
     this.handleDelete = this.handleDelete.bind(this);
@@ -74,7 +75,7 @@ class MakeRoom extends Component {
 
           <div className="row-div">
             <div className="roomtitle2">메인 토픽</div>
-            <div>
+            <div className="tagdiv">
               <ReactTags
                 inputFieldPosition="top"
                 tags={tags}
@@ -99,7 +100,10 @@ class MakeRoom extends Component {
           </div>
 
           <div className="row-div2">
-            <button className="makebutton">개설</button>
+            <Link to="/room/test" className="linklogin">
+              <button className="makebutton">개설</button>
+            </Link>
+
             <button className="cancelbutton" onClick={onCloseModal}>취소</button>
           </div>
 

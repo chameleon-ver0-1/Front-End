@@ -30,7 +30,7 @@
   width: 347px;
   height: 28px;
   border-radius: 5px;
-  border: solid 1px #efefef;
+  border: solid 1px #cccccc;
 }
 
 .row-div2{
@@ -41,6 +41,12 @@
   flex-direction: row;
   justify-content: space-between;
 
+}
+
+.linklogin{
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
 }
 
 .makebutton{
@@ -65,7 +71,7 @@
 
 /* Styles for the input */
 div.ReactTags__tagInput {
-  margin-left: 23px;
+  margin-bottom: 7px;
   /* width: 347px;
   height: 28px;
   border-radius: 5px;
@@ -79,21 +85,27 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
   margin: 0;
   font-size: 12px;
   width: 347px;
-  border: 1px solid #efefef;
+  border: solid 1px #cccccc;
   border-radius: 5px;
 }
 
 /* Styles for selected tags */
+.tagdiv{
+  margin-left: 23px;
+}
+
 div.ReactTags__selected span.ReactTags__tag {
   border: 1px solid #ddd;
   background: #eee;
   font-size: 12px;
   /* display: inline-block; */
-  padding: 2px;
-  margin: 0 5px;
+  padding: 5px;
+  margin: 0 2px;
   cursor: move;
   border-radius: 2px;
+
 }
+
 div.ReactTags__selected a.ReactTags__remove {
   color: #aaa;
   margin-left: 5px;
