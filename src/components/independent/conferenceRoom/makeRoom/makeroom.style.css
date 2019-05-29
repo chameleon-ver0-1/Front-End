@@ -1,0 +1,59 @@
+@import '../../../../style.css';
+
+.makeroomdiv{
+  width: 500px;
+  height: 400px;
+}
+
+.roomtitle{
+  color: var(--light-black);
+  font-size: 20.5px;
+  border-bottom: solid 1px var(--white-two);
+  padding-bottom: 15px;
+}
+
+.row-div{
+  margin-top: 23px;
+  display: flex;
+  flex-direction: row;
+}
+
+.roomtitle2{
+  color: var(--light-black);
+  font-size: 16px;
+}
+
+.roominput{
+  margin-left: 43px;
+  width: 347px;
+  height: 28px;
+  border-radius: 5px;
+  border: solid 1px #efefef;
+}
+
+.row-div2{
+  margin-top: 23px;
+  margin-left: 150px;
+  width: 187px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.makebutton{
+  width: 83px;
+  height: 38px;
+  border: solid 1px #cccccc;
+  color: var(--greenish-teal);
+  border-radius: 10px;
+  background: none;
+}
+
+.cancelbutton{
+  width: 83px;
+  height: 38px;
+  border: solid 1px #cccccc;
+  background: none;
+  border-radius: 10px;
+}
