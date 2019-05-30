@@ -8,7 +8,10 @@ import mic from "../../../assets/conferenceRoom/videohome_mic.png";
 import volume from "../../../assets/conferenceRoom/videohome_volume.png";
 import video from "../../../assets/conferenceRoom/videohome_video.png";
 import setting from "../../../assets/conferenceRoom/videohome_setting.png";
-import closedBtn from "../../../assets/message/closed_btn@3x.png";
+import openDrawer from "../../../assets/conferenceRoom/openDrawer@3x.png";
+import { Keyframes, animated } from "react-spring/renderprops";
+import { Avatar, Form, Icon } from "antd";
+import delay from "delay";
 
 const UpperNav = styled.div`
   width: 100%;
@@ -91,11 +94,25 @@ const Closed = styled.div`
   padding-left: 16px;
   flex: 1;
 `;
+const FixFlexContainer = styled.div`
+  flex: 8;
+`;
 
 export class VideoNav extends Component {
+  state = { open: undefined };
+  toggle = () => this.setState(state => ({ open: !state.open }));
   render() {
+    const state =
+      this.state.open === undefined
+        ? "peek"
+        : this.state.open
+        ? "open"
+        : "close";
+
+    const icon = this.state.open ? "fold" : "unfold";
+
     return (
-      <div>
+      <FixFlexContainer>
         <UpperNav>
           <ContainerLeft>
             <WhiteLogo>
@@ -126,13 +143,20 @@ export class VideoNav extends Component {
           </ButtonBox>
           <Closed>
             <ButtonItem>
-              <img width="20px" height="19px" src={closedBtn} />
+              <img
+                width="10px"
+                height="22px"
+                src={openDrawer}
+                type={`menu-${icon}`}
+                className="sidebar-toggle"
+                onClick={this.toggle}
+              />
             </ButtonItem>
           </Closed>
         </UpperNav>
 
         <div />
-      </div>
+      </FixFlexContainer>
     );
   }
 }

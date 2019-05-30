@@ -38,7 +38,6 @@ export class VideoItem extends Component {
 
     document.body.appendChild(script);
 
-    ///
   }
   componentDidMount() {}
 
