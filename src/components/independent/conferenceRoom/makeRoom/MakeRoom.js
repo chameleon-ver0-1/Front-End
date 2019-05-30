@@ -5,6 +5,8 @@ import { render } from 'react-dom';
 import { TAG } from './tag';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { Link } from "react-router-dom";
+// import { makeStyles } from '@material-ui/core/styles';
+// import TextField from '@material-ui/core/TextField';
 
 const suggestions = TAG.map((tag) => {
   return {
@@ -20,13 +22,25 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
+// const useStyles = makeStyles(theme => ({
+//   container: {
+//     display: 'flex',
+//     flexWrap: 'wrap',
+//   },
+//   textField: {
+//     marginLeft: theme.spacing(1),
+//     marginRight: theme.spacing(1),
+//     width: 300,
+//   },
+// }));
+
 class MakeRoom extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       tags: [{ id: '화상회의', text: '화상회의' }],
-      suggestions: suggestions,
+      suggestions: suggestions
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
@@ -63,6 +77,7 @@ class MakeRoom extends Component {
   render() {
     const { open, title, onCloseModal } = this.props;
     const { tags, suggestions } = this.state;
+    // const classes = useStyles;
 
     return (
       <Modal open={open} onClose={onCloseModal} center >
@@ -91,7 +106,19 @@ class MakeRoom extends Component {
 
           <div className="row-div">
             <div className="roomtitle2">시작 시간</div>
-            <div></div>
+            <div>
+              {/* <form className={classes.container} noValidate>
+                <TextField
+                  id="datetime-local"
+                  type="datetime-local"
+                  defaultValue="2017-05-24T10:30"
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </form> */}
+            </div>
           </div>
 
           <div className="row-div">
