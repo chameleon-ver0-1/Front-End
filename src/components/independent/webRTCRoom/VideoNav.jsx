@@ -8,10 +8,8 @@ import mic from "../../../assets/conferenceRoom/videohome_mic.png";
 import volume from "../../../assets/conferenceRoom/videohome_volume.png";
 import video from "../../../assets/conferenceRoom/videohome_video.png";
 import setting from "../../../assets/conferenceRoom/videohome_setting.png";
-import openDrawer from "../../../assets/conferenceRoom/openDrawer@3x.png";
-import { Keyframes, animated } from "react-spring/renderprops";
-import { Avatar, Form, Icon } from "antd";
-import delay from "delay";
+import Fade from "react-reveal/Fade";
+import InviteDialog from "./InviteDialog";
 
 const UpperNav = styled.div`
   width: 100%;
@@ -46,7 +44,7 @@ const UserCount = styled.div`
   margin-top: 17px;
   margin-left: 20px;
 `;
-const CountText = styled.div`
+const CountText = styled.button`
   color: var(--greenish-teal);
   font-size: 22px;
 
@@ -54,6 +52,9 @@ const CountText = styled.div`
   margin-left: 8px;
   margin-top: 12px;
   overflow: auto;
+  border: none;
+  background: none;
+  outline: none;
 `;
 const Timer = styled.div`
   background: var(--greenish-teal);
@@ -99,18 +100,15 @@ const FixFlexContainer = styled.div`
 `;
 
 export class VideoNav extends Component {
-  state = { open: undefined };
-  toggle = () => this.setState(state => ({ open: !state.open }));
+  constructor(props) {
+    super(props);
+    this.state = { show: false };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState({ show: !this.state.show });
+  }
   render() {
-    const state =
-      this.state.open === undefined
-        ? "peek"
-        : this.state.open
-        ? "open"
-        : "close";
-
-    const icon = this.state.open ? "fold" : "unfold";
-
     return (
       <FixFlexContainer>
         <UpperNav>
@@ -122,7 +120,10 @@ export class VideoNav extends Component {
             <UserCount>
               <img width="20px" height="21px" margin="17px" src={user} />
             </UserCount>
-            <CountText>6</CountText>
+            <CountText onClick={this.handleClick}>6</CountText>
+            <Fade when={this.state.show}>
+              <InviteDialog />
+            </Fade>
             <Timer>1:34:03</Timer>
           </ContainerLeft>
           <ButtonBox>
@@ -141,18 +142,6 @@ export class VideoNav extends Component {
               <img width="52px" src={setting} />
             </ButtonItem>
           </ButtonBox>
-          <Closed>
-            <ButtonItem>
-              <img
-                width="10px"
-                height="22px"
-                src={openDrawer}
-                type={`menu-${icon}`}
-                className="sidebar-toggle"
-                onClick={this.toggle}
-              />
-            </ButtonItem>
-          </Closed>
         </UpperNav>
 
         <div />
