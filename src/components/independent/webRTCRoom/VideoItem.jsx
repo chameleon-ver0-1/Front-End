@@ -13,10 +13,13 @@ connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/";
 
 const VideoFrame = styled.div`
   width: 100%;
-  padding: 16px;
+  padding-left: 207px;
+  padding-top: 19px;
 `;
 
 export class VideoItem extends Component {
+  //FIXME:state값 추가함
+  // state = { roomToken: "", isRoomAppear: false };
   componentWillMount() {
     const script = document.createElement("script");
 
@@ -37,7 +40,6 @@ export class VideoItem extends Component {
     script.async = true;
 
     document.body.appendChild(script);
-
   }
   componentDidMount() {}
 
@@ -104,7 +106,7 @@ export class VideoItem extends Component {
 
       video.srcObject = event.stream;
 
-      var width = 619;
+      var width = 400;
       var height = 1000;
       video.width = width;
 
@@ -114,19 +116,19 @@ export class VideoItem extends Component {
       connection.videosContainer.appendChild(video);
 
       //FIXME: 이 부분 제거해야함.
-      var mediaElement = getHTMLMediaElement(video, {
-        title: event.userid,
-        buttons: ["full-screen"],
-        width: width,
-        height: height,
-        showOnMouseEnter: false
-      });
+      // var mediaElement = getHTMLMediaElement(video, {
+      //   title: event.userid,
+      //   buttons: ["full-screen"],
+      //   width: width,
+      //   height: height,
+      //   showOnMouseEnter: false
+      // });
 
-      setTimeout(function() {
-        mediaElement.media.play();
-      }, 5000);
+      // setTimeout(function() {
+      //   mediaElement.media.play();
+      // }, 5000);
 
-      mediaElement.id = event.streamid;
+      // mediaElement.id = event.streamid;
       // to keep room-id in cache
       localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
       if (event.type === "local") {
@@ -217,6 +219,8 @@ export class VideoItem extends Component {
       ) {
         if (isRoomOpened === true) {
           showRoomURL(connection.sessionid);
+          //FIXME:state값 추가함
+          // this.state.isRoomAppear = true;
         } else {
           disableInputButtons(true);
           if (error === "Room not available") {
@@ -288,6 +292,8 @@ export class VideoItem extends Component {
       var roomURLsDiv = document.getElementById("room-urls");
       roomURLsDiv.innerHTML = html;
       roomURLsDiv.style.display = "block";
+      //FIXME:state값 추가함
+      // this.state.roomToken = roomQueryStringURL;
     };
 
     //roomid setting 부분
@@ -357,15 +363,20 @@ export class VideoItem extends Component {
             size="20"
             defaultValue="abcded"
           />
-          <button className="open-room" onClick={openRoom}>
+          <button
+            className="open-room"
+            onClick={openRoom}
+            // isRoomAppear={this.state.isRoomAppear}
+            // roomToken={this.state.roomToken}
+          >
             회의실 개설하기
           </button>
-          <button className="join-room" onClick={joinRoom}>
+          {/* <button className="join-room" onClick={joinRoom}>
             회의실 참여하기
           </button>
           <button className="open-or-join-room" onClick={openOrJoinRoom}>
             회의실 개설/참여하기
-          </button>
+          </button> */}
         </div>
         <div id="room-urls" />
       </VideoFrame>
