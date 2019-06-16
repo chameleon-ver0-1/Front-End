@@ -37,7 +37,6 @@ export class VideoItem extends Component {
     script.async = true;
 
     document.body.appendChild(script);
-
   }
   componentDidMount() {}
 
@@ -104,7 +103,7 @@ export class VideoItem extends Component {
 
       video.srcObject = event.stream;
 
-      var width = 619;
+      var width = 500;
       var height = 1000;
       video.width = width;
 

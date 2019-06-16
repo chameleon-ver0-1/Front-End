@@ -8,7 +8,6 @@ import mic from "../../../assets/conferenceRoom/videohome_mic.png";
 import volume from "../../../assets/conferenceRoom/videohome_volume.png";
 import video from "../../../assets/conferenceRoom/videohome_video.png";
 import setting from "../../../assets/conferenceRoom/videohome_setting.png";
-import openDrawer from "../../../assets/conferenceRoom/openDrawer@3x.png";
 import { Keyframes, animated } from "react-spring/renderprops";
 import { Avatar, Form, Icon } from "antd";
 import delay from "delay";
@@ -99,18 +98,7 @@ const FixFlexContainer = styled.div`
 `;
 
 export class VideoNav extends Component {
-  state = { open: undefined };
-  toggle = () => this.setState(state => ({ open: !state.open }));
   render() {
-    const state =
-      this.state.open === undefined
-        ? "peek"
-        : this.state.open
-        ? "open"
-        : "close";
-
-    const icon = this.state.open ? "fold" : "unfold";
-
     return (
       <FixFlexContainer>
         <UpperNav>
@@ -141,18 +129,6 @@ export class VideoNav extends Component {
               <img width="52px" src={setting} />
             </ButtonItem>
           </ButtonBox>
-          <Closed>
-            <ButtonItem>
-              <img
-                width="10px"
-                height="22px"
-                src={openDrawer}
-                type={`menu-${icon}`}
-                className="sidebar-toggle"
-                onClick={this.toggle}
-              />
-            </ButtonItem>
-          </Closed>
         </UpperNav>
 
         <div />

@@ -4,6 +4,9 @@ import VideoNav from "./VideoNav";
 import VideoMenubar from "./VideoMenubar";
 import Drawerbar from "./Drawerbar";
 import styled from "styled-components";
+import openDrawer from "../../../assets/conferenceRoom/toggleOpen.png";
+import closeDrawer from "../../../assets/conferenceRoom/toggleClosed.png";
+import { runInThisContext } from "vm";
 
 const VideoBaseContainer = styled.div`
   width: 100%;
@@ -19,24 +22,61 @@ const SecondBox = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const ToggleBtn = styled.button`
+const ToggleBtn = styled.div`
   flex: 0.3;
-  backgrorund: red;
+  background: var(--white-four);
+`;
+const ButtonItem = styled.button`
+  width: 52px;
+  height: 52px;
+  text-align: center;
+  padding: 5px;
+  border: none;
+  background: none;
+  outline: none;
 `;
 
 export class WebRTCRoom extends Component {
+  state = { open: undefined };
+
   render() {
+    const state =
+      this.state.open === undefined
+        ? "peek"
+        : this.state.open
+        ? "open"
+        : "close";
+    const icon = this.state.open ? "fold" : "unfold";
+    const toggle = () => {
+      this.setState(state => ({ open: !state.open }));
+      // console.log(this.state.open);
+      if (icon === "fold") {
+        this.src = { openDrawer };
+      } else {
+        this.src = "../../../assets/conferenceRoom/toggleClosed.png";
+      }
+    };
     return (
       <VideoBaseContainer>
         <NavDivider>
           <VideoNav />
-          <ToggleBtn />
+          <ToggleBtn>
+            <ButtonItem>
+              <img
+                id="drawerToggleBtn"
+                width="10px"
+                height="22px"
+                src={openDrawer}
+                className="sidebar-toggle"
+                onClick={toggle}
+              />
+            </ButtonItem>
+          </ToggleBtn>
         </NavDivider>
-
         <SecondBox>
           <VideoMenubar />
           <VideoItem />
-          <Drawerbar />
+          <Drawerbar isToggle={this.state} />
         </SecondBox>
       </VideoBaseContainer>
     );
