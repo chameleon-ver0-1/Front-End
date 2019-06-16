@@ -8,9 +8,8 @@ import mic from "../../../assets/conferenceRoom/videohome_mic.png";
 import volume from "../../../assets/conferenceRoom/videohome_volume.png";
 import video from "../../../assets/conferenceRoom/videohome_video.png";
 import setting from "../../../assets/conferenceRoom/videohome_setting.png";
-import { Keyframes, animated } from "react-spring/renderprops";
-import { Avatar, Form, Icon } from "antd";
-import delay from "delay";
+import Fade from "react-reveal/Fade";
+import InviteDialog from "./InviteDialog";
 
 const UpperNav = styled.div`
   width: 100%;
@@ -45,7 +44,7 @@ const UserCount = styled.div`
   margin-top: 17px;
   margin-left: 20px;
 `;
-const CountText = styled.div`
+const CountText = styled.button`
   color: var(--greenish-teal);
   font-size: 22px;
 
@@ -53,6 +52,9 @@ const CountText = styled.div`
   margin-left: 8px;
   margin-top: 12px;
   overflow: auto;
+  border: none;
+  background: none;
+  outline: none;
 `;
 const Timer = styled.div`
   background: var(--greenish-teal);
@@ -98,6 +100,14 @@ const FixFlexContainer = styled.div`
 `;
 
 export class VideoNav extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { show: false };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState({ show: !this.state.show });
+  }
   render() {
     return (
       <FixFlexContainer>
@@ -110,7 +120,10 @@ export class VideoNav extends Component {
             <UserCount>
               <img width="20px" height="21px" margin="17px" src={user} />
             </UserCount>
-            <CountText>6</CountText>
+            <CountText onClick={this.handleClick}>6</CountText>
+            <Fade when={this.state.show}>
+              <InviteDialog />
+            </Fade>
             <Timer>1:34:03</Timer>
           </ContainerLeft>
           <ButtonBox>
