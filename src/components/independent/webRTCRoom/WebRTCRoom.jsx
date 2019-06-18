@@ -6,6 +6,8 @@ import Drawerbar from "./Drawerbar";
 import styled from "styled-components";
 import openDrawer from "../../../assets/conferenceRoom/toggleOpen.png";
 import closeDrawer from "../../../assets/conferenceRoom/toggleClosed.png";
+
+import STTTest from "./STTTest";
 import { runInThisContext } from "vm";
 
 const VideoBaseContainer = styled.div`
@@ -76,6 +78,7 @@ export class WebRTCRoom extends Component {
         <SecondBox>
           <VideoMenubar />
           <VideoItem />
+          <STTTest />
           <Drawerbar isToggle={this.state} />
         </SecondBox>
       </VideoBaseContainer>
