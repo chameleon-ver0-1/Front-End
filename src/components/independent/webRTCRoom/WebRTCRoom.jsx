@@ -86,7 +86,7 @@ export class WebRTCRoom extends Component {
         <SecondBox>
           <div style={{ width: "80%", display: "flex", flexDirection: "row" }}>
             <VideoMenubar />
-            <VideoItem style={{}} />
+            <VideoItem />
           </div>
           <STTLayout>
             <STTTest />

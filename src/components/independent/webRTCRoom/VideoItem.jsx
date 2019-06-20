@@ -43,7 +43,7 @@ export class VideoItem extends Component {
     document.body.appendChild(script);
   }
   componentDidMount() {}
-
+  state = { roomKey: "undefined" };
   render() {
     (function() {
       var params = {},
@@ -295,6 +295,7 @@ export class VideoItem extends Component {
       roomURLsDiv.style.display = "block";
       //FIXME:state값 추가함
       // this.state.roomToken = roomQueryStringURL;
+      // this.state.roomKey = html;
     };
 
     //roomid setting 부분
