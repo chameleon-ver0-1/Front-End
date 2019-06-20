@@ -135,7 +135,9 @@ export default class Drawerbar extends React.Component {
       <div
         style={{
           width: "200px",
-          height: "100%"
+          height: "100%",
+          background: "black",
+          paddingLeft: "100px"
         }}
       >
         {/* TODO: 여기 아래랑 */}

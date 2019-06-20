@@ -53,7 +53,7 @@ const records = [
 export class STTTest extends Component {
   render() {
     return (
-      <div>
+      <div style={{ background: "var(--white-five)", width: "252px" }}>
         <div className="test" style={{ backgroundColor: "var(--white-five)" }}>
           <div>
             <div
@@ -86,7 +86,7 @@ export class STTTest extends Component {
           >
             실시간 회의 기록
           </div>
-          <div>{records}</div>,<div>{records}</div>,<div>{records}</div>
+          <div>{records}</div>
         </div>
       </div>
     );

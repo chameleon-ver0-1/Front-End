@@ -12,9 +12,10 @@ connection.autoCloseEntireSession = true;
 connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/";
 
 const VideoFrame = styled.div`
-  width: 100%;
-  padding-left: 207px;
+  padding-left: 50px;
   padding-top: 19px;
+  padding-right: 50px;
+  width: 100%;
 `;
 
 export class VideoItem extends Component {
@@ -352,7 +353,7 @@ export class VideoItem extends Component {
 
     return (
       <VideoFrame id="video-home-container">
-        <div>
+        <div style={{ width: "100%" }}>
           <div id="videos-container" />
           <input
             type="text"
@@ -378,7 +379,7 @@ export class VideoItem extends Component {
             회의실 개설/참여하기
           </button> */}
         </div>
-        <div id="room-urls" />
+        <div id="room-urls" style={{ width: "100%" }} />
       </VideoFrame>
     );
   }
