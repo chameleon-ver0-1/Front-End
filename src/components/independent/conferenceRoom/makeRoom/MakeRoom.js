@@ -1,21 +1,21 @@
-import React, { Component } from 'react'
-import './makeroom.style.css'
+import React, { Component } from "react";
+import "./makeroom.style.css";
 import Modal from "react-responsive-modal";
-import { render } from 'react-dom';
-import { TAG } from './tag';
-import { WithContext as ReactTags } from 'react-tag-input';
+import { render } from "react-dom";
+import { TAG } from "./tag";
+import { WithContext as ReactTags } from "react-tag-input";
 import { Link } from "react-router-dom";
 
-const suggestions = TAG.map((tag) => {
+const suggestions = TAG.map(tag => {
   return {
     id: tag,
     text: tag
-  }
-})
+  };
+});
 
 const KeyCodes = {
   comma: 188,
-  enter: 13,
+  enter: 13
 };
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
@@ -37,7 +37,8 @@ class MakeRoom extends Component {
     super(props);
 
     this.state = {
-      tags: [{ id: '화상회의', text: '화상회의' }],
+      roomTitle: "none",
+      tags: [{ id: "화상회의", text: "화상회의" }],
       suggestions: suggestions
     };
     this.handleDelete = this.handleDelete.bind(this);
@@ -49,7 +50,7 @@ class MakeRoom extends Component {
   handleDelete(i) {
     const { tags } = this.state;
     this.setState({
-      tags: tags.filter((tag, index) => index !== i),
+      tags: tags.filter((tag, index) => index !== i)
     });
   }
 
@@ -69,7 +70,7 @@ class MakeRoom extends Component {
   }
 
   handleTagClick(index) {
-    console.log('The tag at index ' + index + ' was clicked');
+    console.log("The tag at index " + index + " was clicked");
   }
 
   render() {
@@ -78,12 +79,19 @@ class MakeRoom extends Component {
     // const classes = useStyles;
 
     return (
-      <Modal open={open} onClose={onCloseModal} center >
+      <Modal open={open} onClose={onCloseModal} center>
         <div className="makeroomdiv">
           <div className="roomtitle">{title}</div>
           <div className="row-div">
             <div className="roomtitle2">방제목</div>
-            <input className="roominput"></input>
+            <input
+              className="roominput"
+              onChange={e => {
+                this.setState({
+                  roomTitle: e.target.value
+                });
+              }}
+            />
           </div>
 
           <div className="row-div">
@@ -104,28 +112,27 @@ class MakeRoom extends Component {
 
           <div className="row-div">
             <div className="roomtitle2">시작 시간</div>
-            <div>
-
-            </div>
+            <div />
           </div>
 
           <div className="row-div">
             <div className="roomtitle2">참여자</div>
-            <input className="roominput"></input>
+            <input className="roominput" />
           </div>
 
           <div className="row-div2">
-            <Link to="/room/test" className="linklogin">
+            <Link to={`/room/${this.state.roomTitle}`} className="linklogin">
               <button className="makebutton">개설</button>
             </Link>
 
-            <button className="cancelbutton" onClick={onCloseModal}>취소</button>
+            <button className="cancelbutton" onClick={onCloseModal}>
+              취소
+            </button>
           </div>
-
         </div>
       </Modal>
-    )
+    );
   }
 }
 
-export default MakeRoom
+export default MakeRoom;
