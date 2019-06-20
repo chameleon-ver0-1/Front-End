@@ -7,6 +7,7 @@ import people from '../../../assets/conference/people.png';
 import styled, { css } from 'styled-components';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
+import MakeRoom from './makeRoom/MakeRoom';
 
 const Circle_conference = styled.div`
   border-radius: 64px;
@@ -47,6 +48,21 @@ const Circle_time = styled.div`
 
 export class ConferenceRoomDetail extends Component {
 
+  state = {
+    open: false,
+    title: ""
+  }
+
+  submitRegister(e) { }
+
+  onOpenModal = () => {
+    this.setState({ open: true, title: "회의 개설하기" });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  }
+
   render() {
 
     return (
@@ -54,7 +70,8 @@ export class ConferenceRoomDetail extends Component {
         <text className="conferenceroom_text">{this.props.title}</text>
 
         <div className="add_conference">
-          <button className="add_conference_btn">+ 회의 개설하기</button>
+          <button className="add_conference_btn" onClick={this.onOpenModal}>+ 회의 개설하기</button>
+          <MakeRoom open={this.state.open} title={this.state.title} onCloseModal={this.onCloseModal} />
         </div>
 
         <CarouselProvider className="circle_container"
