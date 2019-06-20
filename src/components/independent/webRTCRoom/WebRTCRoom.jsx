@@ -37,7 +37,15 @@ const ButtonItem = styled.button`
   background: none;
   outline: none;
 `;
-
+const RightDrawer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+const STTLayout = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 20%;
+`;
 export class WebRTCRoom extends Component {
   state = { open: undefined };
 
@@ -76,10 +84,16 @@ export class WebRTCRoom extends Component {
           </ToggleBtn>
         </NavDivider>
         <SecondBox>
-          <VideoMenubar />
-          <VideoItem />
-          <STTTest />
-          <Drawerbar isToggle={this.state} />
+          <div style={{ width: "80%", display: "flex", flexDirection: "row" }}>
+            <VideoMenubar />
+            <VideoItem style={{}} />
+          </div>
+          <STTLayout>
+            <STTTest />
+            {/* <RightDrawer style={{ flex: "1" }}>
+              <Drawerbar isToggle={this.state} />
+            </RightDrawer> */}
+          </STTLayout>
         </SecondBox>
       </VideoBaseContainer>
     );
