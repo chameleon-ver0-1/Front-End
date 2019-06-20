@@ -272,6 +272,10 @@ export class VideoItem extends Component {
         })
       );
     };
+    const onRekog = () => {
+      //TODO: 여기에 액션 채우면 됩니다.
+      console.log("예지만세");
+    };
 
     const showRoomURL = roomid => {
       var roomHashURL = "#" + roomid;
@@ -380,7 +384,16 @@ export class VideoItem extends Component {
             회의실 개설/참여하기
           </button> */}
         </div>
+
         <div id="room-urls" style={{ width: "100%" }} />
+        <div id="image-container" style={{ background: "pink" }}>
+          <form>
+            <button type="button" onClick={onRekog}>
+              지금부터 감정인식 시작
+            </button>
+          </form>
+          <div id="show-image">여기는 이미지를 보여주는 공간입니다.</div>
+        </div>
       </VideoFrame>
     );
   }
