@@ -17,10 +17,22 @@ const VideoFrame = styled.div`
   padding-right: 50px;
   width: 100%;
 `;
+const EmotionStatus = styled.div`
+  position: fixed;
+  top: 80%;
+  width: 50%;
+  text-align: center;
+  display: inline-block;
+  background: black;
+  color: white;
+  font-size: 15px;
+  opacity: 0.4;
+  border-radius: 45px;
+`;
 
 export class VideoItem extends Component {
   //FIXME:state값 추가함
-  // state = { roomToken: "", isRoomAppear: false };
+  state = { roomToken: "" };
   componentWillMount() {
     const script = document.createElement("script");
 
@@ -300,6 +312,7 @@ export class VideoItem extends Component {
       //FIXME:state값 추가함
       // this.state.roomToken = roomQueryStringURL;
       // this.state.roomKey = html;
+      this.state.roomToken = roomQueryStringURL;
     };
 
     //roomid setting 부분
@@ -394,6 +407,7 @@ export class VideoItem extends Component {
           </form>
           <div id="show-image">여기는 이미지를 보여주는 공간입니다.</div>
         </div>
+        <EmotionStatus>이곳은 감정을 보여주는 공간입니다.</EmotionStatus>
       </VideoFrame>
     );
   }

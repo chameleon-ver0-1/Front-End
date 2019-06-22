@@ -95,6 +95,7 @@ export class WebRTCRoom extends Component {
             </RightDrawer> */}
           </STTLayout>
         </SecondBox>
+        
       </VideoBaseContainer>
     );
   }
