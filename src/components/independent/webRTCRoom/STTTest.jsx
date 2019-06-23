@@ -3,6 +3,9 @@ import styled from "styled-components";
 import topicCheckOff from "../../../assets/conferenceRoom/videohome_check_off.png";
 // import webkitSpeechRecognition from "react-speech-recognition";
 
+// TODO: 내 이름은 권소영. 이제 내가 변경한 것은 TODO로 표현하겠다.
+import io from "socket.io-client";
+
 const TopicItem = styled.div`
   font-size: 12px;
   height: 31px;
@@ -21,13 +24,6 @@ const TopicButton = styled.button`
   background: none;
   border: none;
 `;
-const Result = styled.div`
-  padding: 10px 20px;
-  height: 150px;
-  border: solid 1px #000;
-  border-radius: 6px;
-`;
-
 const topics = [
   <div>
     <TopicItem>
@@ -41,110 +37,94 @@ const topics = [
 ];
 const records = [
   <React.Fragment>
-    <div
-      style={{
-        fontSize: "12px",
-        paddingTop: "29px",
-        paddingLeft: "18px",
-        paddingBottom: "22px"
-      }}
-    >
-      주제1에 대한 회의록 기록 주제1에 대한 회의록 기록주제1에 대한 회의록 기록
-      주제1에 대한 회의록 기록주제1에 대한 회의록 기록 주제1에 대한 회의록
-      기록주제1에 대한 회의록 기록 주제1에 대한 회의록 기록 주제1에 대한 회의록
-      기록 주제1에 대한 회의록 기록주제1에기록 주제1에 대한 회의록
-      기록주제1에주제1에기록 주제1에 대한 회의록 기록주제1에
+    <div>
+      <textarea
+        value=""
+        type="textarea"
+        wrap="soft"
+        id="stt-message"
+        disabled="true"
+        cols="37"
+        rows="10"
+        style={{
+          fontSize: "12px",
+          paddingTop: "29px",
+          paddingLeft: "18px",
+          paddingBottom: "22px"
+        }}
+      />
+
+      <hr />
     </div>
-    <hr />
   </React.Fragment>
 ];
-/*음성인식 관련 선언부*/
-var isRecognizing = false; // 현재 녹음 중인지
-var ignoreEndProcess = false;
-var finalTranscript = ""; // 누적된 인식 결과
-
-window.SpeechRecognition =
-  window.webkitSpeechRecognition || window.SpeechRecognition;
-// var recognition = new webkitSpeechRecognition();
-var recognition = new window.webkitSpeechRecognition();
-const language = "ko-KR";
-recognition.continuous = true; // 음성이 인식될 때마다 결과값 반환
-recognition.interimResults = true; // 끝나지 않은 상태의 음성 반환 설정
 
 //--------------------------------------------------------
 //-----------------Speech Recognition Code----------------
 //--------------------------------------------------------
 
-/* 음성 인식 시작 처리*/
+var isRecognizing = false;
+var ignoreEndProcess = false;
+var finalTranscript = "";
 
+window.SpeechRecognition =
+  window.webkitSpeechRecognition || window.SpeechRecognition;
+
+var recognition = new window.webkitSpeechRecognition();
+const language = "ko-KR";
+recognition.continuous = true; // 음성이 인식될 때마다 결과값 반환
+recognition.interimResults = true; // 끝나지 않은 상태의 음성 반환 설정
+/** stt 인식 시작 */
 recognition.onstart = function() {
   console.log("onstart", arguments);
   isRecognizing = true;
-  // document.getElementById("btnJoin").attr("class", "on");
 };
-/*음성 인식 종료 처리*/
+/** stt 인식 종료 */
 recognition.onend = function() {
   console.log("onend", arguments);
   isRecognizing = false;
 
-  // 에러 처리
   if (ignoreEndProcess) {
     return false;
   }
 
-  // DO end process
-  // document.getElementById("btnJoin").attr("class", "off");
   if (!finalTranscript) {
-    // 인식된 결과가 없을 경우
     console.log("empty finalTranscript");
     return false;
   }
 };
-/*음성 인식 결과 처리
-    @param event*/
+/** 인식된 결과 처리 */
 recognition.onresult = function(event) {
   console.log("onresult", event);
 
   let interimTranscript = "";
   if (typeof event.results === "undefined") {
-    // 에러 처리
     recognition.onend = null;
     recognition.stop();
     return;
   }
 
   for (let i = event.resultIndex; i < event.results.length; ++i) {
-    // 음성인식 이벤트 결과(string)
     if (event.results[i].isFinal) {
-      // 음성인식 종료된 최종 결과일 경우
-      finalTranscript += event.results[i][0].transcript;
+      // TODO: 소켓서버로 인식된 결과 문장 전송
+      sender(event.results[i][0].transcript);
     } else {
-      // 중간 결과일 경우
       interimTranscript += event.results[i][0].transcript;
     }
   }
 
-  /*Front 화면에 글자 표시*/
-  //finalTranscript = capitalize(finalTranscript); // 최종본 첫 글자 대문자화(EN)
-  document.getElementById("final_span").innerHTML = finalTranscript; // 최종본 개행 처리 linebreak(finalTranscript)
-  document.getElementById("interim_span").innerHTML = interimTranscript; // 중간값 개행 처리 linebreak(interimTranscript)
-
   console.log("finalTranscript", finalTranscript);
   console.log("interimTranscript", interimTranscript);
-  // fireCommand(interimTranscript); // undefined Funcion
 };
-
-/* 음성 인식 에러 처리
-    @param event */
+/** 에러 처리 */
 recognition.onerror = function(event) {
   console.log("onerror", event);
 
   if (event.error.match(/no-speech|audio-capture|not-allowed/)) {
-    ignoreEndProcess = true; // 에러의 경우 END Process 건너뛰기
+    ignoreEndProcess = true;
   }
-
-  document.getElementById("btnJoin").attr("class", "off");
 };
+/** Button Handler */
 const onJoin = () => {
   if (isRecognizing) {
     alert("이미 참여 중입니다.");
@@ -164,7 +144,65 @@ const onExit = () => {
   }
 };
 
+//--------------------------------------------------------
+//-----------------Send to socket.io Server---------------
+//--------------------------------------------------------
+
+var serverURL = "localhost:50000";
+var name = "me";
+var room = "100";
+var socket = null;
+
+var chatLogs = "";
+
+// TODO: 인식된 메시지 프론트에 기록
+function writeMessage(type, name, message) {
+  console.log("[채팅방 기록]: " + message);
+
+  var printName = "";
+  if (type === "me") {
+    printName = name + ":";
+  }
+
+  chatLogs += "\n" + printName + message;
+
+  document.getElementById("stt-message").value = chatLogs;
+}
+
+function sender(text) {
+  socket.emit("user", {
+    name: name,
+    message: text
+  });
+  writeMessage("me", name, text);
+}
+
 export class STTTest extends Component {
+  componentWillMount() {
+    const script = document.createElement("script");
+
+    script.src = "http://cdn.socket.io/socket.io-1.4.0.js";
+
+    //$(document).ready(function() {
+    socket = io.connect(serverURL);
+    socket.on("connection", function(data) {
+      console.log("connect");
+      if (data.type === "connected") {
+        socket.emit("connection", {
+          type: "join",
+          name: name,
+          room: room
+        });
+      }
+    });
+    socket.on("system", function(data) {
+      writeMessage("system", "system", data.message);
+    });
+    socket.on("message", function(data) {
+      writeMessage("other", data.name, data.message);
+    });
+    //});
+  }
   render() {
     return (
       <div style={{ background: "var(--white-five)", width: "252px" }}>
@@ -203,8 +241,8 @@ export class STTTest extends Component {
           <div>{records}</div>
         </div>
         {/* 여기서부터 STT코드 */}
-        <section class="center">
-          <div class="button-panel">
+        <section className="center">
+          <div className="button-panel">
             <button id="btnJoin" onClick={onJoin} className="off">
               Join
             </button>
@@ -213,18 +251,6 @@ export class STTTest extends Component {
             </button>
           </div>
         </section>
-
-        <Result id="result">
-          {/* 최종 음성인식 결과  */}
-          <section class="center">
-            <span class="final" id="final_span" />
-          </section>
-
-          {/* 음성인식 중 반환값 */}
-          <section className="center">
-            <span className="interim" id="interim_span" />
-          </section>
-        </Result>
       </div>
     );
   }
