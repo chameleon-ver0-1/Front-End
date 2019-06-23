@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import "./webrtc.style.css";
 import { getHTMLMediaElement } from "./getHTMLMediaElement";
+import axios from "axios";
+import * as service from "./post";
 var connection = new window.RTCMultiConnection();
 
 connection.autoCloseEntireSession = true;
@@ -32,7 +34,7 @@ const EmotionStatus = styled.div`
 
 export class VideoItem extends Component {
   //FIXME:state값 추가함
-  state = { roomToken: "" };
+  state = { dummy: [] };
   componentWillMount() {
     const script = document.createElement("script");
 
@@ -55,7 +57,7 @@ export class VideoItem extends Component {
     document.body.appendChild(script);
   }
   componentDidMount() {}
-  state = { roomKey: "undefined" };
+  state = { dummy: [] };
   render() {
     (function() {
       var params = {},
@@ -369,6 +371,15 @@ export class VideoItem extends Component {
       alert("2G is not supported. Please use a better internet service.");
     }
 
+    const getPost = () => {
+      fetch("https://jsonplaceholder.typicode.com/todos/1")
+        .then(response => response.json())
+        .then(json => {
+          console.log(json);
+          this.setState({ dummy: json });
+        });
+    };
+
     return (
       <VideoFrame id="video-home-container">
         <div style={{ width: "100%" }}>
@@ -382,12 +393,7 @@ export class VideoItem extends Component {
             size="20"
             defaultValue="abcded"
           />
-          <button
-            className="open-room"
-            onClick={openRoom}
-            // isRoomAppear={this.state.isRoomAppear}
-            // roomToken={this.state.roomToken}
-          >
+          <button className="open-room" onClick={openRoom}>
             회의실 개설하기
           </button>
           {/* <button className="join-room" onClick={joinRoom}>
@@ -401,13 +407,13 @@ export class VideoItem extends Component {
         <div id="room-urls" style={{ width: "100%" }} />
         <div id="image-container" style={{ background: "pink" }}>
           <form>
-            <button type="button" onClick={onRekog}>
+            <button type="button" onClick={getPost}>
               지금부터 감정인식 시작
             </button>
           </form>
           <div id="show-image">여기는 이미지를 보여주는 공간입니다.</div>
         </div>
-        <EmotionStatus>이곳은 감정을 보여주는 공간입니다.</EmotionStatus>
+        <EmotionStatus>{this.state.dummy.title}</EmotionStatus>
       </VideoFrame>
     );
   }
