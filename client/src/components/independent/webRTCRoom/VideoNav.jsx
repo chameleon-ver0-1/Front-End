@@ -1,7 +1,20 @@
+/**
+ * 담당자:조윤영
+ * [OUTLINE]
+ * VideoMenubar파일은 화상회의실 상단의 네비게이션 화면 컴포넌트이다.
+ * <p>
+ * [METHOD]
+ * handleClick(): 초대링크를 나타내도록 show의 state값을 toggle하는 함수
+ * openRoom(): 신규 화상회의 방 개설하는 함수
+ * joinRoom(): 기존 개설된 화상회의 방을 들어가는 함수
+ * openOrJoinRoom(): 신규 화상회의방을 개설하고 들어가는 함수
+ *
+ * <p>
+ * [LIBRARY]
+ * 1. Fade: 자연스럽게 나타나고 사라지게 하는 애니메이션 라이브러리
+ */
 import React, { Component } from "react";
-
 import styled from "styled-components";
-
 import logo from "../../../assets/conferenceRoom/videohome_logo.png";
 import user from "../../../assets/conference/people.png";
 import mic from "../../../assets/conferenceRoom/videohome_mic.png";
@@ -88,13 +101,6 @@ const ButtonItem = styled.button`
   outline: none;
 `;
 
-const Closed = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 507px;
-  padding-left: 16px;
-  flex: 1;
-`;
 const FixFlexContainer = styled.div`
   flex: 8;
 `;
@@ -105,6 +111,7 @@ export class VideoNav extends Component {
     this.state = { show: false };
     this.handleClick = this.handleClick.bind(this);
   }
+  /*초대링크를 나타내도록 show의 state값을 toggle하는 함수*/
   handleClick() {
     this.setState({ show: !this.state.show });
   }

@@ -1,14 +1,15 @@
+/**
+ * 담당자:조윤영
+ * [OUTLINE]
+ * WebRTCRoom의 전체 구성 컴포넌트를 조합하는 파일
+ */
 import React, { Component } from "react";
 import VideoItem from "./VideoItem";
 import VideoNav from "./VideoNav";
 import VideoMenubar from "./VideoMenubar";
-import Drawerbar from "./Drawerbar";
 import styled from "styled-components";
 import openDrawer from "../../../assets/conferenceRoom/toggleOpen.png";
-import closeDrawer from "../../../assets/conferenceRoom/toggleClosed.png";
-
-import STTTest from "./STTTest";
-import { runInThisContext } from "vm";
+import TopicDrawerBar from "./TopicDrawerBar";
 
 const VideoBaseContainer = styled.div`
   width: 100%;
@@ -37,10 +38,10 @@ const ButtonItem = styled.button`
   background: none;
   outline: none;
 `;
-const RightDrawer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
+// const RightDrawer = styled.div`
+//   display: flex;
+//   justify-content: flex-end;
+// `;
 const STTLayout = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -59,7 +60,7 @@ export class WebRTCRoom extends Component {
     const icon = this.state.open ? "fold" : "unfold";
     const toggle = () => {
       this.setState(state => ({ open: !state.open }));
-      // console.log(this.state.open);
+
       if (icon === "fold") {
         this.src = { openDrawer };
       } else {
@@ -89,13 +90,12 @@ export class WebRTCRoom extends Component {
             <VideoItem />
           </div>
           <STTLayout>
-            <STTTest />
+            <TopicDrawerBar />
             {/* <RightDrawer style={{ flex: "1" }}>
               <Drawerbar isToggle={this.state} />
             </RightDrawer> */}
           </STTLayout>
         </SecondBox>
-        
       </VideoBaseContainer>
     );
   }

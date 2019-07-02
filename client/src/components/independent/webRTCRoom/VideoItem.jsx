@@ -1,16 +1,26 @@
+/**
+ * 담당자:조윤영 Edit By.한예지
+ * [OUTLINE]
+ * VideoItem파일은 화상회의 비디오를 표시하는 비디오 컴포넌트이다.
+ * <p>
+ * [METHOD]
+ * rgetScreenId(error, sourceId, screen_constraints): 화면 공유 함수
+ * disableInputButtons(): 상황에 맞춰 버튼들을 비활성화하는 함수
+ * openRoom(): 신규 화상회의 방 개설하는 함수
+ * joinRoom(): 기존 개설된 화상회의 방을 들어가는 함수
+ * openOrJoinRoom(): 신규 화상회의방을 개설하고 들어가는 함수
+ *
+ * <p>
+ * [LIBRARY]
+ * 1. io: socket에 연결하기 위한 라이브러리
+ */
 import React, { Component } from "react";
-
 import styled from "styled-components";
 import "./webrtc.style.css";
-import { getHTMLMediaElement } from "./getHTMLMediaElement";
 import html2canvas from "html2canvas";
-import axios from "axios";
+
 var connection = new window.RTCMultiConnection();
-
 connection.autoCloseEntireSession = true;
-// connection.publicRoomIdentifier = window.params.publicRoomIdentifier;
-
-// FIXME: 우리 소켓링크로 연결 변경
 connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/";
 
 const VideoFrame = styled.div`
@@ -36,6 +46,7 @@ export class VideoItem extends Component {
   //FIXME:state값 추가함
   state = { roomToken: "", dummy: [] };
 
+  /*script가져오는 함수 */
   componentWillMount() {
     const script = document.createElement("script");
 
@@ -60,6 +71,7 @@ export class VideoItem extends Component {
   componentDidMount() {}
 
   state = { roomKey: "undefined" };
+
   render() {
     (function() {
       var params = {},
@@ -74,13 +86,13 @@ export class VideoItem extends Component {
       window.params = params;
     })();
 
-    // if you want audio+video conferencing
     connection.socketMessageEvent = "video-conference-demo";
 
     connection.session = {
       audio: true,
       video: true
     };
+
     connection.sdpConstraints.mandatory = {
       OfferToReceiveAudio: true,
       OfferToReceiveVideo: true
@@ -88,17 +100,11 @@ export class VideoItem extends Component {
 
     connection.onstream = function(event) {
       //connection1
-      connection.videosContainer = document.getElementById("videos-container");
-      var video = document.createElement("video");
-      // var video = event.mediaElement;
+      connection.videosContainer = document.getElementById("videos-container"); //1개 이상의 비디오들을 담을 div공간을 id값으로 가져온다.
+      var video = document.createElement("video"); //비디오 컴포넌트를 생성한다.
       video.id = event.streamid;
 
       console.log("onstream 정상 작동 중");
-
-      var existing = document.getElementById(event.streamid);
-      // if (existing && existing.parentNode) {
-      //   existing.parentNode.removeChild(existing);
-      // }
       event.mediaElement.removeAttribute("src");
       event.mediaElement.removeAttribute("srcObject");
       event.mediaElement.muted = true;
@@ -121,32 +127,17 @@ export class VideoItem extends Component {
         }
       }
 
-      video.srcObject = event.stream;
+      video.srcObject = event.stream; //비디오에 stream을 연결한다.
 
-      var width = 400;
+      var width = 400; //임의의 너비 길이의 변수
       var height = 1000;
-      video.width = width;
+      video.width = width; //비디오의 너비를 설정한다.
 
-      video.buttons = "full-screen";
-      video.style.marginLeft = "16px";
+      video.buttons = "full-screen"; //전체화면으로 확장되는 버튼을 추가한다.
+      video.style.marginLeft = "16px"; //각 비디오의 왼쪽 마진을 설정한다.
 
-      connection.videosContainer.appendChild(video);
+      connection.videosContainer.appendChild(video); //비디오를 div공간에 추가한다.
 
-      //FIXME: 이 부분 제거해야함.
-      // var mediaElement = getHTMLMediaElement(video, {
-      //   title: event.userid,
-      //   buttons: ["full-screen"],
-      //   width: width,
-      //   height: height,
-      //   showOnMouseEnter: false
-      // });
-
-      // setTimeout(function() {
-      //   mediaElement.media.play();
-      // }, 5000);
-
-      // mediaElement.id = event.streamid;
-      // to keep room-id in cache
       localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
       if (event.type === "local") {
         connection.socket.on("disconnect", function() {
@@ -180,9 +171,8 @@ export class VideoItem extends Component {
       }
     };
 
+    /*상황에 맞춰 버튼들을 비활성화하는 함수*/
     const disableInputButtons = enable => {
-      // document.getElementById("room-id").onkeyup();
-
       document.getElementsByClassName("open-or-join-room").disabled = !enable;
       document.getElementsByClassName("open-room").disabled = !enable;
       document.getElementsByClassName("join-room").disabled = !enable;
@@ -190,7 +180,7 @@ export class VideoItem extends Component {
     };
 
     //TODO: 화면 공유 버튼 on/off state에 따라서 함수 실행시키기
-    //화면  공유 기능
+    /*화면 공유 함수*/
     const getScreenId = (error, sourceId, screen_constraints) => {
       if (
         navigator.userAgent.indexOf("Edge") !== -1 &&
@@ -226,7 +216,7 @@ export class VideoItem extends Component {
         });
     };
 
-    /*신규 화상회의 방 개설하기 */
+    /*신규 화상회의 방 개설하는 함수 */
     const openRoom = () => {
       disableInputButtons();
       connection.open(document.getElementById("room-id").value, function(
@@ -236,8 +226,6 @@ export class VideoItem extends Component {
       ) {
         if (isRoomOpened === true) {
           showRoomURL(connection.sessionid);
-          //FIXME:state값 추가함
-          // this.state.isRoomAppear = true;
         } else {
           disableInputButtons(true);
           if (error === "Room not available") {
@@ -251,7 +239,7 @@ export class VideoItem extends Component {
       });
     };
 
-    /*기존 개설된 화상회의 방 들어가기 */
+    /*기존 개설된 화상회의 방을 들어가는 함수 */
     const joinRoom = () => {
       disableInputButtons();
       connection.join(document.getElementById("room-id").value, function(
@@ -270,7 +258,7 @@ export class VideoItem extends Component {
       });
     };
 
-    /*신규 화상회의방 개설하고 들어가기 */
+    /*신규 화상회의방을 개설하고 들어가는 함수 */
     const openOrJoinRoom = () => {
       disableInputButtons();
       connection.openOrJoin(
@@ -288,12 +276,12 @@ export class VideoItem extends Component {
         })
       );
     };
-    //TODO: 예지 - 실시간 전송하기 위한 변수
-    var playTran;
 
-    //TODO: 예지 - 비디오 캡처하는 함수
+    var playTran; //실시간 전송하기 위한 변수
+
+    /* 비디오 캡처하는 함수*/
     const capture = () => {
-      //TODO: 예지 - videos-container 캡쳐하기 전 비디오 위에 비디오 캡쳐 이미지 놓기
+      /*videos-container 캡쳐하기 전 비디오 위에 비디오 캡쳐 이미지 놓기*/
       connection.showImage = document.getElementById("show-image");
       var transImg = document.getElementById("transImg");
       var canvas = document.createElement("canvas");
@@ -301,7 +289,7 @@ export class VideoItem extends Component {
 
       var context = canvas.getContext("2d");
 
-      //TODO: 예지 - 비디오 각각을 반복문을 통해 별도로 캡쳐
+      /*비디오 각각을 반복문을 통해 별도로 캡쳐*/
       for (var i = 0, len = videos.length; i < len; i++) {
         var v = videos[i];
         if (!v.id) continue;
@@ -317,17 +305,15 @@ export class VideoItem extends Component {
           v.style.height = "300px"; //-->이걸로 해결
           v.style.backgroundImage = `url(${canvas.toDataURL("image/png")})`;
           v.style.backgroundSize = "cover";
-          //context.clearRect(0, 0, w, h);
         } catch (e) {
           continue;
         }
       }
 
-      //TODO: 예지 -  videos-container 캡쳐
+      /*videos-container 캡쳐*/
       html2canvas(document.getElementById("videos-container")).then(function(
         canvas
       ) {
-        //document.body.appendChild(canvas);
         transImg.value = canvas.toDataURL("image/png");
 
         // fetch('http://localhost:5000/trans_data', {
@@ -348,8 +334,8 @@ export class VideoItem extends Component {
     };
 
     const onRekog = () => {
-      //TODO: 5초마다 capture() 호출
-      //capture();
+      /*5초마다 capture() 호출*/
+
       playTran = setInterval(function() {
         capture();
       }, 5000);
@@ -363,8 +349,6 @@ export class VideoItem extends Component {
         .then(response => response.text())
         .then(text => console.log(text))
         .catch(err => console.log(err));
-
-      console.log("윤영만세");
     };
 
     const onStop = () => {
@@ -398,16 +382,16 @@ export class VideoItem extends Component {
       this.state.roomToken = roomQueryStringURL;
     };
 
-    //roomid setting 부분
+    /*roomid setting*/
     var roomid = "";
     if (localStorage.getItem(connection.socketMessageEvent)) {
       roomid = localStorage.getItem(connection.socketMessageEvent);
     } else {
       roomid = connection.token();
     }
-    var txtRoomId = document.getElementsByClassName("room-id"); //FIXME:className으로 해야 작동이 되나 원래는 id로 해야함. 둘의 차이를 잘 모르겠음.
+    var txtRoomId = document.getElementsByClassName("room-id");
 
-    txtRoomId.value = roomid; //FIXME:
+    txtRoomId.value = roomid;
     txtRoomId.onkeyup = txtRoomId.oninput = txtRoomId.onpaste = function() {
       localStorage.setItem(
         connection.socketMessageEvent,
@@ -422,7 +406,6 @@ export class VideoItem extends Component {
     //TODO: roomid를 직접 받아와야하는 부분
     var roomid = window.params.roomid;
 
-    // var roomid = params.roomid; //FIXME:
     if (!roomid && hashString.length) {
       roomid = hashString;
     }
@@ -430,7 +413,7 @@ export class VideoItem extends Component {
       document.getElementsByClassName("room-id").value = roomid;
       localStorage.setItem(connection.socketMessageEvent, roomid);
 
-      // auto-join-room
+      /*auto-join-room*/
       (function reCheckRoomPresence() {
         connection.checkPresence(roomid, function(isRoomExist) {
           if (isRoomExist) {
@@ -443,7 +426,7 @@ export class VideoItem extends Component {
       disableInputButtons();
     }
 
-    // detect 2G
+    /*detect 2G*/
     if (
       navigator.connection &&
       navigator.connection.type === "cellular" &&
