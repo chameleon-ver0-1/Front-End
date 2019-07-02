@@ -1,7 +1,13 @@
-import React, { Component } from 'react'
-import './popup.style.css'
+/**
+ * [OUTLINE]
+ * 담당자 : 안지후
+ * 돋보기 버튼을 누르면 나오는 팝업 화면(뒷 배경이 검은색이고 중앙에 작은 화면이 크게 뜸)
+ */
+
+import React, { Component } from "react";
+import "./popup.style.css";
 import Modal from "react-responsive-modal";
-import search from '../../../../assets/signUp/search.png';
+import search from "../../../../assets/signUp/search.png";
 
 export default class PopUp extends Component {
   render() {
@@ -20,14 +26,13 @@ export default class PopUp extends Component {
             />
 
             <button className="search">
-              <img src={search} className="search2" /></button>
-
+              <img src={search} className="search2" />
+            </button>
           </div>
 
-          <button
-            type="button"
-            className="ok-btn"
-            onClick={onCloseModal}>확인</button>
+          <button type="button" className="ok-btn" onClick={onCloseModal}>
+            확인
+          </button>
         </div>
       </Modal>
     );

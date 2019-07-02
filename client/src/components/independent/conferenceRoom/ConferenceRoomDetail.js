@@ -1,3 +1,10 @@
+
+/**
+ * [OUTLINE]
+ * 담당자 : 안지후
+ * 화상회의 메인 홈 화면 구성 내부
+ */
+
 import React, { Component } from "react";
 import "./conference.style.css";
 import "../../../style.css";
