@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import "./webrtc.style.css";
 import { getHTMLMediaElement } from "./getHTMLMediaElement";
+import html2canvas from "html2canvas";
 import axios from "axios";
-import * as service from "./post";
 var connection = new window.RTCMultiConnection();
 
 connection.autoCloseEntireSession = true;
@@ -34,7 +34,8 @@ const EmotionStatus = styled.div`
 
 export class VideoItem extends Component {
   //FIXME:state값 추가함
-  state = { dummy: [] };
+  state = { roomToken: "", dummy: [] };
+
   componentWillMount() {
     const script = document.createElement("script");
 
@@ -57,7 +58,8 @@ export class VideoItem extends Component {
     document.body.appendChild(script);
   }
   componentDidMount() {}
-  state = { dummy: [] };
+
+  state = { roomKey: "undefined" };
   render() {
     (function() {
       var params = {},
@@ -286,9 +288,88 @@ export class VideoItem extends Component {
         })
       );
     };
+    //TODO: 예지 - 실시간 전송하기 위한 변수
+    var playTran;
+
+    //TODO: 예지 - 비디오 캡처하는 함수
+    const capture = () => {
+      //TODO: 예지 - videos-container 캡쳐하기 전 비디오 위에 비디오 캡쳐 이미지 놓기
+      connection.showImage = document.getElementById("show-image");
+      var transImg = document.getElementById("transImg");
+      var canvas = document.createElement("canvas");
+      var videos = document.querySelectorAll("video");
+
+      var context = canvas.getContext("2d");
+
+      //TODO: 예지 - 비디오 각각을 반복문을 통해 별도로 캡쳐
+      for (var i = 0, len = videos.length; i < len; i++) {
+        var v = videos[i];
+        if (!v.id) continue;
+        try {
+          var ratio = v.videoWidth / v.videoHeight;
+          var w = v.videoWidth - 100;
+          var h = parseInt(w / ratio, 10);
+          canvas.setAttribute("width", w);
+          canvas.setAttribute("height", h);
+          context.fillRect(0, 0, w, h);
+          context.drawImage(v, 0, 0, w, h);
+          v.style.width = "400px";
+          v.style.height = "300px"; //-->이걸로 해결
+          v.style.backgroundImage = `url(${canvas.toDataURL("image/png")})`;
+          v.style.backgroundSize = "cover";
+          //context.clearRect(0, 0, w, h);
+        } catch (e) {
+          continue;
+        }
+      }
+
+      //TODO: 예지 -  videos-container 캡쳐
+      html2canvas(document.getElementById("videos-container")).then(function(
+        canvas
+      ) {
+        //document.body.appendChild(canvas);
+        transImg.value = canvas.toDataURL("image/png");
+
+        // fetch('http://localhost:5000/trans_data', {
+        //   method: 'post',
+        //   body: JSON.stringify({transImg : canvas.toDataURL("image/png")})
+        // }).then(function(response) {
+        //   //return response.text();
+        //   console.log(response.text());
+
+        // }).then(function(data) {
+        //   console.log(data);
+        // }) .catch(function (error) {
+        //   console.log('Request failed', error);
+        // });
+
+        document.getElementById("form").submit();
+      });
+    };
+
     const onRekog = () => {
-      //TODO: 여기에 액션 채우면 됩니다.
-      console.log("예지만세");
+      //TODO: 5초마다 capture() 호출
+      //capture();
+      playTran = setInterval(function() {
+        capture();
+      }, 5000);
+
+      fetch("/happy")
+        .then(response => response.text())
+        .then(text => console.log(text))
+        .catch(err => console.log(err));
+
+      fetch("/default")
+        .then(response => response.text())
+        .then(text => console.log(text))
+        .catch(err => console.log(err));
+
+      console.log("윤영만세");
+    };
+
+    const onStop = () => {
+      clearInterval(playTran);
+      console.log("종료");
     };
 
     const showRoomURL = roomid => {
@@ -371,15 +452,6 @@ export class VideoItem extends Component {
       alert("2G is not supported. Please use a better internet service.");
     }
 
-    const getPost = () => {
-      fetch("https://jsonplaceholder.typicode.com/todos/1")
-        .then(response => response.json())
-        .then(json => {
-          console.log(json);
-          this.setState({ dummy: json });
-        });
-    };
-
     return (
       <VideoFrame id="video-home-container">
         <div style={{ width: "100%" }}>
@@ -393,7 +465,12 @@ export class VideoItem extends Component {
             size="20"
             defaultValue="abcded"
           />
-          <button className="open-room" onClick={openRoom}>
+          <button
+            className="open-room"
+            onClick={openRoom}
+            // isRoomAppear={this.state.isRoomAppear}
+            // roomToken={this.state.roomToken}
+          >
             회의실 개설하기
           </button>
           {/* <button className="join-room" onClick={joinRoom}>
@@ -406,14 +483,14 @@ export class VideoItem extends Component {
 
         <div id="room-urls" style={{ width: "100%" }} />
         <div id="image-container" style={{ background: "pink" }}>
-          <form>
-            <button type="button" onClick={getPost}>
-              지금부터 감정인식 시작
-            </button>
-          </form>
-          <div id="show-image">여기는 이미지를 보여주는 공간입니다.</div>
+          <button type="button" onClick={onRekog}>
+            지금부터 감정인식 시작
+          </button>
+          <button type="button" onClick={onStop}>
+            회의 종료
+          </button>
         </div>
-        <EmotionStatus>{this.state.dummy.title}</EmotionStatus>
+        <EmotionStatus>안녕</EmotionStatus>
       </VideoFrame>
     );
   }
