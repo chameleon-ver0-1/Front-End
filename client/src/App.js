@@ -6,12 +6,7 @@ import "../node_modules/font-awesome/css/font-awesome.min.css";
 //MARKUP: add component down here jihu
 
 // import Index from './components/independent/index';
-import {
-  SignIn,
-  SignUp,
-  AuthCheck,
-  ConnectSignIn
-} from "./components/independent/auth/Auth";
+import { SignIn, SignUp, AuthCheck } from "./components/independent/auth/Auth";
 import {
   Issue,
   ConferenceRoom,
@@ -44,7 +39,6 @@ class App extends Component {
               />
               <Route path="/auth/signUp" component={SignUp} />
               <Route path="/auth/authCheck" component={AuthCheck} />
-              <Route path="/auth/connectSignIn" component={ConnectSignIn} />
               <Route path="/home/issue" component={Issue} />
               <Route path="/home/conferenceRoom" component={ConferenceRoom} />
               {/* FIXME: parameter이어 붙여 놓음. 오류 시 되돌리기 */}
