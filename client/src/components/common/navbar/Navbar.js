@@ -19,8 +19,7 @@ export class Navbar extends Component {
     if (
       window.location.pathname === "/auth/signIn" ||
       window.location.pathname === "/auth/signUp" ||
-      window.location.pathname === "/auth/authCheck" ||
-      window.location.pathname === "/auth/connectSignIn"
+      window.location.pathname === "/auth/authCheck"
     ) {
       return (
         <div className="container">
