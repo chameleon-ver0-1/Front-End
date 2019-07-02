@@ -10,7 +10,7 @@ import chat_profile from "../../../../assets/chatting/chat_profile.png";
 import search from "../../../../assets/signUp/search.png";
 import { Link } from "react-router-dom";
 
-class Connectsignin extends Component {
+class ConnectSignIn extends Component {
   state = {
     open: false
   };
@@ -81,4 +81,4 @@ class Connectsignin extends Component {
   }
 }
 
-export default Connectsignin;
+export default ConnectSignIn;
