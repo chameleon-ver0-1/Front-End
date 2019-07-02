@@ -1,14 +1,13 @@
-@import '../../../../style.css';
+@import "../../../../style.css";
 
-.chat_profile{
+.chat_profile {
   width: 164px;
   height: 164px;
-  margin-top: 50px;
-  margin-left: 74px;
-  margin-right: 75px;
+  margin: 10px auto;
+  display: flex;
 }
 
-.add_information{
+.add_information {
   font-size: 14px;
   color: var(--greenish-teal);
   margin-top: 23px;

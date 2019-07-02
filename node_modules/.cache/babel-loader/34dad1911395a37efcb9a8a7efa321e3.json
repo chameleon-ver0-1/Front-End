@@ -1,0 +1,1 @@
+{"ast":null,"code":"module.exports = function parseUnit(str, out) {\n  if (!out) out = [0, ''];\n  str = String(str);\n  var num = parseFloat(str, 10);\n  out[0] = num;\n  out[1] = str.match(/[\\d.\\-\\+]*\\s*(.*)/)[1] || '';\n  return out;\n};","map":null,"metadata":{},"sourceType":"script"}

@@ -1,3 +1,9 @@
+/**
+ * [OUTLINE]
+ * 담당자 : 안지후
+ * 화상회의 홈에서 화상회의를 개설하는 팝업창 화면 구성
+ */
+
 import React, { Component } from "react";
 import "./makeroom.style.css";
 import Modal from "react-responsive-modal";
