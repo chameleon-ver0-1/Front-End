@@ -473,16 +473,12 @@ export class VideoItem extends Component {
           >
             회의실 개설하기
           </button>
-          {/* <button className="join-room" onClick={joinRoom}>
+          <button className="join-room" onClick={joinRoom}>
             회의실 참여하기
           </button>
           <button className="open-or-join-room" onClick={openOrJoinRoom}>
             회의실 개설/참여하기
-          </button> */}
-        </div>
-
-        <div id="room-urls" style={{ width: "100%" }} />
-        <div id="image-container" style={{ background: "pink" }}>
+          </button>
           <button type="button" onClick={onRekog}>
             지금부터 감정인식 시작
           </button>
@@ -490,6 +486,9 @@ export class VideoItem extends Component {
             회의 종료
           </button>
         </div>
+
+        <div id="room-urls" style={{ width: "100%" }} />
+
         <EmotionStatus>안녕</EmotionStatus>
       </VideoFrame>
     );
