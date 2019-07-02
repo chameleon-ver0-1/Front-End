@@ -1,9 +1,25 @@
+/**
+ * 담당자:조윤영 Edit By.권소영
+ * [OUTLINE]
+ * TopicDrawerBar파일은 기존 DrawerBar컴포넌트를 고정하여 STT를 적용한 컴포넌트.
+ * <p>
+ * [METHOD]
+ * recognition.onstart(): STT 인식 시작하는 함수
+ * recognition.onend(): stt 인식 종료하는 함수
+ * recognition.onresult(): 인식된 결과 처리하는 함수
+ * recognition.onerror(): 에러를 처리하는 함수
+ * onJoin(): STT 시작하는 함수
+ * writeMessage(type, name, message): 인식된 메시지 프론트에 기록하는 함수
+ * sender(text): socket.io 서버에 유저이름, 인식된 메시지 전송하는 함수
+ *
+ *
+ * <p>
+ * [LIBRARY]
+ * 1. io: socket에 연결하기 위한 라이브러리
+ */
 import React, { Component } from "react";
 import styled from "styled-components";
 import topicCheckOff from "../../../assets/conferenceRoom/videohome_check_off.png";
-// import webkitSpeechRecognition from "react-speech-recognition";
-
-// TODO: 내 이름은 권소영. 이제 내가 변경한 것은 TODO로 표현하겠다.
 import io from "socket.io-client";
 
 const TopicItem = styled.div`
@@ -24,6 +40,8 @@ const TopicButton = styled.button`
   background: none;
   border: none;
 `;
+
+/*토픽 컴포넌트*/
 const topics = [
   <div>
     <TopicItem>
@@ -35,6 +53,8 @@ const topics = [
     <hr />
   </div>
 ];
+
+/*토픽에 따른 음성기록을 저장하는 컴포넌트*/
 const records = [
   <React.Fragment>
     <div>
@@ -53,7 +73,6 @@ const records = [
           paddingBottom: "22px"
         }}
       />
-
       <hr />
     </div>
   </React.Fragment>
@@ -74,12 +93,14 @@ var recognition = new window.webkitSpeechRecognition();
 const language = "ko-KR";
 recognition.continuous = true; // 음성이 인식될 때마다 결과값 반환
 recognition.interimResults = true; // 끝나지 않은 상태의 음성 반환 설정
-/** stt 인식 시작 */
+
+/** STT 인식 시작 함수*/
 recognition.onstart = function() {
   console.log("onstart", arguments);
   isRecognizing = true;
 };
-/** stt 인식 종료 */
+
+/** STT 인식 종료 함수*/
 recognition.onend = function() {
   console.log("onend", arguments);
   isRecognizing = false;
@@ -93,7 +114,7 @@ recognition.onend = function() {
     return false;
   }
 };
-/** 인식된 결과 처리 */
+/** 인식된 결과 처리 함수 */
 recognition.onresult = function(event) {
   console.log("onresult", event);
 
@@ -116,7 +137,7 @@ recognition.onresult = function(event) {
   console.log("finalTranscript", finalTranscript);
   console.log("interimTranscript", interimTranscript);
 };
-/** 에러 처리 */
+/** 에러 처리 함수 */
 recognition.onerror = function(event) {
   console.log("onerror", event);
 
@@ -124,7 +145,8 @@ recognition.onerror = function(event) {
     ignoreEndProcess = true;
   }
 };
-/** Button Handler */
+
+/** STT 시작하는 함수 */
 const onJoin = () => {
   if (isRecognizing) {
     alert("이미 참여 중입니다.");
@@ -137,6 +159,8 @@ const onJoin = () => {
 
   finalTranscript = "";
 };
+
+/** STT 종료하는 함수 */
 const onExit = () => {
   if (isRecognizing) {
     recognition.stop();
@@ -155,7 +179,7 @@ var socket = null;
 
 var chatLogs = "";
 
-// TODO: 인식된 메시지 프론트에 기록
+/* 인식된 메시지 프론트에 기록하는 함수*/
 function writeMessage(type, name, message) {
   console.log("[채팅방 기록]: " + message);
 
@@ -168,7 +192,7 @@ function writeMessage(type, name, message) {
 
   document.getElementById("stt-message").value = chatLogs;
 }
-
+/* socket.io 서버에 유저이름, 인식된 메시지 전송하는 함수 */
 function sender(text) {
   socket.emit("user", {
     name: name,
@@ -183,7 +207,6 @@ export class STTTest extends Component {
 
     script.src = "http://cdn.socket.io/socket.io-1.4.0.js";
 
-    //$(document).ready(function() {
     socket = io.connect(serverURL);
     socket.on("connection", function(data) {
       console.log("connect");
@@ -195,13 +218,13 @@ export class STTTest extends Component {
         });
       }
     });
+
     socket.on("system", function(data) {
       writeMessage("system", "system", data.message);
     });
     socket.on("message", function(data) {
       writeMessage("other", data.name, data.message);
     });
-    //});
   }
   render() {
     return (
@@ -240,7 +263,6 @@ export class STTTest extends Component {
           </div>
           <div>{records}</div>
         </div>
-        {/* 여기서부터 STT코드 */}
         <section className="center">
           <div className="button-panel">
             <button id="btnJoin" onClick={onJoin} className="off">

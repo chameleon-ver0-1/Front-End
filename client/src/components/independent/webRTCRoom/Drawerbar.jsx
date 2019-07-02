@@ -1,10 +1,32 @@
+/**
+ * 담당자:조윤영
+ * [OUTLINE]
+ * Drawerbar파일은 화상회의실에서 우측 상단에 버튼 선택 시  우측에서 슬라이드 되는 drawer bar컴포넌트이다.
+ * <p>
+ * [METHOD]
+ * componentWillReceiveProps(): 상위 컴포넌트로부터 전달받는 props를 판별하는 함수
+ * <p>
+ * [LIBRARY]
+ * 1. react-spring: react-spring의 슬라이드 애니메이션 라이브러리
+ * 2. delay: 애니메이션의 지연을 주는 라이브러리
+ */
+
 import React, { Fragment } from "react";
 import { Keyframes, animated } from "react-spring/renderprops";
-import { Avatar, Form, Icon } from "antd";
+import { Form } from "antd";
 import delay from "delay";
 import styled from "styled-components";
-import topicCheckOn from "../../../assets/conferenceRoom/videohome_check_on.png";
+
 import topicCheckOff from "../../../assets/conferenceRoom/videohome_check_off.png";
+
+var state = undefined;
+
+const DrawerFragment = styled.div`
+  width: 200px;
+  height: 100%;
+  background: black;
+  padding-left: 100px;
+`;
 
 const TopicItem = styled.div`
   font-size: 12px;
@@ -25,7 +47,7 @@ const TopicButton = styled.button`
   border: none;
 `;
 
-// Creates a spring with predefined animation slots
+/*Creates a spring with predefined animation slots*/
 const Sidebar = Keyframes.Spring({
   // Slots can take arrays/chains,
   peek: [{ x: -10, from: { x: 0 }, delay: 500 }, { x: 0, delay: 800 }],
@@ -38,7 +60,7 @@ const Sidebar = Keyframes.Spring({
   }
 });
 
-// Creates a keyframed trail
+/*Creates a keyframed trail*/
 const Content = Keyframes.Trail({
   peek: [
     { x: -10, opacity: 1, from: { x: 0, opacity: 0 }, delay: 600 },
@@ -47,6 +69,8 @@ const Content = Keyframes.Trail({
   open: { x: -10, opacity: 1, delay: 100 },
   close: { x: 0, opacity: 0, delay: 0 }
 });
+
+/*토픽 컴포넌트*/
 const topics = [
   <div>
     <TopicItem>
@@ -58,6 +82,8 @@ const topics = [
     <hr />
   </div>
 ];
+
+/*토픽에 따른 음성기록을 저장하는 컴포넌트*/
 const records = [
   <Fragment>
     <div
@@ -77,6 +103,8 @@ const records = [
     <hr />
   </Fragment>
 ];
+
+/*애니메이션이 적용될 drawerbar 컴포넌트 아이템*/
 const items = [
   <Fragment>
     <div
@@ -115,32 +143,22 @@ const items = [
   <div>{records}</div>,
   <div>{records}</div>
 ];
-var state = undefined;
+
 export default class Drawerbar extends React.Component {
-  state = { open: undefined };
+  state = { open: undefined }; //drawerbar의 open상태에 대해서 undefined로 초기화한다.
 
   render() {
-    //TODO: WebRTCRoom의 state 가져와서 적용시키기
+    /*상위 컴포넌트로부터 전달받는 props를 판별하는 함수*/
     this.componentWillReceiveProps = () => {
-      //TODO: state를 전역변수로 두고 삽입해야한다.
       state =
         this.props.isToggle.open === undefined
           ? "peek"
           : this.props.isToggle.open
           ? "open"
           : "close";
-      console.log(state);
     };
     return (
-      <div
-        style={{
-          width: "200px",
-          height: "100%",
-          background: "black",
-          paddingLeft: "100px"
-        }}
-      >
-        {/* TODO: 여기 아래랑 */}
+      <DrawerFragment>
         <Sidebar native state={state} style={{}}>
           {({ x }) => (
             <animated.div
@@ -154,9 +172,7 @@ export default class Drawerbar extends React.Component {
                 items={items}
                 keys={items.map((_, i) => i)}
                 reverse={!this.state.open}
-                //  TODO: 여기 아래랑
                 state={state}
-                style={{}}
               >
                 {(item, i) => ({ x, ...props }) => (
                   <animated.div
@@ -177,7 +193,7 @@ export default class Drawerbar extends React.Component {
             </animated.div>
           )}
         </Sidebar>
-      </div>
+      </DrawerFragment>
     );
   }
 }

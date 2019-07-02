@@ -1,7 +1,21 @@
+/**
+ * 담당자:조윤영
+ * [OUTLINE]
+ * InviteDialog파일은 네비게이션 바에서 사용자 선택 시 띄워지는 사용자 초대 링크 다이얼로그 컴포넌트
+ * <p>
+ * [METHOD]
+ * showDropdownMenu(event): 사용차 목록/초대 다이얼로그 컴포넌트를 보여주는 함수
+ * hideDropdownMenu(): 사용차 목록/초대 다이얼로그 컴포넌트를 숨기는 함수
+ *
+ * <p>
+ * [LIBRARY]
+ * 1. react-spring: react-spring의 슬라이드 애니메이션 라이브러리
+ * 2. delay: 애니메이션의 지연을 주는 라이브러리
+ */
 import React, { Component, Fragment } from "react";
 import styled from "styled-components";
 import userProfile from "../../../assets/home/userProfile.png";
-import { NONAME } from "dns";
+
 const InviteContainer = styled.div`
   position: relative;
   display: inline-block;
@@ -66,6 +80,25 @@ const CopyItem = styled.input`
   color: var(--brownish-grey);
   font-size: 9px;
 `;
+const ShowInviteButton = styled.div`
+  width: 100%;
+  color: var(--greenish-teal);
+  font-size: 9px;
+  background: none;
+  border: none;
+  outline: none;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+`;
+const CopyButton = styled.button`
+  color: var(--greenish-teal);
+  background: none;
+  border: none;
+  font-size: 9px;
+`;
+
+/*회의실 참여자 목록 아이템 */
 var item = [
   <div>
     <UserContainer>
@@ -79,26 +112,25 @@ var item = [
   </div>
 ];
 class InviteDialog extends React.Component {
-  //TODO:
-  // videoItem에서의 props에서 state값 중 roomisAppear인지 확인한 후 true일 경우 roomToken가져와서 input value에 setting해줘야 한다.
+  //TODO:videoItem에서의 props에서 state값 중 roomisAppear인지 확인한 후 true일 경우 roomToken가져와서 input value에 setting해줘야 한다.
   constructor() {
     super();
 
     this.state = {
-      displayMenu: false
+      displayMenu: false //펼쳐지지 않은 상태로 초기화한다.
     };
 
     this.showDropdownMenu = this.showDropdownMenu.bind(this);
     this.hideDropdownMenu = this.hideDropdownMenu.bind(this);
   }
-
+  /*버튼 선택 시 현재 회의실 방 링크를 복사할 수 있는 컴포넌트가 추가되어 펼쳐지는데  */
   showDropdownMenu(event) {
     event.preventDefault();
     this.setState({ displayMenu: true }, () => {
       document.addEventListener("click", this.hideDropdownMenu);
     });
   }
-
+  /*사용차 목록/초대 다이얼로그 컴포넌트를 보여주는 함수 */
   hideDropdownMenu() {
     this.setState({ displayMenu: false }, () => {
       document.removeEventListener("click", this.hideDropdownMenu);
@@ -106,17 +138,6 @@ class InviteDialog extends React.Component {
   }
 
   render() {
-    // var copyItem = [
-    //   <Fragment>
-    //     hihi
-    //     <RoomCopyInput id="uniqueRoomId" />
-    //   </Fragment>
-    // ];
-    // const onInvite = () => {
-    //   var copyItem = document.createElement("div");
-    //   copyItem.innerHTML = "<div>hi</div>";
-    //   document.getElementsByClassName("copyRoomId").appendChild(copyItem);
-    // };
     return (
       <InviteContainer>
         <Pointer />
@@ -135,35 +156,13 @@ class InviteDialog extends React.Component {
           <DivideLine />
           {item}
           {item}
-          {item} {item}
-          <div
-            style={{
-              width: "100%",
-              color: "var(--greenish-teal)",
-              fontSize: "9px",
-              background: "none",
-              border: "none",
-              outline: "none",
-              margin: "0px",
-              padding: "0px",
-              textAlign: "center"
-            }}
-          >
-            +초대하기
-          </div>
+          {item}
+          {item}
+          <ShowInviteButton>+초대하기</ShowInviteButton>
           <CopyContainer>
             <CopyItem value="localhost:3000/room/test" />
 
-            <button
-              style={{
-                color: "var(--greenish-teal",
-                background: "none",
-                border: "none",
-                fontSize: "9px"
-              }}
-            >
-              복사
-            </button>
+            <CopyButton>복사</CopyButton>
           </CopyContainer>
         </InviteList>
       </InviteContainer>
