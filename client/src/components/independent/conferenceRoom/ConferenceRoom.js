@@ -1,8 +1,13 @@
+/**
+ * [OUTLINE]
+ * 담당자 : 안지후
+ * 화상회의 메인 홈 화면
+ */
+
 import React, { Component } from "react";
-import { ConferenceRoomDetail } from './ConferenceRoomDetail';
+import { ConferenceRoomDetail } from "./ConferenceRoomDetail";
 
 export class ConferenceRoom extends Component {
-
   render() {
     return (
       <div>

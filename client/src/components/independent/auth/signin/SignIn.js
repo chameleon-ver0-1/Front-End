@@ -1,9 +1,15 @@
+/**
+ * [OUTLINE]
+ * 담당자 : 안지후
+ * 로그인 화면 구성
+ */
+
 import React, { Component } from "react";
 // import styled from 'styled-components'
 import { Link } from "react-router-dom";
 import "./signin.style.css";
-import google from '../../../../assets/signIn/google.png';
-import kakao from '../../../../assets/signIn/kakao.png';
+import google from "../../../../assets/signIn/google.png";
+import kakao from "../../../../assets/signIn/kakao.png";
 
 class SignIn extends Component {
   constructor(props) {
@@ -15,7 +21,7 @@ class SignIn extends Component {
     checked: false
   };
 
-  submitLogin(e) { }
+  submitLogin(e) {}
 
   handleChange = e => {
     const {
