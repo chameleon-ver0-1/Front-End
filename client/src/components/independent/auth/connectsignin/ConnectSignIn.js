@@ -29,7 +29,7 @@ class ConnectSignIn extends Component {
           <img src={chat_profile} className="chat_profile" />
           <div className="add_information">추가 정보를 입력해주세요</div>
 
-          <div className="input-group">
+          <div className="input-group-connect">
             {/* <label className="label" htmlFor="username">영문 이름</label> */}
             <div className="label">영문 이름</div>
 
@@ -41,7 +41,7 @@ class ConnectSignIn extends Component {
             />
           </div>
 
-          <div className="input-group">
+          <div className="input-group-connect">
             {/* <label className="label" htmlFor="company">회사 및 부서</label> */}
             <div className="label">회사 및 부서</div>
             <div className="buttons">
@@ -53,13 +53,13 @@ class ConnectSignIn extends Component {
                   placeholder="회사명"
                 />
 
-                <button className="search">
+                {/* <button className="search">
                   <img
                     src={search}
                     className="search2"
                     onClick={this.onOpenModal}
                   />
-                </button>
+                </button> */}
               </div>
               {/* <Popup open={this.state.open} onCloseModal={this.onCloseModal} /> */}
 
