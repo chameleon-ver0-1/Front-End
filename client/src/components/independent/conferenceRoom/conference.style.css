@@ -1,0 +1,89 @@
+@import '../../../style.css';
+
+.conferenceroom_container{
+  margin-left: 83px;
+  margin-top: 42px;
+  width: 712px;
+  height: 199px;
+  margin-bottom: 150px;
+}
+
+.conferenceroom_text{
+  font-size: 20px;
+}
+
+.add_conference{
+  border-bottom: solid 1px var(--white-two);
+  text-align: right;
+}
+
+.add_conference_btn{
+  font-size: 14px;
+  border: none;
+  background: none;
+  color: var(--greenish-teal);
+  position: right;
+}
+
+.circle_container{
+  display: flex;
+  flex-direction: row;
+  margin-top: 27px;
+  height: 100px;
+  width: 700px;
+}
+
+.slider{
+  width: 700px;
+  height: 200px;
+}
+
+.slide_div{
+  display: flex;
+  flex-direction: row;
+}
+
+.left_right_l{
+  border: none;
+  background: none;
+  width: 16px;
+  height: 33px;
+  /* margin: auto; */
+  text-align: left;
+}
+
+.left_right_r{
+  border: none;
+  background: none;
+  width: 16px;
+  height: 33px;
+  /* margin: auto; */
+  text-align: right;
+}
+
+.left_right_img{
+  width: 16px;
+  height: 33px;
+}
+
+.people{
+  width: 12px;
+  height: 13px;
+}
+
+.circle_hori{
+  display: flex;
+  flex-direction: row;
+  width: 34px;
+  height: 14px;
+  margin-left: 48px;
+  margin-top: 9px;
+}
+
+.circle-box {
+  width: 128px;
+  height: 128px;
+  display: flex;
+  flex-direction: column;
+}
+

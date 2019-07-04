@@ -1,0 +1,27 @@
+@import "../../../style.css";
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+
+  margin-right: 22px;
+  height: 705px;
+  width: 192px;
+  background: #ffff;
+  /* background: red; */
+  border-right: solid 1px var(--white-two);
+}
+
+.link-list {
+  margin-top: 25px;
+  width: 192px;
+  height: 53px;
+  color: #ccc;
+  font-size: 1rem;
+  text-align: center;
+  text-decoration: none;
+}

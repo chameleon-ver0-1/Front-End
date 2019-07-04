@@ -1,0 +1,56 @@
+{
+  "name": "settings",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.19.1",
+    "axios": "^0.18.1",
+    "conversationjs": "^1.0.0",
+    "delay": "^4.2.0",
+    "font-awesome": "^4.7.0",
+    "html2canvas": "^1.0.0-rc.3",
+    "material-ui": "^0.20.2",
+    "natural-drag-animation-rbdnd": "^2.0.1",
+    "optional": "^0.1.4",
+    "prop-types": "^15.7.2",
+    "pure-react-carousel": "^1.19.0",
+    "pusher-js": "^4.4.0",
+    "rc-drawer": "^1.9.8",
+    "react": "^16.8.4",
+    "react-beautiful-dnd": "^10.1.0",
+    "react-dnd": "^7.4.5",
+    "react-dnd-html5-backend": "^7.4.4",
+    "react-dom": "^16.8.4",
+    "react-responsive-modal": "^3.6.0",
+    "react-reveal": "^1.2.2",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.8",
+    "react-speech-recognition": "^2.0.1",
+    "react-spring": "^8.0.20",
+    "react-tag-input": "^6.4.0",
+    "rtcmulticonnection": "^3.6.8",
+    "rtcmulticonnection-server": "^1.3.1",
+    "rtcmulticonnection-v3": "^3.4.5",
+    "simple-peer": "^9.3.0",
+    "skylinkjs": "^0.6.37",
+    "socket.io-client": "^2.2.0",
+    "styled-components": "^4.2.0",
+    "webrtc-screen-capturing": "^1.0.1",
+    "wordcloud": "^1.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

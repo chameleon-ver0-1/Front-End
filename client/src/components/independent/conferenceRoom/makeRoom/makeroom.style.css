@@ -1,0 +1,142 @@
+@import '../../../../style.css';
+
+.makeroomdiv{
+  width: 500px;
+  height: 400px;
+}
+
+.roomtitle{
+  color: var(--light-black);
+  font-size: 20.5px;
+  border-bottom: solid 1px var(--white-two);
+  padding-bottom: 15px;
+  font-weight: bold;
+}
+
+.row-div{
+  margin-top: 23px;
+  display: flex;
+  flex-direction: row;
+}
+
+.roomtitle2{
+  color: var(--light-black);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.roominput{
+  margin-left: 43px;
+  width: 347px;
+  height: 28px;
+  border-radius: 5px;
+  font-size: 12px;
+  border: solid 1px #cccccc;
+}
+
+.row-div2{
+  margin-top: 50px;
+  margin-left: 150px;
+  width: 187px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.linklogin{
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+}
+
+.makebutton{
+  width: 83px;
+  height: 38px;
+  border: solid 1px #cccccc;
+  color: var(--greenish-teal);
+  border-radius: 10px;
+  background: none;
+}
+
+.cancelbutton{
+  width: 83px;
+  height: 38px;
+  border: solid 1px #cccccc;
+  background: none;
+  border-radius: 10px;
+}
+
+/***************Tag css**************/
+
+
+/* Styles for the input */
+div.ReactTags__tagInput {
+  margin-bottom: 7px;
+  /* width: 347px;
+  height: 28px;
+  border-radius: 5px;
+  border: solid 1px #efefef;
+  display: inline-block; */
+}
+div.ReactTags__tagInput input.ReactTags__tagInputField,
+div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
+  margin-left: 23px;
+  height: 28px;
+  margin: 0;
+  font-size: 12px;
+  width: 347px;
+  border: solid 1px #cccccc;
+  border-radius: 5px;
+}
+
+/* Styles for selected tags */
+.tagdiv{
+  margin-left: 23px;
+}
+
+div.ReactTags__selected span.ReactTags__tag {
+  border: 1px solid #ddd;
+  background: #eee;
+  font-size: 12px;
+  /* display: inline-block; */
+  padding: 5px;
+  margin: 0 2px;
+  cursor: move;
+  border-radius: 2px;
+
+}
+
+div.ReactTags__selected a.ReactTags__remove {
+  color: #aaa;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+/* Styles for suggestions */
+div.ReactTags__suggestions {
+  position: absolute;
+  font-size: 12px;
+}
+div.ReactTags__suggestions ul {
+  list-style-type: none;
+  box-shadow: .05em .01em .5em rgba(0,0,0,.2);
+  background: white;
+  width: 200px;
+}
+div.ReactTags__suggestions li {
+  border-bottom: 1px solid #ddd;
+  padding: 5px 10px;
+  margin: 0;
+  font-size: 12px;
+}
+div.ReactTags__suggestions li mark {
+  /* text-decoration: underline; */
+  background: none;
+  font-weight: 500;
+}
+div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
+  background: #b7cfe0;
+  cursor: pointer;
+  font-size: 12px;
+}

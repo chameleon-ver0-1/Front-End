@@ -1,0 +1,10 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.box-container {
+  display: flex;
+  flex-direction: row;
+  /* width: 600px; */
+}

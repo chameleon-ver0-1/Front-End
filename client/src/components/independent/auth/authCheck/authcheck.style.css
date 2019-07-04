@@ -1,0 +1,47 @@
+@import '../../../../style.css';
+
+.authCheck_container{
+  width: 339px;
+  /* background: var(--greenish-teal); */
+  margin-left: 37%;
+  margin-top: 95px;
+}
+
+.authCheck_text{
+  font-size: 29px;
+}
+
+.authCheck_texts_div{
+  margin-top: 49px;
+  text-align: center;
+}
+
+.authCheck_texts{
+  font-size: 14px;
+  color: var(--brownish-grey);
+}
+
+.authCheck_num_div{
+  margin-top: 46px;
+  text-align: center;
+}
+
+.authCheck_num{
+  margin-left: 1px;
+  padding: 2px;
+  width: 60px;
+  height: 76px;
+  border-radius: 20px;
+  border: solid 1px var(--pinkish-grey);
+}
+
+.start_cameleon{
+  margin-top: 57px;
+  text-align: center;
+  width: 330px;
+  height: 41px;
+  border-radius: 18.8px;
+  border: solid 1px var(--greenish-teal);
+  background-color: var(--greenish-teal);
+  color: #ffffff;
+}
