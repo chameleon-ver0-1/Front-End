@@ -116,6 +116,7 @@ export class Issues extends Component {
                   column={column}
                   tasks={tasks}
                   count={column.count}
+                  isTodos={column.isTodo}
                 />
               </div>
             );

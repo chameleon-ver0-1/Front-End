@@ -19,7 +19,7 @@ let ControlBtn = styled.button`
   // display: block;
 `;
 
-let ControlImg = styled.image`
+let ControlImg = styled.img`
   // display: block;
 `;
 
@@ -29,11 +29,9 @@ export class IssueItem extends Component {
   };
 
   editAppear = () => {
-
     console.log(1);
   };
   editDisapear = () => {
-
     console.log(2);
   };
 

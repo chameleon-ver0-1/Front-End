@@ -20,18 +20,21 @@ const initialData = {
       id: "column-1",
       title: "TODO",
       count: 2,
+      isTodo: true,
       taskIds: ["task-1", "task-2", "task-3", "task-4"]
     },
     "column-2": {
       id: "column-2",
       title: "DOING",
       count: 5,
+      isTodo: false,
       taskIds: ["task-5", "task-6", "task-7", "task-8"]
     },
     "column-3": {
       id: "column-3",
       title: "DONE",
       count: 3,
+      isTodo: false,
       // taskIds: ["task-9", "task-10", "task-11", "task-12"]
       taskIds: ["task-9"]
     }
