@@ -18,6 +18,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import "./webrtc.style.css";
 import html2canvas from "html2canvas";
+import axios from "axios";
 
 var connection = new window.RTCMultiConnection();
 connection.autoCloseEntireSession = true;
@@ -283,7 +284,6 @@ export class VideoItem extends Component {
     const capture = () => {
       /*videos-container 캡쳐하기 전 비디오 위에 비디오 캡쳐 이미지 놓기*/
       connection.showImage = document.getElementById("show-image");
-      var transImg = document.getElementById("transImg");
       var canvas = document.createElement("canvas");
       var videos = document.querySelectorAll("video");
 
@@ -314,22 +314,18 @@ export class VideoItem extends Component {
       html2canvas(document.getElementById("videos-container")).then(function(
         canvas
       ) {
-        transImg.value = canvas.toDataURL("image/png");
+        axios
+          .post("/trans_data", {
+            img: canvas.toDataURL("image/png")
+          })
+          .then(response => {
+            console.log(response.data);
+          })
+          .catch(response => {
+            console.log(response);
+          });
 
-        // fetch('http://localhost:5000/trans_data', {
-        //   method: 'post',
-        //   body: JSON.stringify({transImg : canvas.toDataURL("image/png")})
-        // }).then(function(response) {
-        //   //return response.text();
-        //   console.log(response.text());
-
-        // }).then(function(data) {
-        //   console.log(data);
-        // }) .catch(function (error) {
-        //   console.log('Request failed', error);
-        // });
-
-        document.getElementById("form").submit();
+        //document.getElementById("form").submit();
       });
     };
 
@@ -340,15 +336,15 @@ export class VideoItem extends Component {
         capture();
       }, 5000);
 
-      fetch("/happy")
-        .then(response => response.text())
-        .then(text => console.log(text))
-        .catch(err => console.log(err));
+      // axios.get('/happy')
+      //   .then( response => { console.log(response.data); } ) // SUCCESS
+      //   .catch( response => { console.log(response); } ); // ERROR
 
-      fetch("/default")
-        .then(response => response.text())
-        .then(text => console.log(text))
-        .catch(err => console.log(err));
+      // axios.post('/trans_data', {
+      //   name : "한예지"
+      // })
+      // .then( response => { console.log(response.data) } )
+      // .catch( response => { console.log(response) } );
     };
 
     const onStop = () => {
