@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import IssueItem from "../issueItem/IssueItem";
 import IssueAdd from "../issueAdd/IssueAdd";
 import { Droppable } from "react-beautiful-dnd";
+import FreeScrollBar from "react-free-scrollbar";
 import styled from "styled-components";
 const Container = styled.div`
   margin-right: 25px;
   width: 249px;
-  height: 540px;
+  height: 610px;
   display: flex;
   flex-direction: column;
 `;
@@ -27,6 +28,7 @@ export class IssueBox extends Component {
           <p className="issues-title-status">{column.title}</p>
           <p className="issues-title-count">{count}</p>
         </div>
+
         <Droppable droppableId={column.id}>
           {(provided, snapshot) => (
             <ItemList
@@ -35,10 +37,12 @@ export class IssueBox extends Component {
               {...provided.droppableProps}
               isDraggingOver={snapshot.isDraggingOver}
             >
-              {tasks.map((task, index) => (
-                <IssueItem key={task.id} task={task} index={index} />
-              ))}
-              {provided.placeholder}
+              <FreeScrollBar>
+                {tasks.map((task, index) => (
+                  <IssueItem key={task.id} task={task} index={index} />
+                ))}
+                {provided.placeholder}
+              </FreeScrollBar>
             </ItemList>
           )}
         </Droppable>

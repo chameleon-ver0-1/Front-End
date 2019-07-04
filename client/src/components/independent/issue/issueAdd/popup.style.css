@@ -1,0 +1,38 @@
+.popup {
+  width: 368px;
+  height: 244px;
+}
+
+.popup-title {
+  font-size: 16px;
+  margin-top: 37px;
+  margin-left: 147px;
+}
+
+.popup-search {
+  margin-top: 38px;
+  width: 313px;
+  height: 39px;
+  border-radius: 18.8px;
+  border: solid 1px var(--pinkish-grey);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.popup-input {
+  width: 290px;
+  height: 38px;
+  background: none;
+  border: none;
+  font-size: 12px;
+}
+
+.ok-btn {
+  margin-top: 70px;
+  width: 368px;
+  height: 44px;
+  background-color: var(--greenish-teal);
+  border: solid 1px var(--greenish-teal);
+  color: #ffffff;
+  font-size: 16px;
+}
