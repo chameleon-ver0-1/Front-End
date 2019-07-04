@@ -22,6 +22,7 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
+parameters.json
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
