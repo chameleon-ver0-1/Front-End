@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import Popup from "./Popup";
+import AddIssueDialog from "./AddIssueDialog";
 
 const AddBtn = styled.button`
   width: 250px;
@@ -17,34 +17,47 @@ const AddBtn = styled.button`
 
   position: relative;
   top: -40px;
+  outline: none;
 
   // display: ${props => (props.isShow ? "inline" : "none")};
 `;
 
 export class IssueAdd extends Component {
-  state = {
-    open: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      title: "",
+      detail: ""
+    };
+  }
+
   componentDidMount = () => {
     console.log(this.props.isShow);
   };
-  //TODO:
   openDialog = () => {
     this.setState({
       open: true
     });
+  };
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
+  getIssueInfo = (issueTitle, issueDetail) => {
+    this.setState({ title: issueTitle, detail: issueDetail });
   };
 
   render() {
     return (
       <div>
         <AddBtn onClick={this.openDialog}>+ TODO 추가하기</AddBtn>
-        {/* <Popup
+        <div>제목:{this.state.title}</div>
+        <div>내용:{this.state.detail}</div>
+        <AddIssueDialog
           open={this.state.open}
-          title={this.state.title}
-          placeholder={this.state.placeholder}
           onCloseModal={this.onCloseModal}
-        /> */}
+          callbackIssueInfo={this.getIssueInfo}
+        />
       </div>
     );
   }
