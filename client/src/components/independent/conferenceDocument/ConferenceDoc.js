@@ -27,9 +27,18 @@ export class ConferenceDoc extends Component {
     return (
       <div>
         <div className="documentroom_container">
-          <text className="documentroom_text">지난 회의록</text>
+          <div className="documentroom_text">지난 회의록</div>
 
-          <table className="documentroom_table">
+          <div className="documentroom_table">
+            <div className="table_head">
+              <div className="table_head_text">회의제목</div>
+              <div className="table_head_text">회의시간</div>
+              <div className="table_head_text">파일명</div>
+              <div className="table_head_text">보기 및 다운로드</div>
+            </div>
+          </div>
+
+          {/* <table className="documentroom_table">
             <tr className="table_head">
               <th>회의제목</th>
               <th>회의시간</th>
@@ -63,7 +72,7 @@ export class ConferenceDoc extends Component {
                 </tr>
               );
             })}
-          </table>
+          </table> */}
 
           <div className="pagination">
             <button className="page_button">1</button>
