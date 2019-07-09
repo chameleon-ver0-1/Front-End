@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 import Modal from "react-responsive-modal";
+import InitialData from "../testItem-data";
 
 const PopupContainer = styled.div`
   width: 368px;
@@ -50,12 +51,20 @@ const OKBtn = styled.button`
   outline: none;
 `;
 
+var count = 1;
 export default class AddIssueDialog extends Component {
+  /*이슈 추가 다이얼로그에서 설정한 이슈 정보를 상위 컴포넌트로 전달하는 함수*/
   setIssueInfo = () => {
     const issueTitle = document.getElementById("issueTitle").value;
     const issueDetail = document.getElementById("issueDetail").value;
     this.props.callbackIssueInfo(issueTitle, issueDetail);
     console.log("제목:" + issueTitle + "내용:" + issueDetail);
+    InitialData.columns["column-1"].taskIds.push({
+      id: `task-${count}`,
+      contentTitle: issueTitle,
+      content: issueDetail
+    });
+    count++;
   };
   render() {
     const { open, onCloseModal } = this.props;

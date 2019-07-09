@@ -9,6 +9,7 @@
   display: flex;
   background: var(--greenish-teal);
 
+  /* position: fixed; */
   width: 100vw;
   height: 64px;
 
@@ -95,6 +96,7 @@
 
 .nav-container {
   display: flex;
+  /* position: fixed; */
 
   width: 100vw;
   height: 64px;
@@ -143,7 +145,7 @@
   color: var(--brownish-grey);
 }
 
-.dropdown_menu{
+.dropdown_menu {
   background: #f6f6;
   width: 100px;
   height: 100px;
