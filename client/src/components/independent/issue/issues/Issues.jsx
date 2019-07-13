@@ -68,7 +68,7 @@ export class Issues extends Component {
     }
 
     //Moving from one list to another
-
+    // 열 간의 이동을 위함
     const startItemIds = Array.from(start.taskIds);
     startItemIds.splice(source.index, 1);
     const newStart = {
