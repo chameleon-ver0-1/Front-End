@@ -17,14 +17,19 @@ const initialData = {
       nameIds: ["name-1", "name-2", "name-3", "name-4"]
     },
     "role-2": {
-      id: "role-1",
+      id: "role-2",
       title: "디자인팀",
       nameIds: ["name-5"]
     },
     "role-3": {
-      id: "role-1",
+      id: "role-3",
       title: "기획팀",
       nameIds: ["name-6", "name-7", "name-8"]
+    },
+    "role-4": {
+      id: "role-4",
+      title: "재무팀",
+      nameIds: ["name-1", "name-2", "name-3", "name-4"]
     }
   }
 };

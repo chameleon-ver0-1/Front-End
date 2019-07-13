@@ -31,32 +31,38 @@ const DivideLine = styled.div`
 export class UserList extends Component {
   state = { showName: false };
   showTeamMember = () => {
-    this.state.showName = this.state.showName ? false : true;
+    // this.state.showName = this.state.showName ? false : true;
+    // console.log(this.state.showName);
+    console.log("hi");
+  };
+  show = () => {
+    console.log("test if show work");
   };
   render() {
     this.state = InitialData;
     return (
       <div height="100px">
         <DivideLine />
-        {/* <FreeScrollBar> */}
+
         {Object.keys(this.state.data).map(roleId => {
           const role = this.state.data[roleId];
           const names = role.nameIds.map(nameId => this.state.names[nameId]);
 
           return (
             <div>
+              
               <Role>
-                <ArrowButton onClick={this.showTeamMember}>
+                <ArrowButton onClick={this.show}>
                   <img width="7px" height="13px" src={openRole} />
                 </ArrowButton>
 
                 <RoleTitle>{role.title}</RoleTitle>
               </Role>
-              <UserItem className="useritem" names={names} />
+              <UserItem names={names} />
+              {/* <UserItem names={names} show={this.state.showName} /> */}
             </div>
           );
         })}
-        {/* </FreeScrollBar> */}
       </div>
     );
   }

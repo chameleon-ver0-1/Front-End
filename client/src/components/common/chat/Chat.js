@@ -9,6 +9,7 @@ import messageOff from "../../../assets/message/message_chat_off.png";
 
 import Chattings from "./Chattings";
 import Teams from "./Teams";
+import FreeScrollbar from "react-free-scrollbar";
 
 const ChatContainer = styled.div`
   margin-top: 10px;
@@ -79,10 +80,13 @@ export class Chat extends Component {
                   <img width="21px" height="19px" src={messageOff} />
                 </TabItemBtn>
               </TabBox>
-
-              <Teams />
-
+              <div style={{ height: "365px" }}>
+                <FreeScrollbar>
+                  <Teams />
+                </FreeScrollbar>
+              </div>
             </ChatList>
+
             <Chattings />
           </ChatContent>
         </ChatContainer>
