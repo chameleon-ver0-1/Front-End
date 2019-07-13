@@ -7,39 +7,28 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import FreeScrollBar from "react-free-scrollbar";
-// import InitialData from "../testItem-data";
 
 import Modal from "react-responsive-modal";
-import InitialData from "../testItem-data";
+import InitialData from "../comment-data";
 import IssueComment from "../../../../assets/issue/issue_comment.png";
 import CommentProfile from "../../../../assets/home/userProfile_no_shadow.png";
 
 const PopupContainer = styled.div`
-  width: 516px;
-  height: 520px;
+  width: 663px;
+  height: 448px;
   background: white;
   box-shadow: 3 0 7 rgba(0, 0, 0, 0.2);
-  padding-top: 35px;
-  padding-left: 25px;
+  padding-top: 29px;
+  padding-left: 38px;
 `;
 
-const OKBtn = styled.button`
-  margin-top: 10px;
-  width: 368px;
-  height: 44px;
-  background-color: var(--greenish-teal);
-  border: solid 1px var(--greenish-teal);
-  color: #ffffff;
-  font-size: 16px;
-  outline: none;
-`;
 const Reservation = styled.div`
-  font-size: 10px;
+  font-size: 14px;
   color: var(--greenish-teal);
 `;
 const IssueTitle = styled.div`
   color: var(--light-black);
-  font-size: 16px;
+  font-size: 20px;
 `;
 const Line = styled.div`
   width: 2px;
@@ -48,7 +37,7 @@ const Line = styled.div`
   margin-left: 7px;
 `;
 const CreatedBy = styled.div`
-  font-size: 8px;
+  font-size: 12px;
   color: var(--pinkish-grey);
   margin-left: 5px;
 `;
@@ -60,25 +49,30 @@ const Row = styled.div`
 `;
 const DividedLine = styled.div`
   margin-top: 11px;
-  width: 459px;
+  width: 587px;
   height: 2px;
   background: var(--white-five);
 `;
 const IssueContent = styled.div`
-  font-size: 10px;
+  font-size: 14px;
   color: var(--brownish-grey);
-  width: 459px;
+  width: 340px;
   height: auto;
   margin-top: 12px;
 `;
 const ContentButtons = styled.div`
+  width: 244px;
+  height: 63px;
   margin-top: 13px;
   display: flex;
   flex-direction: row;
+  align-content: flex-start;
+  justify-content: flex-end;
 `;
 
 const ContentButton = styled.button`
   width: 42px;
+  height: 16px;
   border: 1px solid var(--pinkish-grey);
   border-radius: 5px;
   font-size: 8px;
@@ -92,9 +86,10 @@ const ContentButton = styled.button`
 `;
 const StatusBadge = styled.button`
   width: 42px;
+  height: 16px;
   border: 1px solid var(--greenish-teal);
   border-radius: 5px;
-  font-size: 8px;
+  font-size: 10px;
   color: var(--greenish-teal);
 
   display: flex;
@@ -104,30 +99,31 @@ const StatusBadge = styled.button`
 
 const CommentPanel = styled.div`
   background: var(--white-three);
-  width: 459px;
-  height: 186px;
+  width: 573px;
+  height: 229px;
   margin-top: 8px;
-  padding-top: 12px;
+  padding-top: 17px;
+  padding-left: 14px;
 `;
 
 const SDividedLine = styled.div`
   margin-top: 11px;
-  width: 439px;
+  width: 555px;
   height: 2px;
   background: var(--white-five);
 `;
 
 const CommentInput = styled.input`
-  width: auto;
+  width: 471px;
   height: 29px;
   background: none;
   border: none;
-  font-size: 8px;
+  font-size: 10px;
   outline: none;
 `;
 const CommentInputBorder = styled.div`
-  width: 367px;
-  height: 29px;
+  width: 471px;
+  height: 40px;
   border: solid 1px var(--white-five);
   margin-left: 4px;
   padding-left: 10px;
@@ -144,12 +140,20 @@ const RowWithMargin = styled.div`
 `;
 const CommentUpdateBtn = styled.button`
   width: 36px;
-  height: 29px;
+  height: 40px;
   background: white;
   border: 1px solid var(--white-five);
   color: var(--brownish-grey);
   margin-left: 2px;
-  font-size: 8px;
+  font-size: 10px;
+`;
+const Name = styled.div`
+  font-size: 12px;
+  color: var(--light-black);
+`;
+const CommentContent = styled.div`
+  font-size: 10px;
+  color: var(--brownish-grey);
 `;
 export default class AddIssueDialog extends Component {
   state = InitialData;
@@ -166,41 +170,22 @@ export default class AddIssueDialog extends Component {
             <CreatedBy>권주희</CreatedBy>
           </Row>
           <DividedLine />
-          <IssueContent>
-            3월 13일 오후 1시 진행될 회의와 관련한 참고자료 입니다. 파일
-            다운로드후, 회의 전까지 정독바랍니다. 확인 하신 분들은 댓글
-            달아주세요.
-          </IssueContent>
-          <ContentButtons>
-            <ContentButton>참여자</ContentButton>
-            <ContentButton>첨부파일</ContentButton>
-            <ContentButton>회의실</ContentButton>
-            <StatusBadge>Done</StatusBadge>
-          </ContentButtons>
+          <Row>
+            <IssueContent>
+              3월 13일 오후 1시 진행될 회의와 관련한 참고자료 입니다. 파일
+              다운로드후, 회의 전까지 정독바랍니다. 확인 하신 분들은 댓글
+              달아주세요.
+            </IssueContent>
+            <ContentButtons>
+              <ContentButton>참여자</ContentButton>
+              <ContentButton>첨부파일</ContentButton>
+              <ContentButton>회의실</ContentButton>
+              <StatusBadge>Done</StatusBadge>
+            </ContentButtons>
+          </Row>
+
           <DividedLine />
           <div className="comment">
-            <RowWithMargin>
-              <img src={IssueComment} width="14px" height="12px" />
-              <div
-                style={{
-                  fontSize: "10px",
-                  color: "var(--brownish-grey)",
-                  marginLeft: "4px"
-                }}
-              >
-                의견 남기기
-              </div>
-              <div
-                style={{
-                  fontSize: "10px",
-                  color: "var(--pinkish-grey)",
-                  marinLeft: "8px"
-                }}
-              >
-                4
-              </div>
-            </RowWithMargin>
-
             <CommentPanel>
               <Row>
                 <img
@@ -220,36 +205,37 @@ export default class AddIssueDialog extends Component {
                 <CommentUpdateBtn>등록</CommentUpdateBtn>
               </Row>
 
-              <SDividedLine />
-
               {/* <CommentItems>
                 <img />
                 <CommentItem />
               </CommentItems> */}
               <FreeScrollBar>
-                {/* {Object.keys(this.state.columns).map(columnId => {
-                  const column = this.state.columns[columnId];
-                  const tasks = column.taskIds.map(
-                    taskId => this.state.tasks[taskId]
-                  );
+                {Object.keys(this.state.data).map(commentIds => {
+                  const comment = this.state.data[commentIds];
 
                   return (
-                    <div className="issues-3">
-                      <IssueBox
-                        key={column.id}
-                        column={column}
-                        tasks={tasks}
-                        count={column.count}
-                        isTodos={column.isTodo}
-                      />
+                    <div>
+                      <SDividedLine />
+                      <div>
+                        <Row>
+                          <img
+                            src={CommentProfile}
+                            width="31px"
+                            height="30px"
+                            style={{ marginTop: "10px" }}
+                          />
+                          <div style={{ marginLeft: "7px", marginTop: "15px" }}>
+                            <Name>{comment.name}</Name>
+                            <CommentContent>{comment.content}</CommentContent>
+                          </div>
+                        </Row>
+                      </div>
                     </div>
                   );
-                })} */}
+                })}
               </FreeScrollBar>
             </CommentPanel>
           </div>
-
-          <OKBtn onClick={onCloseModal}>확인</OKBtn>
         </PopupContainer>
       </Modal>
     );
