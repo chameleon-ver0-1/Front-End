@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import userInfo from "../../../assets/message/message_info.png";
 import userMessage from "../../../assets/message/message_chat.png";
-
+const UserItemContainer = styled.div`
+  // display: ${props => (props.show ? "inline" : "none")};
+`;
 const Dot = styled.div`
   width: 5px;
   height: 5px;
@@ -56,7 +58,7 @@ export class UserItem extends Component {
     return (
       <React.Fragment>
         {names.map(name => (
-          <div>
+          <UserItemContainer>
             <UserRow>
               <UserBox>
                 <Dot />
@@ -72,7 +74,7 @@ export class UserItem extends Component {
               </ButtonBox>
             </UserRow>
             <DivideLine />
-          </div>
+          </UserItemContainer>
         ))}
       </React.Fragment>
     );
