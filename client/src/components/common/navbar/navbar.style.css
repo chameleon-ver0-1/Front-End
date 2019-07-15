@@ -143,6 +143,8 @@
   border-radius: 16.5px;
 
   color: var(--brownish-grey);
+
+  font-size: 13.5px;
 }
 
 .dropdown_menu {
