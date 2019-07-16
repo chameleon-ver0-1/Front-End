@@ -12,6 +12,7 @@ import styled from "styled-components";
 import GoogleLogin from "react-google-login";
 import google from "../../../../assets/signIn/google.png";
 import kakao from "../../../../assets/signIn/kakao.png";
+import axios from "axios";
 
 const SignInContainer = styled.div`
   margin: 60px auto;
@@ -128,12 +129,16 @@ const LoginLinkContainer = styled.div`
 class SignIn extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      error: false,
+      checked: false
+    };
   }
-
-  state = {
-    checked: false
-  };
+  componentDidCatch(error, info) {
+    this.setState({
+      error: true
+    });
+  }
 
   submitLogin(e) {}
 
@@ -146,8 +151,29 @@ class SignIn extends Component {
   responseGoogle = response => {
     console.log(response);
   };
-
+  componentDidMout = () => {
+    // 외부 라이브러리 연동: D3, masonry, etc
+    // 컴포넌트에서 필요한 데이터 요청: Ajax, GraphQL, etc
+    // DOM 에 관련된 작업: 스크롤 설정, 크기 읽어오기 등
+    /*이 API 는 여러분의 컴포넌트가 화면에 나타나게 됐을 때 호출됩니다.
+  여기선 주로 D3, masonry 처럼 DOM 을 사용해야하는 외부 라이브러리 연동을 하거나,
+  해당 컴포넌트에서 필요로하는 데이터를 요청하기 위해 axios, fetch 등을 통하여 ajax 요청을 하거나,
+   DOM 의 속성을 읽거나 직접 변경하는 작업을 진행합니다.*/
+  };
+  componentWillReceiveProps = () => {
+    /*이 API 는 컴포넌트가 새로운 props 를 받게됐을 때 호출됩니다.
+    이 안에서는 주로, state 가 props 에 따라 변해야 하는 로직을 작성합니다.
+    새로 받게될 props 는 nextProps 로 조회 할 수 있으며,
+    이 때 this.props 를 조회하면 업데이트 되기 전의 API 이니 참고하세요.*/
+  };
+  componentWillUpdate = () => {
+    /*이 API는 shouldComponentUpdate 에서 true 를 반환했을때만 호출됩니다.
+    만약에 false 를 반환했었다면 이 함수는 호출되지 않습니다.
+    여기선 주로 애니메이션 효과를 초기화하거나, 이벤트 리스너를 없애는 작업을 합니다.
+    이 함수가 호출되고난 다음에는, render() 가 호출됩니다.*/
+  };
   render() {
+    if (this.state.error) return <h1>에러발생!</h1>;
     return (
       <SignInContainer>
         <LoginContainer>
