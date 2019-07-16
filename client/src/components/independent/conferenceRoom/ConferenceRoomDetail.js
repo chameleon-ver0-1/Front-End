@@ -78,7 +78,7 @@ export class ConferenceRoomDetail extends Component {
   render() {
     return (
       <div className="conferenceroom_container">
-        <text className="conferenceroom_text">{this.props.title}</text>
+        <div className="conferenceroom_text">{this.props.title}</div>
 
         <div className="add_conference">
           <button className="add_conference_btn" onClick={this.onOpenModal}>
