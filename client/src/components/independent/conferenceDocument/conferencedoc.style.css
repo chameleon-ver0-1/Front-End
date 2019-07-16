@@ -1,6 +1,6 @@
-@import '../../../style.css';
+@import "../../../style.css";
 
-.documentroom_container{
+.documentroom_container {
   width: 711px;
   height: 600px;
   /* 457+21+19 */
@@ -10,39 +10,50 @@
   margin-top: 42px;
 }
 
-.documentroom.text{
+.documentroom.text {
   font-size: 20px;
 }
 
-.documentroom_table{
+.documentroom_table {
   width: 711px;
   height: 457px;
-  border-collapse: collapse;
   margin-bottom: 17px;
   margin-top: 21px;
+  border: #000000;
 }
 
-.table_head{
+.table_head {
+  width: 711px;
+  height: 37px;
   background: #f6f6f6;
+  border-top: 1px solid var(--white-two);
   border-bottom: 1px solid var(--white-two);
-  font-size: 14px;
   color: var(--brownish-grey);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
-th,td{
+.table_head_text {
+  font-size: 14px;
+  margin-top: 9px;
+}
+
+th,
+td {
   border-bottom: 1px solid var(--white-two);
   font-size: 14px;
   text-align: center;
 }
 
-.todetail{
+.todetail {
   font-size: 14px;
   text-align: center;
   border: none;
   background: none;
 }
 
-.doc_button{
+.doc_button {
   flex-direction: row;
   margin-right: 15px;
   height: 21px;
@@ -50,7 +61,7 @@ th,td{
   background: none;
 }
 
-.doc_buttonimg{
+.doc_buttonimg {
   height: 21px;
   border: none;
   background: none;
@@ -60,7 +71,7 @@ th,td{
   background-color: #f6f6f6;
 } */
 
-.par_btn{
+.par_btn {
   width: 62px;
   height: 26px;
   color: #ffffff;
@@ -70,7 +81,7 @@ th,td{
   font-size: 12.5px;
 }
 
-.pagination{
+.pagination {
   margin: auto;
   width: 120px;
   height: 11px;
@@ -78,37 +89,37 @@ th,td{
   justify-content: space-between;
 }
 
-.page_button{
+.page_button {
   font-size: 10px;
   color: var(--brownish-grey);
   background: none;
   border: none;
 }
 
-.conference_search{
+.conference_search {
   margin-left: 210px;
   margin-top: 16px;
   margin-bottom: 21px;
 }
 
-.search_select{
+.search_select {
   width: 70px;
   height: 27px;
   font-size: 10px;
 }
 
-.search_option{
+.search_option {
   font-size: 10px;
 }
 
-.search_input{
+.search_input {
   margin-left: 2px;
   width: 180px;
   height: 24px;
   font-size: 10px;
 }
 
-.search_button{
+.search_button {
   margin-left: 2px;
   font-size: 10px;
   width: 36px;
