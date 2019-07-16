@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
-import axios from "axios";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "../node_modules/font-awesome/css/font-awesome.min.css";
 
 //MARKUP: add component down here jihu
@@ -22,6 +21,8 @@ import {
 } from "./components/independent";
 
 import { Navbar, Menu, Chat } from "./components/common";
+
+import PostTest from "../src/services/postTest";
 
 class App extends Component {
   componentDidMount() {}
@@ -58,6 +59,8 @@ class App extends Component {
                 path="/home/conferenceDocumentDetail"
                 component={ConferenceDocumentDetail}
               />
+              <Route path="/postTest" component={PostTest} />
+
               <Chat />
             </div>
           </div>
