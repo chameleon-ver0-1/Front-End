@@ -1,6 +1,65 @@
 import React, { Component } from "react";
-import "./chat.style.css";
+
+import styled from "styled-components";
 import closedBtn from "../../../assets/message/closed_btn@3x.png";
+import userOn from "../../../assets/message/message_friend_on.png";
+import userOff from "../../../assets/message/message_friend_off.png";
+import messageOn from "../../../assets/message/message_chat_on.png";
+import messageOff from "../../../assets/message/message_chat_off.png";
+
+import Chattings from "./Chattings";
+import Teams from "./Teams";
+import FreeScrollbar from "react-free-scrollbar";
+
+const ChatContainer = styled.div`
+  margin-top: 10px;
+
+  height: 100%;
+  width: 500px;
+
+  display: flex;
+  justify-content: flex-end;
+`;
+const ChatContent = styled.div`
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+`;
+const ChatList = styled.div`
+  --box-main-color: rgba(0, 0, 0, 0.2);
+  --box-shadow-h-offset: 0.8px;
+  --box-shadow-v-offset: 0.6px;
+  --box-shadow-blur: 7px;
+  width: 286px;
+  height: 445px;
+
+  box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
+    var(--box-shadow-blur) var(--box-main-color);
+`;
+const ChatHeader = styled.div`
+  padding-top: 10px;
+  padding-left: 12px;
+  height: 34px;
+  background: var(--white-four);
+
+  color: var(--greenish-teal);
+  font-size: 0.7rem;
+
+  display: flex;
+  flex-direction: row;
+`;
+
+const TabBox = styled.div`
+  display: flex;
+`;
+const TabItemBtn = styled.button`
+  border: 1px solid var(--white-five);
+  background: white;
+  width: 35px;
+  height: 35px;
+  online: none;
+`;
+
 export class Chat extends Component {
   render() {
     if (
@@ -9,23 +68,28 @@ export class Chat extends Component {
       window.location.pathname === "/home/conferenceDocument"
     ) {
       return (
-        <div className="chat-container">
-          <div className="chat-content-container">
-            <div className="chat-list-container">
-              <div className="chat-header">
-                메신저
-                <div className="chat-header-btn">
-                  {/* <button className="chat-closed">
-                  <img className="chat-closeBtn" src={closedBtn} />
-                </button> */}
-                </div>
+        <ChatContainer>
+          <ChatContent>
+            <ChatList>
+              <ChatHeader>메신저</ChatHeader>
+              <TabBox>
+                <TabItemBtn>
+                  <img width="17px" height="19px" src={userOn} />
+                </TabItemBtn>
+                <TabItemBtn>
+                  <img width="21px" height="19px" src={messageOff} />
+                </TabItemBtn>
+              </TabBox>
+              <div style={{ height: "365px" }}>
+                <FreeScrollbar>
+                  <Teams />
+                </FreeScrollbar>
               </div>
-            </div>
-            <div className="chat-message-container">
-              <div className="chat-header">이름 Cho yoon young</div>
-            </div>
-          </div>
-        </div>
+            </ChatList>
+
+            <Chattings />
+          </ChatContent>
+        </ChatContainer>
       );
     } else {
       return <div />;

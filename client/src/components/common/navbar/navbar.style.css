@@ -9,6 +9,7 @@
   display: flex;
   background: var(--greenish-teal);
 
+  /* position: fixed; */
   width: 100vw;
   height: 64px;
 
@@ -95,6 +96,7 @@
 
 .nav-container {
   display: flex;
+  /* position: fixed; */
 
   width: 100vw;
   height: 64px;
@@ -141,9 +143,11 @@
   border-radius: 16.5px;
 
   color: var(--brownish-grey);
+
+  font-size: 13.5px;
 }
 
-.dropdown_menu{
+.dropdown_menu {
   background: #f6f6;
   width: 100px;
   height: 100px;
