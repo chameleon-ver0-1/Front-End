@@ -9,6 +9,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./signin.style.css";
 import styled from "styled-components";
+import GoogleLogin from "react-google-login";
 import google from "../../../../assets/signIn/google.png";
 import kakao from "../../../../assets/signIn/kakao.png";
 
@@ -142,6 +143,9 @@ class SignIn extends Component {
     } = e;
     this.setState({ checked });
   };
+  responseGoogle = response => {
+    console.log(response);
+  };
 
   render() {
     return (
@@ -195,13 +199,22 @@ class SignIn extends Component {
           </LoginLinkContainer>
 
           <Buttons>
-            <ImgBtnContainer className="img_button">
-              <Img src={google} />
+            <GoogleLogin
+              clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+              render={renderProps => (
+                <ImgBtnContainer>
+                  <Img src={google} />
 
-              <OtherLoginBtn onClick={this.submitLogin.bind(this)}>
-                Google 로그인
-              </OtherLoginBtn>
-            </ImgBtnContainer>
+                  <OtherLoginBtn onClick={this.submitLogin.bind(this)}>
+                    Google 로그인
+                  </OtherLoginBtn>
+                </ImgBtnContainer>
+              )}
+              buttonText="Login"
+              onSuccess={this.responseGoogle}
+              onFailure={this.responseGoogle}
+              cookiePolicy={"single_host_origin"}
+            />
 
             <ImgBtnContainer>
               <Img src={kakao} />
