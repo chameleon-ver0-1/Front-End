@@ -2,8 +2,8 @@
  * [OUTLINE]
  * 담당자 : 안지후
  * 로그인 화면 구성
+ * 수정 : 조윤영 - 현재 Googlye 및 KaKao 연동 Login은 서버상 도메인에서만 가능함.
  */
-
 import React, { Component } from "react";
 // import styled from 'styled-components'
 import { Link } from "react-router-dom";
@@ -12,7 +12,15 @@ import styled from "styled-components";
 import GoogleLogin from "react-google-login";
 import google from "../../../../assets/signIn/google.png";
 import kakao from "../../../../assets/signIn/kakao.png";
-import axios from "axios";
+import KakaoLogin from "react-kakao-login";
+import { connect } from "react-redux";
+import { login } from "../../../../helpers/SignInHelpers";
+import PropTypes from "prop-types";
+import * as service from "../../../../helpers/SignInHelpers";
+
+const GoogleKey =
+  "419409692345-cjddji3koajma5occofknl50cl27scie.apps.googleusercontent.com";
+const KaKaoKey = "e5e36f8b6e47e733a86feb3afb06e56c";
 
 const SignInContainer = styled.div`
   margin: 60px auto;
@@ -90,7 +98,7 @@ const Img = styled.img`
 const OtherLoginBtn = styled.button`
   background: none;
   border: none;
-  online: none;
+  outline: none;
   height: 40px;
   margin-left: 13px;
   font-size: 14px;
@@ -98,7 +106,7 @@ const OtherLoginBtn = styled.button`
 const ForgetBtn = styled.button`
   margin: auto;
   border: none;
-  online: none;
+  outline: none;
   background: none;
   color: var(--brownish-grey);
   margin-top: 29px;
@@ -125,6 +133,21 @@ const LoginLinkContainer = styled.div`
   margin-top: 28px;
   margin-bottom: 10px;
 `;
+const OriginLoginBtn = styled.button`
+  font-size: 16px;
+
+  color: white;
+  background: none;
+  border: none;
+  outline: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 314px;
+  height: px;
+`;
 
 class SignIn extends Component {
   constructor(props) {
@@ -132,10 +155,11 @@ class SignIn extends Component {
     this.state = {
       error: false,
       checked: false,
-
       id: "",
       name: "",
-      provider: ""
+      provider: "",
+      email: "",
+      password: ""
     };
   }
   componentDidCatch(error, info) {
@@ -152,13 +176,51 @@ class SignIn extends Component {
     } = e;
     this.setState({ checked });
   };
-  responseGoogle = response => {
+
+  /*Google 로그인 함수 */
+  responseGoogle = res => {
     /*Google로그인 성공할 경우 */
-    console.log(response);
+    this.setState({
+      id: res.googleId,
+      email: res.profileObj.email,
+      name: res.profileObj.name,
+      provider: "google"
+    });
+    console.log(res);
   };
   responseFail = err => {
     /*Login Fail*/
     console.error(err);
+  };
+
+  /*Kakao 로그인 함수 */
+  success = response => {
+    /*Kakao 로그인 성공할 경우 */
+    console.log(response);
+  };
+
+  failure = error => {
+    /*Kakao 로그인 실패할 경우 */
+    console.log(error);
+  };
+
+  /*일반 로그인 함수 */
+  originLogin = e => {
+    console.log("일반 로그인 선택");
+    service
+      .login(this.state.email, this.state.password)
+      .then(
+        res => this.context.router.push("/"),
+        err => console.log("로그인에 오류가 생겼습니다.")
+      );
+    // axios.post("/auth/signin", {
+    //     email: this.state.email,
+    //     password: this.state.password
+    //   })
+    //   .then(res => {
+    //     localStorage.setItem("cool-jwt", res.data);
+    //     this.props.history.push("/Protected");
+    //   });
   };
 
   componentDidMout = () => {
@@ -182,7 +244,15 @@ class SignIn extends Component {
     여기선 주로 애니메이션 효과를 초기화하거나, 이벤트 리스너를 없애는 작업을 합니다.
     이 함수가 호출되고난 다음에는, render() 가 호출됩니다.*/
   };
+
+  change = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
   render() {
+    const { id, name, email, password } = this.state;
+
     if (this.state.error) return <h1>에러발생!</h1>;
     return (
       <SignInContainer>
@@ -195,6 +265,7 @@ class SignIn extends Component {
                 type="text"
                 name="username"
                 placeholder="이메일 형식의 아이디를 입력해주세요"
+                onChange={this.change}
               />
             </InputBorder>
           </InputGroup>
@@ -206,6 +277,7 @@ class SignIn extends Component {
                 type="password"
                 name="password"
                 placeholder="비밀번호를 입력해주세요"
+                onChange={this.change}
               />
             </InputBorder>
           </InputGroup>
@@ -229,36 +301,48 @@ class SignIn extends Component {
           </Checks>
 
           <LoginLinkContainer>
-            <Link to="/home/issue" className="link-login">
-              로그인
-            </Link>
+            <OriginLoginBtn onClick={this.originLogin}>로그인</OriginLoginBtn>
           </LoginLinkContainer>
 
           <Buttons>
             <GoogleLogin
-              clientId="419409692345-cjddji3koajma5occofknl50cl27scie.apps.googleusercontent.com"
+              clientId={GoogleKey}
+              onSuccess={this.responseGoogle}
+              onFailure={this.responseGoogle}
+              cookiePolicy={"single_host_origin"}
               render={renderProps => (
                 <ImgBtnContainer>
                   <Img src={google} />
 
-                  <OtherLoginBtn onClick={this.submitLogin.bind(this)}>
+                  <OtherLoginBtn
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                  >
                     Google 로그인
                   </OtherLoginBtn>
                 </ImgBtnContainer>
               )}
-              buttonText="Login"
-              onSuccess={this.responseGoogle}
-              onFailure={this.responseGoogle}
-              cookiePolicy={"single_host_origin"}
             />
 
-            <ImgBtnContainer>
-              <Img src={kakao} />
+            <KakaoLogin
+              jsKey={KaKaoKey}
+              onSuccess={this.success}
+              onFailure={this.failure}
+              render={props => (
+                <ImgBtnContainer>
+                  <Img src={kakao} />
 
-              <OtherLoginBtn onClick={this.submitLogin.bind(this)}>
-                카카오 로그인
-              </OtherLoginBtn>
-            </ImgBtnContainer>
+                  <OtherLoginBtn
+                    onClick={e => {
+                      e.preventDefault();
+                      props.onClick();
+                    }}
+                  >
+                    카카오 로그인
+                  </OtherLoginBtn>
+                </ImgBtnContainer>
+              )}
+            />
           </Buttons>
 
           <ForgetBtn onClick={this.submitLogin.bind(this)}>
