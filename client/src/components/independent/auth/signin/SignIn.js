@@ -131,7 +131,11 @@ class SignIn extends Component {
     super(props);
     this.state = {
       error: false,
-      checked: false
+      checked: false,
+
+      id: "",
+      name: "",
+      provider: ""
     };
   }
   componentDidCatch(error, info) {
@@ -149,8 +153,14 @@ class SignIn extends Component {
     this.setState({ checked });
   };
   responseGoogle = response => {
+    /*Google로그인 성공할 경우 */
     console.log(response);
   };
+  responseFail = err => {
+    /*Login Fail*/
+    console.error(err);
+  };
+
   componentDidMout = () => {
     // 외부 라이브러리 연동: D3, masonry, etc
     // 컴포넌트에서 필요한 데이터 요청: Ajax, GraphQL, etc
@@ -226,7 +236,7 @@ class SignIn extends Component {
 
           <Buttons>
             <GoogleLogin
-              clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+              clientId="419409692345-cjddji3koajma5occofknl50cl27scie.apps.googleusercontent.com"
               render={renderProps => (
                 <ImgBtnContainer>
                   <Img src={google} />
