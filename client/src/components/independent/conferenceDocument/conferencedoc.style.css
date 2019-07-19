@@ -71,10 +71,46 @@ td {
   background-color: #f6f6f6;
 } */
 
-.post-list-item {
-  list-style: none;
+.post-ul {
+  list-style-type: none;
+  border: none;
+}
+
+.post-li {
+  list-style-type: none;
+  float: none;
+  width: 711px;
+  height: 30px;
+}
+
+.post-row-list {
+  list-style-type: none;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.post-row-list-item {
+  list-style-type: none;
   padding-left: 0px;
   font-size: 14px;
+  float: left;
+  border: none;
+}
+
+.post-row-list-item-btn {
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: none;
+}
+
+.post-row-list-item-img {
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: none;
 }
 
 a {
@@ -92,12 +128,13 @@ a {
 }
 
 .page-div {
-  margin-top: 30px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
 }
 
 .pagination {
+  border: none;
   width: 142px;
   height: 13px;
   display: flex;
@@ -105,6 +142,7 @@ a {
 }
 
 .page-item {
+  border: none;
   list-style: none;
   padding-left: 0px;
   font-size: 14px;
@@ -119,7 +157,7 @@ a {
 
 .conference_search {
   margin-left: 210px;
-  margin-top: 30px;
+  margin-top: 50px;
   margin-bottom: 21px;
 }
 

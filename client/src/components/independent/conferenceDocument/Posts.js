@@ -1,18 +1,49 @@
 import React, { Component } from "react";
+import DocData from "./data/doc.json";
+import download_off from "../../../assets/doc/download_off.png";
+import { Link } from "react-router-dom";
 
 const Posts = ({ posts, loading }) => {
-  if (loading) {
-    return <h4>Loading...</h4>;
-  }
+  // if (loading) {
+  //   return <h4>Loading...</h4>;
+  // }
 
   return (
-    <ul className="post-list">
-      {posts.map(post => (
-        <li key={post.id} className="post-list-item">
-          {post.title}
-        </li>
-      ))}
-    </ul>
+    <div>
+      {/* {posts.map(post => (
+            <li key={post.id} className="post-row-list-item">
+              {post.title}
+            </li>
+          ))} */}
+      {DocData.map((docDetail, index) => {
+        return (
+          <ul className="post-ul">
+            <li className="post-li">
+              <ul className="post-row-list">
+                <li className="post-row-list-item">
+                  <Link
+                    to="/home/conferenceDocumentDetail"
+                    className="linkdocumentdetail"
+                  >
+                    <button className="todetail">{docDetail.title}</button>
+                  </Link>
+                </li>
+                <li className="post-row-list-item">{docDetail.date}</li>
+                <li className="post-row-list-item">태그태그태그</li>
+                <li className="post-row-list-item">
+                  <button className="post-row-list-item-btn">
+                    <img
+                      src={download_off}
+                      className="post-row-list-item-img"
+                    />
+                  </button>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        );
+      })}
+    </div>
   );
 };
 
