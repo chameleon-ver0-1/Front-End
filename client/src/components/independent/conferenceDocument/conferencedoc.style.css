@@ -35,8 +35,8 @@
 }
 
 .table_head_text {
-  font-size: 14px;
-  margin-top: 9px;
+  font-size: 16px;
+  margin-top: 7px;
 }
 
 th,
@@ -71,6 +71,16 @@ td {
   background-color: #f6f6f6;
 } */
 
+.post-list-item {
+  list-style: none;
+  padding-left: 0px;
+  font-size: 14px;
+}
+
+a {
+  font-size: 14px;
+}
+
 .par_btn {
   width: 62px;
   height: 26px;
@@ -81,12 +91,23 @@ td {
   font-size: 12.5px;
 }
 
+.page-div {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
 .pagination {
-  margin: auto;
-  width: 120px;
-  height: 11px;
+  width: 142px;
+  height: 13px;
   display: flex;
   justify-content: space-between;
+}
+
+.page-item {
+  list-style: none;
+  padding-left: 0px;
+  font-size: 14px;
 }
 
 .page_button {

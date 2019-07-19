@@ -4,7 +4,7 @@
  * 회의록 첫 화면 구성
  */
 
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import "./conferencedoc.style.css";
 import doc_off from "../../../assets/doc/doc_off.png";
 import doc_on from "../../../assets/doc/doc_on.png";
@@ -12,6 +12,8 @@ import download_off from "../../../assets/doc/download_off.png";
 import download_on from "../../../assets/doc/download_on.png";
 import { Link } from "react-router-dom";
 import DocData from "./data/doc.json";
+import axios from "axios";
+import ConferencePosts from "./ConferencePosts";
 
 export class ConferenceDoc extends Component {
   constructor(props) {
@@ -33,9 +35,11 @@ export class ConferenceDoc extends Component {
             <div className="table_head">
               <div className="table_head_text">회의제목</div>
               <div className="table_head_text">회의시간</div>
-              <div className="table_head_text">파일명</div>
-              <div className="table_head_text">보기 및 다운로드</div>
+              <div className="table_head_text">메인토픽</div>
+              <div className="table_head_text">다운로드</div>
             </div>
+
+            <ConferencePosts />
           </div>
 
           {/* <table className="documentroom_table">
@@ -74,14 +78,13 @@ export class ConferenceDoc extends Component {
             })}
           </table> */}
 
-          <div className="pagination">
+          {/* <div className="pagination">
             <button className="page_button">1</button>
             <button className="page_button">2</button>
             <button className="page_button">3</button>
             <button className="page_button">4</button>
             <button className="page_button">5</button>
-            {/* activestyle? */}
-          </div>
+          </div> */}
 
           <div className="conference_search">
             <select className="search_select">
