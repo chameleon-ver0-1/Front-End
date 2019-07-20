@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DocData from "./data/doc.json";
 import download_off from "../../../assets/doc/download_off.png";
 import { Link } from "react-router-dom";
+import DocumentTag from "./DocumentTag";
 
 const Posts = ({ posts, loading }) => {
   // if (loading) {
@@ -16,6 +17,7 @@ const Posts = ({ posts, loading }) => {
             </li>
           ))} */}
       {DocData.map((docDetail, index) => {
+        //TODO: 어디있는지 모르는 li padding 값 없애기
         return (
           <ul className="post-ul">
             <li className="post-li">
@@ -29,7 +31,9 @@ const Posts = ({ posts, loading }) => {
                   </Link>
                 </li>
                 <li className="post-row-list-item">{docDetail.date}</li>
-                <li className="post-row-list-item">태그태그태그</li>
+                <li className="post-row-list-item">
+                  <DocumentTag />
+                </li>
                 <li className="post-row-list-item">
                   <button className="post-row-list-item-btn">
                     <img

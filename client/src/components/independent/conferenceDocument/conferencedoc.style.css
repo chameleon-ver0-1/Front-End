@@ -39,30 +39,9 @@
   margin-top: 7px;
 }
 
-th,
-td {
-  border-bottom: 1px solid var(--white-two);
-  font-size: 14px;
-  text-align: center;
-}
-
 .todetail {
   font-size: 14px;
   text-align: center;
-  border: none;
-  background: none;
-}
-
-.doc_button {
-  flex-direction: row;
-  margin-right: 15px;
-  height: 21px;
-  border: none;
-  background: none;
-}
-
-.doc_buttonimg {
-  height: 21px;
   border: none;
   background: none;
 }
@@ -97,6 +76,10 @@ td {
   font-size: 14px;
   float: left;
   border: none;
+}
+
+.tags {
+  margin-bottom: 10px;
 }
 
 .post-row-list-item-btn {
