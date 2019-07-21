@@ -60,6 +60,8 @@
   float: none;
   width: 711px;
   height: 30px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .post-row-list {
@@ -73,13 +75,16 @@
 .post-row-list-item {
   list-style-type: none;
   padding-left: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin: auto;
   font-size: 14px;
   float: left;
   border: none;
 }
 
 .tags {
-  margin-bottom: 10px;
+  padding-top: 0px;
 }
 
 .post-row-list-item-btn {

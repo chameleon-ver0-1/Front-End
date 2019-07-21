@@ -61,7 +61,7 @@ class ConnectSignIn extends Component {
             </div>
           </div>
 
-          <Link to="/signin">
+          <Link to="/auth/signIn">
             <button className="join-btn">가입하기</button>
           </Link>
         </div>
