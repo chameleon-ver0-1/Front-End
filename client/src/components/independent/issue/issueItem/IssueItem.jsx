@@ -14,26 +14,22 @@ import styled from "styled-components";
 const Container = styled.div`
   border: ${props =>
     props.isDragging ? " solid 1px var(--greenish-teal) " : "none"};
-  // background: ${props =>
-    props.isDragging ? " #C1F2E2" : "var(--light-sage)"};
+
+  padding-top: 16px;
+  padding-left: 15px;
+  height: 73px;
+  width: 218px;
+  
 `;
 
-let ControlBtn = styled.button`
-  // display: block;
-`;
-
-let ControlImg = styled.img`
-  // display: block;
-`;
 const IssueTitle = styled.button`
   width: auto;
   height: auto;
 
   display: flex;
-  align-content: flex-start;
+
   overflow: hidden;
 
-  margin-left: 12px;
   font-size: 0.7rem;
 
   color: var(--light-black);
@@ -42,7 +38,6 @@ const IssueTitle = styled.button`
   outline: none;
 `;
 const IssueContent = styled.div`
-  margin-left: 15px;
   margin-top: 6px;
   font-size: 0.475rem;
   color: var(--greenish-teal);
@@ -66,13 +61,6 @@ export class IssueItem extends Component {
     this.setState({ open: false });
   };
 
-  editAppear = () => {
-    console.log(1);
-  };
-  editDisapear = () => {
-    console.log(2);
-  };
-
   render() {
     return (
       <React.Fragment>
@@ -87,20 +75,10 @@ export class IssueItem extends Component {
               ref={provided.innerRef}
               isDragging={snapshot.isDragging}
             >
-              <div id="issueItem-control">
-                <ControlBtn className="edit-btn">
-                  <ControlImg src={edit} className="edit_im" />
-                </ControlBtn>
-                <div id="issueItem-edit">
-                  <ControlBtn className="edit-btn">
-                    <ControlImg src={edit} className="edit_im" />
-                  </ControlBtn>
-                </div>
-              </div>
               <IssueTitle onClick={this.openDialog}>
                 {this.props.task.contentTitle}
               </IssueTitle>
-              <IssueContent c>
+              <IssueContent>
                 {this.props.task.content}
                 <img className="confYN" src={conference} />
               </IssueContent>

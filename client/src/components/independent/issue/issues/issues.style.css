@@ -38,8 +38,8 @@
 .issues-body {
   margin-top: 66px;
 
-  width: 249px;
-  height: 541px;
+  width: 256px;
+  height: 531px;
 
   box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
     var(--box-shadow-blur) var(--box-main-color);

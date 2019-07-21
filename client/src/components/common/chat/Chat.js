@@ -6,7 +6,7 @@ import userOn from "../../../assets/message/message_friend_on.png";
 import userOff from "../../../assets/message/message_friend_off.png";
 import messageOn from "../../../assets/message/message_chat_on.png";
 import messageOff from "../../../assets/message/message_chat_off.png";
-
+import ChatRoomItem from "./ChatRoomItem";
 import Chattings from "./Chattings";
 import Teams from "./Teams";
 import FreeScrollbar from "react-free-scrollbar";
@@ -60,37 +60,82 @@ const TabItemBtn = styled.button`
   height: 35px;
   online: none;
 `;
-
+const Title = styled.div`
+  height: 29px;
+  width: 100%;
+  padding-left: 13px;
+  display: flex;
+  align-items: center;
+  color: var(--light-black);
+  font-size: 14px;
+  font-family: NanumSquareB;
+`;
+const DivideLine = styled.div`
+  width: 288px;
+  background: var(--white-two);
+  height: 1px;
+`;
 export class Chat extends Component {
+  state = { isClickChatList: true };
+
   render() {
     if (
       window.location.pathname === "/home/issue" ||
       window.location.pathname === "/home/conferenceRoom" ||
       window.location.pathname === "/home/conferenceDocument"
     ) {
-      return (
-        <ChatContainer>
-          <ChatContent>
-            <ChatList>
-              <ChatHeader>메신저</ChatHeader>
-              <TabBox>
-                <TabItemBtn>
-                  <img width="17px" height="19px" src={userOn} />
-                </TabItemBtn>
-                <TabItemBtn>
-                  <img width="21px" height="19px" src={messageOff} />
-                </TabItemBtn>
-              </TabBox>
-              <div style={{ height: "365px" }}>
-                <FreeScrollbar>
-                  <Teams />
-                </FreeScrollbar>
-              </div>
-            </ChatList>
-            <Chattings />
-          </ChatContent>
-        </ChatContainer>
-      );
+      if (this.state.isClickChatList) {
+        return (
+          <ChatContainer>
+            <ChatContent>
+              <ChatList>
+                <ChatHeader>메신저</ChatHeader>
+                <TabBox>
+                  <TabItemBtn>
+                    <img width="17px" height="19px" src={userOn} />
+                  </TabItemBtn>
+                  <TabItemBtn>
+                    <img width="21px" height="19px" src={messageOff} />
+                  </TabItemBtn>
+                </TabBox>
+                <div style={{ height: "340px" }}>
+                  <DivideLine />
+                  <Title>채팅방</Title>
+                  <DivideLine />
+                  <FreeScrollbar>
+                    <ChatRoomItem />
+                  </FreeScrollbar>
+                </div>
+              </ChatList>
+              <Chattings />
+            </ChatContent>
+          </ChatContainer>
+        );
+      } else {
+        return (
+          <ChatContainer>
+            <ChatContent>
+              <ChatList>
+                <ChatHeader>메신저</ChatHeader>
+                <TabBox>
+                  <TabItemBtn>
+                    <img width="17px" height="19px" src={userOn} />
+                  </TabItemBtn>
+                  <TabItemBtn>
+                    <img width="21px" height="19px" src={messageOff} />
+                  </TabItemBtn>
+                </TabBox>
+                <div style={{ height: "365px" }}>
+                  <FreeScrollbar>
+                    <Teams />
+                  </FreeScrollbar>
+                </div>
+              </ChatList>
+              <Chattings />
+            </ChatContent>
+          </ChatContainer>
+        );
+      }
     } else {
       return <div />;
     }
