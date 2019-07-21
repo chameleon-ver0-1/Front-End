@@ -14,6 +14,7 @@ export class Navbar extends Component {
   }
   handleClick() {
     this.setState({ show: !this.state.show });
+    console.log(this.state.show);
   }
 
   render() {
@@ -36,12 +37,12 @@ export class Navbar extends Component {
           </div>
         </div>
       );
-    } else if (
-      window.location.pathname === "/home/issue" ||
-      window.location.pathname === "/home/conferenceRoom" ||
-      window.location.pathname === "/home/conferenceDocument" ||
-      window.location.pathname === "/home/conferenceDocumentDetail"
-    ) {
+    }
+    // window.location.pathname === "/home/issue" ||
+    // window.location.pathname === "/home/conferenceRoom" ||
+    // window.location.pathname === "/home/conferenceDocument" ||
+    // window.location.pathname === "/home/conferenceDocumentDetail"
+    else {
       return (
         <div className="container">
           <div className="nav2-container">
@@ -74,9 +75,10 @@ export class Navbar extends Component {
           </div>
         </div>
       );
-    } else {
-      return <div />;
     }
+    // } else {
+    //   return <div />;
+    // }
   }
 }
 

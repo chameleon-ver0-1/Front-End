@@ -51,31 +51,37 @@ const DivideLine = styled.div`
   margin-left: 35px;
   margin-top: 5px;
 `;
+const ShowDiv = styled.div`
+  //FIXME: 여기 왜 안되니?
+  // display: ${props => (props.show ? "inline" : "none")};
+`;
 
 export class UserItem extends Component {
   render() {
     const { names } = this.props;
     return (
       <React.Fragment>
-        {names.map(name => (
-          <UserItemContainer>
-            <UserRow>
-              <UserBox>
-                <Dot />
-                <UserName>{name}</UserName>
-              </UserBox>
-              <ButtonBox>
-                <ButtonItem>
-                  <img width="13px" height="13px" src={userInfo} />
-                </ButtonItem>
-                <ButtonItem>
-                  <img width="13px" height="13px" src={userMessage} />
-                </ButtonItem>
-              </ButtonBox>
-            </UserRow>
-            <DivideLine />
-          </UserItemContainer>
-        ))}
+        <ShowDiv>
+          {names.map(name => (
+            <UserItemContainer>
+              <UserRow>
+                <UserBox>
+                  <Dot />
+                  <UserName>{name}</UserName>
+                </UserBox>
+                <ButtonBox>
+                  <ButtonItem>
+                    <img width="13px" height="13px" src={userInfo} />
+                  </ButtonItem>
+                  <ButtonItem>
+                    <img width="13px" height="13px" src={userMessage} />
+                  </ButtonItem>
+                </ButtonBox>
+              </UserRow>
+              <DivideLine />
+            </UserItemContainer>
+          ))}
+        </ShowDiv>
       </React.Fragment>
     );
   }
