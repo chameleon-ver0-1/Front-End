@@ -29,6 +29,18 @@ const ProjectName = styled.div`
   font-family: NanumSquareEB;
   color: var(--brownish-grey);
 `;
+const ProjectManageBtn = styled.button`
+  color: var(--white-two);
+  font-size: 16px;
+  width: 100%;
+  padding: 0px;
+  border: none;
+  background: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 400px;
+  outline: none;
+`;
 export class Menu extends Component {
   render() {
     const regex = new RegExp("/auth");
@@ -57,6 +69,7 @@ export class Menu extends Component {
           >
             회의록
           </NavLink>
+          <ProjectManageBtn>프로젝트 관리 화면으로</ProjectManageBtn>
         </div>
       )
     );

@@ -15,8 +15,8 @@
   width: 212px;
   height: 71px;
 
-  margin-top: 20px;
-  margin-left: 18px;
+  margin-top: 19px;
+  margin-left: 15px;
 
   border-radius: 10px;
 
@@ -52,10 +52,6 @@
   background: none;
   border: none;
 }
-
-/* .issueItem-container:hover ~ .edit-btn {
-  display: none;
-} */
 
 .edit_im {
   width: 10px;

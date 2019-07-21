@@ -53,8 +53,8 @@ export class IssueAdd extends Component {
     return (
       <div>
         <AddBtn onClick={this.openDialog}>+ TODO 추가하기</AddBtn>
-        <div>제목:{this.state.title}</div>
-        <div>내용:{this.state.detail}</div>
+        {/* <div>제목:{this.state.title}</div>
+        <div>내용:{this.state.detail}</div> */}
         <AddIssueDialog
           open={this.state.open}
           onCloseModal={this.onCloseModal}
