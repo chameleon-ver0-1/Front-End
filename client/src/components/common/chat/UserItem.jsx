@@ -4,10 +4,11 @@ import userInfo from "../../../assets/message/message_info.png";
 import userMessage from "../../../assets/message/message_chat.png";
 const UserItemContainer = styled.div`
   // display: ${props => (props.show ? "inline" : "none")};
-`;
+  width: 280px;
+  `;
 const Dot = styled.div`
-  width: 5px;
-  height: 5px;
+  width: 8px;
+  height: 8px;
   background: var(--light-sage);
   border-radius: 100px;
 `;
@@ -51,31 +52,37 @@ const DivideLine = styled.div`
   margin-left: 35px;
   margin-top: 5px;
 `;
+const ShowDiv = styled.div`
+  //FIXME: 여기 왜 안되는지 나중에 확인
+  // display: ${props => (props.show ? "inline" : "none")};
+`;
 
 export class UserItem extends Component {
   render() {
     const { names } = this.props;
     return (
       <React.Fragment>
-        {names.map(name => (
-          <UserItemContainer>
-            <UserRow>
-              <UserBox>
-                <Dot />
-                <UserName>{name}</UserName>
-              </UserBox>
-              <ButtonBox>
-                <ButtonItem>
-                  <img width="13px" height="13px" src={userInfo} />
-                </ButtonItem>
-                <ButtonItem>
-                  <img width="13px" height="13px" src={userMessage} />
-                </ButtonItem>
-              </ButtonBox>
-            </UserRow>
-            <DivideLine />
-          </UserItemContainer>
-        ))}
+        <ShowDiv>
+          {names.map(name => (
+            <UserItemContainer>
+              <UserRow>
+                <UserBox>
+                  <Dot />
+                  <UserName>{name}</UserName>
+                </UserBox>
+                <ButtonBox>
+                  <ButtonItem>
+                    <img width="13px" height="13px" src={userInfo} />
+                  </ButtonItem>
+                  <ButtonItem>
+                    <img width="13px" height="13px" src={userMessage} />
+                  </ButtonItem>
+                </ButtonBox>
+              </UserRow>
+              <DivideLine />
+            </UserItemContainer>
+          ))}
+        </ShowDiv>
       </React.Fragment>
     );
   }

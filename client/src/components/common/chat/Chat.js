@@ -47,6 +47,7 @@ const ChatHeader = styled.div`
 
   display: flex;
   flex-direction: row;
+  font-family: NanumSquareB;
 `;
 
 const TabBox = styled.div`
@@ -86,7 +87,6 @@ export class Chat extends Component {
                 </FreeScrollbar>
               </div>
             </ChatList>
-
             <Chattings />
           </ChatContent>
         </ChatContainer>

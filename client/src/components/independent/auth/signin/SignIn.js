@@ -4,18 +4,16 @@
  * 로그인 화면 구성
  * 수정 : 조윤영 - 현재 Googlye 및 KaKao 연동 Login은 서버상 도메인에서만 가능함.
  */
+
 import React, { Component } from "react";
 // import styled from 'styled-components'
 import { Link } from "react-router-dom";
-import "./signin.style.css";
+
 import styled from "styled-components";
 import GoogleLogin from "react-google-login";
 import google from "../../../../assets/signIn/google.png";
 import kakao from "../../../../assets/signIn/kakao.png";
 import KakaoLogin from "react-kakao-login";
-import { connect } from "react-redux";
-import { login } from "../../../../helpers/SignInHelpers";
-import PropTypes from "prop-types";
 import * as service from "../../../../helpers/SignInHelpers";
 
 const GoogleKey =
@@ -28,6 +26,7 @@ const SignInContainer = styled.div`
 `;
 const SignInHeader = styled.div`
   font-size: 30px;
+  font-family: NanumSquareB;
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
@@ -41,6 +40,7 @@ const InputGroup = styled.div`
 const Label = styled.div`
   font-size: 14px;
   margin-left: 11px;
+  font-family: NanumSquareB;
 `;
 
 const LoginInput = styled.input`
@@ -102,6 +102,7 @@ const OtherLoginBtn = styled.button`
   height: 40px;
   margin-left: 13px;
   font-size: 14px;
+  font-family: NanumSquareB;
 `;
 const ForgetBtn = styled.button`
   margin: auto;
@@ -135,6 +136,7 @@ const LoginLinkContainer = styled.div`
 `;
 const OriginLoginBtn = styled.button`
   font-size: 16px;
+  font-family: NanumSquareB;
 
   color: white;
   background: none;
@@ -148,6 +150,22 @@ const OriginLoginBtn = styled.button`
   width: 314px;
   height: px;
 `;
+const WarnId = styled.div`
+  font-size: 11px;
+  color: var(--greenish-teal);
+  margin-left: 140px;
+  display: none;
+`;
+const WarnPassword = styled.div`
+  font-size: 11px;
+  color: var(--greenish-teal);
+  margin-left: 117px;
+  display: none;
+`;
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 class SignIn extends Component {
   constructor(props) {
@@ -159,7 +177,9 @@ class SignIn extends Component {
       name: "",
       provider: "",
       email: "",
-      password: ""
+      password: "",
+      isWarnId: true,
+      isWarnPassword: true
     };
   }
   componentDidCatch(error, info) {
@@ -221,6 +241,12 @@ class SignIn extends Component {
     //     localStorage.setItem("cool-jwt", res.data);
     //     this.props.history.push("/Protected");
     //   });
+    document.getElementById("warnId").style.display = this.state.isWarnId
+      ? "inline"
+      : "none";
+    document.getElementById("warnPwd").style.display = this.state.isWarnId
+      ? "inline"
+      : "none";
   };
 
   componentDidMout = () => {
@@ -259,7 +285,10 @@ class SignIn extends Component {
         <LoginContainer>
           <SignInHeader>로그인</SignInHeader>
           <InputGroup>
-            <Label>아이디</Label>
+            <Row>
+              <Label>아이디</Label>
+              <WarnId id="warnId">*이메일이 올바르지 않습니다.</WarnId>
+            </Row>
             <InputBorder>
               <LoginInput
                 type="text"
@@ -271,7 +300,12 @@ class SignIn extends Component {
           </InputGroup>
 
           <InputGroup>
-            <Label>비밀번호</Label>
+            <Row>
+              <Label>비밀번호</Label>
+              <WarnPassword id="warnPwd">
+                * 비밀번호가 올바르지 않습니다.
+              </WarnPassword>
+            </Row>
             <InputBorder>
               <LoginInput
                 type="password"

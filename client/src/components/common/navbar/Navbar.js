@@ -4,15 +4,17 @@ import userProfile from "../../../assets/home/userProfile.png";
 import moreInfo from "../../../assets/home/moreInfo.png";
 import Dropdown from "./dropdownmenu/Dropdown";
 import Fade from "react-reveal/Fade";
-import alert from "../../../assets/home/alert_off.png";
+import alertOff from "../../../assets/home/alert_off.png";
+import alertOn from "../../../assets/home/alert_on.png";
 export class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { show: false };
+    this.state = { show: false, haveNotice: true };
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick() {
     this.setState({ show: !this.state.show });
+    console.log(this.state.show);
   }
 
   render() {
@@ -35,12 +37,12 @@ export class Navbar extends Component {
           </div>
         </div>
       );
-    } else if (
-      window.location.pathname === "/home/issue" ||
-      window.location.pathname === "/home/conferenceRoom" ||
-      window.location.pathname === "/home/conferenceDocument" ||
-      window.location.pathname === "/home/conferenceDocumentDetail"
-    ) {
+    }
+    // window.location.pathname === "/home/issue" ||
+    // window.location.pathname === "/home/conferenceRoom" ||
+    // window.location.pathname === "/home/conferenceDocument" ||
+    // window.location.pathname === "/home/conferenceDocumentDetail"
+    else {
       return (
         <div className="container">
           <div className="nav2-container">
@@ -51,8 +53,8 @@ export class Navbar extends Component {
               </Fade>
               <button className="notice-btn">
                 <img
-                  src={alert}
-                  className="notice_im"
+                  id="notice_im"
+                  src={this.state.haveNotice ? alertOn : alertOff}
                   onClick={this.handleClick}
                 />
               </button>
@@ -73,9 +75,10 @@ export class Navbar extends Component {
           </div>
         </div>
       );
-    } else {
-      return <div />;
     }
+    // } else {
+    //   return <div />;
+    // }
   }
 }
 
