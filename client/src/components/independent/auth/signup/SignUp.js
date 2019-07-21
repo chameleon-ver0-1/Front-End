@@ -6,8 +6,6 @@
 
 import React, { Component } from "react";
 import "./signup.style.css";
-import Popup from "../popup/Popup";
-import search from "../../../../assets/signUp/search.png";
 import { Link } from "react-router-dom";
 
 class SignUp extends Component {
@@ -44,9 +42,11 @@ class SignUp extends Component {
         <div className="login-container">
           <div className="header2">회원가입</div>
           <div className="input-group2">
-            {/* <label className="label" htmlFor="username">이름</label> */}
-            <div className="label">이름</div>
-
+            <div className="label-div">
+              <div className="label">이름</div>
+              <div className="star">*</div>
+              <div className="green-message">* 문항은 필수 입력사항입니다</div>
+            </div>
             <input
               type="text"
               name="username"
@@ -56,7 +56,6 @@ class SignUp extends Component {
           </div>
 
           <div className="input-group2">
-            {/* <label className="label" htmlFor="username">영문 이름</label> */}
             <div className="label">영문 이름</div>
 
             <input
@@ -68,8 +67,10 @@ class SignUp extends Component {
           </div>
 
           <div className="input-group2">
-            {/* <label className="label" htmlFor="email">아이디</label> */}
-            <div className="label">아이디</div>
+            <div className="label-div">
+              <div className="label">아이디 </div>
+              <div className="star">*</div>
+            </div>
 
             <input
               type="text"
@@ -80,9 +81,10 @@ class SignUp extends Component {
           </div>
 
           <div className="input-group2">
-            {/* <label className="label" htmlFor="password">비밀번호</label> */}
-            <div className="label">비밀번호</div>
-
+            <div className="label-div">
+              <div className="label">비밀번호 </div>
+              <div className="star">*</div>
+            </div>
             <input
               type="password"
               name="password"
@@ -92,49 +94,23 @@ class SignUp extends Component {
           </div>
 
           <div className="input-group2">
-            {/* <label className="label" htmlFor="company">회사 및 부서</label> */}
             <div className="label">회사 및 부서</div>
 
-            <div className="buttons">
-              <div className="text_search">
-                <input
-                  type="text"
-                  name="company"
-                  className="small-input"
-                  placeholder="회사명"
-                />
-
-                <button className="search">
-                  <img
-                    src={search}
-                    className="search2"
-                    onClick={this.onOpenModal}
-                  />
-                </button>
-              </div>
-              <Popup
-                open={this.state.open}
-                title={this.state.title}
-                placeholder={this.state.placeholder}
-                onCloseModal={this.onCloseModal}
+            <div className="text_search">
+              <input
+                type="text"
+                name="company"
+                className="small-input"
+                placeholder="회사명"
+                //TODO: 태그로 바꿔야함
               />
 
-              <div className="text_search">
-                <input
-                  type="text"
-                  name="company"
-                  className="small-input"
-                  placeholder="부서명"
-                />
-
-                <button className="search">
-                  <img
-                    src={search}
-                    className="search2"
-                    onClick={this.onOpenModal2}
-                  />
-                </button>
-              </div>
+              <input
+                type="text"
+                name="company"
+                className="small-input"
+                placeholder="부서명"
+              />
             </div>
           </div>
 

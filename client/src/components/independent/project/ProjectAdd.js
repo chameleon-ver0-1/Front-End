@@ -3,7 +3,11 @@ import "./projectadd.style.css";
 
 export class ProjectAdd extends Component {
   render() {
-    return <div />;
+    return (
+      <div className="inner-container2">
+        <div className="header">프로젝트 추가</div>
+      </div>
+    );
   }
 }
 
