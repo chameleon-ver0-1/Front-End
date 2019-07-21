@@ -9,9 +9,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/automl": "^1.2.2",
+    "@google-cloud/storage": "^3.0.2",
     "aws-sdk": "^2.434.0",
     "body-parser": "^1.18.3",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "image-size": "^0.7.4",
+    "python-shell": "^1.0.7",
+    "sharp": "^0.22.1"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
