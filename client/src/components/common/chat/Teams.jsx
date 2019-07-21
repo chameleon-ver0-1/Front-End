@@ -50,7 +50,6 @@ export class UserList extends Component {
 
           return (
             <div>
-              
               <Role>
                 <ArrowButton onClick={this.show}>
                   <img width="7px" height="13px" src={openRole} />
