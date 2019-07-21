@@ -75,8 +75,21 @@ const DivideLine = styled.div`
   background: var(--white-two);
   height: 1px;
 `;
+
 export class Chat extends Component {
-  state = { isClickChatList: true };
+  state = { isClickUserList: true };
+  openUserList = () => {
+    this.setState({
+      isClickUserList: true
+    });
+    console.log(this.state.isClickUserList);
+  };
+  openRoomList = () => {
+    this.setState({
+      isClickUserList: false
+    });
+    console.log(this.state.isClickUserList);
+  };
 
   render() {
     if (
@@ -84,21 +97,27 @@ export class Chat extends Component {
       window.location.pathname === "/home/conferenceRoom" ||
       window.location.pathname === "/home/conferenceDocument"
     ) {
-      if (this.state.isClickChatList) {
-        return (
-          <ChatContainer>
-            <ChatContent>
-              <ChatList>
-                <ChatHeader>메신저</ChatHeader>
-                <TabBox>
-                  <TabItemBtn>
-                    <img width="17px" height="19px" src={userOn} />
-                  </TabItemBtn>
-                  <TabItemBtn>
-                    <img width="21px" height="19px" src={messageOff} />
-                  </TabItemBtn>
-                </TabBox>
-                <div style={{ height: "340px" }}>
+      return (
+        <ChatContainer>
+          <ChatContent>
+            <ChatList>
+              <ChatHeader>메신저</ChatHeader>
+              <TabBox>
+                <TabItemBtn onClick={this.openUserList}>
+                  <img width="17px" height="19px" src={userOn} />
+                </TabItemBtn>
+                <TabItemBtn onClick={this.openRoomList}>
+                  <img width="21px" height="19px" src={messageOff} />
+                </TabItemBtn>
+              </TabBox>
+
+              <div style={{ height: "340px", width: "286px" }}>
+                <div
+                  id="chattingRoom"
+                  style={{
+                    display: this.state.isClickUserList ? "none" : "inline"
+                  }}
+                >
                   <DivideLine />
                   <Title>채팅방</Title>
                   <DivideLine />
@@ -106,36 +125,22 @@ export class Chat extends Component {
                     <ChatRoomItem />
                   </FreeScrollbar>
                 </div>
-              </ChatList>
-              <Chattings />
-            </ChatContent>
-          </ChatContainer>
-        );
-      } else {
-        return (
-          <ChatContainer>
-            <ChatContent>
-              <ChatList>
-                <ChatHeader>메신저</ChatHeader>
-                <TabBox>
-                  <TabItemBtn>
-                    <img width="17px" height="19px" src={userOn} />
-                  </TabItemBtn>
-                  <TabItemBtn>
-                    <img width="21px" height="19px" src={messageOff} />
-                  </TabItemBtn>
-                </TabBox>
-                <div style={{ height: "365px" }}>
+                <div
+                  id="userList"
+                  style={{
+                    display: this.state.isClickUserList ? "inline" : "none"
+                  }}
+                >
                   <FreeScrollbar>
                     <Teams />
                   </FreeScrollbar>
                 </div>
-              </ChatList>
-              <Chattings />
-            </ChatContent>
-          </ChatContainer>
-        );
-      }
+              </div>
+            </ChatList>
+            <Chattings />
+          </ChatContent>
+        </ChatContainer>
+      );
     } else {
       return <div />;
     }
