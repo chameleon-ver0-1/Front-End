@@ -53,7 +53,7 @@ const DivideLine = styled.div`
   margin-top: 5px;
 `;
 const ShowDiv = styled.div`
-  //FIXME: 여기 왜 안되니?
+  //FIXME: 여기 왜 안되는지 나중에 확인
   // display: ${props => (props.show ? "inline" : "none")};
 `;
 
