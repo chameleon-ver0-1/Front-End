@@ -4,10 +4,11 @@ import userInfo from "../../../assets/message/message_info.png";
 import userMessage from "../../../assets/message/message_chat.png";
 const UserItemContainer = styled.div`
   // display: ${props => (props.show ? "inline" : "none")};
-`;
+  width: 280px;
+  `;
 const Dot = styled.div`
-  width: 5px;
-  height: 5px;
+  width: 8px;
+  height: 8px;
   background: var(--light-sage);
   border-radius: 100px;
 `;

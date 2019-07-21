@@ -23,7 +23,8 @@ const ChatMessageBox = styled.div`
     var(--box-shadow-blur) var(--box-main-color);
 `;
 const ChatOpponent = styled.div`
-  padding-top: 10px;
+  display: flex;
+
   padding-left: 12px;
   height: 34px;
   background: var(--white-four);
@@ -31,6 +32,8 @@ const ChatOpponent = styled.div`
   color: var(--greenish-teal);
   font-size: 0.7rem;
   font-family: NanumSquareB;
+
+  align-items: center;
 `;
 const ChatInput = styled.div`
   display: flex;
@@ -64,6 +67,16 @@ const SendBtn = styled.button`
   background: none;
   margin-top: 3px;
 `;
+const Dot = styled.div`
+  width: 8px;
+  height: 8px;
+  background: var(--light-sage);
+  border-radius: 100px;
+  margin-right: 8px;
+`;
+const Row = styled.div`
+  display: flex;
+`;
 
 function addItem(state) {
   const items = [...state.items];
@@ -95,7 +108,12 @@ export default class Chattings extends React.PureComponent {
   render() {
     return (
       <ChatMessageBox>
-        <ChatOpponent>이름 Cho yoon young</ChatOpponent>
+        <ChatOpponent>
+          {" "}
+          <Dot />
+          이름 Cho yoon young
+        </ChatOpponent>
+
         <div style={{ height: "140px" }}>
           <div className="chat-container">
             <ul className="ul-c" ref={this.list}>
