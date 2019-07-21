@@ -4,11 +4,12 @@ import userProfile from "../../../assets/home/userProfile.png";
 import moreInfo from "../../../assets/home/moreInfo.png";
 import Dropdown from "./dropdownmenu/Dropdown";
 import Fade from "react-reveal/Fade";
-import alert from "../../../assets/home/alert_off.png";
+import alertOff from "../../../assets/home/alert_off.png";
+import alertOn from "../../../assets/home/alert_on.png";
 export class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { show: false };
+    this.state = { show: false, haveNotice: true };
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick() {
@@ -51,8 +52,8 @@ export class Navbar extends Component {
               </Fade>
               <button className="notice-btn">
                 <img
-                  src={alert}
-                  className="notice_im"
+                  id="notice_im"
+                  src={this.state.haveNotice ? alertOn : alertOff}
                   onClick={this.handleClick}
                 />
               </button>

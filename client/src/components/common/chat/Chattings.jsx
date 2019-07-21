@@ -96,35 +96,33 @@ export default class Chattings extends React.PureComponent {
       <ChatMessageBox>
         <ChatOpponent>이름 Cho yoon young</ChatOpponent>
         <div style={{ height: "140px" }}>
-          <FreeScrollbar>
-            <div className="chat-container">
-              <ul className="ul-c" ref={this.list}>
-                <Transition
-                  native
-                  items={this.state.items}
-                  keys={item => item.key}
-                  from={{ opacity: 0, transform: "translate3d(0,60px,0)" }}
-                  enter={{ opacity: 1, transform: "translate3d(0,0,0)" }}
-                  config={{ tension: 50, friction: 25 }}
-                >
-                  {({ text, left, first, last }, i, state) => styles => (
-                    <animated.li
-                      ref={state === "enter" && this.el}
-                      className={classnames({
-                        left,
-                        right: !left,
-                        first,
-                        last
-                      })}
-                      style={styles}
-                    >
-                      {text}
-                    </animated.li>
-                  )}
-                </Transition>
-              </ul>
-            </div>
-          </FreeScrollbar>
+          <div className="chat-container">
+            <ul className="ul-c" ref={this.list}>
+              <Transition
+                native
+                items={this.state.items}
+                keys={item => item.key}
+                from={{ opacity: 0, transform: "translate3d(0,60px,0)" }}
+                enter={{ opacity: 1, transform: "translate3d(0,0,0)" }}
+                config={{ tension: 50, friction: 25 }}
+              >
+                {({ text, left, first, last }, i, state) => styles => (
+                  <animated.li
+                    ref={state === "enter" && this.el}
+                    className={classnames({
+                      left,
+                      right: !left,
+                      first,
+                      last
+                    })}
+                    style={styles}
+                  >
+                    {text}
+                  </animated.li>
+                )}
+              </Transition>
+            </ul>
+          </div>
         </div>
         <ChatInput>
           <FileBtn>
