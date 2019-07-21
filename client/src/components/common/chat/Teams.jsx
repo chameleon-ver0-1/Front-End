@@ -13,6 +13,7 @@ const RoleTitle = styled.div`
   color: var(--light-black);
   margin-left: 7px;
   margin-top: 7px;
+  font-family: NanumSquareB;
 `;
 const ArrowButton = styled.div`
   width: 26px;

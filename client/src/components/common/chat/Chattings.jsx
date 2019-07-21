@@ -30,6 +30,7 @@ const ChatOpponent = styled.div`
 
   color: var(--greenish-teal);
   font-size: 0.7rem;
+  font-family: NanumSquareB;
 `;
 const ChatInput = styled.div`
   display: flex;
