@@ -19,6 +19,8 @@ const AddBtn = styled.button`
   top: -40px;
   outline: none;
 
+  font-family:NanumSquareB;
+
   // display: ${props => (props.isShow ? "inline" : "none")};
 `;
 

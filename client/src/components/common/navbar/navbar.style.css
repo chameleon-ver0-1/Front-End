@@ -72,11 +72,13 @@
   width: 200px;
   color: white;
   font-size: 0.83rem;
+  font-family: NanumSquareEB;
 }
 
 .userDepartment {
   color: white;
   font-size: 0.6rem;
+  font-family: NanumSquareB;
 }
 
 .moreInfo {
