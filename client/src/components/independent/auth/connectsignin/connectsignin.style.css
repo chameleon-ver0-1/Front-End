@@ -1,5 +1,17 @@
 @import "../../../../style.css";
 
+.inner-container {
+  margin: 60px auto;
+  display: flex;
+}
+
+.header {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
 .chat_profile {
   width: 164px;
   height: 164px;

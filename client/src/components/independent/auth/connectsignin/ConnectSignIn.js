@@ -45,23 +45,12 @@ class ConnectSignIn extends Component {
             {/* <label className="label" htmlFor="company">회사 및 부서</label> */}
             <div className="label">회사 및 부서</div>
             <div className="buttons">
-              <div>
-                <input
-                  type="text"
-                  name="company"
-                  className="login-input2"
-                  placeholder="회사명"
-                />
-
-                {/* <button className="search">
-                  <img
-                    src={search}
-                    className="search2"
-                    onClick={this.onOpenModal}
-                  />
-                </button> */}
-              </div>
-              {/* <Popup open={this.state.open} onCloseModal={this.onCloseModal} /> */}
+              <input
+                type="text"
+                name="company"
+                className="login-input2"
+                placeholder="회사명"
+              />
 
               <input
                 type="text"
