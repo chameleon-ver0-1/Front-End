@@ -1,56 +1,77 @@
-@import '../../../../style.css';
+@import "../../../../style.css";
 
-.inner-container2{
+.label-div {
+  display: flex;
+  flex-direction: row;
+}
+
+.label {
+  font-size: 14px;
+  margin-left: 11px;
+  margin-right: 2px;
+}
+
+.star {
+  font-size: 11px;
+  color: var(--greenish-teal);
+}
+
+.green-message {
+  color: var(--greenish-teal);
+  font-size: 10px;
+  margin-left: 145px;
+}
+
+.login-input {
+  margin-top: 9px;
+  width: 313px;
+  height: 39px;
+
+  border-radius: 18.8px;
+  border: solid 1px var(--pinkish-grey);
+  padding-left: 15px;
+  align-items: center;
+
+  font-size: 12px;
+}
+
+.inner-container2 {
   /* background: #666666; */
   width: 313px;
   margin: 10px auto;
 }
 
-.header2{
+.header2 {
   font-size: 30px;
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
 }
 
-.input-group2{
+.input-group2 {
   margin-bottom: 18px;
 }
 
-.text_search{
+.text_search {
   margin-top: 9px;
-  border: solid 1px var(--pinkish-grey);
-  border-radius: 18.8px;
-  width: 147px;
+  width: 330px;
   height: 38px;
+  display: flex;
+  flex-direction: row;
 }
 
-.small-input{
-  width: 109px;
+.small-input {
+  width: 149px;
   height: 38px;
-  object-fit: contain;
   background: none;
   padding-left: 20px;
   border: none;
   font-size: 12px;
+  border: solid 1px var(--pinkish-grey);
+  border-radius: 18.8px;
 }
 
-.search{
-  width: 10px;
-  height: 10px;
-  object-fit: contain;
-  background: none;
-  border: none;
-
-}
-
-.search2{
-  width: 14px;
-  height: 14px;
-  margin-right: 12px;
-}
-
-.join-btn{
+.join-btn {
   background: var(--greenish-teal);
   width: 313px;
   height: 41px;

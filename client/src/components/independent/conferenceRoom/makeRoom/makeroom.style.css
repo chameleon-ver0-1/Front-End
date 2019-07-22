@@ -1,56 +1,65 @@
-@import '../../../../style.css';
+@import "../../../../style.css";
 
-.makeroomdiv{
+.makeroomdiv {
   width: 500px;
   height: 400px;
 }
 
-.roomtitle{
+.roomtitle {
   color: var(--light-black);
   font-size: 20.5px;
   border-bottom: solid 1px var(--white-two);
   padding-bottom: 15px;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
 }
 
-.row-div{
+.row-div {
   margin-top: 23px;
   display: flex;
   flex-direction: row;
 }
 
-.roomtitle2{
+.roomtitle2 {
   color: var(--light-black);
   font-size: 16px;
   font-weight: bold;
 }
 
-.roominput{
+.roominput {
   margin-left: 43px;
   width: 347px;
   height: 28px;
   border-radius: 5px;
   font-size: 12px;
   border: solid 1px #cccccc;
+  padding-left: 11px;
 }
 
-.row-div2{
+.row-div2 {
   margin-top: 50px;
   margin-left: 150px;
   width: 187px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
 }
 
-.linklogin{
+.linklogin {
   text-decoration: none;
   display: flex;
   justify-content: center;
 }
 
-.makebutton{
+.getissue {
+  font-size: 12px;
+  color: var(--greenish-teal);
+  background: none;
+  border: none;
+}
+
+.makebutton {
   width: 83px;
   height: 38px;
   border: solid 1px #cccccc;
@@ -59,7 +68,7 @@
   background: none;
 }
 
-.cancelbutton{
+.cancelbutton {
   width: 83px;
   height: 38px;
   border: solid 1px #cccccc;
@@ -68,7 +77,6 @@
 }
 
 /***************Tag css**************/
-
 
 /* Styles for the input */
 div.ReactTags__tagInput {
@@ -79,8 +87,7 @@ div.ReactTags__tagInput {
   border: solid 1px #efefef;
   display: inline-block; */
 }
-div.ReactTags__tagInput input.ReactTags__tagInputField,
-div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
+div.ReactTags__tagInput input.ReactTags__tagInputField {
   margin-left: 23px;
   height: 28px;
   margin: 0;
@@ -88,10 +95,11 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
   width: 347px;
   border: solid 1px #cccccc;
   border-radius: 5px;
+  padding-left: 11px;
 }
 
 /* Styles for selected tags */
-.tagdiv{
+.tagdiv {
   margin-left: 23px;
 }
 
@@ -104,7 +112,6 @@ div.ReactTags__selected span.ReactTags__tag {
   margin: 0 2px;
   cursor: move;
   border-radius: 2px;
-
 }
 
 div.ReactTags__selected a.ReactTags__remove {
@@ -120,7 +127,7 @@ div.ReactTags__suggestions {
 }
 div.ReactTags__suggestions ul {
   list-style-type: none;
-  box-shadow: .05em .01em .5em rgba(0,0,0,.2);
+  box-shadow: 0.05em 0.01em 0.5em rgba(0, 0, 0, 0.2);
   background: white;
   width: 200px;
 }
