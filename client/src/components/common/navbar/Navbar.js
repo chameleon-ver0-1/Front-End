@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 import closedBtn from "../../../assets/message/closed_btn@3x.png";
 import { css } from "glamor";
-
+import LogoWhiteIcon from "../../../assets/home/Logo_white.png";
 const Row = styled.div`
   display: flex;
 `;
@@ -31,6 +31,13 @@ const AlertTitle = styled.div`
 const AlertContent = styled.div`
   font-size: 12px;
   color: var(--brownish-grey);
+`;
+const LogoContainer = styled.div`
+  height: 64px;
+  width: 200px;
+  display: flex;
+  padding-left: 31px;
+  align-items: center;
 `;
 export class Navbar extends Component {
   constructor(props) {
@@ -69,7 +76,9 @@ export class Navbar extends Component {
       return (
         <div className="container">
           <div className="nav-container">
-            <p className="logo">카멜레On</p>
+            <LogoContainer>
+              <img width="129px" height="41px" src={LogoWhiteIcon} />
+            </LogoContainer>
             <div className="btn-container">
               <div className="btn-p">
                 <button className="nav-btn">로그인</button>
@@ -88,7 +97,9 @@ export class Navbar extends Component {
       return (
         <div className="container">
           <div className="nav2-container">
-            <p className="logo2">카멜레On</p>
+            <LogoContainer>
+              <img width="129px" height="41px" src={LogoWhiteIcon} />
+            </LogoContainer>
             <div className="nav-right">
               <Fade when={this.state.show}>
                 <Dropdown />
