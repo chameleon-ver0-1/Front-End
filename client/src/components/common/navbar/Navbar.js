@@ -14,6 +14,7 @@ import styled from "styled-components";
 import closedBtn from "../../../assets/message/closed_btn@3x.png";
 import { css } from "glamor";
 import LogoWhiteIcon from "../../../assets/home/Logo_white.png";
+import LogoBlackIcon from "../../../assets/home/Logo_black.png";
 const Row = styled.div`
   display: flex;
 `;
@@ -77,7 +78,7 @@ export class Navbar extends Component {
         <div className="container">
           <div className="nav-container">
             <LogoContainer>
-              <img width="129px" height="41px" src={LogoWhiteIcon} />
+              <img width="129px" height="31px" src={LogoBlackIcon} />
             </LogoContainer>
             <div className="btn-container">
               <div className="btn-p">
