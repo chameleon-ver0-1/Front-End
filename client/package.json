@@ -36,6 +36,7 @@
     "react-scripts": "2.1.8",
     "react-speech-recognition": "^2.0.1",
     "react-spring": "^8.0.27",
+    "react-tabs": "^3.0.0",
     "react-tag-input": "^6.4.0",
     "react-toastify": "^5.3.2",
     "rtcmulticonnection": "^3.6.8",
