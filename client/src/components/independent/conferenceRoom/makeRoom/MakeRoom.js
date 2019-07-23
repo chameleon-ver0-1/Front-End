@@ -11,6 +11,7 @@ import { render } from "react-dom";
 import { TAG } from "./tag";
 import { WithContext as ReactTags } from "react-tag-input";
 import { Link } from "react-router-dom";
+import MakeIssue from "../makeIssue/MakeIssue";
 
 const suggestions = TAG.map(tag => {
   return {
@@ -45,7 +46,9 @@ class MakeRoom extends Component {
     this.state = {
       roomTitle: "none",
       tags: [{ id: "화상회의", text: "화상회의" }],
-      suggestions: suggestions
+      suggestions: suggestions,
+      open: false,
+      title: ""
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
@@ -78,6 +81,14 @@ class MakeRoom extends Component {
   handleTagClick(index) {
     console.log("The tag at index " + index + " was clicked");
   }
+
+  onOpenModal = () => {
+    this.setState({ open: true, title: "토픽을 가져올 이슈를 선택하세요" });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
 
   render() {
     const { open, title, onCloseModal } = this.props;
@@ -116,7 +127,14 @@ class MakeRoom extends Component {
               />
             </div>
           </div>
-          <button className="getissue">이슈에서 가져오기</button>
+          <button className="getissue" onClick={this.onOpenModal}>
+            이슈에서 가져오기
+          </button>
+          <MakeIssue
+            open={this.state.open}
+            title={this.state.title}
+            onCloseModal={this.onCloseModal}
+          />
 
           <div className="row-div">
             <div className="roomtitle2">시작 시간</div>
