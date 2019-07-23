@@ -17,7 +17,6 @@ const Posts = ({ posts, loading }) => {
             </li>
           ))} */}
       {DocData.map((docDetail, index) => {
-        //TODO: 어디있는지 모르는 li padding 값 없애기
         return (
           <ul className="post-ul">
             <li className="post-li">

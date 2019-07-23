@@ -1,4 +1,3 @@
-
 /**
  * [OUTLINE]
  * 담당자 : 안지후
@@ -28,6 +27,8 @@ const Circle_conference = styled.div`
   height: 128px;
   border: solid 1px var(--greenish-teal);
   margin: auto;
+  position: relative;
+  z-index: -1;
 `;
 
 const Circle_title = styled.div`

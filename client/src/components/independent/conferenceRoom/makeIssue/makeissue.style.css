@@ -5,6 +5,44 @@
   text-align: center;
 }
 
+.issue-item:hover {
+  background-color: var(--white-two);
+}
+
+.choose-issue {
+  width: 75px;
+  height: 38px;
+  background: none;
+  border-radius: 10px;
+  border: solid 1px var(--white-two);
+  color: var(--greenish-teal);
+  font-size: 14px;
+}
+
+.choose-issue:hover {
+  background: var(--greenish-teal);
+  color: #ffffff;
+}
+
+.cancel-issue {
+  width: 75px;
+  height: 38px;
+  background: none;
+  border-radius: 10px;
+  border: solid 1px var(--white-two);
+  color: var(--brownish-grey);
+  font-size: 14px;
+}
+
+.issue-buttons-div {
+  margin-top: 50px;
+  margin-left: 150px;
+  width: 187px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 /********************** TAB Design *************************/
 .react-tabs {
   -webkit-tap-highlight-color: transparent;
@@ -30,10 +68,9 @@
 }
 
 .react-tabs__tab--selected {
-  background: #fff;
-  border-color: #aaa;
-  color: black;
-  border-radius: 5px 5px 0 0;
+  color: var(--greenish-teal);
+  /* border-color: #aaa;
+  border-radius: 5px 5px 0 0; */
 }
 
 .react-tabs__tab--disabled {
@@ -41,11 +78,12 @@
   cursor: default;
 }
 
-.react-tabs__tab:focus {
+/* .react-tabs__tab:focus {
   box-shadow: 0 0 5px hsl(208, 99%, 50%);
   border-color: hsl(208, 99%, 50%);
+  color: var(--greenish-teal);
   outline: none;
-}
+} */
 
 .react-tabs__tab:focus:after {
   content: "";

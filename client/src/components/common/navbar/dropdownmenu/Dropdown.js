@@ -6,7 +6,6 @@
 
 import React from "react";
 import "./dropdown.style.css";
-import notice from "../../../../assets/home/alert_off.png";
 import alert from "../../../../assets/home/alrert_list.png";
 import user from "../../../../assets/home/userProfile.png";
 import styled, { css } from "styled-components";
