@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./issueItem.style.css";
 
 import edit from "../../../../assets/issue/issue_edit.png";
 import comment from "../../../../assets/issue/issue_comment.png";
@@ -8,40 +7,14 @@ import conference from "../../../../assets/issue/issue_video_conference.png";
 import IssueDetailDialog from "./IssueDetailDialog";
 
 import { Draggable } from "react-beautiful-dnd";
-
-import styled from "styled-components";
-
-const Container = styled.div`
-  border: ${props =>
-    props.isDragging ? " solid 1px var(--greenish-teal) " : "none"};
-
-  padding-top: 16px;
-  padding-left: 15px;
-  height: 73px;
-  width: 218px;
-  
-`;
-
-const IssueTitle = styled.button`
-  width: auto;
-  height: auto;
-
-  display: flex;
-
-  overflow: hidden;
-
-  font-size: 0.7rem;
-
-  color: var(--light-black);
-  background: none;
-  border: none;
-  outline: none;
-`;
-const IssueContent = styled.div`
-  margin-top: 6px;
-  font-size: 0.475rem;
-  color: var(--greenish-teal);
-`;
+import {
+  Container,
+  IssueItemDetail,
+  IssueTitles,
+  IssueContents,
+  IssueContent,
+  CommentCount
+} from "./issueItem.style";
 
 export class IssueItem extends Component {
   constructor(props) {
@@ -67,7 +40,6 @@ export class IssueItem extends Component {
         <Draggable draggableId={this.props.task.id} index={this.props.index}>
           {(provided, snapshot) => (
             <Container
-              className="issueItem-container"
               onMouseOver={this.editAppear}
               onMouseOut={this.editDisapear}
               {...provided.draggableProps}
@@ -75,19 +47,24 @@ export class IssueItem extends Component {
               ref={provided.innerRef}
               isDragging={snapshot.isDragging}
             >
-              <IssueTitle onClick={this.openDialog}>
+              <IssueTitles onClick={this.openDialog}>
                 {this.props.task.contentTitle}
-              </IssueTitle>
-              <IssueContent>
+              </IssueTitles>
+              <IssueContents>
                 {this.props.task.content}
-                <img className="confYN" src={conference} />
-              </IssueContent>
+                <img
+                  width="7px"
+                  height="12px"
+                  style={{ marginLeft: "4px" }}
+                  src={conference}
+                />
+              </IssueContents>
 
-              <div id="issueItem-detail">
-                <img className="comment_im" src={comment} />
-                <p className="comment_count">3</p>
-                <img className="file_im" src={file} />
-              </div>
+              <IssueItemDetail>
+                <img width="13px" height="12px" src={comment} />
+                <CommentCount>3</CommentCount>
+                <img width="13px" height="12px" src={file} />
+              </IssueItemDetail>
             </Container>
           )}
         </Draggable>

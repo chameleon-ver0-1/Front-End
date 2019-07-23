@@ -1,45 +1,44 @@
 import React, { Component } from "react";
-import "./navbar.style.css";
-import userProfile from "../../../assets/home/userProfile.png";
-import moreInfo from "../../../assets/home/moreInfo.png";
-import Dropdown from "./dropdownmenu/Dropdown";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import Fade from "react-reveal/Fade";
+
+import Dropdown from "./dropdownmenu/Dropdown";
+import MessagePopUp from "./messagepopup/MessagePopUp";
+
+import "react-toastify/dist/ReactToastify.css";
+import styled from "styled-components";
+
+import { css } from "glamor";
+
 import alertOff from "../../../assets/home/alert_off.png";
 import alertOn from "../../../assets/home/alert_on.png";
 import alertToast from "../../../assets/home/alrert_list.png";
-import MessagePopUp from "./messagepopup/MessagePopUp";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import styled from "styled-components";
 import closedBtn from "../../../assets/message/closed_btn@3x.png";
-import { css } from "glamor";
 import LogoWhiteIcon from "../../../assets/home/Logo_white.png";
 import LogoBlackIcon from "../../../assets/home/Logo_black.png";
-const Row = styled.div`
-  display: flex;
-`;
-const ClosedBtn = styled.button`
-  border: none;
+import userProfile from "../../../assets/home/userProfile.png";
+import moreInfo from "../../../assets/home/moreInfo.png";
 
-  background: none;
-  outline: none;
-`;
-const AlertTitle = styled.div`
-  font-size: 12px;
-  font-family: NanumSquareEB;
-  color: var(--greenish-teal);
-`;
-const AlertContent = styled.div`
-  font-size: 12px;
-  color: var(--brownish-grey);
-`;
-const LogoContainer = styled.div`
-  height: 64px;
-  width: 200px;
-  display: flex;
-  padding-left: 31px;
-  align-items: center;
-`;
+import {
+  NavContainer,
+  BtnContainer,
+  BtnP,
+  NavBtn,
+  Row,
+  ClosedBtn,
+  AlertTitle,
+  AlertContent,
+  LogoContainer,
+  Nav2Container,
+  NavRight,
+  NoticeBtn,
+  UserInfoContainer,
+  UserName,
+  UserDepartment,
+  MoreInfo
+} from "./navbar.style";
+
 export class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -50,10 +49,6 @@ export class Navbar extends Component {
     this.setState({ show: !this.state.show });
     console.log(this.state.show);
   }
-  notify = () =>
-    toast("Wow so easy !", {
-      closeButton: true
-    });
 
   render() {
     const Msg = ({ closeToast }) => (
@@ -76,57 +71,58 @@ export class Navbar extends Component {
     ) {
       return (
         <div className="container">
-          <div className="nav-container">
+          <NavContainer>
             <LogoContainer>
               <img width="129px" height="31px" src={LogoBlackIcon} />
             </LogoContainer>
-            <div className="btn-container">
-              <div className="btn-p">
-                <button className="nav-btn">로그인</button>
-              </div>
-              <button className="nav-btn">회원가입</button>
-            </div>
-          </div>
+            <BtnContainer>
+              <BtnP>
+                <Link to="/auth/signIn">
+                  <NavBtn>로그인</NavBtn>
+                </Link>
+              </BtnP>
+              <Link to="/auth/signUp">
+                <NavBtn>회원가입</NavBtn>
+              </Link>
+            </BtnContainer>
+          </NavContainer>
         </div>
       );
-    }
-    // window.location.pathname === "/home/issue" ||
-    // window.location.pathname === "/home/conferenceRoom" ||
-    // window.location.pathname === "/home/conferenceDocument" ||
-    // window.location.pathname === "/home/conferenceDocumentDetail"
-    else {
+    } else {
       return (
         <div className="container">
-          <div className="nav2-container">
+          <Nav2Container>
             <LogoContainer>
               <img width="129px" height="41px" src={LogoWhiteIcon} />
             </LogoContainer>
-            <div className="nav-right">
+            <NavRight>
               <Fade when={this.state.show}>
                 <Dropdown />
               </Fade>
-              <button className="notice-btn">
+              <NoticeBtn>
                 <img
-                  id="notice_im"
+                  width="20px"
+                  height="28px"
                   src={this.state.haveNotice ? alertOn : alertOff}
                   onClick={this.handleClick}
                 />
-              </button>
+              </NoticeBtn>
 
               <img
-                className="userProfile"
+                width="38px"
+                height="37px"
                 src={userProfile}
                 alt="프로필이미지"
               />
-              <div className="userInfo-container">
-                <p className="userName">권주희 Kwonju hee</p>
-                <p className="userDepartment">디자인 부서</p>
-              </div>
-              <button className="moreInfo" onClick={() => toast(<Msg />)}>
-                <img src={moreInfo} className="moreInfo_im" />
-              </button>
-            </div>
-          </div>
+              <UserInfoContainer>
+                <UserName>권주희 Kwonju hee</UserName>
+                <UserDepartment>디자인 부서</UserDepartment>
+              </UserInfoContainer>
+              <MoreInfo onClick={() => toast(<Msg />)}>
+                <img width="12px" height="6px" src={moreInfo} />
+              </MoreInfo>
+            </NavRight>
+          </Nav2Container>
 
           <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
         </div>

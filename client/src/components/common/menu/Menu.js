@@ -20,11 +20,9 @@ const ProjectName = styled.div`
   width: 100%;
   height: 52px;
   background: var(--white-four);
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   font-size: 22px;
   font-family: NanumSquareEB;
   color: var(--brownish-grey);
