@@ -10,8 +10,10 @@ import styled from "styled-components";
 import Modal from "react-responsive-modal";
 import InitialData from "../testItem-data";
 
+import CheckBox from "./CheckBox";
+
 const PopupContainer = styled.div`
-  width: 505x;
+  width: 530x;
   height: 441px;
 `;
 const PopupTitle = styled.h3`
@@ -33,7 +35,7 @@ const SelectLabel = styled.div`
   font-size: 14px;
   font-family: NanumSquareB;
   color: var(--pinkish-grey);
-  margin-left: 65px;
+  margin-left: 12px;
 `;
 const PopupInput = styled.input`
   width: 290px;
@@ -83,6 +85,7 @@ const TitleInput = styled.input`
   border: none;
   width: 320px;
   height: 25px;
+  outline: none;
 `;
 const TitleInputBorder = styled.div`
   width: 328px;
@@ -106,8 +109,25 @@ const SmallTimeBorder = styled.div`
   border: solid 1px var(--white-two);
   margin-left: 6px;
 `;
+const TextAreaBorder = styled.div`
+  width: 328px;
+  height: 97px;
+  border: solid 1px var(--white-two);
+  border-radius: 12px;
+  padding-left: 8px;
+  padding-top: 8px;
+  margin-left: 36px;
+`;
+
 var count = 1;
 export default class AddIssueDialog extends Component {
+  state = { checked: false };
+
+  handleCheckboxChange = event => {
+    this.setState({ checked: event.target.checked });
+    console.log("?");
+  };
+
   /*이슈 추가 다이얼로그에서 설정한 이슈 정보를 상위 컴포넌트로 전달하는 함수*/
   setIssueInfo = () => {
     const issueTitle = document.getElementById("issueTitle").value;
@@ -141,30 +161,39 @@ export default class AddIssueDialog extends Component {
             <SmallTimeBorder />
           </Row>
           <SelectRow>
-            <input type="checkbox" />
+            {/* <SelectCheckBox
+              id="selectShow"
+              style={{ marginLeft: "38px" }}
+              type="checkbox"
+            /> */}
+            <CheckBox />
+            <SelectLabel>설명</SelectLabel>
+            <TextAreaBorder>
+              <textarea
+                type="textarea"
+                wrap="soft"
+                cols="49"
+                rows="5"
+                style={{
+                  fontSize: "12px",
+                  border: "none",
+                  resize: "none",
+                  outline: "none"
+                }}
+                placeholder="업무에 대한 부가 설명을 적어주세요"
+              />
+            </TextAreaBorder>
+          </SelectRow>
+          <SelectRow>
+            <input style={{ marginLeft: "38px" }} type="checkbox" />
             <SelectLabel>설명</SelectLabel>
           </SelectRow>
+          <SelectRow>
+            <input style={{ marginLeft: "38px" }} type="checkbox" />
+            <SelectLabel>첨부파일</SelectLabel>
+          </SelectRow>
 
-          <PopupInputBorder>
-            <PopupInput
-              type="text"
-              id="issueTitle"
-              defaultValue=""
-              placeholder={this.props.placeholder}
-            />
-          </PopupInputBorder>
-          <PopupLabel>Issue description:</PopupLabel>
-          <PopupInputBorder>
-            <PopupInput
-              type="text"
-              id="issueDetail"
-              defaultValue=""
-              placeholder={this.props.placeholder}
-            />
-          </PopupInputBorder>
           <button onClick={this.setIssueInfo}>전달임시버튼</button>
-
-          <OKBtn onClick={onCloseModal}>확인</OKBtn>
         </PopupContainer>
       </Modal>
     );
