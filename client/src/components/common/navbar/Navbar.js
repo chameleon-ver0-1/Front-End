@@ -36,7 +36,11 @@ import {
   UserInfoContainer,
   UserName,
   UserDepartment,
-  MoreInfo
+  MoreInfo,
+  HomeNav,
+  NavItem,
+  NavClickItem,
+  AuthBox
 } from "./navbar.style";
 
 export class Navbar extends Component {
@@ -73,7 +77,7 @@ export class Navbar extends Component {
         <div className="container">
           <NavContainer>
             <LogoContainer>
-              <img width="129px" height="31px" src={LogoBlackIcon} />
+              <img width="129px" height="40px" src={LogoBlackIcon} />
             </LogoContainer>
             <BtnContainer>
               <BtnP>
@@ -88,12 +92,49 @@ export class Navbar extends Component {
           </NavContainer>
         </div>
       );
+    } else if (
+      window.location.pathname === "/" ||
+      window.location.pathname === "/home"
+    ) {
+      return (
+        <div>
+          <HomeNav>
+            <img
+              src={LogoBlackIcon}
+              width="129px"
+              height="40px"
+              style={{ marginRight: "338px" }}
+            />
+            <Link to="/">
+              <NavClickItem>Home</NavClickItem>
+            </Link>
+            <Link to="/home/issue">
+              <NavItem>Service</NavItem>
+            </Link>
+            <Link to="/about">
+              <NavItem>About</NavItem>
+            </Link>
+            <Link to="/faq">
+              <NavItem>FAQ</NavItem>
+            </Link>
+            <AuthBox style={{ marginLeft: "57px" }}>
+              <Link to="/auth/signIn">
+                <NavBtn>로그인</NavBtn>
+              </Link>
+
+              <Link to="/auth/signUp">
+                <NavBtn style={{ marginLeft: "7px" }}>회원가입</NavBtn>
+              </Link>
+            </AuthBox>
+          </HomeNav>
+        </div>
+      );
     } else {
       return (
         <div className="container">
           <Nav2Container>
             <LogoContainer>
-              <img width="129px" height="41px" src={LogoWhiteIcon} />
+              <img width="129px" height="40px" src={LogoWhiteIcon} />
             </LogoContainer>
             <NavRight>
               <Fade when={this.state.show}>
@@ -102,7 +143,7 @@ export class Navbar extends Component {
               <NoticeBtn>
                 <img
                   width="20px"
-                  height="28px"
+                  height="30px"
                   src={this.state.haveNotice ? alertOn : alertOff}
                   onClick={this.handleClick}
                 />
@@ -123,14 +164,10 @@ export class Navbar extends Component {
               </MoreInfo>
             </NavRight>
           </Nav2Container>
-
           <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
         </div>
       );
     }
-    // } else {
-    //   return <div />;
-    // }
   }
 }
 

@@ -41,12 +41,11 @@ const ProjectManageBtn = styled.button`
 `;
 export class Menu extends Component {
   render() {
-    const regex = new RegExp("/auth");
+    const regex1 = new RegExp("/home");
     const regex2 = new RegExp("/room");
 
-    return (
-      !regex.test(window.location.pathname) &&
-      !regex2.test(window.location.pathname) && (
+    if (regex1.test(window.location.pathname)) {
+      return (
         <div className="menu-container">
           <ProjectName>프로젝트명</ProjectName>
 
@@ -69,8 +68,12 @@ export class Menu extends Component {
           </NavLink>
           <ProjectManageBtn>프로젝트 관리 화면으로</ProjectManageBtn>
         </div>
-      )
-    );
+      );
+    } else if (window.location.pathname === "") {
+      return <div />;
+    } else {
+      return <div />;
+    }
   }
 }
 

@@ -116,3 +116,28 @@ export const MoreInfo = styled.button`
   border: none;
   background: none;
 `;
+
+export const HomeNav = styled.div`
+  padding-top: 17px;
+  padding-left: 171px;
+  display: flex;
+  align-items: center;
+`;
+
+export const NavItem = styled.div`
+  font-size: 13.5px;
+  color: var(--brownish-grey);
+  font-family: NanumSquareB;
+  margin-right: 49px;
+`;
+
+export const NavClickItem = styled.div`
+  font-size: 13.5px;
+  color: var(--greenish-teal);
+  font-family: NanumSquareB;
+  margin-right: 49px;
+`;
+export const AuthBox = styled.div`
+  margin-left: 57px;
+  display: flex;
+`;
