@@ -7,8 +7,16 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
+import DatePicker from "react-datepicker";
+import moment from "moment";
+import "react-datepicker/dist/react-datepicker.css";
 import Modal from "react-responsive-modal";
 import InitialData from "../testItem-data";
+
+import BigDatePicker from "./BigDatePicker";
+import SmallDatePicker from "./SmallDatePicker";
+
+import DatePickStyle from "./datepicker.style.css";
 
 import CheckBox from "./CheckBox";
 
@@ -37,33 +45,7 @@ const SelectLabel = styled.div`
   color: var(--pinkish-grey);
   margin-left: 12px;
 `;
-const PopupInput = styled.input`
-  width: 290px;
-  height: 38px;
-  background: none;
-  border: none;
-  font-size: 12px;
-  outline: none;
-`;
-const PopupInputBorder = styled.div`
-  width: 313px;
-  height: 39px;
-  border-radius: 18.8px;
-  border: solid 1px var(--pinkish-grey);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 10px;
-`;
-const OKBtn = styled.button`
-  margin-top: 10px;
-  width: 368px;
-  height: 44px;
-  background-color: var(--greenish-teal);
-  border: solid 1px var(--greenish-teal);
-  color: #ffffff;
-  font-size: 16px;
-  outline: none;
-`;
+
 const DivideLine = styled.div`
   height: 1px;
   width: 417px;
@@ -95,20 +77,6 @@ const TitleInputBorder = styled.div`
   margin-left: 36px;
   padding-left: 5px;
 `;
-const BigTimeBorder = styled.div`
-  width: 95px;
-  height: 29px;
-  border-radius: 10px;
-  border: solid 1px var(--white-two);
-  margin-left: 18px;
-`;
-const SmallTimeBorder = styled.div`
-  width: 79px;
-  height: 29px;
-  border-radius: 10px;
-  border: solid 1px var(--white-two);
-  margin-left: 6px;
-`;
 const TextAreaBorder = styled.div`
   width: 328px;
   height: 97px;
@@ -118,13 +86,47 @@ const TextAreaBorder = styled.div`
   padding-top: 8px;
   margin-left: 36px;
 `;
-
+const AddFileBtn = styled.input`
+  color: var(--brownish-grey);
+  background: #f0f0f0;
+  width: 62px;
+  height: 23px;
+  border: solid 1px var(--white-two);
+  font-size: 12px;
+  border-radius: 10px;
+  margin-left: 11px;
+`;
+const ConfirmBtn = styled.button`
+  font-size: 14px;
+  color: var(--greenish-teal);
+  border: solid 1px var(--white-two);
+  width: 75px;
+  height: 38px;
+  border-radius: 10px;
+  margin-right: 20px;
+`;
+const CancelBtn = styled.button`
+  font-size: 14px;
+  color: var(--brownish-teal);
+  border: solid 1px var(--white-two);
+  width: 75px;
+  height: 38px;
+  border-radius: 10px;
+`;
+const SubmitBtns = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 var count = 1;
 export default class AddIssueDialog extends Component {
-  state = { checked: false };
+  state = { checked: false, selectedDate: new Date().toISOString() };
 
   handleCheckboxChange = event => {
-    this.setState({ checked: event.target.checked });
+    this.setState({
+      checked: event.target.checked,
+      startDay: moment(),
+      startDate: moment()
+    });
     console.log("?");
   };
 
@@ -141,6 +143,17 @@ export default class AddIssueDialog extends Component {
     });
     count++;
   };
+  handleChange = date => {
+    this.setState({
+      startDay: date
+    });
+  };
+  handleChange2 = date => {
+    this.setState({
+      startDate: date
+    });
+  };
+
   render() {
     const { open, onCloseModal } = this.props;
 
@@ -157,16 +170,33 @@ export default class AddIssueDialog extends Component {
           </Row>
           <Row>
             <PopupLabel>D-DAY</PopupLabel>
-            <BigTimeBorder />
-            <SmallTimeBorder />
+            <div style={{ fontSize: "12px" }}>
+              <DatePicker
+                customInput={<BigDatePicker />}
+                selected={this.state.startDay}
+                onChange={this.handleChange}
+                minDate={new Date()}
+                relativeSize={true}
+              />
+            </div>
+            <DatePicker
+              customInput={<SmallDatePicker />}
+              selected={this.state.startDate}
+              onChange={this.handleChange2}
+              showTimeSelect
+              showTimeSelectOnly
+              dateFormat="h:mm aa"
+              timeCaption="Time"
+              relativeSize={true}
+            />
           </Row>
           <SelectRow>
-            {/* <SelectCheckBox
+            <input
               id="selectShow"
               style={{ marginLeft: "38px" }}
               type="checkbox"
-            /> */}
-            <CheckBox />
+            />
+
             <SelectLabel>설명</SelectLabel>
             <TextAreaBorder>
               <textarea
@@ -186,14 +216,21 @@ export default class AddIssueDialog extends Component {
           </SelectRow>
           <SelectRow>
             <input style={{ marginLeft: "38px" }} type="checkbox" />
-            <SelectLabel>설명</SelectLabel>
+            <SelectLabel>화상회의</SelectLabel>
           </SelectRow>
           <SelectRow>
             <input style={{ marginLeft: "38px" }} type="checkbox" />
             <SelectLabel>첨부파일</SelectLabel>
-          </SelectRow>
 
-          <button onClick={this.setIssueInfo}>전달임시버튼</button>
+            <input
+              type="file"
+              style={{ marginLeft: "11px", height: "13px", fontSize: "10px" }}
+            />
+          </SelectRow>
+          <SubmitBtns>
+            <ConfirmBtn>확인</ConfirmBtn>
+            <CancelBtn>취소</CancelBtn>
+          </SubmitBtns>
         </PopupContainer>
       </Modal>
     );
