@@ -40,13 +40,18 @@ export class ChatRoomItem extends Component {
   state = InitialData;
   render() {
     return (
-      <React.Fragment>
+      <div
+        style={{
+          width: "288px",
+          height: "315px"
+        }}
+      >
         {Object.keys(this.state.data).map(roomId => {
           const roomItem = this.state.data[roomId];
           return (
             <div
               style={{
-                width: "100%",
+                width: "270px",
                 height: "58px",
                 paddingTop: "8px"
               }}
@@ -66,7 +71,7 @@ export class ChatRoomItem extends Component {
             </div>
           );
         })}
-      </React.Fragment>
+      </div>
     );
   }
 }

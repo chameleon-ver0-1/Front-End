@@ -16,11 +16,11 @@ import {
   ConferenceRoom,
   ConferenceDocument,
   WebRTCRoom,
-  ConferenceDocumentDetail,
-  Test
+  ConferenceDocumentDetail
 } from "./components/independent";
 
 import { Navbar, Menu, Chat } from "./components/common";
+import { Welcome } from "./components/independent/welcome/Welcome";
 
 import PostTest from "../src/services/postTest";
 
@@ -43,12 +43,29 @@ class App extends Component {
                   </React.Fragment>
                 )}
               />
-              <Route path="/auth/signUp" component={SignUp} />
+              <Route
+                exact
+                path="/auth/signUp"
+                render={props => (
+                  <React.Fragment>
+                    <SignUp />
+                  </React.Fragment>
+                )}
+              />
+              <Route
+                exact
+                path="/"
+                render={props => (
+                  <React.Fragment>
+                    <Welcome />
+                  </React.Fragment>
+                )}
+              />
+              <Route path="/home/issue" component={Issue} />
               <Route path="/auth/authCheck" component={AuthCheck} />
               <Route path="/auth/connectSignIn" component={ConnectSignIn} />
-              <Route path="/home/issue" component={Issue} />
+
               <Route path="/home/conferenceRoom" component={ConferenceRoom} />
-              {/* FIXME: parameter이어 붙여 놓음. 오류 시 되돌리기 */}
               <Route path="/room/:roomTokenId" component={WebRTCRoom} />
 
               <Route

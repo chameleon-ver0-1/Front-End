@@ -3,7 +3,7 @@ import styled from "styled-components";
 import AddIssueDialog from "./AddIssueDialog";
 
 const AddBtn = styled.button`
-  width: 250px;
+  width: 257px;
   height: 55px;
 
   background: var(--white-three);
@@ -16,7 +16,7 @@ const AddBtn = styled.button`
   text-align: center;
 
   position: relative;
-  top: -40px;
+  top: -50px;
   outline: none;
 
   font-family:NanumSquareB;
