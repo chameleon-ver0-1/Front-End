@@ -16,7 +16,8 @@ import {
   ConferenceRoom,
   ConferenceDocument,
   WebRTCRoom,
-  ConferenceDocumentDetail
+  ConferenceDocumentDetail,
+  VideoSharing
 } from "./components/independent";
 
 import { Navbar, Menu, Chat } from "./components/common";
@@ -77,7 +78,7 @@ class App extends Component {
                 component={ConferenceDocumentDetail}
               />
               <Route path="/postTest" component={PostTest} />
-
+              <Route path="/share" component={VideoSharing} />
               <Chat />
             </div>
           </div>

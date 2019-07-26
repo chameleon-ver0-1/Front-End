@@ -24,6 +24,13 @@ var connection = new window.RTCMultiConnection();
 connection.autoCloseEntireSession = true;
 connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/";
 
+//TODO: video-sharing 추가
+var RMCMediaTrack = {
+  cameraStream: null,
+  cameraTrack: null,
+  screen: null
+};
+
 const VideoFrame = styled.div`
   padding-left: 50px;
   padding-top: 19px;
@@ -45,7 +52,7 @@ const EmotionStatus = styled.div`
 
 export class VideoItem extends Component {
   //FIXME:state값 추가함
-  state = { roomToken: "", dummy: []};
+  state = { roomToken: "", dummy: [] };
 
   /*script가져오는 함수 */
   componentWillMount() {
@@ -64,6 +71,7 @@ export class VideoItem extends Component {
 
     script.src = "https://cdn.WebRTC-Experiment.com/getScreenId.js";
     script.src = "https://webrtc.github.io/adapter/adapter-latest.js";
+    script.src = "https://www.webrtc-experiment.com/common.js";
 
     script.async = true;
 
@@ -87,7 +95,8 @@ export class VideoItem extends Component {
       window.params = params;
     })();
 
-    connection.socketMessageEvent = "video-conference-demo";
+    // connection.socketMessageEvent = "video-conference-demo";
+    connection.socketMessageEvent = "video-screen-demo";
 
     connection.session = {
       audio: true,
@@ -98,10 +107,33 @@ export class VideoItem extends Component {
       OfferToReceiveAudio: true,
       OfferToReceiveVideo: true
     };
+    /*TODO: vidieo sharing - 여기 추가 */
+    // https://www.rtcmulticonnection.org/docs/iceServers/
+    // use your own TURN-server here!
+    connection.iceServers = [
+      {
+        urls: [
+          "stun:stun.l.google.com:19302",
+          "stun:stun1.l.google.com:19302",
+          "stun:stun2.l.google.com:19302",
+          "stun:stun.l.google.com:19302?transport=udp"
+        ]
+      }
+    ];
 
     connection.onstream = function(event) {
       //connection1
       connection.videosContainer = document.getElementById("videos-container"); //1개 이상의 비디오들을 담을 div공간을 id값으로 가져온다.
+
+      var existing = document.getElementById(event.streamid);
+      if (existing && existing.parentNode) {
+        existing.parentNode.removeChild(existing);
+      }
+      if (event.type === "local" && event.stream.isVideo) {
+        RMCMediaTrack.cameraStream = event.stream;
+        RMCMediaTrack.cameraTrack = getTracks(event.stream, "video")[0];
+      }
+
       var video = document.createElement("video"); //비디오 컴포넌트를 생성한다.
       video.id = event.streamid;
 
@@ -139,8 +171,17 @@ export class VideoItem extends Component {
 
       connection.videosContainer.appendChild(video); //비디오를 div공간에 추가한다.
 
+      //TODO: video-sharing 추가
+      setTimeout(function() {
+        video.media.play();
+      }, 5000);
+      video.id = event.streamid;
+
       localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
       if (event.type === "local") {
+        //TODO:video-sharing 추가
+        RMCMediaTrack.selfVideo = video.media;
+
         connection.socket.on("disconnect", function() {
           if (!connection.getAllParticipants().length) {
             window.location.reload();
@@ -205,6 +246,123 @@ export class VideoItem extends Component {
       //   // etc.
       // };
 
+      //TODO: video-sharing 추가
+      var btnShareScreen = document.getElementById("share-screen");
+      connection.onUserStatusChanged = function() {
+        btnShareScreen.disabled = connection.getAllParticipants().length <= 0;
+      };
+
+      btnShareScreen.onclick = function() {
+        this.disabled = true;
+        getScreenStream(function(screen) {
+          var isLiveSession = connection.getAllParticipants().length > 0;
+          if (isLiveSession) {
+            replaceTrack(RMCMediaTrack.screen);
+          }
+          // now remove old video track from "attachStreams" array
+          // so that newcomers can see screen as well
+          connection.attachStreams.forEach(function(stream) {
+            getTracks(stream, "video").forEach(function(track) {
+              stream.removeTrack(track);
+            });
+            // now add screen track into that stream object
+            stream.addTrack(RMCMediaTrack.screen);
+          });
+        });
+      };
+      function screenHelper(callback) {
+        if (navigator.mediaDevices.getDisplayMedia) {
+          navigator.mediaDevices.getDisplayMedia(screen_constraints).then(
+            stream => {
+              callback(stream);
+            },
+            error => {
+              alert("Please make sure to use Edge 17 or higher.");
+            }
+          );
+        } else if (navigator.getDisplayMedia) {
+          navigator.getDisplayMedia(screen_constraints).then(
+            stream => {
+              callback(stream);
+            },
+            error => {
+              alert("Please make sure to use Edge 17 or higher.");
+            }
+          );
+        } else {
+          alert("getDisplayMedia API is not available in this browser.");
+        }
+      }
+      function getScreenStream(callback) {
+        screenHelper(function(screen) {
+          RMCMediaTrack.screen = getTracks(screen, "video")[0];
+          RMCMediaTrack.selfVideo.srcObject = screen;
+          // in case if onedned event does not fire
+          (function looper() {
+            // readyState can be "live" or "ended"
+            if (RMCMediaTrack.screen.readyState === "ended") {
+              RMCMediaTrack.screen.onended();
+              return;
+            }
+            setTimeout(looper, 1000);
+          })();
+          var firedOnce = false;
+          RMCMediaTrack.screen.onended = RMCMediaTrack.screen.onmute = RMCMediaTrack.screen.oninactive = function() {
+            if (firedOnce) return;
+            firedOnce = true;
+            if (getTracks(RMCMediaTrack.cameraStream, "video")[0].readyState) {
+              getTracks(RMCMediaTrack.cameraStream, "video").forEach(function(
+                track
+              ) {
+                RMCMediaTrack.cameraStream.removeTrack(track);
+              });
+              RMCMediaTrack.cameraStream.addTrack(RMCMediaTrack.cameraTrack);
+            }
+            RMCMediaTrack.selfVideo.srcObject = RMCMediaTrack.cameraStream;
+            connection.socket &&
+              connection.socket.emit(connection.socketCustomEvent, {
+                justStoppedMyScreen: true,
+                userid: connection.userid
+              });
+            // share camera again
+            replaceTrack(RMCMediaTrack.cameraTrack);
+            // now remove old screen from "attachStreams" array
+            connection.attachStreams = [RMCMediaTrack.cameraStream];
+            // so that user can share again
+            btnShareScreen.disabled = false;
+          };
+          connection.socket &&
+            connection.socket.emit(connection.socketCustomEvent, {
+              justSharedMyScreen: true,
+              userid: connection.userid
+            });
+          callback(screen);
+        });
+      }
+      function replaceTrack(videoTrack) {
+        if (!videoTrack) return;
+        if (videoTrack.readyState === "ended") {
+          alert(
+            'Can not replace an "ended" track. track.readyState: ' +
+              videoTrack.readyState
+          );
+          return;
+        }
+        connection.getAllParticipants().forEach(function(pid) {
+          var peer = connection.peers[pid].peer;
+          if (!peer.getSenders) return;
+          var trackToReplace = videoTrack;
+          peer.getSenders().forEach(function(sender) {
+            if (!sender || !sender.track) return;
+            if (sender.track.kind === "video" && trackToReplace) {
+              sender.replaceTrack(trackToReplace);
+              trackToReplace = null;
+            }
+          });
+        });
+      }
+      //////////////////여기까지//////////////
+      //////////////////여기까지///////////////
       navigator.mediaDevices
         .getUserMedia(screen_constraints)
         .then(function(stream) {
@@ -310,23 +468,27 @@ export class VideoItem extends Component {
         }
       }
       /*videos-container 캡쳐*/
-      html2canvas(document.getElementById("videos-container")).then(function(canvas) {
-        axios.post("/emotion", {
-          img: canvas.toDataURL("image/png")
-        })
-        .then(response => {
-          if(response.data =='무반응'){
-            document.getElementById("showEmotion").style.visibility="hidden";
-          }
-          else{
-            document.getElementById("showEmotion").style.visibility="visible";
-          }
-          document.getElementById("showEmotion").innerHTML = response.data;
-          console.log(response.data);
-        })
-        .catch(response => {
-          console.log(response);
-        });
+      html2canvas(document.getElementById("videos-container")).then(function(
+        canvas
+      ) {
+        axios
+          .post("/emotion", {
+            img: canvas.toDataURL("image/png")
+          })
+          .then(response => {
+            if (response.data == "무반응") {
+              document.getElementById("showEmotion").style.visibility =
+                "hidden";
+            } else {
+              document.getElementById("showEmotion").style.visibility =
+                "visible";
+            }
+            document.getElementById("showEmotion").innerHTML = response.data;
+            console.log(response.data);
+          })
+          .catch(response => {
+            console.log(response);
+          });
       });
     };
 
@@ -436,7 +598,7 @@ export class VideoItem extends Component {
             className="room-id"
             autoCorrect="off"
             autoCapitalize="off"
-            size="20"
+            size="10"
             defaultValue="abcded"
           />
           <button
@@ -459,11 +621,14 @@ export class VideoItem extends Component {
           <button type="button" onClick={onStop}>
             회의 종료
           </button>
+          <button id="share-screen" disabled>
+            Share Your Screen
+          </button>
         </div>
 
         <div id="room-urls" style={{ width: "100%" }} />
 
-        <EmotionStatus id="showEmotion" ></EmotionStatus>
+        <EmotionStatus id="showEmotion" />
       </VideoFrame>
     );
   }
