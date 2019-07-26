@@ -28,7 +28,7 @@ const UpperNav = styled.div`
   width: 100%;
   height: 56px;
   background: var(--white-four);
-  position: fixed;
+
   display: flex;
   flex-direction: row;
 `;
