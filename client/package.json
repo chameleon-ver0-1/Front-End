@@ -48,6 +48,7 @@
     "skylinkjs": "^0.6.37",
     "socket.io-client": "^2.2.0",
     "styled-components": "^4.2.0",
+    "webrtc-adapter": "^7.2.8",
     "webrtc-screen-capturing": "^1.0.1",
     "wordcloud": "^1.1.0"
   },
