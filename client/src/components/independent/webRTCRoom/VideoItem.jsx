@@ -24,13 +24,6 @@ var connection = new window.RTCMultiConnection();
 connection.autoCloseEntireSession = true;
 connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/";
 
-//TODO: video-sharing 추가
-var RMCMediaTrack = {
-  cameraStream: null,
-  cameraTrack: null,
-  screen: null
-};
-
 const VideoFrame = styled.div`
   padding-left: 50px;
   padding-top: 19px;
@@ -71,6 +64,10 @@ export class VideoItem extends Component {
 
     script.src = "https://cdn.WebRTC-Experiment.com/getScreenId.js";
     script.src = "https://webrtc.github.io/adapter/adapter-latest.js";
+
+    /*screen sharing을 위한 script */
+    script.src = "https://cdn.WebRTC-Experiment.com/getScreenId.js";
+    script.src = "https://webrtc.github.io/adapter/adapter-latest.js";
     script.src = "https://www.webrtc-experiment.com/common.js";
 
     script.async = true;
@@ -96,6 +93,7 @@ export class VideoItem extends Component {
     })();
 
     // connection.socketMessageEvent = "video-conference-demo";
+    //FIXME:
     connection.socketMessageEvent = "video-screen-demo";
 
     connection.session = {
@@ -107,9 +105,8 @@ export class VideoItem extends Component {
       OfferToReceiveAudio: true,
       OfferToReceiveVideo: true
     };
-    /*TODO: vidieo sharing - 여기 추가 */
-    // https://www.rtcmulticonnection.org/docs/iceServers/
-    // use your own TURN-server here!
+
+    //FIXME:
     connection.iceServers = [
       {
         urls: [
@@ -121,19 +118,16 @@ export class VideoItem extends Component {
       }
     ];
 
+    //FIXME:
+    var RMCMediaTrack = {
+      cameraStream: null,
+      cameraTrack: null,
+      screen: null
+    };
+
     connection.onstream = function(event) {
       //connection1
       connection.videosContainer = document.getElementById("videos-container"); //1개 이상의 비디오들을 담을 div공간을 id값으로 가져온다.
-
-      var existing = document.getElementById(event.streamid);
-      if (existing && existing.parentNode) {
-        existing.parentNode.removeChild(existing);
-      }
-      if (event.type === "local" && event.stream.isVideo) {
-        RMCMediaTrack.cameraStream = event.stream;
-        RMCMediaTrack.cameraTrack = getTracks(event.stream, "video")[0];
-      }
-
       var video = document.createElement("video"); //비디오 컴포넌트를 생성한다.
       video.id = event.streamid;
 
@@ -142,6 +136,26 @@ export class VideoItem extends Component {
       event.mediaElement.removeAttribute("srcObject");
       event.mediaElement.muted = true;
       event.mediaElement.volume = 0;
+
+      //FIXME:
+      var existing = document.getElementById(event.streamid);
+      if (existing && existing.parentNode) {
+        existing.parentNode.removeChild(existing);
+      }
+
+      if (event.type === "local" && event.stream.isVideo) {
+        RMCMediaTrack.cameraStream = event.stream;
+        navigator.mediaDevices
+          .getUserMedia({ video: true, audio: true })
+          .then(
+            stream =>
+              (RMCMediaTrack.cameraTrack = stream.getTracks(
+                event.stream,
+                "video"
+              )[0])
+          );
+      }
+      //
 
       try {
         video.setAttributeNode(document.createAttribute("autoplay"));
@@ -162,7 +176,7 @@ export class VideoItem extends Component {
 
       video.srcObject = event.stream; //비디오에 stream을 연결한다.
 
-      var width = 400; //임의의 너비 길이의 변수
+      var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
       var height = 1000;
       video.width = width; //비디오의 너비를 설정한다.
 
@@ -171,17 +185,13 @@ export class VideoItem extends Component {
 
       connection.videosContainer.appendChild(video); //비디오를 div공간에 추가한다.
 
-      //TODO: video-sharing 추가
-      setTimeout(function() {
-        video.media.play();
-      }, 5000);
-      video.id = event.streamid;
+      //TODO: get
+      // setTimeout(function() {
+      //   mediaElement.media.play();
+      // }, 5000);
 
       localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
       if (event.type === "local") {
-        //TODO:video-sharing 추가
-        RMCMediaTrack.selfVideo = video.media;
-
         connection.socket.on("disconnect", function() {
           if (!connection.getAllParticipants().length) {
             window.location.reload();
@@ -219,160 +229,6 @@ export class VideoItem extends Component {
       document.getElementsByClassName("open-room").disabled = !enable;
       document.getElementsByClassName("join-room").disabled = !enable;
       document.getElementsByClassName("room-id").disabled = !enable;
-    };
-
-    //TODO: 화면 공유 버튼 on/off state에 따라서 함수 실행시키기
-    /*화면 공유 함수*/
-    const getScreenId = (error, sourceId, screen_constraints) => {
-      if (
-        navigator.userAgent.indexOf("Edge") !== -1 &&
-        (!!navigator.msSaveOrOpenBlob || !!navigator.msSaveBlob)
-      ) {
-        navigator.getDisplayMedia(screen_constraints).then(
-          stream => {
-            document.querySelector("video").srcObject = stream;
-          },
-          error => {
-            alert("Please make sure to use Edge 17 or higher.");
-          }
-        );
-        return;
-      }
-      //TODO: 화면 공유 버튼 on/off state에 따라서 함수 실행시키기
-      //chrome extension 설치 여부 detection
-      // const getChromeExtensionStatus = status => {
-      //   if (status === "installed-enabled") alert("installed");
-      //   if (status === "installed-disabled") alert("installed but disabled");
-      //   // etc.
-      // };
-
-      //TODO: video-sharing 추가
-      var btnShareScreen = document.getElementById("share-screen");
-      connection.onUserStatusChanged = function() {
-        btnShareScreen.disabled = connection.getAllParticipants().length <= 0;
-      };
-
-      btnShareScreen.onclick = function() {
-        this.disabled = true;
-        getScreenStream(function(screen) {
-          var isLiveSession = connection.getAllParticipants().length > 0;
-          if (isLiveSession) {
-            replaceTrack(RMCMediaTrack.screen);
-          }
-          // now remove old video track from "attachStreams" array
-          // so that newcomers can see screen as well
-          connection.attachStreams.forEach(function(stream) {
-            getTracks(stream, "video").forEach(function(track) {
-              stream.removeTrack(track);
-            });
-            // now add screen track into that stream object
-            stream.addTrack(RMCMediaTrack.screen);
-          });
-        });
-      };
-      function screenHelper(callback) {
-        if (navigator.mediaDevices.getDisplayMedia) {
-          navigator.mediaDevices.getDisplayMedia(screen_constraints).then(
-            stream => {
-              callback(stream);
-            },
-            error => {
-              alert("Please make sure to use Edge 17 or higher.");
-            }
-          );
-        } else if (navigator.getDisplayMedia) {
-          navigator.getDisplayMedia(screen_constraints).then(
-            stream => {
-              callback(stream);
-            },
-            error => {
-              alert("Please make sure to use Edge 17 or higher.");
-            }
-          );
-        } else {
-          alert("getDisplayMedia API is not available in this browser.");
-        }
-      }
-      function getScreenStream(callback) {
-        screenHelper(function(screen) {
-          RMCMediaTrack.screen = getTracks(screen, "video")[0];
-          RMCMediaTrack.selfVideo.srcObject = screen;
-          // in case if onedned event does not fire
-          (function looper() {
-            // readyState can be "live" or "ended"
-            if (RMCMediaTrack.screen.readyState === "ended") {
-              RMCMediaTrack.screen.onended();
-              return;
-            }
-            setTimeout(looper, 1000);
-          })();
-          var firedOnce = false;
-          RMCMediaTrack.screen.onended = RMCMediaTrack.screen.onmute = RMCMediaTrack.screen.oninactive = function() {
-            if (firedOnce) return;
-            firedOnce = true;
-            if (getTracks(RMCMediaTrack.cameraStream, "video")[0].readyState) {
-              getTracks(RMCMediaTrack.cameraStream, "video").forEach(function(
-                track
-              ) {
-                RMCMediaTrack.cameraStream.removeTrack(track);
-              });
-              RMCMediaTrack.cameraStream.addTrack(RMCMediaTrack.cameraTrack);
-            }
-            RMCMediaTrack.selfVideo.srcObject = RMCMediaTrack.cameraStream;
-            connection.socket &&
-              connection.socket.emit(connection.socketCustomEvent, {
-                justStoppedMyScreen: true,
-                userid: connection.userid
-              });
-            // share camera again
-            replaceTrack(RMCMediaTrack.cameraTrack);
-            // now remove old screen from "attachStreams" array
-            connection.attachStreams = [RMCMediaTrack.cameraStream];
-            // so that user can share again
-            btnShareScreen.disabled = false;
-          };
-          connection.socket &&
-            connection.socket.emit(connection.socketCustomEvent, {
-              justSharedMyScreen: true,
-              userid: connection.userid
-            });
-          callback(screen);
-        });
-      }
-      function replaceTrack(videoTrack) {
-        if (!videoTrack) return;
-        if (videoTrack.readyState === "ended") {
-          alert(
-            'Can not replace an "ended" track. track.readyState: ' +
-              videoTrack.readyState
-          );
-          return;
-        }
-        connection.getAllParticipants().forEach(function(pid) {
-          var peer = connection.peers[pid].peer;
-          if (!peer.getSenders) return;
-          var trackToReplace = videoTrack;
-          peer.getSenders().forEach(function(sender) {
-            if (!sender || !sender.track) return;
-            if (sender.track.kind === "video" && trackToReplace) {
-              sender.replaceTrack(trackToReplace);
-              trackToReplace = null;
-            }
-          });
-        });
-      }
-      //////////////////여기까지//////////////
-      //////////////////여기까지///////////////
-      navigator.mediaDevices
-        .getUserMedia(screen_constraints)
-        .then(function(stream) {
-          document.querySelector("video").srcObject = stream;
-
-          // share this "MediaStream" object using RTCPeerConnection API
-        })
-        .catch(function(error) {
-          console.error(error);
-        });
     };
 
     /*신규 화상회의 방 개설하는 함수 */
@@ -435,6 +291,148 @@ export class VideoItem extends Component {
         })
       );
     };
+
+    var btnShareScreen = document.getElementById("share-screen");
+    connection.onUserStatusChanged = function() {
+      btnShareScreen.disabled = connection.getAllParticipants().length <= 0;
+    };
+
+    const shareVideo = () => {
+      this.disabled = true;
+
+      getScreenStream(function(screen) {
+        var isLiveSession = connection.getAllParticipants().length > 0;
+        if (isLiveSession) {
+          navigator.mediaDevices
+            .getUserMedia({ video: true, audio: true })
+            .then(stream => stream.replaceTrack(RMCMediaTrack.screen));
+        }
+        // now remove old video track from "attachStreams" array
+        // so that newcomers can see screen as well
+        connection.attachStreams.forEach(function(stream) {
+          navigator.mediaDevices
+            .getUserMedia({ video: true, audio: true })
+            .then(stream =>
+              stream.getTracks(stream, "video").forEach(function(track) {
+                stream.removeTrack(track);
+              })
+            );
+
+          // now add screen track into that stream object
+          stream.addTrack(RMCMediaTrack.screen);
+        });
+      });
+    };
+    function screenHelper(callback, screen_constraints) {
+      if (navigator.mediaDevices.getDisplayMedia) {
+        navigator.mediaDevices.getDisplayMedia(screen_constraints).then(
+          stream => {
+            callback(stream);
+          },
+          error => {
+            alert("Please make sure to use Edge 17 or higher.");
+          }
+        );
+      } else if (navigator.getDisplayMedia) {
+        navigator.getDisplayMedia(screen_constraints).then(
+          stream => {
+            callback(stream);
+          },
+          error => {
+            alert("Please make sure to use Edge 17 or higher.");
+          }
+        );
+      } else {
+        alert("getDisplayMedia API is not available in this browser.");
+      }
+    }
+    function getScreenStream(callback) {
+      screenHelper(function(screen) {
+        navigator.mediaDevices
+          .getUserMedia({ video: true, audio: true })
+          .then(
+            stream =>
+              (RMCMediaTrack.screen = stream.getTracks(screen, "video")[0])
+          );
+
+        RMCMediaTrack.selfVideo.srcObject = screen;
+        // in case if onedned event does not fire
+        (function looper() {
+          // readyState can be "live" or "ended"
+          if (RMCMediaTrack.screen.readyState === "ended") {
+            RMCMediaTrack.screen.onended();
+            return;
+          }
+          setTimeout(looper, 1000);
+        })();
+        var firedOnce = false;
+        RMCMediaTrack.screen.onended = RMCMediaTrack.screen.onmute = RMCMediaTrack.screen.oninactive = function() {
+          if (firedOnce) return;
+          firedOnce = true;
+          if (
+            navigator.mediaDevices
+              .getUserMedia({ video: true, audio: true })
+              .then(
+                stream =>
+                  stream.getTracks(RMCMediaTrack.cameraStream, "video")[0]
+                    .readyState
+              )
+          ) {
+            navigator.mediaDevices
+              .getUserMedia({ video: true, audio: true })
+              .then(stream =>
+                stream
+                  .getTracks(RMCMediaTrack.cameraStream, "video")
+                  .forEach(function(track) {
+                    RMCMediaTrack.cameraStream.removeTrack(track);
+                  })
+              );
+
+            RMCMediaTrack.cameraStream.addTrack(RMCMediaTrack.cameraTrack);
+          }
+          RMCMediaTrack.selfVideo.srcObject = RMCMediaTrack.cameraStream;
+          connection.socket &&
+            connection.socket.emit(connection.socketCustomEvent, {
+              justStoppedMyScreen: true,
+              userid: connection.userid
+            });
+          // share camera again
+          replaceTrack(RMCMediaTrack.cameraTrack);
+          // now remove old screen from "attachStreams" array
+          connection.attachStreams = [RMCMediaTrack.cameraStream];
+          // so that user can share again
+          btnShareScreen.disabled = false;
+        };
+        connection.socket &&
+          connection.socket.emit(connection.socketCustomEvent, {
+            justSharedMyScreen: true,
+            userid: connection.userid
+          });
+        callback(screen);
+      });
+    }
+    function replaceTrack(videoTrack) {
+      if (!videoTrack) return;
+      if (videoTrack.readyState === "ended") {
+        alert(
+          'Can not replace an "ended" track. track.readyState: ' +
+            videoTrack.readyState
+        );
+        return;
+      }
+      connection.getAllParticipants().forEach(function(pid) {
+        var peer = connection.peers[pid].peer;
+        if (!peer.getSenders) return;
+        var trackToReplace = videoTrack;
+        peer.getSenders().forEach(function(sender) {
+          if (!sender || !sender.track) return;
+          if (sender.track.kind === "video" && trackToReplace) {
+            sender.replaceTrack(trackToReplace);
+            trackToReplace = null;
+          }
+        });
+      });
+    }
 
     let playTran; //실시간 전송하기 위한 변수
 
@@ -598,7 +596,7 @@ export class VideoItem extends Component {
             className="room-id"
             autoCorrect="off"
             autoCapitalize="off"
-            size="10"
+            size="20"
             defaultValue="abcded"
           />
           <button
@@ -615,14 +613,14 @@ export class VideoItem extends Component {
           <button className="open-or-join-room" onClick={openOrJoinRoom}>
             회의실 개설/참여하기
           </button>
+          <button id="share-screen" disabled onClick={shareVideo}>
+            화면 공유
+          </button>
           <button type="button" onClick={onRekog}>
             지금부터 감정인식 시작
           </button>
           <button type="button" onClick={onStop}>
             회의 종료
-          </button>
-          <button id="share-screen" disabled>
-            Share Your Screen
           </button>
         </div>
 
