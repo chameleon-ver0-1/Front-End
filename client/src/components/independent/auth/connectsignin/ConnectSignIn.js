@@ -44,20 +44,15 @@ class ConnectSignIn extends Component {
           <div className="input-group-connect">
             {/* <label className="label" htmlFor="company">회사 및 부서</label> */}
             <div className="label">회사 및 부서</div>
-            <div className="buttons">
+            <div className="text_search">
               <input
                 type="text"
                 name="company"
-                className="login-input2"
-                placeholder="회사명"
+                className="small-input"
+                //TODO: 태그로 바꿔야함
               />
 
-              <input
-                type="text"
-                name="company"
-                className="login-input2"
-                placeholder="부서명"
-              />
+              <input type="text" name="company" className="small-input" />
             </div>
           </div>
 

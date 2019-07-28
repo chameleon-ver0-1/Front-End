@@ -73,6 +73,7 @@
   color: var(--greenish-teal);
   border-radius: 10px;
   background: none;
+  font-size: 14px;
 }
 
 .cancelbutton {
@@ -81,6 +82,7 @@
   border: solid 1px #cccccc;
   background: none;
   border-radius: 10px;
+  font-size: 14px;
 }
 
 /***************Tag css**************/

@@ -138,7 +138,7 @@ export class Navbar extends Component {
             </LogoContainer>
             <NavRight>
               <Fade when={this.state.show}>
-                <Dropdown />
+                <Dropdown style={{ zIndex: 100 }} />
               </Fade>
               <NoticeBtn>
                 <img

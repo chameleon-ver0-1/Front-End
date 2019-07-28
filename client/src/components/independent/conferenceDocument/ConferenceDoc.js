@@ -6,8 +6,6 @@
 
 import React, { Component, useState, useEffect } from "react";
 import "./conferencedoc.style.css";
-import download_off from "../../../assets/doc/download_off.png";
-import download_on from "../../../assets/doc/download_on.png";
 import { Link } from "react-router-dom";
 import DocData from "./data/doc.json";
 import axios from "axios";

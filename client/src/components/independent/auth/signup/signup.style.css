@@ -9,6 +9,7 @@
   font-size: 14px;
   margin-left: 11px;
   margin-right: 2px;
+  font-family: NanumSquareB;
 }
 
 .star {
@@ -45,6 +46,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: 48px;
+  font-family: NanumSquareB;
 }
 
 .input-group2 {
@@ -60,7 +62,8 @@
 }
 
 .small-input {
-  width: 149px;
+  padding-left: 15px;
+  width: 134px;
   height: 38px;
   background: none;
   border: none;
@@ -81,4 +84,5 @@
   color: #ffffff;
   margin-top: 20px;
   font-size: 16px;
+  font-family: NanumSquareB;
 }

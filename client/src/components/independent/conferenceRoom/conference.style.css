@@ -1,6 +1,6 @@
-@import '../../../style.css';
+@import "../../../style.css";
 
-.conferenceroom_container{
+.conferenceroom_container {
   margin-left: 83px;
   margin-top: 42px;
   width: 712px;
@@ -8,16 +8,17 @@
   margin-bottom: 150px;
 }
 
-.conferenceroom_text{
+.conferenceroom_text {
   font-size: 20px;
+  font-family: NanumSquareB;
 }
 
-.add_conference{
+.add_conference {
   border-bottom: solid 1px var(--white-two);
   text-align: right;
 }
 
-.add_conference_btn{
+.add_conference_btn {
   font-size: 14px;
   border: none;
   background: none;
@@ -25,7 +26,7 @@
   position: right;
 }
 
-.circle_container{
+.circle_container {
   display: flex;
   flex-direction: row;
   margin-top: 27px;
@@ -33,17 +34,17 @@
   width: 700px;
 }
 
-.slider{
+.slider {
   width: 700px;
   height: 200px;
 }
 
-.slide_div{
+.slide_div {
   display: flex;
   flex-direction: row;
 }
 
-.left_right_l{
+.left_right_l {
   border: none;
   background: none;
   width: 16px;
@@ -52,7 +53,7 @@
   text-align: left;
 }
 
-.left_right_r{
+.left_right_r {
   border: none;
   background: none;
   width: 16px;
@@ -61,17 +62,17 @@
   text-align: right;
 }
 
-.left_right_img{
+.left_right_img {
   width: 16px;
   height: 33px;
 }
 
-.people{
+.people {
   width: 12px;
   height: 13px;
 }
 
-.circle_hori{
+.circle_hori {
   display: flex;
   flex-direction: row;
   width: 34px;
@@ -86,4 +87,3 @@
   display: flex;
   flex-direction: column;
 }
-

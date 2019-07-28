@@ -10,8 +10,9 @@
   margin-top: 42px;
 }
 
-.documentroom.text {
+.documentroom_text {
   font-size: 20px;
+  font-family: NanumSquareB;
 }
 
 .documentroom_table {
