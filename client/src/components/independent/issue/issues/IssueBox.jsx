@@ -8,7 +8,7 @@ import styled from "styled-components";
 const Container = styled.div`
   margin-right: 25px;
   width: 256px;
-  height: 610px;
+  height: 640px;
   display: flex;
   flex-direction: column;
 `;

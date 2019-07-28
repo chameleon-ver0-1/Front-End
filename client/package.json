@@ -22,6 +22,8 @@
     "rc-drawer": "^1.9.8",
     "react": "^16.8.4",
     "react-beautiful-dnd": "^10.1.0",
+    "react-bootstrap-date-picker": "^5.1.0",
+    "react-datepicker": "^2.8.0",
     "react-dnd": "^7.4.5",
     "react-dnd-html5-backend": "^7.4.4",
     "react-dom": "^16.8.4",
@@ -46,6 +48,7 @@
     "skylinkjs": "^0.6.37",
     "socket.io-client": "^2.2.0",
     "styled-components": "^4.2.0",
+    "webrtc-adapter": "^7.2.8",
     "webrtc-screen-capturing": "^1.0.1",
     "wordcloud": "^1.1.0"
   },
