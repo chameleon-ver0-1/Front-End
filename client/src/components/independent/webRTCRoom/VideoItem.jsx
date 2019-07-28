@@ -19,8 +19,10 @@ import styled from "styled-components";
 import "./webrtc.style.css";
 import html2canvas from "html2canvas";
 import axios from "axios";
+import * as service from "./getHTMLMediaElement";
 
 var connection = new window.RTCMultiConnection();
+
 connection.autoCloseEntireSession = true;
 connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/";
 
@@ -42,7 +44,11 @@ const EmotionStatus = styled.div`
   opacity: 0.4;
   border-radius: 45px;
 `;
-
+var VideosContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
 export class VideoItem extends Component {
   //FIXME:state값 추가함
   state = { roomToken: "", dummy: [] };
@@ -60,7 +66,6 @@ export class VideoItem extends Component {
       "https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js";
     script.src =
       "https://rtcmulticonnection.herokuapp.com/node_modules/webrtc-adapter/out/adapter.js";
-    script.src = "./getHTMLMediaElement.jsx";
 
     script.src = "https://cdn.WebRTC-Experiment.com/getScreenId.js";
     script.src = "https://webrtc.github.io/adapter/adapter-latest.js";
@@ -79,6 +84,13 @@ export class VideoItem extends Component {
   state = { roomKey: "undefined" };
 
   render() {
+    //FIXME:
+    var RMCMediaTrack = {
+      cameraStream: null,
+      cameraTrack: null,
+      screen: null
+    };
+
     (function() {
       var params = {},
         r = /([^&=]+)=?([^&]*)/g;
@@ -118,20 +130,16 @@ export class VideoItem extends Component {
       }
     ];
 
-    //FIXME:
-    var RMCMediaTrack = {
-      cameraStream: null,
-      cameraTrack: null,
-      screen: null
-    };
-
     connection.onstream = function(event) {
       //connection1
+      console.log("onstream 정상 작동 중");
+
       connection.videosContainer = document.getElementById("videos-container"); //1개 이상의 비디오들을 담을 div공간을 id값으로 가져온다.
       var video = document.createElement("video"); //비디오 컴포넌트를 생성한다.
       video.id = event.streamid;
+      video.style.border = "solid 1px var(--greenish-teal)";
+      // video.style.marginLeft = "16px"; //각 비디오의 왼쪽 마진을 설정한다.
 
-      console.log("onstream 정상 작동 중");
       event.mediaElement.removeAttribute("src");
       event.mediaElement.removeAttribute("srcObject");
       event.mediaElement.muted = true;
@@ -176,21 +184,23 @@ export class VideoItem extends Component {
 
       video.srcObject = event.stream; //비디오에 stream을 연결한다.
 
-      var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
-      var height = 1000;
-      video.width = width; //비디오의 너비를 설정한다.
+      var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
 
-      video.buttons = "full-screen"; //전체화면으로 확장되는 버튼을 추가한다.
-      video.style.marginLeft = "16px"; //각 비디오의 왼쪽 마진을 설정한다.
+      var mediaElement = service.getHTMLMediaElement(video, {
+        title: event.userid,
+        buttons: ["full-screen"],
+        width: width,
+        showOnMouseEnter: false
+      });
 
-      connection.videosContainer.appendChild(video); //비디오를 div공간에 추가한다.
+      connection.videosContainer.appendChild(mediaElement); //비디오를 div공간에 추가한다.
 
       //TODO: get
-      // setTimeout(function() {
-      //   mediaElement.media.play();
-      // }, 5000);
+      setTimeout(function() {
+        mediaElement.media.play();
+      }, 5000);
+      mediaElement.id = event.streamid;
 
-      localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
       if (event.type === "local") {
         connection.socket.on("disconnect", function() {
           if (!connection.getAllParticipants().length) {
@@ -198,6 +208,7 @@ export class VideoItem extends Component {
           }
         });
       }
+      localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
     };
 
     //connection2
@@ -224,21 +235,18 @@ export class VideoItem extends Component {
     };
 
     /*상황에 맞춰 버튼들을 비활성화하는 함수*/
-    const disableInputButtons = enable => {
-      document.getElementsByClassName("open-or-join-room").disabled = !enable;
-      document.getElementsByClassName("open-room").disabled = !enable;
-      document.getElementsByClassName("join-room").disabled = !enable;
-      document.getElementsByClassName("room-id").disabled = !enable;
+    const disableInputButtons = () => {
+      // document.getElementsByClassName("open-or-join-room").disabled = true;
+      document.getElementsByClassName("open-room").disabled = true;
+      document.getElementsByClassName("join-room").disabled = true;
+      document.getElementsByClassName("room-id").disabled = true;
     };
 
     /*신규 화상회의 방 개설하는 함수 */
     const openRoom = () => {
       disableInputButtons();
-      connection.open(document.getElementById("room-id").value, function(
-        isRoomOpened,
-        roomid,
-        error
-      ) {
+      var roomid = document.getElementById("room-id").value;
+      connection.open(roomid, function(isRoomOpened, roomid, error) {
         if (isRoomOpened === true) {
           showRoomURL(connection.sessionid);
         } else {
@@ -252,16 +260,15 @@ export class VideoItem extends Component {
           alert(error);
         }
       });
+      // join callback
+      afterOpenOrJoin();
     };
 
     /*기존 개설된 화상회의 방을 들어가는 함수 */
     const joinRoom = () => {
       disableInputButtons();
-      connection.join(document.getElementById("room-id").value, function(
-        isJoinedRoom,
-        roomid,
-        error
-      ) {
+      var roomid = document.getElementById("room-id").value;
+      connection.join(roomid, function(isJoinedRoom, roomid, error) {
         if (error) {
           disableInputButtons(true);
           if (error === "Room not available") {
@@ -271,7 +278,29 @@ export class VideoItem extends Component {
           alert(error);
         }
       });
+      afterOpenOrJoin();
     };
+
+    function afterOpenOrJoin() {
+      connection.socket.on(connection.socketCustomEvent, function(
+        message,
+        error
+      ) {
+        if (message.userid === connection.userid) return; // ignore self messages
+        if (message.justSharedMyScreen === true) {
+          var video = document.getElementById(message.userid);
+          if (video) {
+            video.querySelector("video").srcObject = null;
+          }
+        }
+        if (message.justStoppedMyScreen === true) {
+          var video = document.getElementById(message.userid);
+          if (video) {
+            video.querySelector("video").srcObject = null;
+          }
+        }
+      });
+    }
 
     /*신규 화상회의방을 개설하고 들어가는 함수 */
     const openOrJoinRoom = () => {
@@ -293,8 +322,24 @@ export class VideoItem extends Component {
     };
 
     var btnShareScreen = document.getElementById("share-screen");
-    connection.onUserStatusChanged = function() {
-      btnShareScreen.disabled = connection.getAllParticipants().length <= 0;
+    // connection.onUserStatusChanged = function() {
+    //   btnShareScreen.disabled = connection.getAllParticipants().length <= 0;
+    // };
+    const getScreenId = (error, sourceId, screen_constraints) => {
+      if (
+        navigator.userAgent.indexOf("Edge") !== -1 &&
+        (!!navigator.msSaveOrOpenBlob || !!navigator.msSaveBlob)
+      ) {
+        navigator.getDisplayMedia(screen_constraints).then(
+          stream => {
+            document.querySelector("video").srcObject = stream;
+          },
+          error => {
+            alert("Please make sure to use Edge 17 or higher.");
+          }
+        );
+        return;
+      }
     };
 
     const shareVideo = () => {
@@ -355,6 +400,7 @@ export class VideoItem extends Component {
               (RMCMediaTrack.screen = stream.getTracks(screen, "video")[0])
           );
 
+        //FIXME:오류나는 부분
         RMCMediaTrack.selfVideo.srcObject = screen;
         // in case if onedned event does not fire
         (function looper() {
@@ -366,43 +412,43 @@ export class VideoItem extends Component {
           setTimeout(looper, 1000);
         })();
         var firedOnce = false;
-        RMCMediaTrack.screen.onended = RMCMediaTrack.screen.onmute = RMCMediaTrack.screen.oninactive = function() {
-          if (firedOnce) return;
-          firedOnce = true;
-          if (
-            navigator.mediaDevices
-              .getUserMedia({ video: true, audio: true })
-              .then(
-                stream =>
-                  stream.getTracks(RMCMediaTrack.cameraStream, "video")[0]
-                    .readyState
-              )
-          ) {
-            navigator.mediaDevices
-              .getUserMedia({ video: true, audio: true })
-              .then(stream =>
-                stream
-                  .getTracks(RMCMediaTrack.cameraStream, "video")
-                  .forEach(function(track) {
-                    RMCMediaTrack.cameraStream.removeTrack(track);
-                  })
-              );
+        // RMCMediaTrack.screen.onended = RMCMediaTrack.screen.onmute = RMCMediaTrack.screen.oninactive = function() {
+        //   if (firedOnce) return;
+        //   firedOnce = true;
+        //   if (
+        //     navigator.mediaDevices
+        //       .getUserMedia({ video: true, audio: true })
+        //       .then(
+        //         stream =>
+        //           stream.getTracks(RMCMediaTrack.cameraStream, "video")[0]
+        //             .readyState
+        //       )
+        //   ) {
+        //     navigator.mediaDevices
+        //       .getUserMedia({ video: true, audio: true })
+        //       .then(stream =>
+        //         stream
+        //           .getTracks(RMCMediaTrack.cameraStream, "video")
+        //           .forEach(function(track) {
+        //             RMCMediaTrack.cameraStream.removeTrack(track);
+        //           })
+        //       );
 
-            RMCMediaTrack.cameraStream.addTrack(RMCMediaTrack.cameraTrack);
-          }
-          RMCMediaTrack.selfVideo.srcObject = RMCMediaTrack.cameraStream;
-          connection.socket &&
-            connection.socket.emit(connection.socketCustomEvent, {
-              justStoppedMyScreen: true,
-              userid: connection.userid
-            });
-          // share camera again
-          replaceTrack(RMCMediaTrack.cameraTrack);
-          // now remove old screen from "attachStreams" array
-          connection.attachStreams = [RMCMediaTrack.cameraStream];
-          // so that user can share again
-          btnShareScreen.disabled = false;
-        };
+        //     RMCMediaTrack.cameraStream.addTrack(RMCMediaTrack.cameraTrack);
+        //   }
+        //   RMCMediaTrack.selfVideo.srcObject = RMCMediaTrack.cameraStream;
+        //   connection.socket &&
+        //     connection.socket.emit(connection.socketCustomEvent, {
+        //       justStoppedMyScreen: true,
+        //       userid: connection.userid
+        //     });
+        //   // share camera again
+        //   replaceTrack(RMCMediaTrack.cameraTrack);
+        //   // now remove old screen from "attachStreams" array
+        //   connection.attachStreams = [RMCMediaTrack.cameraStream];
+        //   // so that user can share again
+        //   btnShareScreen.disabled = false;
+        // };
         connection.socket &&
           connection.socket.emit(connection.socketCustomEvent, {
             justSharedMyScreen: true,
@@ -411,6 +457,7 @@ export class VideoItem extends Component {
         callback(screen);
       });
     }
+
     function replaceTrack(videoTrack) {
       if (!videoTrack) return;
       if (videoTrack.readyState === "ended") {
@@ -531,6 +578,7 @@ export class VideoItem extends Component {
       // this.state.roomToken = roomQueryStringURL;
       // this.state.roomKey = html;
       this.state.roomToken = roomQueryStringURL;
+      console.log(roomQueryStringURL);
     };
 
     /*roomid setting*/
@@ -556,6 +604,7 @@ export class VideoItem extends Component {
 
     //TODO: roomid를 직접 받아와야하는 부분
     var roomid = window.params.roomid;
+    // var roomid = txtRoomId;
 
     if (!roomid && hashString.length) {
       roomid = hashString;
@@ -589,7 +638,6 @@ export class VideoItem extends Component {
     return (
       <VideoFrame id="video-home-container">
         <div style={{ width: "100%" }}>
-          <div id="videos-container" />
           <input
             type="text"
             id="room-id"
@@ -597,7 +645,6 @@ export class VideoItem extends Component {
             autoCorrect="off"
             autoCapitalize="off"
             size="20"
-            defaultValue="abcded"
           />
           <button
             className="open-room"
@@ -613,7 +660,7 @@ export class VideoItem extends Component {
           <button className="open-or-join-room" onClick={openOrJoinRoom}>
             회의실 개설/참여하기
           </button>
-          <button id="share-screen" disabled onClick={shareVideo}>
+          <button id="share-screen" onClick={shareVideo}>
             화면 공유
           </button>
           <button type="button" onClick={onRekog}>
@@ -623,7 +670,7 @@ export class VideoItem extends Component {
             회의 종료
           </button>
         </div>
-
+        <VideosContainer id="videos-container" />
         <div id="room-urls" style={{ width: "100%" }} />
 
         <EmotionStatus id="showEmotion" />

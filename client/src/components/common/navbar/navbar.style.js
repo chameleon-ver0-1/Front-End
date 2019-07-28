@@ -5,7 +5,7 @@ export const NavContainer = styled.div`
   display: flex;
 
   width: 100vw;
-  height: 64px;
+  height: 6.64vh;
 
   border-bottom: 1px solid var(--white-two);
 `;
@@ -68,8 +68,8 @@ export const Nav2Container = styled.div`
   display: flex;
   background: var(--greenish-teal);
 
-  width: 100vw;
-  height: 64px;
+  width: 100%;
+  height: 6.64vh;
 
   border-bottom: 1px solid var(--white-two);
 `;
@@ -122,6 +122,7 @@ export const HomeNav = styled.div`
   padding-left: 171px;
   display: flex;
   align-items: center;
+  height: 6.64%;
 `;
 
 export const NavItem = styled.div`

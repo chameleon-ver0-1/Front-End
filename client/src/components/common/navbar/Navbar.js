@@ -129,7 +129,11 @@ export class Navbar extends Component {
           </HomeNav>
         </div>
       );
-    } else {
+    } else if (
+      window.location.pathname === "/home/issue" ||
+      window.location.pathname === "/home/conferenceRoom" ||
+      window.location.pathname === "/home/conferenceDoc"
+    ) {
       return (
         <div className="container">
           <Nav2Container>
@@ -167,6 +171,8 @@ export class Navbar extends Component {
           <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
         </div>
       );
+    } else {
+      return <div />;
     }
   }
 }
