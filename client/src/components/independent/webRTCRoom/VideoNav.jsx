@@ -60,10 +60,11 @@ const UserCount = styled.div`
 const CountText = styled.button`
   color: var(--greenish-teal);
   font-size: 22px;
+  height: 100%;
+  display: flex;
 
-  padding: 0px;
   margin-left: 8px;
-  margin-top: 12px;
+  align-items: center;
   overflow: auto;
   border: none;
   background: none;
@@ -80,6 +81,10 @@ const Timer = styled.div`
   color: white;
   font-size: 15px;
   text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   overflow: hidden;
 `;
@@ -121,7 +126,7 @@ export class VideoNav extends Component {
         <UpperNav>
           <ContainerLeft>
             <WhiteLogo>
-              <img width="45px" margin="8px" src={logo} />
+              <img width="45px" height="46px" margin="7px" src={logo} />
             </WhiteLogo>
             <ConferenceTitle>4월 간행물 표지 초안</ConferenceTitle>
             <UserCount>

@@ -201,7 +201,16 @@ function sender(text) {
   writeMessage("me", name, text);
 }
 
-export class STTTest extends Component {
+export class TopicDrawerBar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.items = [];
+    for (let i = 1; i <= 5; i++) {
+      this.items.push(i);
+    }
+  }
+
   componentWillMount() {
     const script = document.createElement("script");
 
@@ -228,8 +237,8 @@ export class STTTest extends Component {
   }
   render() {
     return (
-      <div style={{ background: "var(--white-five)", width: "252px" }}>
-        <div className="test" style={{ backgroundColor: "var(--white-five)" }}>
+      <div style={{ background: "var(--white-four)", width: "252px" }}>
+        <div style={{ backgroundColor: "var(--white-four)" }}>
           <div>
             <div
               style={{
@@ -278,4 +287,4 @@ export class STTTest extends Component {
   }
 }
 
-export default STTTest;
+export default TopicDrawerBar;

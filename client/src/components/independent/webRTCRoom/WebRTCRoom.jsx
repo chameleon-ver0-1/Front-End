@@ -9,8 +9,26 @@ import VideoNav from "./VideoNav";
 import VideoMenubar from "./VideoMenubar";
 import styled from "styled-components";
 import openDrawer from "../../../assets/conferenceRoom/toggleOpen.png";
+import closeDrawer from "../../../assets/conferenceRoom/toggleClosed.png";
 import TopicDrawerBar from "./TopicDrawerBar";
 
+import SlideMenu from "react-slide-menu";
+
+const MainView = styled.div`
+  transition: margin-left 0.5s;
+`;
+const SideBar = styled.div`
+  height: 80%;
+  width: 0;
+  position: fixed;
+  z-index: 0;
+  top: 122px;
+  right: 0;
+  background-color: var(--white-four);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+`;
 const VideoBaseContainer = styled.div`
   width: 100%;
 `;
@@ -28,6 +46,10 @@ const SecondBox = styled.div`
 const ToggleBtn = styled.div`
   flex: 0.3;
   background: var(--white-four);
+  width: 10px;
+  height: 51px;
+  display: flex;
+  align-items: center;
 `;
 const ButtonItem = styled.button`
   width: 52px;
@@ -38,64 +60,70 @@ const ButtonItem = styled.button`
   background: none;
   outline: none;
 `;
-// const RightDrawer = styled.div`
-//   display: flex;
-//   justify-content: flex-end;
-// `;
-const STTLayout = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 20%;
-`;
+var cnt = 1;
 export class WebRTCRoom extends Component {
-  state = { open: undefined };
+  constructor(props) {
+    super(props);
+    this.state = { slideMenuActive: false };
+  }
 
+  onToggle = () => {
+    this.setState({
+      slideMenuActive: !this.state.slideMenuActive
+    });
+
+    if (this.state.slideMenuActive == true) {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("main").style.marginRight = "250px";
+    } else {
+      document.getElementById("mySidebar").style.width = "0px";
+      document.getElementById("main").style.marginRight = "0px";
+    }
+  };
   render() {
-    const state =
-      this.state.open === undefined
-        ? "peek"
-        : this.state.open
-        ? "open"
-        : "close";
-    const icon = this.state.open ? "fold" : "unfold";
-    const toggle = () => {
-      this.setState(state => ({ open: !state.open }));
+    // this.state.slideMenuActive = false;
 
-      if (icon === "fold") {
-        this.src = { openDrawer };
-      } else {
-        this.src = "../../../assets/conferenceRoom/toggleClosed.png";
-      }
-    };
     return (
       <VideoBaseContainer>
         <NavDivider>
           <VideoNav />
-          <ToggleBtn>
-            <ButtonItem>
-              <img
-                id="drawerToggleBtn"
-                width="10px"
-                height="22px"
-                src={openDrawer}
-                className="sidebar-toggle"
-                onClick={toggle}
-              />
-            </ButtonItem>
+          <ToggleBtn onClick={this.onToggle}>
+            <img
+              id="toggleBtn"
+              src={
+                this.state.slideMenuActive == false ? closeDrawer : openDrawer
+              }
+              width="10px"
+              height="22px"
+              style={{ background: "var(--white-four)" }}
+            />
           </ToggleBtn>
         </NavDivider>
-        <SecondBox>
-          <div style={{ width: "80%", display: "flex", flexDirection: "row" }}>
-            <VideoMenubar />
-            <VideoItem />
-          </div>
-          <STTLayout>
-            <TopicDrawerBar />
-            {/* <RightDrawer style={{ flex: "1" }}>
-              <Drawerbar isToggle={this.state} />
-            </RightDrawer> */}
-          </STTLayout>
-        </SecondBox>
+        <MainView id="main">
+          <SecondBox>
+            <div
+              style={{ width: "80%", display: "flex", flexDirection: "row" }}
+            >
+              <VideoMenubar />
+              <VideoItem />
+            </div>
+
+            <SideBar id="mySidebar" class="sidebar">
+              <TopicDrawerBar />
+              <button
+                style={{
+                  position: "absolute",
+                  top: "0",
+                  right: "25px",
+                  fontSize: "36px",
+                  marginLeft: "50px"
+                }}
+              >
+                ×
+              </button>
+            </SideBar>
+          </SecondBox>
+        </MainView>
       </VideoBaseContainer>
     );
   }
