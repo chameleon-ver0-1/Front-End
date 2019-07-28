@@ -21,6 +21,7 @@ export class MakeIssue extends Component {
           <div className="roomtitle">{title}</div>
 
           {/* TODO: issue 데이터 가져오기 */}
+          {/* TODO: 선택한 데이터 태그로 받아오기 */}
           <Tabs>
             <TabList>
               <Tab>TODO</Tab>
@@ -30,7 +31,9 @@ export class MakeIssue extends Component {
 
             <TabPanel>
               <ul className="issue-list">
-                <li className="issue-item">a</li>
+                <li className="issue-item" onClick={this.issueClicked}>
+                  a
+                </li>
                 <li className="issue-item">b</li>
                 <li className="issue-item">c</li>
               </ul>

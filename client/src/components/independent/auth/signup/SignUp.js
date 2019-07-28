@@ -101,16 +101,10 @@ class SignUp extends Component {
                 type="text"
                 name="company"
                 className="small-input"
-                placeholder="회사명"
                 //TODO: 태그로 바꿔야함
               />
 
-              <input
-                type="text"
-                name="company"
-                className="small-input"
-                placeholder="부서명"
-              />
+              <input type="text" name="company" className="small-input" />
             </div>
           </div>
 

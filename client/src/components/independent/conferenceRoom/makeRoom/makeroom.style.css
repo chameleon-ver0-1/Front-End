@@ -25,13 +25,14 @@
   color: var(--light-black);
   font-size: 16px;
   font-weight: bold;
+  display: flex;
 }
 
 .roominput {
   margin-left: 43px;
   width: 347px;
   height: 28px;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 12px;
   border: solid 1px #cccccc;
   padding-left: 11px;
@@ -57,6 +58,12 @@
   color: var(--greenish-teal);
   background: none;
   border: none;
+  float: right;
+}
+
+.getissueimg {
+  width: 13px;
+  height: 13px;
 }
 
 .makebutton {
@@ -94,7 +101,7 @@ div.ReactTags__tagInput input.ReactTags__tagInputField {
   font-size: 12px;
   width: 347px;
   border: solid 1px #cccccc;
-  border-radius: 5px;
+  border-radius: 10px;
   padding-left: 11px;
 }
 

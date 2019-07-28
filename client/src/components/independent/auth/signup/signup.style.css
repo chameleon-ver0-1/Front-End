@@ -23,8 +23,8 @@
 }
 
 .login-input {
-  margin-top: 9px;
-  width: 313px;
+  margin-top: 8px;
+  width: 297px;
   height: 39px;
 
   border-radius: 18.8px;
@@ -36,16 +36,15 @@
 }
 
 .inner-container2 {
-  /* background: #666666; */
+  margin: 60px auto;
   width: 313px;
-  margin: 10px auto;
 }
 
 .header2 {
   font-size: 30px;
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 48px;
 }
 
 .input-group2 {
@@ -54,17 +53,16 @@
 
 .text_search {
   margin-top: 9px;
-  width: 330px;
   height: 38px;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 }
 
 .small-input {
   width: 149px;
   height: 38px;
   background: none;
-  padding-left: 20px;
   border: none;
   font-size: 12px;
   border: solid 1px var(--pinkish-grey);
