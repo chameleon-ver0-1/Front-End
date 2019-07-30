@@ -1,0 +1,44 @@
+@import "../../../../style.css";
+
+.inner-container3 {
+  margin: 60px auto;
+  width: 313px;
+}
+
+.header3 {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 48px;
+  font-family: NanumSquareB;
+}
+
+.p-explanation {
+  font-size: 14px;
+  color: var(--brownish-grey);
+  display: flex;
+  justify-content: center;
+}
+
+.pa-btn-div {
+  margin-top: 40px;
+  height: 97px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-btn {
+  width: 313px;
+  height: 41px;
+  color: var(--greenish-teal);
+  background: none;
+  border-radius: 18.8px;
+  border: solid 1px var(--greenish-teal);
+  font-size: 16px;
+}
+
+.project-btn:hover {
+  background: var(--greenish-teal);
+  color: #ffffff;
+}

@@ -72,7 +72,8 @@ export class Navbar extends Component {
       window.location.pathname === "/auth/signUp" ||
       window.location.pathname === "/auth/authCheck" ||
       window.location.pathname === "/auth/connectSignIn" ||
-      window.location.pathname === "/auth/projectAdd"
+      window.location.pathname === "/auth/projectAdd" ||
+      window.location.pathname === "/auth/projectList"
     ) {
       return (
         <div className="container">
@@ -133,7 +134,8 @@ export class Navbar extends Component {
     } else if (
       window.location.pathname === "/home/issue" ||
       window.location.pathname === "/home/conferenceRoom" ||
-      window.location.pathname === "/home/conferenceDoc"
+      window.location.pathname === "/home/conferenceDocument" ||
+      window.location.pathname === "/home/conferenceDocumentDetail"
     ) {
       return (
         <div className="container">

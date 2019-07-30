@@ -1,0 +1,22 @@
+@import "../../../../style.css";
+
+.inner-container3 {
+  margin: 60px auto;
+  width: 313px;
+}
+
+.header3 {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 48px;
+  font-family: NanumSquareB;
+}
+
+.pl-btn-div {
+  margin-top: 40px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
