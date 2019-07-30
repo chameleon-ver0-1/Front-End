@@ -5,32 +5,50 @@
  */
 import React, { Component } from "react";
 import styled from "styled-components";
-import home from "../../../assets/conferenceRoom/videohome_home.png";
-import monitor from "../../../assets/conferenceRoom/videohome_monitor.png";
-import doc from "../../../assets/conferenceRoom/videohome_doc.png";
+import home from "../../../assets/conferenceRoom/videohome_home_on.png";
+import sharingIcon from "../../../assets/conferenceRoom/videohome_sharing_off.png";
+import doc from "../../../assets/conferenceRoom/videohome_doc_off.png";
+import logoIcon from "../../../assets/conferenceRoom/videohome_logo.png";
+
+const Logo = styled.div`
+  width: 64px;
+  height: 62px;
+  background: #555555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8px;
+`;
 
 const LeftNav = styled.div`
-  width: 63px;
-  height: 767px;
-  background: #4dcf99;
+  width: 64px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #555555;
 `;
 const ButtonItem = styled.button`
   width: 63px;
   height: 55px;
-  text-align: center;
 
   border: none;
   background: none;
   outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const HomeItem = styled.button`
   width: 63px;
   height: 55px;
-  text-align: center;
 
   border: none;
-  background: #88dfba;
+  background: var(--greenish-teal);
   outline: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const onSharing = () => {
@@ -66,19 +84,25 @@ const onSharing = () => {
 export class VideoMenubar extends Component {
   render() {
     return (
-      <div>
-        <LeftNav>
-          <HomeItem>
-            <img width="63px" height="55px" src={home} />
-          </HomeItem>
-          <ButtonItem>
-            <img width="63px" height="55px" src={monitor} onClick={onSharing} />
-          </ButtonItem>
-          <ButtonItem>
-            <img width="63px" height="55px" src={doc} />
-          </ButtonItem>
-        </LeftNav>
-      </div>
+      <LeftNav>
+        <Logo>
+          <img width="62px" height="69px" margin="7px" src={logoIcon} />
+        </Logo>
+        <HomeItem>
+          <img width="35px" height="35px" src={home} />
+        </HomeItem>
+        <ButtonItem>
+          <img
+            width="35px"
+            height="35px"
+            src={sharingIcon}
+            onClick={onSharing}
+          />
+        </ButtonItem>
+        <ButtonItem>
+          <img width="35px" height="35px" src={doc} />
+        </ButtonItem>
+      </LeftNav>
     );
   }
 }

@@ -30,7 +30,8 @@ const VideoFrame = styled.div`
   padding-left: 50px;
   padding-top: 19px;
   padding-right: 50px;
-  width: 100%;
+
+  height: 90%;
 `;
 const EmotionStatus = styled.div`
   position: fixed;
@@ -46,7 +47,6 @@ const EmotionStatus = styled.div`
 `;
 var VideosContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
 `;
 export class VideoItem extends Component {
@@ -184,11 +184,11 @@ export class VideoItem extends Component {
 
       video.srcObject = event.stream; //비디오에 stream을 연결한다.
 
-      var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
+      var width = parseInt(connection.videosContainer.clientWidth / 3);
 
       var mediaElement = service.getHTMLMediaElement(video, {
         title: event.userid,
-        buttons: ["full-screen"],
+        buttons: ["mute-audio", "mute-video"],
         width: width,
         showOnMouseEnter: false
       });
@@ -637,39 +637,38 @@ export class VideoItem extends Component {
 
     return (
       <VideoFrame id="video-home-container">
-        <div style={{ width: "100%" }}>
-          <input
-            type="text"
-            id="room-id"
-            className="room-id"
-            autoCorrect="off"
-            autoCapitalize="off"
-            size="20"
-          />
-          <button
-            className="open-room"
-            onClick={openRoom}
-            // isRoomAppear={this.state.isRoomAppear}
-            // roomToken={this.state.roomToken}
-          >
-            회의실 개설하기
-          </button>
-          <button className="join-room" onClick={joinRoom}>
-            회의실 참여하기
-          </button>
-          <button className="open-or-join-room" onClick={openOrJoinRoom}>
-            회의실 개설/참여하기
-          </button>
-          <button id="share-screen" onClick={shareVideo}>
-            화면 공유
-          </button>
-          <button type="button" onClick={onRekog}>
-            지금부터 감정인식 시작
-          </button>
-          <button type="button" onClick={onStop}>
-            회의 종료
-          </button>
-        </div>
+        <input
+          type="text"
+          id="room-id"
+          className="room-id"
+          autoCorrect="off"
+          autoCapitalize="off"
+          size="20"
+        />
+        <button
+          className="open-room"
+          onClick={openRoom}
+          // isRoomAppear={this.state.isRoomAppear}
+          // roomToken={this.state.roomToken}
+        >
+          회의실 개설하기
+        </button>
+        {/* <button className="join-room" onClick={joinRoom}>
+          회의실 참여하기
+        </button>
+        <button className="open-or-join-room" onClick={openOrJoinRoom}>
+          회의실 개설/참여하기
+        </button>
+        <button id="share-screen" onClick={shareVideo}>
+          화면 공유
+        </button>
+        <button type="button" onClick={onRekog}>
+          지금부터 감정인식 시작
+        </button>
+        <button type="button" onClick={onStop}>
+          회의 종료
+        </button> */}
+
         <VideosContainer id="videos-container" />
         <div id="room-urls" style={{ width: "100%" }} />
 

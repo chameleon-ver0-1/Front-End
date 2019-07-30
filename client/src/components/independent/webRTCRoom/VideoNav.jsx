@@ -17,44 +17,28 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import logo from "../../../assets/conferenceRoom/videohome_logo.png";
 import user from "../../../assets/conference/people.png";
-import mic from "../../../assets/conferenceRoom/videohome_mic.png";
-import volume from "../../../assets/conferenceRoom/videohome_volume.png";
-import video from "../../../assets/conferenceRoom/videohome_video.png";
-import setting from "../../../assets/conferenceRoom/videohome_setting.png";
+import mic from "../../../assets/conferenceRoom/videohome_speaking.png";
+
 import Fade from "react-reveal/Fade";
 import InviteDialog from "./InviteDialog";
 
 const UpperNav = styled.div`
-  width: 100%;
+  width: calc((100vw - 64px) / 2);
   height: 56px;
-  background: var(--white-four);
-
+  background: none;
   display: flex;
   flex-direction: row;
+  align-items: center;
 `;
 
-const ContainerLeft = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-`;
-
-const WhiteLogo = styled.div`
-  width: 63px;
-  height: 56px;
-  background: var(--greenish-teal);
-  text-align: center;
-  padding-top: 8px;
-`;
 const ConferenceTitle = styled.div`
   margin-left: 26px;
   font-size: 22px;
-  color: var(--light-black);
-  margin-top: 16px;
+  color: white;
+
   overflow: hidden;
 `;
 const UserCount = styled.div`
-  margin-top: 17px;
   margin-left: 20px;
 `;
 const CountText = styled.button`
@@ -74,7 +58,7 @@ const Timer = styled.div`
   background: var(--greenish-teal);
   width: 65px;
   height: 26px;
-  margin-top: 14px;
+
   margin-left: 14px;
 
   border-radius: 11.5px;
@@ -87,27 +71,6 @@ const Timer = styled.div`
   justify-content: center;
 
   overflow: hidden;
-`;
-const ButtonBox = styled.div`
-  margin-left: 155px;
-
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  overflow: hidden;
-`;
-const ButtonItem = styled.button`
-  width: 52px;
-  height: 52px;
-  text-align: center;
-  padding: 5px;
-  border: none;
-  background: none;
-  outline: none;
-`;
-
-const FixFlexContainer = styled.div`
-  flex: 8;
 `;
 
 export class VideoNav extends Component {
@@ -122,42 +85,17 @@ export class VideoNav extends Component {
   }
   render() {
     return (
-      <FixFlexContainer>
-        <UpperNav>
-          <ContainerLeft>
-            <WhiteLogo>
-              <img width="45px" height="46px" margin="7px" src={logo} />
-            </WhiteLogo>
-            <ConferenceTitle>4월 간행물 표지 초안</ConferenceTitle>
-            <UserCount>
-              <img width="20px" height="21px" margin="17px" src={user} />
-            </UserCount>
-            <CountText onClick={this.handleClick}>6</CountText>
-            <Fade when={this.state.show}>
-              <InviteDialog />
-            </Fade>
-            <Timer>1:34:03</Timer>
-          </ContainerLeft>
-          <ButtonBox>
-            <ButtonItem>
-              <img width="52px" src={mic} />
-            </ButtonItem>
-            <ButtonItem>
-              <img width="52px" src={volume} />
-            </ButtonItem>
-            <ButtonItem>
-              {" "}
-              <img width="52px" src={video} />
-            </ButtonItem>
-            <ButtonItem>
-              {" "}
-              <img width="52px" src={setting} />
-            </ButtonItem>
-          </ButtonBox>
-        </UpperNav>
-
-        <div />
-      </FixFlexContainer>
+      <UpperNav>
+        <ConferenceTitle>4월 간행물 표지 초안</ConferenceTitle>
+        <UserCount>
+          <img width="20px" height="21px" margin="17px" src={user} />
+        </UserCount>
+        <CountText onClick={this.handleClick}>6</CountText>
+        <Fade when={this.state.show}>
+          <InviteDialog />
+        </Fade>
+        <Timer>1:34:03</Timer>
+      </UpperNav>
     );
   }
 }

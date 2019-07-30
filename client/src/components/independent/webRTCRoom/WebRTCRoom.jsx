@@ -16,51 +16,49 @@ import SlideMenu from "react-slide-menu";
 
 const MainView = styled.div`
   transition: margin-left 0.5s;
+  width: 0;
 `;
 const SideBar = styled.div`
-  height: 80%;
+  height: calc(100% - 48px);
   width: 0;
   position: fixed;
   z-index: 0;
-  top: 122px;
+  top: 56px;
   right: 0;
   background-color: var(--white-four);
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
 `;
 const VideoBaseContainer = styled.div`
-  width: 100%;
-`;
-const NavDivider = styled.div`
+  width: 100vw;
   display: flex;
-`;
-const SecondBox = styled.div`
-  width: 100%;
-  height: 767px;
   background: var(--brownish-grey);
+`;
 
-  display: flex;
-  flex-direction: row;
+const SecondBox = styled.div`
+  width: calc(100vw - 64px);
+  height: calc(100vh - 56px);
+  background: var(--brownish-grey);
 `;
 const ToggleBtn = styled.div`
-  flex: 0.3;
-  background: var(--white-four);
-  width: 10px;
-  height: 51px;
+  width: 30px;
+
   display: flex;
+  justify-content: flex-end;
   align-items: center;
 `;
-const ButtonItem = styled.button`
-  width: 52px;
-  height: 52px;
-  text-align: center;
-  padding: 5px;
-  border: none;
-  background: none;
-  outline: none;
+
+const Row = styled.div`
+  display: flex;
+  width: calc(100vw - 64px);
 `;
-var cnt = 1;
+const ToggleDiv = styled.div`
+  width: calc((100vw - 64px) / 2);
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 25px;
+`;
+
 export class WebRTCRoom extends Component {
   constructor(props) {
     super(props);
@@ -85,45 +83,34 @@ export class WebRTCRoom extends Component {
 
     return (
       <VideoBaseContainer>
-        <NavDivider>
-          <VideoNav />
-          <ToggleBtn onClick={this.onToggle}>
-            <img
-              id="toggleBtn"
-              src={
-                this.state.slideMenuActive == false ? closeDrawer : openDrawer
-              }
-              width="10px"
-              height="22px"
-              style={{ background: "var(--white-four)" }}
-            />
-          </ToggleBtn>
-        </NavDivider>
-        <MainView id="main">
+        <VideoMenubar />
+        <div>
+          <Row>
+            <VideoNav />
+            <ToggleDiv>
+              <ToggleBtn onClick={this.onToggle}>
+                <img
+                  id="toggleBtn"
+                  src={
+                    this.state.slideMenuActive == false
+                      ? closeDrawer
+                      : openDrawer
+                  }
+                  width="16px"
+                  height="23px"
+                />
+              </ToggleBtn>
+            </ToggleDiv>
+          </Row>
           <SecondBox>
-            <div
-              style={{ width: "80%", display: "flex", flexDirection: "row" }}
-            >
-              <VideoMenubar />
-              <VideoItem />
-            </div>
-
-            <SideBar id="mySidebar" class="sidebar">
-              <TopicDrawerBar />
-              <button
-                style={{
-                  position: "absolute",
-                  top: "0",
-                  right: "25px",
-                  fontSize: "36px",
-                  marginLeft: "50px"
-                }}
-              >
-                ×
-              </button>
-            </SideBar>
+            <VideoItem />
+            <MainView id="main">
+              <SideBar id="mySidebar" class="sidebar">
+                <TopicDrawerBar />
+              </SideBar>
+            </MainView>
           </SecondBox>
-        </MainView>
+        </div>
       </VideoBaseContainer>
     );
   }

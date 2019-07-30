@@ -40,6 +40,11 @@ const TopicButton = styled.button`
   background: none;
   border: none;
 `;
+const DrawerContainer = styled.div`
+  background: var(--white-four);
+  width: 252px;
+  height: calc(100%-48px);
+`;
 
 /*토픽 컴포넌트*/
 const topics = [
@@ -237,7 +242,7 @@ export class TopicDrawerBar extends Component {
   }
   render() {
     return (
-      <div style={{ background: "var(--white-four)", width: "252px" }}>
+      <DrawerContainer>
         <div style={{ backgroundColor: "var(--white-four)" }}>
           <div>
             <div
@@ -282,7 +287,7 @@ export class TopicDrawerBar extends Component {
             </button>
           </div>
         </section>
-      </div>
+      </DrawerContainer>
     );
   }
 }
