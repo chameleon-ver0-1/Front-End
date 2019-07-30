@@ -9,7 +9,8 @@ import {
   SignIn,
   SignUp,
   AuthCheck,
-  ConnectSignIn
+  ConnectSignIn,
+  ProjectAdd
 } from "./components/independent/auth/Auth";
 import {
   Issue,
@@ -65,7 +66,7 @@ class App extends Component {
               <Route path="/home/issue" component={Issue} />
               <Route path="/auth/authCheck" component={AuthCheck} />
               <Route path="/auth/connectSignIn" component={ConnectSignIn} />
-
+              <Route path="/auth/projectAdd" component={ProjectAdd} />
               <Route path="/home/conferenceRoom" component={ConferenceRoom} />
               <Route path="/room/:roomTokenId" component={WebRTCRoom} />
 
