@@ -10,12 +10,13 @@
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
+  font-family: NanumSquareB;
 }
 
 .chat_profile {
   width: 164px;
   height: 164px;
-  margin: 10px auto;
+  margin: 5px auto;
   display: flex;
 }
 
@@ -41,4 +42,12 @@
   margin-bottom: 36px;
   display: flex;
   justify-content: center;
+}
+
+.text_search {
+  margin-top: 9px;
+  height: 38px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

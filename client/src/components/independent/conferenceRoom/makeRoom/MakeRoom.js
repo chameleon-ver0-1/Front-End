@@ -12,6 +12,7 @@ import { TAG } from "./tag";
 import { WithContext as ReactTags } from "react-tag-input";
 import { Link } from "react-router-dom";
 import MakeIssue from "../makeIssue/MakeIssue";
+import searchissue from "../../../../assets/conference/searchissue.png";
 
 const suggestions = TAG.map(tag => {
   return {
@@ -27,25 +28,13 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-// const useStyles = makeStyles(theme => ({
-//   container: {
-//     display: 'flex',
-//     flexWrap: 'wrap',
-//   },
-//   textField: {
-//     marginLeft: theme.spacing(1),
-//     marginRight: theme.spacing(1),
-//     width: 300,
-//   },
-// }));
-
 class MakeRoom extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       roomTitle: "none",
-      tags: [{ id: "화상회의", text: "화상회의" }],
+      tags: [],
       suggestions: suggestions,
       open: false,
       title: ""
@@ -124,12 +113,16 @@ class MakeRoom extends Component {
                 handleAddition={this.handleAddition}
                 handleDrag={this.handleDrag}
                 handleTagClick={this.handleTagClick}
+                placeholder="메인 토픽을 입력하세요"
               />
+
+              <button className="getissue" onClick={this.onOpenModal}>
+                <img src={searchissue} className="getissueimg" />
+                이슈에서 가져오기
+              </button>
             </div>
           </div>
-          <button className="getissue" onClick={this.onOpenModal}>
-            이슈에서 가져오기
-          </button>
+
           <MakeIssue
             open={this.state.open}
             title={this.state.title}

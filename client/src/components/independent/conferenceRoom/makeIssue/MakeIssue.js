@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import Modal from "react-responsive-modal";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "./makeissue.style.css";
+import InitialData from "../../issue/testItem-data";
 
 export class MakeIssue extends Component {
+  state = InitialData;
+
   render() {
     const { open, title, onCloseModal } = this.props;
 
@@ -16,6 +19,9 @@ export class MakeIssue extends Component {
       >
         <div className="makeroomdiv">
           <div className="roomtitle">{title}</div>
+
+          {/* TODO: issue 데이터 가져오기 */}
+          {/* TODO: 선택한 데이터 태그로 받아오기 */}
           <Tabs>
             <TabList>
               <Tab>TODO</Tab>
@@ -25,26 +31,35 @@ export class MakeIssue extends Component {
 
             <TabPanel>
               <ul className="issue-list">
-                <li>a</li>
-                <li>b</li>
-                <li>c</li>
+                <li className="issue-item" onClick={this.issueClicked}>
+                  a
+                </li>
+                <li className="issue-item">b</li>
+                <li className="issue-item">c</li>
               </ul>
             </TabPanel>
             <TabPanel>
               <ul className="issue-list">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li className="issue-item">1</li>
+                <li className="issue-item">2</li>
+                <li className="issue-item">3</li>
               </ul>
             </TabPanel>
             <TabPanel>
               <ul className="issue-list">
-                <li>x</li>
-                <li>y</li>
-                <li>z</li>
+                <li className="issue-item">x</li>
+                <li className="issue-item">y</li>
+                <li className="issue-item">z</li>
               </ul>
             </TabPanel>
           </Tabs>
+
+          <div className="issue-buttons-div">
+            <button className="choose-issue">선택</button>
+            <button className="cancel-issue" onClick={onCloseModal}>
+              취소
+            </button>
+          </div>
         </div>
       </Modal>
     );

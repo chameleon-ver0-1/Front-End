@@ -101,7 +101,7 @@ class SignUp extends Component {
                 type="text"
                 name="company"
                 className="small-input"
-                placeholder="회사명"
+                placeholder="회사명을 검색하세요"
                 //TODO: 태그로 바꿔야함
               />
 
@@ -109,7 +109,7 @@ class SignUp extends Component {
                 type="text"
                 name="company"
                 className="small-input"
-                placeholder="부서명"
+                placeholder="부서명을 검색하세요"
               />
             </div>
           </div>
