@@ -16,7 +16,7 @@ canvas {
 .documentdetaildiv {
   margin-top: 41px;
   margin-left: 82px;
-  width: 711px;
+  width: 750px;
 }
 
 .documentDetailTitle {
@@ -40,20 +40,26 @@ canvas {
 }
 
 .save_button_div {
+  width: 180px;
   margin-top: 9px;
   display: flex;
   justify-content: space-between;
-  width: 120px;
-  height: 25px;
 }
 
 .save_button {
+  width: 82px;
+  height: 27px;
   padding: 2px;
-  font-size: 12px;
+  font-size: 13.5px;
   color: var(--pinkish-grey);
   background: none;
-  border-radius: 10.8px;
+  border-radius: 10px;
   border: solid 1px var(--pinkish-grey);
+  text-emphasis: center;
+}
+
+.save-div {
+  font-size: 13.5px;
 }
 
 .downloadimg {
