@@ -96,7 +96,9 @@ export class Chat extends Component {
     if (
       window.location.pathname === "/home/issue" ||
       window.location.pathname === "/home/conferenceRoom" ||
-      window.location.pathname === "/home/conferenceDocument"
+      window.location.pathname === "/home/conferenceDocument" ||
+      window.location.pathname ===
+        "/home/conferenceDocument/conferenceDocumentDetail"
     ) {
       return (
         <ChatContainer>
