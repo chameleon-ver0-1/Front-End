@@ -23,7 +23,7 @@ const Posts = ({ posts, loading }) => {
               <ul className="post-row-list">
                 <li className="post-row-list-item">
                   <Link
-                    to="/home/conferenceDocumentDetail"
+                    to="/home/conferenceDocument/conferenceDocumentDetail"
                     className="linkdocumentdetail"
                   >
                     <button className="todetail">{docDetail.title}</button>

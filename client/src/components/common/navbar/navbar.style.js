@@ -3,18 +3,15 @@ import styled from "styled-components";
 /*1 Nav*/
 export const NavContainer = styled.div`
   display: flex;
-
   width: 100vw;
-  height: 6.64vh;
-
+  height: 64px;
+  display: flex;
+  align-items: center;
   border-bottom: 1px solid var(--white-two);
 `;
 export const BtnContainer = styled.div`
   flex: 1;
-
-  padding-top: 16px;
   padding-right: 47px;
-
   display: flex;
   justify-content: flex-end;
 `;
@@ -36,6 +33,7 @@ export const NavBtn = styled.button`
 
   font-size: 13.5px;
 `;
+
 
 /*2 Nav */
 export const Row = styled.div`
@@ -67,10 +65,8 @@ export const LogoContainer = styled.div`
 export const Nav2Container = styled.div`
   display: flex;
   background: var(--greenish-teal);
-
   width: 100%;
-  height: 6.64vh;
-
+  height: 64px;
   border-bottom: 1px solid var(--white-two);
 `;
 
@@ -78,14 +74,15 @@ export const NavRight = styled.div`
   flex: 1;
   display: flex;
   justify-content: flex-end;
-  padding-top: 16px;
+  align-items: center;
   padding-right: 29px;
 `;
 export const NoticeBtn = styled.button`
   width: 20px;
   height: 28px;
+
+  margin-right: 26px;
   outline: none;
-  padding-right: 32px;
   border: none;
 
   background: none;
@@ -93,14 +90,12 @@ export const NoticeBtn = styled.button`
   background-size: auto;
 `;
 export const UserInfoContainer = styled.div`
-  padding-right: 30px;
-
-  width: 120px;
+  width: 150px;
+  margin-right: 22px;
 `;
 export const UserName = styled.div`
-  width: 200px;
   color: white;
-  font-size: 0.83rem;
+  font-size: 16.5px
   font-family: NanumSquareEB;
 `;
 

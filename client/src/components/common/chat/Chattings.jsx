@@ -1,6 +1,5 @@
 import React from "react";
 import { Transition, animated } from "react-spring/renderprops";
-import lorem from "lorem-ipsum";
 import emoji from "random-unicode-emoji";
 import classnames from "classnames";
 import "./chatting.style.css";
@@ -37,6 +36,9 @@ const ChatOpponent = styled.div`
 `;
 const ChatInput = styled.div`
   display: flex;
+  align-items: center;
+
+  height: 40px;
 `;
 const FileBtn = styled.button`
   width: 32px;
@@ -44,7 +46,6 @@ const FileBtn = styled.button`
   border: none;
   background: none;
   online: none;
-  margin-top: 3px;
 `;
 const InputBorder = styled.div`
   width: 220px;
@@ -61,11 +62,10 @@ const MessageInput = styled.input`
 `;
 const SendBtn = styled.button`
   width: 21px;
-  height: 21px;
+  height: 5px;
   border: none;
   inline: none;
   background: none;
-  margin-top: 3px;
 `;
 const Dot = styled.div`
   width: 8px;
@@ -83,7 +83,7 @@ function addItem(state) {
   const previous = state.items[state.items.length - 1];
   const left = Math.round(Math.random()) === 1;
   const first = previous === undefined || previous.left !== left;
-  const text = "hi";
+  const text = state.message;
   if (previous !== undefined) previous.last = first;
   items.push({ key: state.items.length, text, left, first, last: true });
   return { items };
@@ -91,25 +91,23 @@ function addItem(state) {
 
 let count = 0;
 export default class Chattings extends React.PureComponent {
-  state = { items: [] };
+  state = { items: [], message: "" };
 
   list = React.createRef();
   el = React.createRef();
 
   addItems = () =>
     setTimeout(
-      () => void (this.setState(addItem), count++ < 10 && this.addItems()),
-      this.state.items.length ? Math.random() * 1000 : 0
+      () => void (this.setState(addItem), count++ < 10 && this.addItems())
     );
 
   componentDidMount() {
-    this.addItems();
+    // this.addItems();
   }
   render() {
     return (
       <ChatMessageBox>
         <ChatOpponent>
-          {" "}
           <Dot />
           이름 Cho yoon young
         </ChatOpponent>
@@ -148,9 +146,16 @@ export default class Chattings extends React.PureComponent {
             <img width="15px" height="19px" src={FileIcon} alt="file" />
           </FileBtn>
           <InputBorder>
-            <MessageInput placeholder="메시지를 입력하세요" />
+            <MessageInput
+              onChange={e => {
+                this.setState({
+                  message: e.target.value
+                });
+              }}
+              placeholder="메시지를 입력하세요"
+            />
           </InputBorder>
-          <SendBtn>
+          <SendBtn onClick={this.addItems}>
             <img
               width="21px"
               height="21px"
