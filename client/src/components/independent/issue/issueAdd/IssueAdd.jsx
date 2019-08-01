@@ -17,11 +17,10 @@ const AddBtn = styled.button`
 
   position: relative;
   top: -50px;
+  left: 21px;
   outline: none;
 
-  font-family:NanumSquareB;
-
-  // display: ${props => (props.isShow ? "inline" : "none")};
+  font-family: NanumSquareB;
 `;
 
 export class IssueAdd extends Component {
@@ -51,7 +50,7 @@ export class IssueAdd extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{width:"0px", height:"0px"}}>
         <AddBtn onClick={this.openDialog}>+ TODO 추가하기</AddBtn>
         {/* <div>제목:{this.state.title}</div>
         <div>내용:{this.state.detail}</div> */}

@@ -122,6 +122,7 @@ export class Issues extends Component {
             );
           })}
         </DragDropContext>
+
       </div>
     );
   }

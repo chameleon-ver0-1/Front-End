@@ -8,7 +8,7 @@ import styled from "styled-components";
 const Container = styled.div`
   margin-right: 25px;
   width: 256px;
-  height: 640px;
+  height: 550px;
   display: flex;
   flex-direction: column;
 `;
@@ -52,7 +52,6 @@ export class IssueBox extends Component {
             </ItemList>
           )}
         </Droppable>
-        <IssueAdd isShow={isTodos} />
       </Container>
     );
   }

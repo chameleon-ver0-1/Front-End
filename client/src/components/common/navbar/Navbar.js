@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Fade from "react-reveal/Fade";
 
@@ -76,23 +76,21 @@ export class Navbar extends Component {
       window.location.pathname === "/auth/projectList"
     ) {
       return (
-        <div className="container">
-          <NavContainer>
-            <LogoContainer>
-              <img width="129px" height="40px" src={LogoBlackIcon} />
-            </LogoContainer>
-            <BtnContainer>
-              <BtnP>
-                <Link to="/auth/signIn">
-                  <NavBtn>로그인</NavBtn>
-                </Link>
-              </BtnP>
-              <Link to="/auth/signUp">
-                <NavBtn>회원가입</NavBtn>
-              </Link>
-            </BtnContainer>
-          </NavContainer>
-        </div>
+        <NavContainer>
+          <LogoContainer>
+            <img width="129px" height="40px" src={LogoBlackIcon} />
+          </LogoContainer>
+          <BtnContainer>
+            <BtnP>
+              <NavLink to="/auth/signIn">
+                <NavBtn>로그인</NavBtn>
+              </NavLink>
+            </BtnP>
+            <NavLink to="/auth/signUp">
+              <NavBtn>회원가입</NavBtn>
+            </NavLink>
+          </BtnContainer>
+        </NavContainer>
       );
     } else if (
       window.location.pathname === "/" ||
@@ -135,7 +133,8 @@ export class Navbar extends Component {
       window.location.pathname === "/home/issue" ||
       window.location.pathname === "/home/conferenceRoom" ||
       window.location.pathname === "/home/conferenceDocument" ||
-      window.location.pathname === "/home/conferenceDocumentDetail"
+      window.location.pathname ===
+        "/home/conferenceDocument/conferenceDocumentDetail"
     ) {
       return (
         <div className="container">
@@ -147,6 +146,7 @@ export class Navbar extends Component {
               <Fade when={this.state.show}>
                 <Dropdown style={{ zIndex: 100 }} />
               </Fade>
+
               <NoticeBtn>
                 <img
                   width="20px"
@@ -157,10 +157,11 @@ export class Navbar extends Component {
               </NoticeBtn>
 
               <img
-                width="38px"
-                height="37px"
+                width="45px"
+                height="46px"
                 src={userProfile}
                 alt="프로필이미지"
+                style={{ marginRight: "13px" }}
               />
               <UserInfoContainer>
                 <UserName>권주희 Kwonju hee</UserName>

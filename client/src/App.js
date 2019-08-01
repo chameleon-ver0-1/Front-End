@@ -71,13 +71,18 @@ class App extends Component {
               <Route path="/auth/projectList" component={ProjectList} />
               <Route path="/home/conferenceRoom" component={ConferenceRoom} />
               <Route path="/room/:roomTokenId" component={WebRTCRoom} />
+              <Route
+                exact
+                path="/home/conferenceDocument"
+                render={props => (
+                  <React.Fragment>
+                    <ConferenceDocument />
+                  </React.Fragment>
+                )}
+              />
 
               <Route
-                path="/home/conferenceDocument"
-                component={ConferenceDocument}
-              />
-              <Route
-                path="/home/conferenceDocumentDetail"
+                path="/home/conferenceDocument/conferenceDocumentDetail"
                 component={ConferenceDocumentDetail}
               />
               <Route path="/postTest" component={PostTest} />
