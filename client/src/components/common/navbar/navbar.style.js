@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { NavLink } from "react-router-dom";
 /*1 Nav*/
 export const NavContainer = styled.div`
   display: flex;
@@ -18,12 +18,16 @@ export const BtnContainer = styled.div`
 export const BtnP = styled.div`
   padding-right: 7px;
 `;
-export const NavBtn = styled.button`
+export const NavBtn = styled(NavLink)`
   font-size: 1rem;
   font-family: NanumSquareB;
-
+  cursor: pointer;
   width: 80px;
   height: 33px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   border: 1px solid var(--white-two);
   border-radius: 16.5px;
@@ -32,8 +36,12 @@ export const NavBtn = styled.button`
   color: var(--brownish-grey);
 
   font-size: 13.5px;
-`;
 
+  &:hover {
+    border: 1px solid var(--greenish-teal);
+    color: var(--greenish-teal);
+  }
+`;
 
 /*2 Nav */
 export const Row = styled.div`
@@ -41,7 +49,7 @@ export const Row = styled.div`
 `;
 export const ClosedBtn = styled.button`
   border: none;
-
+  cursor: pointer;
   background: none;
   outline: none;
 `;
@@ -80,7 +88,7 @@ export const NavRight = styled.div`
 export const NoticeBtn = styled.button`
   width: 20px;
   height: 28px;
-
+  cursor: pointer;
   margin-right: 26px;
   outline: none;
   border: none;
@@ -110,6 +118,9 @@ export const MoreInfo = styled.button`
 
   border: none;
   background: none;
+
+  cursor: pointer;
+  outline: none;
 `;
 
 export const HomeNav = styled.div`
@@ -125,6 +136,10 @@ export const NavItem = styled.div`
   color: var(--brownish-grey);
   font-family: NanumSquareB;
   margin-right: 49px;
+
+  &:hover {
+    color: var(--greenish-teal);
+  }
 `;
 
 export const NavClickItem = styled.div`

@@ -21,7 +21,7 @@ import DatePickStyle from "./datepicker.style.css";
 import CheckBox from "./CheckBox";
 
 const PopupContainer = styled.div`
-  width: 530x;
+  width: 505px;
   height: 441px;
 `;
 const PopupTitle = styled.h3`
@@ -29,9 +29,11 @@ const PopupTitle = styled.h3`
   font-family: NanumSquareB;
   margin-top: 37px;
 
-  color: var(--light-black);
   display: flex;
   justify-content: center;
+  width: 100%;
+
+  color: var(--light-black);
 `;
 const PopupLabel = styled.div`
   font-size: 14px;
@@ -43,7 +45,12 @@ const SelectLabel = styled.div`
   font-size: 14px;
   font-family: NanumSquareB;
   color: var(--pinkish-grey);
-  margin-left: 12px;
+  width: 76px;
+`;
+const CheckContainer = styled.div`
+  height: 16px;
+  display: flex;
+  align-items: center;
 `;
 
 const DivideLine = styled.div`
@@ -58,6 +65,7 @@ const Row = styled.div`
   display: flex;
   margin-bottom: 13px;
   align-items: center;
+  height: 29px;
 `;
 const SelectRow = styled.div`
   display: flex;
@@ -65,7 +73,7 @@ const SelectRow = styled.div`
 `;
 const TitleInput = styled.input`
   border: none;
-  width: 320px;
+  width: 315px;
   height: 25px;
   outline: none;
 `;
@@ -74,17 +82,18 @@ const TitleInputBorder = styled.div`
   height: 29px;
   border-radius: 10px;
   border: solid 1px var(--white-two);
-  margin-left: 36px;
+  margin-left: 48px;
   padding-left: 5px;
+  display: flex;
+  align-items: center;
 `;
 const TextAreaBorder = styled.div`
   width: 328px;
   height: 97px;
   border: solid 1px var(--white-two);
   border-radius: 12px;
-  padding-left: 8px;
   padding-top: 8px;
-  margin-left: 36px;
+  padding-left: 8px;
 `;
 const AddFileBtn = styled.input`
   color: var(--brownish-grey);
@@ -153,24 +162,25 @@ export default class AddIssueDialog extends Component {
       startDate: date
     });
   };
-
+  exHandleChange = () => {};
   render() {
     const { open, onCloseModal } = this.props;
 
     return (
       <Modal open={open} onClose={onCloseModal} center>
         <PopupContainer>
-          <PopupTitle>TODO 추가하기</PopupTitle>
-          <DivideLine />
-          <Row>
-            <PopupLabel>제목</PopupLabel>
-            <TitleInputBorder>
-              <TitleInput />
-            </TitleInputBorder>
-          </Row>
-          <Row>
-            <PopupLabel>D-DAY</PopupLabel>
-            <div style={{ fontSize: "12px" }}>
+          <div>
+            <PopupTitle>TODO 추가하기</PopupTitle>
+            <DivideLine />
+            <Row>
+              <PopupLabel>제목</PopupLabel>
+              <TitleInputBorder>
+                <TitleInput />
+              </TitleInputBorder>
+            </Row>
+            <Row style={{ marginTop: "20px" }}>
+              <PopupLabel>D-DAY</PopupLabel>
+
               <DatePicker
                 customInput={<BigDatePicker />}
                 selected={this.state.startDay}
@@ -178,59 +188,71 @@ export default class AddIssueDialog extends Component {
                 minDate={new Date()}
                 relativeSize={true}
               />
-            </div>
-            <DatePicker
-              customInput={<SmallDatePicker />}
-              selected={this.state.startDate}
-              onChange={this.handleChange2}
-              showTimeSelect
-              showTimeSelectOnly
-              dateFormat="h:mm aa"
-              timeCaption="Time"
-              relativeSize={true}
-            />
-          </Row>
-          <SelectRow>
-            <input
-              id="selectShow"
-              style={{ marginLeft: "38px" }}
-              type="checkbox"
-            />
 
-            <SelectLabel>설명</SelectLabel>
-            <TextAreaBorder>
-              <textarea
-                type="textarea"
-                wrap="soft"
-                cols="49"
-                rows="5"
-                style={{
-                  fontSize: "12px",
-                  border: "none",
-                  resize: "none",
-                  outline: "none"
-                }}
-                placeholder="업무에 대한 부가 설명을 적어주세요"
+              <DatePicker
+                customInput={<SmallDatePicker />}
+                selected={this.state.startDate}
+                onChange={this.handleChange2}
+                showTimeSelect
+                showTimeSelectOnly
+                dateFormat="h:mm aa"
+                timeCaption="Time"
+                relativeSize={true}
               />
-            </TextAreaBorder>
-          </SelectRow>
-          <SelectRow>
-            <input style={{ marginLeft: "38px" }} type="checkbox" />
-            <SelectLabel>화상회의</SelectLabel>
-          </SelectRow>
-          <SelectRow>
-            <input style={{ marginLeft: "38px" }} type="checkbox" />
-            <SelectLabel>첨부파일</SelectLabel>
+            </Row>
+            <SelectRow style={{ marginTop: "20px" }}>
+              <CheckContainer>
+                <input
+                  id="selectShow"
+                  style={{ width: "16px", height: "16px", marginLeft: "38px" }}
+                  type="checkbox"
+                  onChange={this.exHandleChange}
+                />
 
-            <input
-              type="file"
-              style={{ marginLeft: "11px", height: "13px", fontSize: "10px" }}
-            />
-          </SelectRow>
-          <SubmitBtns>
-            <ConfirmBtn>확인</ConfirmBtn>
-            <CancelBtn>취소</CancelBtn>
-          </SubmitBtns>
+                <SelectLabel>설명</SelectLabel>
+              </CheckContainer>
+              <TextAreaBorder>
+                <textarea
+                  type="textarea"
+                  wrap="soft"
+                  cols="49"
+                  rows="5"
+                  style={{
+                    fontSize: "12px",
+                    border: "none",
+                    resize: "none",
+                    outline: "none"
+                  }}
+                  placeholder="업무에 대한 부가 설명을 적어주세요"
+                />
+              </TextAreaBorder>
+            </SelectRow>
+            <SelectRow style={{ marginTop: "30px" }}>
+              <CheckContainer>
+                <input style={{ marginLeft: "38px" }} type="checkbox" />
+                <SelectLabel>화상회의</SelectLabel>
+              </CheckContainer>
+            </SelectRow>
+            <SelectRow style={{ marginTop: "15px" }}>
+              <CheckContainer>
+                <input style={{ marginLeft: "38px" }} type="checkbox" />
+                <SelectLabel>첨부파일</SelectLabel>
+              </CheckContainer>
+              <input
+                type="file"
+                style={{
+                  marginLeft: "11px",
+                  height: "15px",
+                  width: "200px",
+                  fontSize: "14px"
+                }}
+              />
+            </SelectRow>
+            <SubmitBtns>
+              <ConfirmBtn>확인</ConfirmBtn>
+              <CancelBtn>취소</CancelBtn>
+            </SubmitBtns>
+          </div>
         </PopupContainer>
       </Modal>
     );

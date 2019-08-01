@@ -7,7 +7,7 @@ const BigTimeBorder = styled.button`
 
   border-radius: 10px;
   border: solid 1px var(--white-two);
-  margin-left: 18px;
+  margin-left: 30px;
   font-size: 14px;
   color: var(--light-black);
 `;

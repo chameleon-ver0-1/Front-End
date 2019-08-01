@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
-import "./issueDep.style.css";
 import InitialData from "./issue-dep-data";
+import { DepContainer, DepItem } from "./issueDep.style";
+
 export class IssueDep extends Component {
   render() {
     this.state = InitialData;
@@ -10,16 +11,12 @@ export class IssueDep extends Component {
     };
 
     return (
-      <div className="dep-container">
+      <DepContainer>
         {Object.keys(this.state.data).map(depId => {
           const depItem = this.state.data[depId];
-          return (
-            <button className="dep-item" activeStyle={depActive}>
-              {depItem}
-            </button>
-          );
+          return <DepItem>{depItem}</DepItem>;
         })}
-      </div>
+      </DepContainer>
     );
   }
 }

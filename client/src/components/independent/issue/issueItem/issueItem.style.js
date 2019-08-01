@@ -8,7 +8,7 @@ export const PopupContainer = styled.div`
   background: white;
   box-shadow: 3 0 7 rgba(0, 0, 0, 0.2);
   padding-top: 29px;
-  padding-left: 38px;
+  padding-left: 65px;
 `;
 
 export const Reservation = styled.div`
@@ -18,12 +18,13 @@ export const Reservation = styled.div`
 export const IssueTitle = styled.div`
   color: var(--light-black);
   font-size: 20px;
+  cursor: pointer;
 `;
 export const Line = styled.div`
   width: 2px;
   height: 9px;
   background: var(--pinkish-grey);
-  margin-left: 7px;
+  // margin-left: 7px;
 `;
 export const CreatedBy = styled.div`
   font-size: 12px;
@@ -89,7 +90,7 @@ export const StatusBadge = styled.button`
 export const CommentPanel = styled.div`
   background: var(--white-three);
   width: 573px;
-  height: 229px;
+  height: 230px;
   margin-top: 8px;
   padding-top: 17px;
   padding-left: 14px;
@@ -182,7 +183,7 @@ export const IssueTitles = styled.button`
 
   overflow: hidden;
 
-  font-size: 0.7rem;
+  font-size: 16.5px;
 
   color: var(--light-black);
   background: none;
@@ -191,7 +192,7 @@ export const IssueTitles = styled.button`
 `;
 export const IssueContents = styled.div`
   margin-top: 6px;
-  font-size: 0.475rem;
+  font-size: 12.5px;
   color: var(--greenish-teal);
 `;
 
@@ -209,25 +210,6 @@ export const IssueItemControl = styled.div`
   height: 17px;
 `;
 
-// .edit-btn {
-//   padding-top: 6px;
-//   margin-right: 6px;
-//   display: flex;
-//   align-items: flex-start;
-//   width: 10px;
-//   height: 10px;
-
-//   background: none;
-//   border: none;
-// }
-
-// .edit_im {
-//   width: 10px;
-//   height: 10px;
-//   background-repeat: no-repeat;
-//   /* display: none; */
-// }
-
 export const IssueItemDetail = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -237,7 +219,7 @@ export const IssueItemDetail = styled.div`
   height: 12px;
 `;
 export const CommentCount = styled.div`
-  font-size: 0.55rem;
+  font-size: 12.5px;
   color: var(--brownish-grey);
   margin-left: 5px;
   margin-right: 10px;

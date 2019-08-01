@@ -46,4 +46,6 @@ export const StartBtn = styled.button`
   color: white;
   font-size: 16px;
   outline: none;
+
+  cursor: pointer;
 `;
