@@ -18,7 +18,7 @@ const RoleTitle = styled.div`
   margin-top: 7px;
   font-family: NanumSquareB;
 `;
-const ArrowButton = styled.div`
+const ArrowButton = styled.button`
   width: 26px;
   height: 29px;
   border: none;
@@ -27,6 +27,9 @@ const ArrowButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
+  outline: none;
 `;
 const DivideLine = styled.div`
   height: 1px;
@@ -37,7 +40,7 @@ export class UserList extends Component {
   state = { InitialData, show: false };
 
   handleClick = () => {
-    this.setState({ show: this.state.show ? false : true });
+    this.setState({ show: !this.state.show });
     console.log(this.state.show);
   };
   render() {
@@ -58,9 +61,11 @@ export class UserList extends Component {
                   <img width="7px" height="13px" src={openRole} />
                 </ArrowButton>
 
-                <RoleTitle>{role.title}</RoleTitle>
+                <RoleTitle key={role.id}>{role.title}</RoleTitle>
               </Role>
-              <UserItem show={this.state.show} names={names} />
+              <div style={{ display: this.state.show ? "inline" : "none" }}>
+                <UserItem names={names} />
+              </div>
             </div>
           );
         })}

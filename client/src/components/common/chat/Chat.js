@@ -59,7 +59,8 @@ const TabItemBtn = styled.button`
   background: white;
   width: 35px;
   height: 35px;
-  online: none;
+  outline: none;
+  cursor: pointer;
 `;
 const Title = styled.div`
   height: 29px;
@@ -79,16 +80,19 @@ const DivideLine = styled.div`
 
 export class Chat extends Component {
   state = { isClickUserList: true };
+
   openUserList = () => {
     this.setState({
       isClickUserList: true
     });
+
     console.log(this.state.isClickUserList);
   };
   openRoomList = () => {
     this.setState({
       isClickUserList: false
     });
+
     console.log(this.state.isClickUserList);
   };
 
@@ -107,10 +111,24 @@ export class Chat extends Component {
               <ChatHeader>메신저</ChatHeader>
               <TabBox>
                 <TabItemBtn onClick={this.openUserList}>
-                  <img width="17px" height="19px" src={userOn} />
+                  <img
+                    id="userlist_btn"
+                    width="17px"
+                    height="19px"
+                    src={this.state.isClickUserList == true ? userOn : userOff}
+                  />
                 </TabItemBtn>
                 <TabItemBtn onClick={this.openRoomList}>
-                  <img width="21px" height="19px" src={messageOff} />
+                  <img
+                    id="messagelist_btn"
+                    width="21px"
+                    height="19px"
+                    src={
+                      this.state.isClickUserList == true
+                        ? messageOff
+                        : messageOn
+                    }
+                  />
                 </TabItemBtn>
               </TabBox>
 
