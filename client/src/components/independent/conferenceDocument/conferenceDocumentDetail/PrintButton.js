@@ -28,7 +28,7 @@ const PrintButton = ({ id, label }) => (
     <div id="myMm" style={{ height: "1mm" }} />
 
     <div
-      className="pa2 ba bw1 b--black bg-yellow black-90 br2 dib pointer dim shadow-1"
+      className="sum-div"
       onClick={() => {
         const input = document.getElementById(id);
         const inputHeightMm = pxToMm(input.offsetHeight);
@@ -67,7 +67,7 @@ const PrintButton = ({ id, label }) => (
         });
       }}
     >
-      <button className="save_button">
+      <button className="save_button1">
         <img src={download_off} className="downloadimg" />
         {label}
       </button>

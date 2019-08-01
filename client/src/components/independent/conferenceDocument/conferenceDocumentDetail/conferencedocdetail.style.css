@@ -22,7 +22,7 @@ canvas {
 .documentDetailTitle {
   display: flex;
   flex-direction: row;
-  height: 40px;
+  height: 45px;
   border-bottom: solid 1px var(--white-two);
   margin-bottom: 20px;
 }
@@ -47,6 +47,19 @@ canvas {
 }
 
 .save_button {
+  width: 82px;
+  height: 28px;
+  padding: 2px;
+  font-size: 13.5px;
+  color: var(--pinkish-grey);
+  background: none;
+  border-radius: 10px;
+  border: solid 1px var(--pinkish-grey);
+  text-emphasis: center;
+  margin-top: 7px;
+}
+
+.save_button1 {
   width: 82px;
   height: 27px;
   padding: 2px;
