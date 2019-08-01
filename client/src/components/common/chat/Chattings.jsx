@@ -29,7 +29,7 @@ const ChatOpponent = styled.div`
   background: var(--white-four);
 
   color: var(--greenish-teal);
-  font-size: 0.7rem;
+  font-size: 16px;
   font-family: NanumSquareB;
 
   align-items: center;

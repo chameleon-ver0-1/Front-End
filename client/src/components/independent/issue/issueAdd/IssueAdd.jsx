@@ -9,7 +9,7 @@ const AddBtn = styled.button`
   background: var(--white-three);
   color: var(--pinkish-grey);
 
-  font-size: 0.8rem;
+  font-size: 16px;
 
   border: none;
   align-items: center;
@@ -21,6 +21,8 @@ const AddBtn = styled.button`
   outline: none;
 
   font-family: NanumSquareB;
+
+  cursor: pointer;
 `;
 
 export class IssueAdd extends Component {
@@ -50,7 +52,7 @@ export class IssueAdd extends Component {
 
   render() {
     return (
-      <div style={{width:"0px", height:"0px"}}>
+      <div style={{ width: "0px", height: "0px" }}>
         <AddBtn onClick={this.openDialog}>+ TODO 추가하기</AddBtn>
         {/* <div>제목:{this.state.title}</div>
         <div>내용:{this.state.detail}</div> */}

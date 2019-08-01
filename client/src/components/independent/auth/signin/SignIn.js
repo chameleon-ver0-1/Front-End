@@ -49,6 +49,7 @@ const LoginInput = styled.input`
   width: 300px;
   height: 30px;
   font-size: 12px;
+  outline: none;
 `;
 const InputBorder = styled.div`
   margin-top: 9px;
@@ -105,6 +106,8 @@ const OtherLoginBtn = styled.button`
   margin-left: 13px;
   font-size: 14px;
   font-family: NanumSquareB;
+
+  cursor: pointer;
 `;
 const ForgetBtn = styled.button`
   margin: auto;
@@ -148,6 +151,8 @@ const OriginLoginBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 
   width: 314px;
   height: px;

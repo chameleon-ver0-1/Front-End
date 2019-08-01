@@ -10,7 +10,7 @@ const active = {
   width: "100%",
   height: "53px",
   color: "var(--greenish-teal)",
-  fontSize: "1.2rem",
+  fontSize: "22px",
   fontFamily: "NanumSquareEB",
   textAlign: "center",
   textDecoration: "none",

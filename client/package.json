@@ -23,6 +23,7 @@
     "random-unicode-emoji": "^1.0.1",
     "rc-drawer": "^1.9.8",
     "react": "^16.8.4",
+    "react-animations": "^1.0.0",
     "react-beautiful-dnd": "^10.1.0",
     "react-bootstrap-date-picker": "^5.1.0",
     "react-burger-menu": "^2.6.10",
