@@ -1,19 +1,25 @@
 import React, { Component } from "react";
-import "./issue.style.css";
 import IssueDep from "./issueDepartment/IssueDep";
 import Issues from "./issues/Issues";
+import styled from "styled-components";
+import IssueAdd from "./issueAdd/IssueAdd";
 
-
-
+const BoxContainer = styled.div`
+  display: flex;
+`;
+const IssueContainer = styled.div`
+  height: calc(100% - 48px);
+`;
 export class issue extends Component {
   render() {
     return (
-      <div className="issue-container">
+      <IssueContainer>
         <IssueDep />
-        <div className="box-container">
+        <BoxContainer>
           <Issues />
-        </div>
-      </div>
+        </BoxContainer>
+        <IssueAdd />
+      </IssueContainer>
     );
   }
 }

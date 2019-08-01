@@ -4,6 +4,9 @@ import UserItem from "./UserItem";
 import openRole from "../../../assets/message/message_arrow.png";
 import InitialData from "./role-data";
 
+const TeamContainer = styled.div`
+  width: 288px;
+`;
 const Role = styled.div`
   display: flex;
   height: 29px;
@@ -39,7 +42,7 @@ export class UserList extends Component {
   };
   render() {
     return (
-      <div height="100px">
+      <TeamContainer>
         <DivideLine />
 
         {Object.keys(this.state.InitialData.data).map(roleId => {
@@ -61,7 +64,7 @@ export class UserList extends Component {
             </div>
           );
         })}
-      </div>
+      </TeamContainer>
     );
   }
 }

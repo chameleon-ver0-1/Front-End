@@ -41,6 +41,7 @@ const Label = styled.div`
   font-size: 14px;
   margin-left: 11px;
   font-family: NanumSquareB;
+  color: var(--brownish-grey);
 `;
 
 const LoginInput = styled.input`
@@ -62,7 +63,6 @@ const InputBorder = styled.div`
 
 const Checks = styled.div`
   margin-top: 8px;
-  margin-bottom: 10px;
   width: 313px;
   height: 12px;
   display: flex;
@@ -70,7 +70,9 @@ const Checks = styled.div`
 `;
 
 const Check = styled.div`
-  font-size: 14px;
+  font-size: 12px;
+  color: var(--brownish-grey);
+  width: 120px;
 `;
 
 const Buttons = styled.div`
@@ -317,21 +319,25 @@ class SignIn extends Component {
           </InputGroup>
 
           <Checks className="checks">
-            <input
-              onChange={this.handleChange}
-              id={this.id}
-              type="checkbox"
-              checked={this.state.Checked}
-            />
-            <Check htmlFor={this.id}>로그인 상태 유지</Check>
+            <Row>
+              <input
+                onChange={this.handleChange}
+                id={this.id}
+                type="checkbox"
+                checked={this.state.Checked}
+              />
+              <Check htmlFor={this.id}>로그인 상태 유지</Check>
+            </Row>
 
-            <input
-              onChange={this.handleChange}
-              id={this.id}
-              type="checkbox"
-              checked={this.state.Checked}
-            />
-            <Check htmlFor={this.id}>이메일 기억하기</Check>
+            <Row>
+              <input
+                onChange={this.handleChange}
+                id={this.id}
+                type="checkbox"
+                checked={this.state.Checked}
+              />
+              <Check htmlFor={this.id}>이메일 기억하기</Check>
+            </Row>
           </Checks>
 
           <LoginLinkContainer>
