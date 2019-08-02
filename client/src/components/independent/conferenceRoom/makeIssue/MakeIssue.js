@@ -7,8 +7,44 @@ import InitialData from "../../issue/testItem-data";
 export class MakeIssue extends Component {
   state = InitialData;
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      issue: "",
+      tags: [{ id: 0, text: "가나다" }]
+    };
+  }
+
+  /* TODO: 두번 클릭해야 저장되는 것 수정 */
+  issueClicked = e => {
+    this.setState({
+      issue: e
+    });
+    console.log(this.state.issue);
+  };
+
+  /* TODO: tag 값 props로 넘기기 */
+  onSelectIssue = () => {
+    const { tags, issue } = this.state;
+    this.setState({
+      tags: tags.concat({ id: this.id++, text: issue })
+    });
+    console.log(tags);
+    if (tags.length > 2) {
+      this.setState({
+        //TODO: tags 배열 수 제한해야함 ( 삭제 )
+      });
+    }
+  };
+
+  bothClick = () => {
+    this.onSelectIssue();
+    this.props.onCloseModal();
+  };
+
   render() {
-    const { open, title, onCloseModal } = this.props;
+    const { open, title, onCloseModal, tags } = this.props;
 
     return (
       <Modal
@@ -21,7 +57,6 @@ export class MakeIssue extends Component {
           <div className="roomtitle">{title}</div>
 
           {/* TODO: issue 데이터 가져오기 */}
-          {/* TODO: 선택한 데이터 태그로 받아오기 */}
           <Tabs>
             <TabList>
               <Tab>TODO</Tab>
@@ -31,11 +66,27 @@ export class MakeIssue extends Component {
 
             <TabPanel>
               <ul className="issue-list">
-                <li className="issue-item" onClick={this.issueClicked}>
+                <li
+                  className="issue-item"
+                  onClick={this.issueClicked.bind(
+                    this,
+                    "a"
+                  )} /* "a"쓴 부분이 ""값을 넘긴다는 뜻. 데이터 받아올때는 "변수.값"의 형태로 */
+                >
                   a
                 </li>
-                <li className="issue-item">b</li>
-                <li className="issue-item">c</li>
+                <li
+                  className="issue-item"
+                  onClick={this.issueClicked.bind(this, "b")}
+                >
+                  b
+                </li>
+                <li
+                  className="issue-item"
+                  onClick={this.issueClicked.bind(this, "c")}
+                >
+                  c
+                </li>
               </ul>
             </TabPanel>
             <TabPanel>
@@ -55,7 +106,9 @@ export class MakeIssue extends Component {
           </Tabs>
 
           <div className="issue-buttons-div">
-            <button className="choose-issue">선택</button>
+            <button className="choose-issue" onClick={this.bothClick}>
+              선택
+            </button>
             <button className="cancel-issue" onClick={onCloseModal}>
               취소
             </button>

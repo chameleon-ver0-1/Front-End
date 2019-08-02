@@ -14,7 +14,6 @@ import { Link } from "react-router-dom";
 import MakeIssue from "../makeIssue/MakeIssue";
 import searchissue from "../../../../assets/conference/searchissue.png";
 import DatePicker from "react-datepicker";
-import moment from "moment";
 import BigDatePicker from "./BigDatePicker";
 import SmallDatePicker from "./SmallDatePicker";
 
@@ -38,7 +37,7 @@ class MakeRoom extends Component {
 
     this.state = {
       roomTitle: "none",
-      tags: [],
+      tags: [{ id: 0, text: "화상회의" }],
       suggestions: suggestions,
       open: false,
       title: "",
