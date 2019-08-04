@@ -29,10 +29,10 @@ export class ConferenceDoc extends Component {
 
           <div className="documentroom_table">
             <div className="table_head">
-              <div className="table_head_text">회의제목</div>
-              <div className="table_head_text">회의시간</div>
-              <div className="table_head_text">메인토픽</div>
-              <div className="table_head_text">다운로드</div>
+              <div className="table_head_text1">회의제목</div>
+              <div className="table_head_text2">회의시간</div>
+              <div className="table_head_text3">메인토픽</div>
+              <div className="table_head_text4">다운로드</div>
             </div>
 
             <ConferencePosts />
