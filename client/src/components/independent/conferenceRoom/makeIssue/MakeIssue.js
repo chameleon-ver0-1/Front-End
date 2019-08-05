@@ -19,7 +19,7 @@ export class MakeIssue extends Component {
   /* TODO: 두번 클릭해야 저장되는 것 수정 */
   issueClicked = e => {
     this.setState({
-      issue: e
+      issue: e.target.value
     });
     console.log(this.state.issue);
   };
@@ -68,10 +68,10 @@ export class MakeIssue extends Component {
               <ul className="issue-list">
                 <li
                   className="issue-item"
-                  onClick={this.issueClicked.bind(
-                    this,
-                    "a"
-                  )} /* "a"쓴 부분이 ""값을 넘긴다는 뜻. 데이터 받아올때는 "변수.값"의 형태로 */
+                  value="aa"
+                  onClick={
+                    this.issueClicked
+                  } /* "a"쓴 부분이 ""값을 넘긴다는 뜻. 데이터 받아올때는 "변수.값"의 형태로 */
                 >
                   a
                 </li>

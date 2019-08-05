@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+.issue-item {
+  font-size: 14px;
+}
+
 .issue-item:hover {
   background-color: var(--white-two);
 }
@@ -35,6 +39,8 @@
 }
 
 .issue-buttons-div {
+  position: absolute;
+  top: 330px;
   margin-top: 50px;
   margin-left: 150px;
   width: 187px;
@@ -46,6 +52,9 @@
 /********************** TAB Design *************************/
 .react-tabs {
   -webkit-tap-highlight-color: transparent;
+  width: 417px;
+  margin: auto;
+  margin-top: 20px;
 }
 
 .react-tabs__tab-list {
@@ -65,6 +74,7 @@
   list-style: none;
   padding: 6px 12px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .react-tabs__tab--selected {
