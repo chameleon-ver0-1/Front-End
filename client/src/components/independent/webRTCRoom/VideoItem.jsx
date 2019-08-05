@@ -15,40 +15,17 @@
  * 1. io: socket에 연결하기 위한 라이브러리
  */
 import React, { Component } from "react";
-import styled from "styled-components";
-import "./webrtc.style.css";
+
 import html2canvas from "html2canvas";
 import axios from "axios";
 import * as service from "./getHTMLMediaElement";
+import { VideoFrame, EmotionStatus, VideosContainer } from "./webrtc.style";
 
 var connection = new window.RTCMultiConnection();
 
 connection.autoCloseEntireSession = true;
 connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/";
 
-const VideoFrame = styled.div`
-  padding-left: 50px;
-  padding-top: 19px;
-  padding-right: 50px;
-
-  height: 90%;
-`;
-const EmotionStatus = styled.div`
-  position: fixed;
-  top: 80%;
-  width: 50%;
-  text-align: center;
-  display: inline-block;
-  background: black;
-  color: white;
-  font-size: 15px;
-  opacity: 0.4;
-  border-radius: 45px;
-`;
-var VideosContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
 export class VideoItem extends Component {
   //FIXME:state값 추가함
   state = { roomToken: "", dummy: [] };

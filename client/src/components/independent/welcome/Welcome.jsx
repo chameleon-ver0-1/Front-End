@@ -11,6 +11,9 @@ import {
   StartBtn
 } from "./welcome.style";
 export class Welcome extends Component {
+  componentWillUpdate = () => {
+    
+  };
   render() {
     return (
       <div>

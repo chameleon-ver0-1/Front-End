@@ -29,7 +29,7 @@ const ChatOpponent = styled.div`
   background: var(--white-four);
 
   color: var(--greenish-teal);
-  font-size: 0.7rem;
+  font-size: 16px;
   font-family: NanumSquareB;
 
   align-items: center;
@@ -46,6 +46,8 @@ const FileBtn = styled.button`
   border: none;
   background: none;
   online: none;
+
+  cursor: pointer;
 `;
 const InputBorder = styled.div`
   width: 220px;
@@ -66,6 +68,8 @@ const SendBtn = styled.button`
   border: none;
   inline: none;
   background: none;
+
+  cursor: pointer;
 `;
 const Dot = styled.div`
   width: 8px;

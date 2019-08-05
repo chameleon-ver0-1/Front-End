@@ -7,6 +7,7 @@
 
 .issues-title {
   display: flex;
+
   justify-content: center;
   width: 238px;
   height: 20px;
@@ -16,14 +17,12 @@
   text-align: center;
 }
 .issues-title-status {
-  font-size: 1.15rem;
-  font-family: NanumSquareB;
+  font-size: 22.5px;
   color: var(--light-black);
+  font-family: NanumSquareB;
 }
 .issues-title-count {
-  margin-left: 11px;
-
-  font-size: 1.15rem;
+  font-size: 22.5px;
   color: var(--white-two);
 }
 

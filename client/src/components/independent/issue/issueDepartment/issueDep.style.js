@@ -1,27 +1,30 @@
-@import "../../../../style.css";
+import styled from "styled-components";
 
-* {
-  margin: 0px;
-  padding: 0px;
-}
-.dep-container {
+export const DepContainer = styled.div`
   margin-left: 84px;
   margin-top: 41px;
   width: 711px;
   height: 35px;
   border-bottom: 1px solid var(--white-two);
   padding-left: 56px;
-}
-.dep-item {
-  margin-bottom: 8px;
+  padding-bottom: 21px;
+`;
+export const DepItem = styled.button`
   margin-right: 89px;
-  width: 62px;
+  width: 70px;
 
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 24px;
   font-family: NanumSquareB;
   color: var(--white-two);
 
   background: none;
   border: none;
-}
+  cursor: pointer;
+
+  outline: none;
+
+  &:hover {
+    color: var(--greenish-teal);
+  }
+`;

@@ -63,57 +63,52 @@ export default class AddIssueDialog extends Component {
           </Row>
 
           <DividedLine />
-          <div className="comment">
-            <CommentPanel>
-              <Row>
-                <img
-                  src={CommentProfile}
-                  width="31px"
-                  height="30px"
-                  alt="myProfile"
+
+          <CommentPanel>
+            <Row>
+              <img
+                src={CommentProfile}
+                width="31px"
+                height="30px"
+                alt="myProfile"
+              />
+              <CommentInputBorder>
+                <CommentInput
+                  type="text"
+                  id="issueTitle"
+                  defaultValue=""
+                  placeholder="의견을 작성하세요"
                 />
-                <CommentInputBorder>
-                  <CommentInput
-                    type="text"
-                    id="issueTitle"
-                    defaultValue=""
-                    placeholder="의견을 작성하세요"
-                  />
-                </CommentInputBorder>
-                <CommentUpdateBtn>등록</CommentUpdateBtn>
-              </Row>
+              </CommentInputBorder>
+              <CommentUpdateBtn>등록</CommentUpdateBtn>
+            </Row>
 
-              {/* <CommentItems>
-                <img />
-                <CommentItem />
-              </CommentItems> */}
-              <FreeScrollBar>
-                {Object.keys(this.state.data).map(commentIds => {
-                  const comment = this.state.data[commentIds];
+            <FreeScrollBar>
+              {Object.keys(this.state.data).map(commentIds => {
+                const comment = this.state.data[commentIds];
 
-                  return (
+                return (
+                  <div width="573px" height="168px">
+                    <SDividedLine />
                     <div>
-                      <SDividedLine />
-                      <div>
-                        <Row>
-                          <img
-                            src={CommentProfile}
-                            width="31px"
-                            height="30px"
-                            style={{ marginTop: "10px" }}
-                          />
-                          <div style={{ marginLeft: "7px", marginTop: "15px" }}>
-                            <Name>{comment.name}</Name>
-                            <CommentContent>{comment.content}</CommentContent>
-                          </div>
-                        </Row>
-                      </div>
+                      <Row>
+                        <img
+                          src={CommentProfile}
+                          width="31px"
+                          height="30px"
+                          style={{ marginTop: "10px" }}
+                        />
+                        <div style={{ marginLeft: "7px", marginTop: "15px" }}>
+                          <Name>{comment.name}</Name>
+                          <CommentContent>{comment.content}</CommentContent>
+                        </div>
+                      </Row>
                     </div>
-                  );
-                })}
-              </FreeScrollBar>
-            </CommentPanel>
-          </div>
+                  </div>
+                );
+              })}
+            </FreeScrollBar>
+          </CommentPanel>
         </PopupContainer>
       </Modal>
     );

@@ -44,6 +44,8 @@ const ButtonItem = styled.button`
   width: 13px;
   height: 13px;
   margin-left: 4px;
+
+  cursor: pointer;
 `;
 const DivideLine = styled.div`
   background: var(--white-two);

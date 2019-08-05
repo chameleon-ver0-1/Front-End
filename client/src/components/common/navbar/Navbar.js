@@ -43,6 +43,23 @@ import {
   AuthBox
 } from "./navbar.style";
 
+const active = {
+  fontSize: "13.5px",
+  fontFamily: "NanumSquareB",
+  cursor: "pointer",
+  width: "80px",
+  height: "33px",
+
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+
+  border: "1px solid var(--greenish-teal)",
+  borderRadius: "16.5px",
+  outline: "none",
+
+  color: "var(--greenish-teal)"
+};
 export class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -77,18 +94,23 @@ export class Navbar extends Component {
     ) {
       return (
         <NavContainer>
-          <LogoContainer>
-            <img width="129px" height="40px" src={LogoBlackIcon} />
-          </LogoContainer>
+          <Link to="/">
+            <LogoContainer>
+              <img width="129px" height="40px" src={LogoBlackIcon} />
+            </LogoContainer>
+          </Link>
           <BtnContainer>
-            <BtnP>
-              <NavLink to="/auth/signIn">
-                <NavBtn>로그인</NavBtn>
-              </NavLink>
-            </BtnP>
-            <NavLink to="/auth/signUp">
-              <NavBtn>회원가입</NavBtn>
-            </NavLink>
+            <NavBtn to="/auth/signIn" activeStyle={active}>
+              로그인
+            </NavBtn>
+
+            <NavBtn
+              to="/auth/signUp"
+              style={{ marginLeft: "7px" }}
+              activeStyle={active}
+            >
+              회원가입
+            </NavBtn>
           </BtnContainer>
         </NavContainer>
       );
@@ -118,13 +140,11 @@ export class Navbar extends Component {
               <NavItem>FAQ</NavItem>
             </Link>
             <AuthBox style={{ marginLeft: "57px" }}>
-              <Link to="/auth/signIn">
-                <NavBtn>로그인</NavBtn>
-              </Link>
+              <NavBtn to="/auth/signIn">로그인</NavBtn>
 
-              <Link to="/auth/signUp">
-                <NavBtn style={{ marginLeft: "7px" }}>회원가입</NavBtn>
-              </Link>
+              <NavBtn to="/auth/signUp" style={{ marginLeft: "7px" }}>
+                회원가입
+              </NavBtn>
             </AuthBox>
           </HomeNav>
         </div>
@@ -139,9 +159,11 @@ export class Navbar extends Component {
       return (
         <div className="container">
           <Nav2Container>
-            <LogoContainer>
-              <img width="129px" height="40px" src={LogoWhiteIcon} />
-            </LogoContainer>
+            <Link to="/">
+              <LogoContainer>
+                <img width="129px" height="40px" src={LogoWhiteIcon} />
+              </LogoContainer>
+            </Link>
             <NavRight>
               <Fade when={this.state.show}>
                 <Dropdown style={{ zIndex: 100 }} />

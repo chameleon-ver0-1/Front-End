@@ -10,46 +10,7 @@ import sharingIcon from "../../../assets/conferenceRoom/videohome_sharing_off.pn
 import doc from "../../../assets/conferenceRoom/videohome_doc_off.png";
 import logoIcon from "../../../assets/conferenceRoom/videohome_logo.png";
 
-const Logo = styled.div`
-  width: 64px;
-  height: 62px;
-  background: #555555;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 8px;
-`;
-
-const LeftNav = styled.div`
-  width: 64px;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background: #555555;
-`;
-const ButtonItem = styled.button`
-  width: 63px;
-  height: 55px;
-
-  border: none;
-  background: none;
-  outline: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const HomeItem = styled.button`
-  width: 63px;
-  height: 55px;
-
-  border: none;
-  background: var(--greenish-teal);
-  outline: none;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import { Logo, LeftNav, ButtonItem, HomeItem } from "./webrtc.style";
 
 const onSharing = () => {
   //TODO: 화면 공유 버튼 on/off state에 따라서 함수 실행시키기

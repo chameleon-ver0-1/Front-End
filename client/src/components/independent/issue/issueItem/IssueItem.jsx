@@ -61,7 +61,12 @@ export class IssueItem extends Component {
               </IssueContents>
 
               <IssueItemDetail>
-                <img width="13px" height="12px" src={comment} />
+                <img
+                  onClick={this.openDialog}
+                  width="13px"
+                  height="12px"
+                  src={comment}
+                />
                 <CommentCount>3</CommentCount>
                 <img width="13px" height="12px" src={file} />
               </IssueItemDetail>
