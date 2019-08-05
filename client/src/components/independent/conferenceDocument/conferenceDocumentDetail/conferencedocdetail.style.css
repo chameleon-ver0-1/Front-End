@@ -16,7 +16,7 @@ canvas {
 .documentdetaildiv {
   margin-top: 41px;
   margin-left: 82px;
-  width: 750px;
+  width: 800px;
 }
 
 .documentDetailTitle {
@@ -56,7 +56,8 @@ canvas {
   border-radius: 10px;
   border: solid 1px var(--pinkish-grey);
   text-emphasis: center;
-  margin-top: 7px;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 
 .save_button1 {

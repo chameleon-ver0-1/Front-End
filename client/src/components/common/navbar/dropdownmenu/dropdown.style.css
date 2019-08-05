@@ -4,6 +4,11 @@
   position: relative;
   display: inline-block;
   z-index: 200;
+  width: 20px;
+  height: 28px;
+  margin-right: 26px;
+  cursor: pointer;
+  outline: none;
 }
 
 li a {
@@ -19,16 +24,21 @@ li {
   width: 20px;
   height: 28px;
   padding-right: 32px;
+  cursor: pointer;
+  outline: none;
   border: none;
   background: none;
   background-repeat: no-repeat;
   background-size: auto;
 }
 
+.notice-btn:active {
+  border: none;
+}
+
 .notice_im {
-  padding-top: 4px;
   width: 20px;
-  height: 28px;
+  height: 30px;
 }
 
 .tri_alert {
@@ -40,8 +50,6 @@ li {
   border-right: 10px solid transparent;
   border-bottom: 20px solid #ffffff;
   border-left: 10px solid transparent;
-  margin-top: 35px;
-  margin-left: 100%;
 }
 
 .alert_ul {
@@ -55,7 +63,7 @@ li {
   background-color: #ffffff;
   font-weight: bold;
   position: absolute;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 10px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 

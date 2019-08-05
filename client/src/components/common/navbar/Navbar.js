@@ -165,18 +165,16 @@ export class Navbar extends Component {
               </LogoContainer>
             </Link>
             <NavRight>
-              <Fade when={this.state.show}>
-                <Dropdown style={{ zIndex: 100 }} />
-              </Fade>
+              <Dropdown style={{ zIndex: 100 }} />
 
-              <NoticeBtn>
+              {/* <NoticeBtn>
                 <img
                   width="20px"
                   height="30px"
                   src={this.state.haveNotice ? alertOn : alertOff}
                   onClick={this.handleClick}
                 />
-              </NoticeBtn>
+              </NoticeBtn> */}
 
               <img
                 width="45px"
