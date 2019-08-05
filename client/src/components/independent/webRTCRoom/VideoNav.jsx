@@ -14,7 +14,6 @@
  * 1. Fade: 자연스럽게 나타나고 사라지게 하는 애니메이션 라이브러리
  */
 import React, { Component } from "react";
-import styled from "styled-components";
 import logo from "../../../assets/conferenceRoom/videohome_logo.png";
 import user from "../../../assets/conference/people.png";
 import mic from "../../../assets/conferenceRoom/videohome_speaking.png";
@@ -22,56 +21,13 @@ import mic from "../../../assets/conferenceRoom/videohome_speaking.png";
 import Fade from "react-reveal/Fade";
 import InviteDialog from "./InviteDialog";
 
-const UpperNav = styled.div`
-  width: calc((100vw - 64px) / 2);
-  height: 56px;
-  background: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const ConferenceTitle = styled.div`
-  margin-left: 26px;
-  font-size: 22px;
-  color: white;
-
-  overflow: hidden;
-`;
-const UserCount = styled.div`
-  margin-left: 20px;
-`;
-const CountText = styled.button`
-  color: var(--greenish-teal);
-  font-size: 22px;
-  height: 100%;
-  display: flex;
-
-  margin-left: 8px;
-  align-items: center;
-  overflow: auto;
-  border: none;
-  background: none;
-  outline: none;
-`;
-const Timer = styled.div`
-  background: var(--greenish-teal);
-  width: 65px;
-  height: 26px;
-
-  margin-left: 14px;
-
-  border-radius: 11.5px;
-  color: white;
-  font-size: 15px;
-  text-align: center;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  overflow: hidden;
-`;
+import {
+  UpperNav,
+  ConferenceTitle,
+  UserCount,
+  CountText,
+  Timer
+} from "./webrtc.style";
 
 export class VideoNav extends Component {
   constructor(props) {

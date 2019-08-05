@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./test.style.css";
 
 // var maxTries = 0;
 // function showChromeExtensionStatus() {

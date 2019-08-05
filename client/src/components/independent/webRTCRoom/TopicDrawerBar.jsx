@@ -18,33 +18,9 @@
  * 1. io: socket에 연결하기 위한 라이브러리
  */
 import React, { Component } from "react";
-import styled from "styled-components";
 import topicCheckOff from "../../../assets/conferenceRoom/videohome_check_off.png";
 import io from "socket.io-client";
-
-const TopicItem = styled.div`
-  font-size: 12px;
-  height: 31px;
-  padding-left: 13px;
-  padding-top: 5px;
-  color: var(--brownish-grey);
-  display: flex;
-  flex-direction: row;
-`;
-const TopicButton = styled.button`
-  display: block;
-  margin-left: 100px;
-  margin-top: 0px;
-  width: 16px;
-  height: 16px;
-  background: none;
-  border: none;
-`;
-const DrawerContainer = styled.div`
-  background: var(--white-four);
-  width: 252px;
-  height: calc(100%-48px);
-`;
+import { TopicItem, TopicButton, DrawerContainer } from "./webrtc.style";
 
 /*토픽 컴포넌트*/
 const topics = [

@@ -104,7 +104,11 @@ export class Navbar extends Component {
               로그인
             </NavBtn>
 
-            <NavBtn to="/auth/signUp" style={{ marginLeft: "7px" }}>
+            <NavBtn
+              to="/auth/signUp"
+              style={{ marginLeft: "7px" }}
+              activeStyle={active}
+            >
               회원가입
             </NavBtn>
           </BtnContainer>
