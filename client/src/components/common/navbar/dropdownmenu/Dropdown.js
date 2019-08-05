@@ -9,7 +9,8 @@ import "./dropdown.style.css";
 import alert from "../../../../assets/home/alrert_list.png";
 import user from "../../../../assets/home/userProfile.png";
 import styled, { css } from "styled-components";
-import notice from "../../../../assets/home/alert_on.png";
+import alertOn from "../../../../assets/home/alert_on.png";
+import alertOff from "../../../../assets/home/alert_off.png";
 
 const Alert_text = styled.div`
   margin-top: 3px;
@@ -30,7 +31,8 @@ class Dropdown extends React.Component {
     super();
 
     this.state = {
-      displayMenu: false
+      displayMenu: false,
+      haveNotice: true
     };
 
     this.showDropdownMenu = this.showDropdownMenu.bind(this);
@@ -54,7 +56,7 @@ class Dropdown extends React.Component {
     const NoticeBtn = (
       <button className="notice-btn">
         <img
-          src={notice}
+          src={this.state.haveNotice ? alertOn : alertOff}
           onClick={this.showDropdownMenu}
           className="notice_im"
         />
