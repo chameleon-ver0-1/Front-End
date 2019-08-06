@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import people from "../../../assets/conference/people.png";
+import Conference from "./data/conference.json";
 
 const Circle_conference = styled.div`
   border-radius: 64px;

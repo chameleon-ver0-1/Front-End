@@ -40,66 +40,120 @@ export class ConferenceRoomDetail extends Component {
   };
 
   render() {
-    return (
-      <div className="conferenceroom_container">
-        <div className="conferenceroom_text">{this.props.title}</div>
+    if (this.props.title == "현재 진행중인 회의") {
+      return (
+        <div className="conferenceroom_container">
+          <div className="conferenceroom_text">{this.props.title}</div>
 
-        <div className="add_conference">
-          <button className="add_conference_btn" onClick={this.onOpenModal}>
-            + 회의 개설하기
-          </button>
-          <MakeRoom
-            open={this.state.open}
-            title={this.state.title}
-            onCloseModal={this.onCloseModal}
-          />
+          <div className="add_conference">
+            <button className="add_conference_btn" onClick={this.onOpenModal}>
+              + 회의 개설하기
+            </button>
+            <MakeRoom
+              open={this.state.open}
+              title={this.state.title}
+              onCloseModal={this.onCloseModal}
+            />
+          </div>
+
+          <CarouselProvider
+            className="circle_container"
+            totalSlides={3}
+            naturalSlideWidth={800}
+            naturalSlideHeight={200}
+          >
+            <ButtonBack className="left_right_l">
+              <img src={left} className="left_right_img" />
+            </ButtonBack>
+
+            <Slider className="slider">
+              <Slide index={0} className="slide-index0">
+                <div className="slide_div">
+                  <Circle1 />
+                  <Circle1 />
+                  <Circle1 />
+                  <Circle1 />
+                </div>
+              </Slide>
+
+              <Slide index={1}>
+                <div className="slide_div">
+                  <Circle1 />
+                  <Circle1 />
+                  <Circle1 />
+                  <Circle1 />
+                </div>
+              </Slide>
+
+              <Slide index={2}>
+                <div className="slide_div">
+                  <Circle1 />
+                  <Circle1 />
+                  <Circle1 />
+                  <Circle1 />
+                </div>
+              </Slide>
+            </Slider>
+
+            <ButtonNext className="left_right_r">
+              <img src={right} className="left_right_img" />
+            </ButtonNext>
+          </CarouselProvider>
         </div>
+      );
+    } else {
+      return (
+        <div className="conferenceroom_container">
+          <div className="conferenceroom_text">{this.props.title}</div>
 
-        <CarouselProvider
-          className="circle_container"
-          totalSlides={3}
-          naturalSlideWidth={800}
-          naturalSlideHeight={200}
-        >
-          <ButtonBack className="left_right_l">
-            <img src={left} className="left_right_img" />
-          </ButtonBack>
+          <div className="add_conference2" />
 
-          <Slider className="slider">
-            <Slide index={0} className="slide-index0">
-              <div className="slide_div">
-                <Circle2 />
-                <Circle2 />
-                <Circle2 />
-                <Circle2 />
-              </div>
-            </Slide>
+          <CarouselProvider
+            className="circle_container"
+            totalSlides={3}
+            naturalSlideWidth={800}
+            naturalSlideHeight={200}
+          >
+            <ButtonBack className="left_right_l2">
+              <img src={left} className="left_right_img" />
+            </ButtonBack>
 
-            <Slide index={1}>
-              <div className="slide_div">
-                <Circle2 />
-                <Circle2 />
-                <Circle2 />
-                <Circle2 />
-              </div>
-            </Slide>
+            <Slider className="slider">
+              <Slide index={0} className="slide-index0">
+                <div className="slide_div">
+                  <Circle2 />
+                  <Circle2 />
+                  <Circle2 />
+                  <Circle2 />
+                </div>
+              </Slide>
 
-            <Slide index={2}>
-              <div className="slide_div">
-                <Circle2 />
-                <Circle2 />
-                <Circle2 />
-                <Circle2 />
-              </div>
-            </Slide>
-          </Slider>
+              <Slide index={1}>
+                <div className="slide_div">
+                  <Circle2 />
+                  <Circle2 />
+                  <Circle2 />
+                  <Circle2 />
+                </div>
+              </Slide>
 
-          <ButtonNext className="left_right_r">
-            <img src={right} className="left_right_img" />
-          </ButtonNext>
-        </CarouselProvider>
-      </div>
-    );
+              <Slide index={2}>
+                <div className="slide_div">
+                  <Circle2 />
+                  <Circle2 />
+                  <Circle2 />
+                  <Circle2 />
+                </div>
+              </Slide>
+            </Slider>
+
+            <ButtonNext className="left_right_r2">
+              <img src={right} className="left_right_img" />
+            </ButtonNext>
+          </CarouselProvider>
+        </div>
+      );
+    }
   }
 }
 

@@ -15,10 +15,6 @@ li a {
   color: #000;
   text-decoration: none;
 }
-li {
-  padding: 8px 10px;
-  border-bottom: 1px solid #e5e5e5;
-}
 
 .notice-btn {
   width: 20px;
@@ -74,6 +70,11 @@ li {
   border-bottom: 1px solid var(--white-two);
   margin-top: 5px;
   margin-left: 3px;
+}
+
+.alert_li {
+  padding: 8px 10px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .alert_li:hover {

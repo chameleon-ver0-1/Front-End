@@ -7,6 +7,8 @@
 
 .issue-item {
   font-size: 14px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .issue-item:hover {
