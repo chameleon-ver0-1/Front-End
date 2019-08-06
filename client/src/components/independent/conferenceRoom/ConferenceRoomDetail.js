@@ -20,44 +20,8 @@ import {
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import MakeRoom from "./makeRoom/MakeRoom";
-
-const Circle_conference = styled.div`
-  border-radius: 64px;
-  width: 128px;
-  height: 128px;
-  border: solid 1px var(--greenish-teal);
-  margin: auto;
-  position: relative;
-  z-index: -1;
-`;
-
-const Circle_title = styled.div`
-  font-size: 14px;
-  text-align: center;
-`;
-
-const Circle_name = styled.div`
-  font-size: 10px;
-  color: var(--pinkish-grey);
-  text-align: center;
-`;
-
-const Circle_people = styled.div`
-  font-size: 12px;
-`;
-
-const Circle_time = styled.div`
-  border-radius: 64px;
-  width: 34px;
-  height: 34px;
-  background: var(--greenish-teal);
-  font-size: 10px;
-  color: #ffffff;
-  text-align: center;
-  margin-left: 94px;
-  display: flex;
-  align-items: center;
-`;
+import Circle1 from "./Circle1";
+import Circle2 from "./Circle2";
 
 export class ConferenceRoomDetail extends Component {
   state = {
@@ -104,133 +68,28 @@ export class ConferenceRoomDetail extends Component {
           <Slider className="slider">
             <Slide index={0} className="slide-index0">
               <div className="slide_div">
-                <Circle_conference>
-                  <Circle_time>12:30~</Circle_time>
-                  <Circle_title>개발팀 전체 회의</Circle_title>
-                  <Circle_name>권주희 Kwon ju hee</Circle_name>
-                  <div className="circle_hori">
-                    <img src={people} className="people" />
-                    <Circle_people>5/6</Circle_people>
-                  </div>
-                </Circle_conference>
-
-                <Circle_conference>
-                  <Circle_time>12:30~</Circle_time>
-                  <Circle_title>개발팀 전체 회의</Circle_title>
-                  <Circle_name>권주희 Kwon ju hee</Circle_name>
-                  <div className="circle_hori">
-                    <img src={people} className="people" />
-                    <Circle_people>5/6</Circle_people>
-                  </div>
-                </Circle_conference>
-
-                <Circle_conference>
-                  <Circle_time>12:30~</Circle_time>
-                  <Circle_title>개발팀 전체 회의</Circle_title>
-                  <Circle_name>권주희 Kwon ju hee</Circle_name>
-                  <div className="circle_hori">
-                    <img src={people} className="people" />
-                    <Circle_people>5/6</Circle_people>
-                  </div>
-                </Circle_conference>
-
-                <Circle_conference>
-                  <Circle_time>12:30~</Circle_time>
-                  <Circle_title>개발팀 전체 회의</Circle_title>
-                  <Circle_name>권주희 Kwon ju hee</Circle_name>
-                  <div className="circle_hori">
-                    <img src={people} className="people" />
-                    <Circle_people>5/6</Circle_people>
-                  </div>
-                </Circle_conference>
+                <Circle2 />
+                <Circle2 />
+                <Circle2 />
+                <Circle2 />
               </div>
             </Slide>
 
             <Slide index={1}>
               <div className="slide_div">
-                <Circle_conference>
-                  <Circle_time>12:30~</Circle_time>
-                  <Circle_title>개발팀 전체 회의</Circle_title>
-                  <Circle_name>권주희 Kwon ju hee</Circle_name>
-                  <div className="circle_hori">
-                    <img src={people} className="people" />
-                    <Circle_people>5/6</Circle_people>
-                  </div>
-                </Circle_conference>
-
-                <Circle_conference>
-                  <Circle_time>12:30~</Circle_time>
-                  <Circle_title>개발팀 전체 회의</Circle_title>
-                  <Circle_name>권주희 Kwon ju hee</Circle_name>
-                  <div className="circle_hori">
-                    <img src={people} className="people" />
-                    <Circle_people>5/6</Circle_people>
-                  </div>
-                </Circle_conference>
-
-                <Circle_conference>
-                  <Circle_time>12:30~</Circle_time>
-                  <Circle_title>개발팀 전체 회의</Circle_title>
-                  <Circle_name>권주희 Kwon ju hee</Circle_name>
-                  <div className="circle_hori">
-                    <img src={people} className="people" />
-                    <Circle_people>5/6</Circle_people>
-                  </div>
-                </Circle_conference>
-
-                <Circle_conference>
-                  <Circle_time>12:30~</Circle_time>
-                  <Circle_title>개발팀 전체 회의</Circle_title>
-                  <Circle_name>권주희 Kwon ju hee</Circle_name>
-                  <div className="circle_hori">
-                    <img src={people} className="people" />
-                    <Circle_people>5/6</Circle_people>
-                  </div>
-                </Circle_conference>
+                <Circle2 />
+                <Circle2 />
+                <Circle2 />
+                <Circle2 />
               </div>
             </Slide>
 
             <Slide index={2}>
               <div className="slide_div">
-                <Circle_conference>
-                  <Circle_time>12:30~</Circle_time>
-                  <Circle_title>개발팀 전체 회의</Circle_title>
-                  <Circle_name>권주희 Kwon ju hee</Circle_name>
-                  <div className="circle_hori">
-                    <img src={people} className="people" />
-                    <Circle_people>5/6</Circle_people>
-                  </div>
-                </Circle_conference>
-
-                <Circle_conference>
-                  <Circle_time>12:30~</Circle_time>
-                  <Circle_title>개발팀 전체 회의</Circle_title>
-                  <Circle_name>권주희 Kwon ju hee</Circle_name>
-                  <div className="circle_hori">
-                    <img src={people} className="people" />
-                    <Circle_people>5/6</Circle_people>
-                  </div>
-                </Circle_conference>
-
-                <Circle_conference>
-                  <Circle_time>12:30~</Circle_time>
-                  <Circle_title>개발팀 전체 회의</Circle_title>
-                  <Circle_name>권주희 Kwon ju hee</Circle_name>
-                  <div className="circle_hori">
-                    <img src={people} className="people" />
-                    <Circle_people>5/6</Circle_people>
-                  </div>
-                </Circle_conference>
-
-                <Circle_conference>
-                  <Circle_time>12:30~</Circle_time>
-                  <Circle_title>개발팀 전체 회의</Circle_title>
-                  <Circle_name>권주희 Kwon ju hee</Circle_name>
-                  <div className="circle_hori">
-                    <img src={people} className="people" />
-                    <Circle_people>5/6</Circle_people>
-                  </div>
-                </Circle_conference>
+                <Circle2 />
+                <Circle2 />
+                <Circle2 />
+                <Circle2 />
               </div>
             </Slide>
           </Slider>
