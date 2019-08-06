@@ -12,39 +12,39 @@ export class MakeIssue extends Component {
 
     this.state = {
       issue: "",
-      tags: [{ id: 0, text: "가나다" }]
+      tags: []
     };
   }
 
-  /* TODO: 두번 클릭해야 저장되는 것 수정 */
   issueClicked = e => {
     this.setState({
-      issue: e.target.value
+      issue: e
     });
     console.log(this.state.issue);
   };
 
+  /* TODO: 두번 클릭해야 저장되는 것 수정 -> 비동기 문제 */
   /* TODO: tag 값 props로 넘기기 */
   onSelectIssue = () => {
     const { tags, issue } = this.state;
     this.setState({
-      tags: tags.concat({ id: this.id++, text: issue })
+      tags: tags.concat({ id: 0, text: issue })
     });
     console.log(tags);
-    if (tags.length > 2) {
+    if (tags.length > 0) {
       this.setState({
-        //TODO: tags 배열 수 제한해야함 ( 삭제 )
+        tags: tags.splice(tags[0], tags[1])
       });
     }
   };
 
   bothClick = () => {
     this.onSelectIssue();
-    this.props.onCloseModal();
+    // this.props.onCloseModal(); -> //TODO: 다 해결하고 주석 풀기
   };
 
   render() {
-    const { open, title, onCloseModal, tags } = this.props;
+    const { open, title, onCloseModal } = this.props;
 
     return (
       <Modal
@@ -68,10 +68,10 @@ export class MakeIssue extends Component {
               <ul className="issue-list">
                 <li
                   className="issue-item"
-                  value="aa"
-                  onClick={
-                    this.issueClicked
-                  } /* "a"쓴 부분이 ""값을 넘긴다는 뜻. 데이터 받아올때는 "변수.값"의 형태로 */
+                  onClick={this.issueClicked.bind(
+                    this,
+                    "a"
+                  )} /* "a"쓴 부분이 ""값을 넘긴다는 뜻. 데이터 받아올때는 "변수.값"의 형태로 */
                 >
                   a
                 </li>
