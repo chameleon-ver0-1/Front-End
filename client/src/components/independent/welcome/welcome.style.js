@@ -1,4 +1,7 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { slideInUp } from "react-animations";
+
+const showUpAnimation = keyframes`${slideInUp}`;
 
 export const DivideLine = styled.div`
   width: 74px;
@@ -48,4 +51,12 @@ export const StartBtn = styled.button`
   outline: none;
 
   cursor: pointer;
+`;
+
+export const Show1Div = styled.div`
+  animation: 2s ${showUpAnimation};
+`;
+
+export const Show2Div = styled.div`
+  animation: 2.2s ${showUpAnimation};
 `;

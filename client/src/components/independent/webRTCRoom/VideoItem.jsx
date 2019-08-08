@@ -622,17 +622,17 @@ export class VideoItem extends Component {
           autoCapitalize="off"
           size="20"
         />
-        <button
+        {/* <button
           className="open-room"
           onClick={openRoom}
           // isRoomAppear={this.state.isRoomAppear}
           // roomToken={this.state.roomToken}
         >
           회의실 개설하기
-        </button>
+        </button> */}
         {/* <button className="join-room" onClick={joinRoom}>
           회의실 참여하기
-        </button>
+        </button> */}
         <button className="open-or-join-room" onClick={openOrJoinRoom}>
           회의실 개설/참여하기
         </button>
@@ -644,7 +644,7 @@ export class VideoItem extends Component {
         </button>
         <button type="button" onClick={onStop}>
           회의 종료
-        </button> */}
+        </button>
 
         <VideosContainer id="videos-container" />
         <div id="room-urls" style={{ width: "100%" }} />
