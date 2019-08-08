@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./menu.style.css";
 import styled from "styled-components";
-import { yellow100 } from "material-ui/styles/colors";
 
 const active = {
   marginTop: "25px",

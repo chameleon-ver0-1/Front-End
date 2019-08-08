@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+
+//////////////////////////////////////
 /*1 Nav*/
+//////////////////////////////////////
 export const NavContainer = styled.div`
   display: flex;
   width: 100vw;
@@ -25,6 +28,8 @@ export const NavBtn = styled(NavLink)`
   width: 80px;
   height: 33px;
 
+  text-decoration: none;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,7 +48,9 @@ export const NavBtn = styled(NavLink)`
   }
 `;
 
+//////////////////////////////////////
 /*2 Nav */
+//////////////////////////////////////
 export const Row = styled.div`
   display: flex;
 `;
