@@ -127,16 +127,16 @@ export class Navbar extends Component {
               height="40px"
               style={{ marginRight: "338px" }}
             />
-            <Link to="/">
+            <Link to="/" style={{ textDecoration: "none" }}>
               <NavClickItem>Home</NavClickItem>
             </Link>
-            <Link to="/home/issue">
+            <Link to="/home/issue" style={{ textDecoration: "none" }}>
               <NavItem>Service</NavItem>
             </Link>
-            <Link to="/about">
+            <Link to="/about" style={{ textDecoration: "none" }}>
               <NavItem>About</NavItem>
             </Link>
-            <Link to="/faq">
+            <Link to="/faq" style={{ textDecoration: "none" }}>
               <NavItem>FAQ</NavItem>
             </Link>
             <AuthBox style={{ marginLeft: "57px" }}>
