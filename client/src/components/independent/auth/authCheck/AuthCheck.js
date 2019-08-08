@@ -57,7 +57,7 @@ export class AuthCheck extends Component {
 
         {/* <button className="authCheck_reAuth">인증번호 재전송</button> */}
 
-        <Link to="/auth/projectAdd">
+        <Link to="/auth/projectAdd" style={{ textDecoration: "none" }}>
           <button className="start_cameleon">카멜레On 시작하기</button>
         </Link>
       </div>
