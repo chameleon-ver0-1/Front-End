@@ -13,6 +13,9 @@ import { WithContext as ReactTags } from "react-tag-input";
 import { Link } from "react-router-dom";
 import MakeIssue from "../makeIssue/MakeIssue";
 import searchissue from "../../../../assets/conference/searchissue.png";
+import DatePicker from "react-datepicker";
+import BigDatePicker from "./BigDatePicker";
+import SmallDatePicker from "./SmallDatePicker";
 
 const suggestions = TAG.map(tag => {
   return {
@@ -34,10 +37,11 @@ class MakeRoom extends Component {
 
     this.state = {
       roomTitle: "none",
-      tags: [],
+      tags: [{ id: 0, text: "화상회의" }],
       suggestions: suggestions,
       open: false,
-      title: ""
+      title: "",
+      selectedDate: new Date().toISOString()
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
@@ -45,6 +49,7 @@ class MakeRoom extends Component {
     this.handleTagClick = this.handleTagClick.bind(this);
   }
 
+  /* 태그 */
   handleDelete(i) {
     const { tags } = this.state;
     this.setState({
@@ -71,12 +76,25 @@ class MakeRoom extends Component {
     console.log("The tag at index " + index + " was clicked");
   }
 
+  /* 이슈에서 가져오기 */
   onOpenModal = () => {
     this.setState({ open: true, title: "토픽을 가져올 이슈를 선택하세요" });
   };
 
   onCloseModal = () => {
     this.setState({ open: false });
+  };
+
+  /* 날짜 */
+  handleChange = date => {
+    this.setState({
+      startDay: date
+    });
+  };
+  handleChange2 = date => {
+    this.setState({
+      startDate: date
+    });
   };
 
   render() {
@@ -131,7 +149,23 @@ class MakeRoom extends Component {
 
           <div className="row-div">
             <div className="roomtitle2">시작 시간</div>
-            <div />
+            <DatePicker
+              customInput={<BigDatePicker />}
+              selected={this.state.startDay}
+              onChange={this.handleChange}
+              minDate={new Date()}
+              relativeSize={true}
+            />
+            <DatePicker
+              customInput={<SmallDatePicker />}
+              selected={this.state.startDate}
+              onChange={this.handleChange2}
+              showTimeSelect
+              showTimeSelectOnly
+              dateFormat="h:mm aa"
+              timeCaption="Time"
+              relativeSize={true}
+            />
           </div>
 
           <div className="row-div">

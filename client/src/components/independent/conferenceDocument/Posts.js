@@ -21,7 +21,7 @@ const Posts = ({ posts, loading }) => {
           <ul className="post-ul">
             <li className="post-li">
               <ul className="post-row-list">
-                <li className="post-row-list-item">
+                <li className="post-row-list-item1">
                   <Link
                     to="/home/conferenceDocument/conferenceDocumentDetail"
                     className="linkdocumentdetail"
@@ -29,11 +29,13 @@ const Posts = ({ posts, loading }) => {
                     <button className="todetail">{docDetail.title}</button>
                   </Link>
                 </li>
-                <li className="post-row-list-item">{docDetail.date}</li>
-                <li className="post-row-list-item">
-                  <DocumentTag />
+                <li className="post-row-list-item2">{docDetail.date}</li>
+                <li className="post-row-list-item3">
+                  <div className="post-row-list-item-tag">
+                    <DocumentTag />
+                  </div>
                 </li>
-                <li className="post-row-list-item">
+                <li className="post-row-list-item4">
                   <button className="post-row-list-item-btn">
                     <img
                       src={download_off}

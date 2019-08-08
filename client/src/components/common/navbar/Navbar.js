@@ -63,13 +63,13 @@ const active = {
 export class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { show: false, haveNotice: true };
-    this.handleClick = this.handleClick.bind(this);
+    // this.state = { show: false };
+    // this.handleClick = this.handleClick.bind(this);
   }
-  handleClick() {
-    this.setState({ show: !this.state.show });
-    console.log(this.state.show);
-  }
+  // handleClick() {
+  //   this.setState({ show: !this.state.show });
+  //   console.log(this.state.show);
+  // }
 
   render() {
     const Msg = ({ closeToast }) => (
@@ -165,18 +165,7 @@ export class Navbar extends Component {
               </LogoContainer>
             </Link>
             <NavRight>
-              <Fade when={this.state.show}>
-                <Dropdown style={{ zIndex: 100 }} />
-              </Fade>
-
-              <NoticeBtn>
-                <img
-                  width="20px"
-                  height="30px"
-                  src={this.state.haveNotice ? alertOn : alertOff}
-                  onClick={this.handleClick}
-                />
-              </NoticeBtn>
+              <Dropdown style={{ zIndex: 100 }} />
 
               <img
                 width="45px"
