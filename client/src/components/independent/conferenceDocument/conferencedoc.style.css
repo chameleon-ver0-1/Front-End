@@ -78,10 +78,12 @@
 .post-li {
   list-style-type: none;
   float: none;
-  width: 711px;
+  width: 690px;
   height: 30px;
   padding-left: 0px;
   padding-right: 0px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .post-row-list {
@@ -129,6 +131,7 @@
   padding-top: 0px;
   padding-bottom: 0px;
   /* margin: auto; */
+  margin-top: 3px;
   font-size: 14px;
   float: left;
   border: none;
@@ -148,6 +151,7 @@
   padding-top: 0px;
   padding-bottom: 0px;
   /* margin: auto; */
+  margin-top: 3px;
   font-size: 14px;
   float: left;
   border: none;
