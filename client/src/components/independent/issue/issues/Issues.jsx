@@ -1,13 +1,8 @@
 import React, { Component, Fragment } from "react";
-
-import InitialData from "../testItem-data";
-
-import IssueAdd from "../issueAdd";
-import "./issues.style.css";
-
-import IssueBox from "./IssueBox";
-
 import { DragDropContext } from "react-beautiful-dnd";
+import InitialData from "../testItem-data";
+import IssueBox from "./IssueBox";
+import { Issue3, IssueBig } from "./issues.style";
 
 export class Issues extends Component {
   state = InitialData;
@@ -97,7 +92,7 @@ export class Issues extends Component {
 
   render() {
     return (
-      <div className="issue-big">
+      <IssueBig>
         <DragDropContext
           onDragStart={this.onDragStart}
           onDragUpdate={this.onDragUpdate}
@@ -110,7 +105,7 @@ export class Issues extends Component {
             );
 
             return (
-              <div className="issues-3">
+              <Issue3>
                 <IssueBox
                   key={column.id}
                   column={column}
@@ -118,12 +113,11 @@ export class Issues extends Component {
                   count={column.count}
                   isTodos={column.isTodo}
                 />
-              </div>
+              </Issue3>
             );
           })}
         </DragDropContext>
-
-      </div>
+      </IssueBig>
     );
   }
 }

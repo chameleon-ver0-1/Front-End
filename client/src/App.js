@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import "../node_modules/font-awesome/css/font-awesome.min.css";
 
-//MARKUP: add component down here jihu
-
-// import Index from './components/independent/index';
 import {
   SignIn,
   SignUp,
@@ -18,8 +14,7 @@ import {
   ConferenceRoom,
   ConferenceDocument,
   WebRTCRoom,
-  ConferenceDocumentDetail,
-  VideoSharing
+  ConferenceDocumentDetail
 } from "./components/independent";
 
 import { Navbar, Menu, Chat } from "./components/common";
@@ -86,7 +81,7 @@ class App extends Component {
                 component={ConferenceDocumentDetail}
               />
               <Route path="/postTest" component={PostTest} />
-              <Route path="/share" component={VideoSharing} />
+
               <Chat />
             </div>
           </div>

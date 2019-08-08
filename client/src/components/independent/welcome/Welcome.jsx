@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { slideInUp } from "react-animations";
 import MainIcon from "../../../assets/home/home_main.jpg";
 import {
   DivideLine,
@@ -8,17 +9,18 @@ import {
   BoldGreenTitle,
   Row,
   Content,
-  StartBtn
+  StartBtn,
+  Show1Div,
+  Show2Div
 } from "./welcome.style";
+
 export class Welcome extends Component {
-  componentWillUpdate = () => {
-    
-  };
+  componentWillUpdate = () => {};
   render() {
     return (
       <div>
         <Row style={{ position: "absolute" }}>
-          <div>
+          <Show1Div>
             <DivideLine />
             <Title>얼굴인식과 </Title>
             <Title>감정분석을 활용한</Title>
@@ -34,13 +36,15 @@ export class Welcome extends Component {
             <Link to="/auth/signUp">
               <StartBtn>카멜레ON 처음 시작하기</StartBtn>
             </Link>
-          </div>
-          <img
-            width="952px"
-            height="687px"
-            src={MainIcon}
-            style={{ marginTop: "50px" }}
-          />
+          </Show1Div>
+          <Show2Div>
+            <img
+              width="952px"
+              height="687px"
+              src={MainIcon}
+              style={{ marginTop: "50px" }}
+            />
+          </Show2Div>
         </Row>
       </div>
     );
