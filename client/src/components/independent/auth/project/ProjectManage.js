@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import "./projectadd.style.css";
+import "./projectmanage.style.css";
 import { Link } from "react-router-dom";
 
-export class ProjectAdd extends Component {
+export class ProjectManage extends Component {
   render() {
     return (
       <div className="inner-container3">
-        <div className="header3">프로젝트 추가</div>
+        <div className="header3">프로젝트 관리</div>
         <div className="p-explanation">
           지금 바로 새로운 프로젝트를 개설하거나,
         </div>
@@ -28,4 +28,4 @@ export class ProjectAdd extends Component {
   }
 }
 
-export default ProjectAdd;
+export default ProjectManage;
