@@ -6,173 +6,38 @@
  */
 
 import React, { Component } from "react";
-// import styled from 'styled-components'
-import { Link } from "react-router-dom";
-
-import styled from "styled-components";
-import GoogleLogin from "react-google-login";
 import google from "../../../../assets/signIn/google.png";
 import kakao from "../../../../assets/signIn/kakao.png";
+import {
+  SignInContainer,
+  LoginContainer,
+  SignInHeader,
+  InputGroup,
+  Row,
+  Label,
+  WarnId,
+  InputBorder,
+  LoginInput,
+  WarnPassword,
+  Checks,
+  Check,
+  LoginLinkContainer,
+  OriginLoginBtn,
+  Buttons,
+  ImgBtnContainer,
+  OtherLoginBtn,
+  Img,
+  ForgetBtn
+} from "./signin.style";
+
+import GoogleLogin from "react-google-login";
 import KakaoLogin from "react-kakao-login";
+
 import * as service from "../../../../helpers/SignInHelpers";
 
 const GoogleKey =
   "419409692345-cjddji3koajma5occofknl50cl27scie.apps.googleusercontent.com";
 const KaKaoKey = "e5e36f8b6e47e733a86feb3afb06e56c";
-
-const SignInContainer = styled.div`
-  margin: 60px auto;
-  display: flex;
-`;
-const SignInHeader = styled.div`
-  font-size: 30px;
-  font-family: NanumSquareB;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 50px;
-`;
-const LoginContainer = styled.div`
-  margin: auto;
-`;
-const InputGroup = styled.div`
-  margin-bottom: 22px;
-`;
-const Label = styled.div`
-  font-size: 14px;
-  margin-left: 11px;
-  font-family: NanumSquareB;
-  color: var(--brownish-grey);
-`;
-
-const LoginInput = styled.input`
-  border: none;
-  width: 300px;
-  height: 30px;
-  font-size: 12px;
-  outline: none;
-`;
-const InputBorder = styled.div`
-  margin-top: 9px;
-  width: 313px;
-  height: 39px;
-
-  border-radius: 18.8px;
-  border: solid 1px var(--pinkish-grey);
-  padding-left: 15px;
-  align-items: center;
-`;
-
-const Checks = styled.div`
-  margin-top: 8px;
-  width: 313px;
-  height: 12px;
-  display: flex;
-  justify-content: space-around;
-`;
-
-const Check = styled.div`
-  font-size: 12px;
-  color: var(--brownish-grey);
-  width: 120px;
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  justify-content: space-around;
-`;
-const ImgBtnContainer = styled.div`
-  width: 153px;
-  height: 40px;
-  border: solid 1px var(--greenish-teal);
-  border-radius: 18.8px;
-  color: var(--greenish-teal);
-  background-color: white;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Img = styled.img`
-  width: 18px;
-  height: 18px;
-`;
-
-const OtherLoginBtn = styled.button`
-  background: none;
-  border: none;
-  outline: none;
-  height: 40px;
-  margin-left: 13px;
-  font-size: 14px;
-  font-family: NanumSquareB;
-
-  cursor: pointer;
-`;
-const ForgetBtn = styled.button`
-  margin: auto;
-  border: none;
-  outline: none;
-  background: none;
-  color: var(--brownish-grey);
-  margin-top: 29px;
-  display: flex;
-  justify-content: center;
-  font-size: 14px;
-`;
-const LoginLinkContainer = styled.div`
-  font-size: 16px;
-  background-color: var(--greenish-teal);
-  color: white;
-
-  text-decoration: none;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 330px;
-  height: 41px;
-
-  border-radius: 18.8px;
-
-  margin-top: 28px;
-  margin-bottom: 10px;
-`;
-const OriginLoginBtn = styled.button`
-  font-size: 16px;
-  font-family: NanumSquareB;
-
-  color: white;
-  background: none;
-  border: none;
-  outline: none;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  cursor: pointer;
-
-  width: 314px;
-  height: px;
-`;
-const WarnId = styled.div`
-  font-size: 11px;
-  color: var(--greenish-teal);
-  margin-left: 140px;
-  display: none;
-`;
-const WarnPassword = styled.div`
-  font-size: 11px;
-  color: var(--greenish-teal);
-  margin-left: 117px;
-  display: none;
-`;
-const Row = styled.div`
-  display: flex;
-  align-items: center;
-`;
 
 class SignIn extends Component {
   constructor(props) {
@@ -237,7 +102,7 @@ class SignIn extends Component {
     service
       .login(this.state.email, this.state.password)
       .then(
-        res => this.context.router.push("/"),
+        res => this.context.router.push("/auth/projectAdd"),
         err => console.log("로그인에 오류가 생겼습니다.")
       );
     // axios.post("/auth/signin", {
@@ -248,6 +113,7 @@ class SignIn extends Component {
     //     localStorage.setItem("cool-jwt", res.data);
     //     this.props.history.push("/Protected");
     //   });
+
     document.getElementById("warnId").style.display = this.state.isWarnId
       ? "inline"
       : "none";
@@ -323,7 +189,7 @@ class SignIn extends Component {
             </InputBorder>
           </InputGroup>
 
-          <Checks className="checks">
+          <Checks>
             <Row>
               <input
                 onChange={this.handleChange}
@@ -331,7 +197,7 @@ class SignIn extends Component {
                 type="checkbox"
                 checked={this.state.Checked}
               />
-              <Check htmlFor={this.id}>로그인 상태 유지</Check>
+              <Check>로그인 상태 유지</Check>
             </Row>
 
             <Row>
@@ -341,7 +207,7 @@ class SignIn extends Component {
                 type="checkbox"
                 checked={this.state.Checked}
               />
-              <Check htmlFor={this.id}>이메일 기억하기</Check>
+              <Check>이메일 기억하기</Check>
             </Row>
           </Checks>
 
