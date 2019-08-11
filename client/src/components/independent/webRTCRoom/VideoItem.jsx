@@ -4,7 +4,7 @@
  * VideoItem파일은 화상회의 비디오를 표시하는 비디오 컴포넌트이다.
  * <p>
  * [METHOD]
- * rgetScreenId(error, sourceId, screen_constraints): 화면 공유 함수
+ * getScreenId(error, sourceId, screen_constraints): 화면 공유 함수
  * disableInputButtons(): 상황에 맞춰 버튼들을 비활성화하는 함수
  * openRoom(): 신규 화상회의 방 개설하는 함수
  * joinRoom(): 기존 개설된 화상회의 방을 들어가는 함수
@@ -52,6 +52,8 @@ export class VideoItem extends Component {
     script.src = "https://webrtc.github.io/adapter/adapter-latest.js";
     script.src = "https://www.webrtc-experiment.com/common.js";
 
+    /*말하는 순간을 잡기 위한 script */
+    script.src = "https://cdn.webrtc-experiment.com/hark.js";
     script.async = true;
 
     document.body.appendChild(script);
@@ -61,7 +63,6 @@ export class VideoItem extends Component {
   state = { roomKey: "undefined" };
 
   render() {
-    //FIXME:
     var RMCMediaTrack = {
       cameraStream: null,
       cameraTrack: null,
@@ -108,14 +109,19 @@ export class VideoItem extends Component {
     ];
 
     connection.onstream = function(event) {
+      initHark({
+        stream: event.stream,
+        streamedObject: event,
+        connection: connection
+      });
       //connection1
-      console.log("onstream 정상 작동 중");
-
       connection.videosContainer = document.getElementById("videos-container"); //1개 이상의 비디오들을 담을 div공간을 id값으로 가져온다.
       var video = document.createElement("video"); //비디오 컴포넌트를 생성한다.
       video.id = event.streamid;
-      video.style.border = "solid 1px var(--greenish-teal)";
-      // video.style.marginLeft = "16px"; //각 비디오의 왼쪽 마진을 설정한다.
+      video.style.width = "100%";
+      video.style.height = "100%";
+
+      // video.style.border = "solid 1px var(--greenish-teal)";
 
       event.mediaElement.removeAttribute("src");
       event.mediaElement.removeAttribute("srcObject");
@@ -140,7 +146,6 @@ export class VideoItem extends Component {
               )[0])
           );
       }
-      //
 
       try {
         video.setAttributeNode(document.createAttribute("autoplay"));
@@ -161,7 +166,8 @@ export class VideoItem extends Component {
 
       video.srcObject = event.stream; //비디오에 stream을 연결한다.
 
-      var width = parseInt(connection.videosContainer.clientWidth / 3);
+      connection.videosContainer.style.width = "443px";
+      var width = parseInt(connection.videosContainer);
 
       var mediaElement = service.getHTMLMediaElement(video, {
         title: event.userid,
@@ -187,6 +193,50 @@ export class VideoItem extends Component {
       }
       localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
     };
+
+    //connection-ing
+    connection.onspeaking = function(e) {
+      // e.streamid, e.userid, e.stream, etc.
+      console.log("onspeaking 작동 중");
+      var mediaElement = document.getElementById(e.streamid);
+      mediaElement.style.border = "1px solid red";
+    };
+    connection.onsilence = function(e) {
+      // e.streamid, e.userid, e.stream, etc.
+      var mediaElement = document.getElementById(e.streamid);
+      mediaElement.style.border = "";
+    };
+    connection.onvolumechange = function(event) {
+      event.mediaElement.style.borderWidth = event.volume;
+    };
+
+    function initHark(args) {
+      if (!window.hark) {
+        throw "Please link hark.js";
+        return;
+      }
+
+      var connection = args.connection;
+      var streamedObject = args.streamedObject;
+      var stream = args.stream;
+
+      var options = {};
+      var speechEvents = window.hark(stream, options);
+
+      speechEvents.on("speaking", function() {
+        connection.onspeaking(streamedObject);
+      });
+
+      speechEvents.on("stopped_speaking", function() {
+        connection.onsilence(streamedObject);
+      });
+
+      speechEvents.on("volume_change", function(volume, threshold) {
+        streamedObject.volume = volume;
+        streamedObject.threshold = threshold;
+        connection.onvolumechange(streamedObject);
+      });
+    }
 
     //connection2
     connection.onstreamended = function(event) {

@@ -54,9 +54,9 @@ export const StartBtn = styled.button`
 `;
 
 export const Show1Div = styled.div`
-  animation: 2s ${showUpAnimation};
+  animation: 1.3s ${showUpAnimation};
 `;
 
 export const Show2Div = styled.div`
-  animation: 2.2s ${showUpAnimation};
+  animation: 1.8s ${showUpAnimation};
 `;
