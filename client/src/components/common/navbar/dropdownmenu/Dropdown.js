@@ -8,9 +8,12 @@ import React from "react";
 import "./dropdown.style.css";
 import alert from "../../../../assets/home/alrert_list.png";
 import user from "../../../../assets/home/userProfile.png";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import alertOn from "../../../../assets/home/alert_on.png";
 import alertOff from "../../../../assets/home/alert_off.png";
+import { fadeIn } from "react-animations";
+
+const fadeInAnimation = keyframes`${fadeIn}`;
 
 const Alert_text = styled.div`
   margin-top: 3px;
@@ -24,6 +27,10 @@ const Alert_time = styled.div`
   color: var(--greenish-teal);
   text-align: bottom;
   margin-top: 35px;
+`;
+
+const FadeInDiv = styled.div`
+  animation: 1s ${fadeInAnimation};
 `;
 
 class Dropdown extends React.Component {
@@ -68,7 +75,7 @@ class Dropdown extends React.Component {
         {NoticeBtn}
 
         {this.state.displayMenu ? (
-          <div className="tri_alert">
+          <FadeInDiv className="tri_alert">
             <div className="triangle" />
 
             <ul className="alert_ul">
@@ -123,7 +130,7 @@ class Dropdown extends React.Component {
 
               <button className="alert_all">전체보기</button>
             </ul>
-          </div>
+          </FadeInDiv>
         ) : null}
       </div>
     );
