@@ -1,3 +1,8 @@
+/**
+ * 담당자:조윤영
+ * [OUTLINE]
+ * 이슈 화면의 진행상황별 리스트를 생성하고 카드의 상화/좌우 이동을 관리하는 컴포넌트 파일
+ */
 import React, { Component, Fragment } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import InitialData from "../testItem-data";
@@ -11,20 +16,12 @@ export class Issues extends Component {
     // document.childNodes.backgroundColor = "orange";
   };
 
-  onDragUpdate = update => {
-    // const { destination } = update;
-    // const opacity = destination
-    //   ? destination.index / Object.keys(this.state.tasks).length
-    //   : 0;
-    // const issueName = document.querySelector(".issueItem-container");
-    // issueName.style.backgroundColor = `rgba(153,141,217, ${opacity})`;
-  };
   onDragEnd = result => {
     // const issueName = document.querySelector(".issues-body");
     // issueName.style.color = "inherit";
     // issueName.style.backgroundColor = "inherit";
 
-    //TODO:reorder our column
+    //TODO:reorder our column(열)
     const { destination, source, draggableId } = result;
 
     if (!destination) {
@@ -43,8 +40,8 @@ export class Issues extends Component {
 
     if (start === finish) {
       const newItemIds = Array.from(start.taskIds);
-      newItemIds.splice(source.index, 1);
-      newItemIds.splice(destination.index, 0, draggableId);
+      newItemIds.splice(source.index, 1); //드래그하는 해당 카드를 배열에서 삭제
+      newItemIds.splice(destination.index, 0, draggableId); //드래그를 끝낸 위치에 드래그하는 카드를 추가한다.
 
       const newColumn = {
         ...start,
@@ -63,7 +60,6 @@ export class Issues extends Component {
     }
 
     //Moving from one list to another
-    // 열 간의 이동을 위함
     const startItemIds = Array.from(start.taskIds);
     startItemIds.splice(source.index, 1);
     const newStart = {
