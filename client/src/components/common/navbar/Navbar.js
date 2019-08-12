@@ -89,7 +89,7 @@ export class Navbar extends Component {
       window.location.pathname === "/auth/signUp" ||
       window.location.pathname === "/auth/authCheck" ||
       window.location.pathname === "/auth/connectSignIn" ||
-      window.location.pathname === "/auth/projectAdd" ||
+      window.location.pathname === "/auth/projectManage" ||
       window.location.pathname === "/auth/projectList"
     ) {
       return (
