@@ -7,7 +7,8 @@ import {
   AuthCheck,
   ConnectSignIn,
   ProjectManage,
-  ProjectList
+  ProjectList,
+  ProjectAdd
 } from "./components/independent/auth/Auth";
 import {
   Issue,
@@ -63,6 +64,7 @@ class App extends Component {
               <Route path="/auth/authCheck" component={AuthCheck} />
               <Route path="/auth/connectSignIn" component={ConnectSignIn} />
               <Route path="/auth/projectManage" component={ProjectManage} />
+              <Route path="/auth/projectAdd" component={ProjectAdd} />
               <Route path="/auth/projectList" component={ProjectList} />
               <Route path="/home/conferenceRoom" component={ConferenceRoom} />
               <Route path="/room/:roomTokenId" component={WebRTCRoom} />
