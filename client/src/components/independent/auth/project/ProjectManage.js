@@ -15,7 +15,7 @@ export class ProjectManage extends Component {
         </div>
 
         <div className="pa-btn-div">
-          <Link to="/auth/authCheck">
+          <Link to="/auth/projectAdd">
             <button className="project-btn">새 프로젝트 개설하기</button>
           </Link>
 
