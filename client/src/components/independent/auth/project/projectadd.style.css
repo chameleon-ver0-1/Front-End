@@ -1,0 +1,57 @@
+@import "../../../../style.css";
+
+.inner-container4 {
+  margin: 60px auto;
+  width: 331px;
+}
+
+.p-input-container {
+  margin-top: 45px;
+}
+
+.p-input-row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 25px;
+}
+
+.p-text {
+  font-size: 14px;
+  color: var(--brownish-grey);
+  margin-top: 6px;
+}
+
+.p-input {
+  position: absolute;
+  width: 210px;
+  height: 38px;
+  object-fit: contain;
+  border-radius: 18.8px;
+  border: solid 1px var(--white-two);
+  margin-left: 90px;
+  padding-left: 15px;
+  font-size: 12px;
+}
+
+.p-green-message {
+  font-size: 11px;
+  color: var(--greenish-teal);
+  margin-left: 190px;
+}
+
+.star2 {
+  font-size: 11px;
+  color: var(--greenish-teal);
+  margin-top: 6px;
+}
+
+.p-add-btn {
+  margin-top: 37px;
+  width: 313px;
+  height: 41px;
+  object-fit: contain;
+  border-radius: 18.8px;
+  border: solid 1px var(--greenish-teal);
+  background-color: var(--greenish-teal);
+  color: #ffffff;
+}
