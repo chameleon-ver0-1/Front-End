@@ -15,7 +15,6 @@
  * 1. io: socket에 연결하기 위한 라이브러리
  */
 import React, { Component } from "react";
-
 import html2canvas from "html2canvas";
 import axios from "axios";
 import * as service from "./getHTMLMediaElement";
@@ -23,8 +22,8 @@ import { VideoFrame, EmotionStatus, VideosContainer } from "./webrtc.style";
 
 var connection = new window.RTCMultiConnection();
 
-connection.autoCloseEntireSession = true;
-connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/";
+connection.autoCloseEntireSession = true; //개설자가 방을 나가면 방을 닫는 설정
+connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/";//socket.io 신호 서버 URL을 설정
 
 export class VideoItem extends Component {
   //FIXME:state값 추가함
@@ -86,11 +85,13 @@ export class VideoItem extends Component {
     //FIXME:
     connection.socketMessageEvent = "video-screen-demo";
 
+    //비디오와 오디오를 통한 회의를 하고자할 경우,
     connection.session = {
       audio: true,
       video: true
     };
 
+    //createOffer이나 createAnswer API가 호출될 때마다 사용해야하는 제한 조건을 강제 실행할 수 있다.
     connection.sdpConstraints.mandatory = {
       OfferToReceiveAudio: true,
       OfferToReceiveVideo: true
@@ -108,7 +109,9 @@ export class VideoItem extends Component {
       }
     ];
 
+    //모든 로컬 및 원격 미디어 스트림을 수신하기 위한 함수
     connection.onstream = function(event) {
+      //onspeaking에서 사용할 부분을 초기화
       initHark({
         stream: event.stream,
         streamedObject: event,
@@ -117,11 +120,11 @@ export class VideoItem extends Component {
       //connection1
       connection.videosContainer = document.getElementById("videos-container"); //1개 이상의 비디오들을 담을 div공간을 id값으로 가져온다.
       var video = document.createElement("video"); //비디오 컴포넌트를 생성한다.
-      video.id = event.streamid;
+      video.id = event.streamid; //각 비디오 화면에 각 스트림의 고유 식별자를 붙인다.
       video.style.width = "100%";
       video.style.height = "100%";
 
-      // video.style.border = "solid 1px var(--greenish-teal)";
+      video.style.border = "solid 1px var(--greenish-teal)";
 
       event.mediaElement.removeAttribute("src");
       event.mediaElement.removeAttribute("srcObject");
@@ -134,8 +137,10 @@ export class VideoItem extends Component {
         existing.parentNode.removeChild(existing);
       }
 
+      //로컬이고 Video stream일 경우,
       if (event.type === "local" && event.stream.isVideo) {
         RMCMediaTrack.cameraStream = event.stream;
+
         navigator.mediaDevices
           .getUserMedia({ video: true, audio: true })
           .then(
@@ -194,19 +199,20 @@ export class VideoItem extends Component {
       localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
     };
 
+
     //connection-ing
-    connection.onspeaking = function(e) {
+    connection.onspeaking = function(e) {//사용자가 말하는 순간 동안 실행되는 함수
       // e.streamid, e.userid, e.stream, etc.
       console.log("onspeaking 작동 중");
       var mediaElement = document.getElementById(e.streamid);
-      mediaElement.style.border = "1px solid red";
+      mediaElement.style.border = "3px dotted red";
     };
-    connection.onsilence = function(e) {
+    connection.onsilence = function(e) {//사용자가 말을 하지 않는 동안 실행되는 함수
       // e.streamid, e.userid, e.stream, etc.
       var mediaElement = document.getElementById(e.streamid);
       mediaElement.style.border = "";
     };
-    connection.onvolumechange = function(event) {
+    connection.onvolumechange = function(event) {//볼륨의 높낮이가 달라질 때 실행되는 함수
       event.mediaElement.style.borderWidth = event.volume;
     };
 
@@ -239,12 +245,14 @@ export class VideoItem extends Component {
     }
 
     //connection2
+    //비활성화된(중지된) 비디오를 제거
     connection.onstreamended = function(event) {
       var mediaElement = document.getElementById(event.streamid);
       if (mediaElement) {
         mediaElement.parentNode.removeChild(mediaElement);
       }
     };
+
     connection.onMediaError = function(e) {
       if (e.message === "Concurrent mic process limit.") {
         if (window.DetectRTC.audioInputDevices.length <= 1) {
@@ -348,6 +356,34 @@ export class VideoItem extends Component {
       );
     };
 
+    const testShare = () => {
+      this.disabled = true;
+
+      connection.DetectRTC.screen.getChromeExtensionStatus(function(status) {
+        if (status == "installed-enabled") {
+          connection.addStream({
+            screen: true,
+            oneway: true
+          });
+        }
+
+        if (status == "installed-disabled") {
+          alert(
+            "Please enable chrome extension and reload the page. It seems that chrome extension is installed but disabled. Or maybe you are using localhost or non-allowed domain."
+          );
+        }
+
+        if (status == "not-installed") {
+          alert(
+            "Please install chrome extension. It seems that chrome extension is not installed."
+          );
+        }
+
+        if (status == "not-chrome") {
+          alert("Please either use Chrome or Firefox to share screen.");
+        }
+      });
+    };
     var btnShareScreen = document.getElementById("share-screen");
     // connection.onUserStatusChanged = function() {
     //   btnShareScreen.disabled = connection.getAllParticipants().length <= 0;
@@ -686,7 +722,7 @@ export class VideoItem extends Component {
         <button className="open-or-join-room" onClick={openOrJoinRoom}>
           회의실 개설/참여하기
         </button>
-        <button id="share-screen" onClick={shareVideo}>
+        <button id="share-screen" onClick={testShare}>
           화면 공유
         </button>
         <button type="button" onClick={onRekog}>
