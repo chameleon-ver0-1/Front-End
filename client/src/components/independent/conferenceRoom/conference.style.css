@@ -29,6 +29,7 @@
   background: none;
   color: var(--greenish-teal);
   position: right;
+  outline: none;
 }
 
 .circle_container {
@@ -58,6 +59,7 @@
   /* margin: auto; */
   text-align: left;
   margin-top: 50px;
+  outline: none;
 }
 
 .left_right_r {
@@ -68,6 +70,7 @@
   /* margin: auto; */
   text-align: right;
   margin-top: 50px;
+  outline: none;
 }
 
 .left_right_l2 {
@@ -78,6 +81,7 @@
   /* margin: auto; */
   text-align: left;
   margin-top: 83px;
+  outline: none;
 }
 
 .left_right_r2 {
@@ -88,6 +92,7 @@
   /* margin: auto; */
   text-align: right;
   margin-top: 83px;
+  outline: none;
 }
 
 .left_right_img {

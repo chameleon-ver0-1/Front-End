@@ -3,6 +3,18 @@ import "./projectadd.style.css";
 import { Link } from "react-router-dom";
 
 export class ProjectAdd extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      projectname: ""
+    };
+  }
+
+  addproject = () => {
+    console.log(this.state.projectname);
+  };
+
   render() {
     return (
       <div className="inner-container4">
@@ -19,7 +31,15 @@ export class ProjectAdd extends Component {
           <div className="p-input-row">
             <div className="p-text">프로젝트명</div>
             <div className="star2">*</div>
-            <input type="text" className="p-input" />
+            <input
+              type="text"
+              className="p-input"
+              onChange={e => {
+                this.setState({
+                  projectname: e.target.value
+                });
+              }}
+            />
           </div>
 
           <div className="p-input-row">
@@ -52,7 +72,9 @@ export class ProjectAdd extends Component {
         </div>
 
         <Link to="/auth/projectList">
-          <button className="p-add-btn">개설하기</button>
+          <button className="p-add-btn" onClick={this.addproject}>
+            개설하기
+          </button>
         </Link>
       </div>
     );
