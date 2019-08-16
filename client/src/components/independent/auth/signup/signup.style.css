@@ -32,7 +32,7 @@
   border: solid 1px var(--pinkish-grey);
   padding-left: 15px;
   align-items: center;
-
+  outline: none;
   font-size: 12px;
 }
 
@@ -70,6 +70,7 @@
   font-size: 12px;
   border: solid 1px var(--pinkish-grey);
   border-radius: 18.8px;
+  outline: none;
 }
 
 .join-btn {
@@ -85,4 +86,5 @@
   margin-top: 20px;
   font-size: 16px;
   font-family: NanumSquareB;
+  outline: none;
 }
