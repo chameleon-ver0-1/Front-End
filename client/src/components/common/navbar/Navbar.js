@@ -7,9 +7,6 @@ import Dropdown from "./dropdownmenu/Dropdown";
 import MessagePopUp from "./messagepopup/MessagePopUp";
 
 import "react-toastify/dist/ReactToastify.css";
-import styled from "styled-components";
-
-import { css } from "glamor";
 
 import alertOff from "../../../assets/home/alert_off.png";
 import alertOn from "../../../assets/home/alert_on.png";
@@ -88,9 +85,7 @@ export class Navbar extends Component {
       window.location.pathname === "/auth/signIn" ||
       window.location.pathname === "/auth/signUp" ||
       window.location.pathname === "/auth/authCheck" ||
-      window.location.pathname === "/auth/connectSignIn" ||
-      window.location.pathname === "/auth/projectAdd" ||
-      window.location.pathname === "/auth/projectList"
+      window.location.pathname === "/auth/connectSignIn"
     ) {
       return (
         <NavContainer>
@@ -148,6 +143,36 @@ export class Navbar extends Component {
             </AuthBox>
           </HomeNav>
         </div>
+      );
+    } else if (
+      window.location.pathname === "/auth/projectAdd" ||
+      window.location.pathname === "/auth/projectList"
+    ) {
+      return (
+        <NavContainer>
+          <Link to="/">
+            <LogoContainer>
+              <img width="129px" height="40px" src={LogoBlackIcon} />
+            </LogoContainer>
+          </Link>
+          <NavRight>
+            <img
+              width="45px"
+              height="46px"
+              src={userProfile}
+              alt="프로필이미지"
+              style={{ marginRight: "13px" }}
+            />
+            <UserInfoContainer>
+              <UserName style={{ color: "var(--brownish-grey)" }}>
+                권주희 Kwonju hee
+              </UserName>
+            </UserInfoContainer>
+            <MoreInfo>
+              <img width="12px" height="6px" src={moreInfo} />
+            </MoreInfo>
+          </NavRight>
+        </NavContainer>
       );
     } else if (
       window.location.pathname === "/home/issue" ||
