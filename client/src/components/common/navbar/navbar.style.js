@@ -107,11 +107,16 @@ export const NoticeBtn = styled.button`
 export const UserInfoContainer = styled.div`
   width: 150px;
   margin-right: 22px;
+  height: 100%;
 `;
 export const UserName = styled.div`
   color: white;
   font-size: 16.5px
   font-family: NanumSquareEB;
+
+  height:100%;
+  display:flex;
+  align-items:center;
 `;
 
 export const UserDepartment = styled.div`
