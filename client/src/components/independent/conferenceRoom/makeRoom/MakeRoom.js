@@ -16,6 +16,8 @@ import searchissue from "../../../../assets/conference/searchissue.png";
 import DatePicker from "react-datepicker";
 import BigDatePicker from "./BigDatePicker";
 import SmallDatePicker from "./SmallDatePicker";
+import TagsTopic from "./TagsTopic";
+import TagsPeople from "./TagsPeople";
 
 const suggestions = TAG.map(tag => {
   return {
@@ -37,7 +39,7 @@ class MakeRoom extends Component {
 
     this.state = {
       roomTitle: "none",
-      tags: [{ id: 0, text: "화상회의" }],
+      tags: [],
       suggestions: suggestions,
       open: false,
       title: "",
@@ -122,17 +124,7 @@ class MakeRoom extends Component {
           <div className="row-div">
             <div className="roomtitle2">메인 토픽</div>
             <div className="tagdiv">
-              <ReactTags
-                inputFieldPosition="top"
-                tags={tags}
-                suggestions={suggestions}
-                delimiters={delimiters}
-                handleDelete={this.handleDelete}
-                handleAddition={this.handleAddition}
-                handleDrag={this.handleDrag}
-                handleTagClick={this.handleTagClick}
-                placeholder="메인 토픽을 입력하세요"
-              />
+              <TagsTopic />
 
               <button className="getissue" onClick={this.onOpenModal}>
                 <img src={searchissue} className="getissueimg" />
@@ -170,7 +162,9 @@ class MakeRoom extends Component {
 
           <div className="row-div">
             <div className="roomtitle2">참여자</div>
-            <input className="roominput" placeholder="참여자를 추가하세요" />
+            <div className="tag-inline-div">
+              <TagsPeople />
+            </div>
           </div>
 
           <div className="row-div2">
