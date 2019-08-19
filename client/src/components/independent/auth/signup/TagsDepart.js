@@ -1,13 +1,29 @@
 import React, { Component } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import styled from "styled-components";
+import { DEPART } from "./depart";
 
-export class TagsTopic extends Component {
+const suggestions = DEPART.map(tag => {
+  return {
+    id: tag,
+    text: tag
+  };
+});
+
+const KeyCodes = {
+  comma: 188,
+  enter: 13
+};
+
+const delimiters = [KeyCodes.comma, KeyCodes.enter];
+
+export class TagsDepart extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      tags: []
+      tags: [],
+      suggestions: suggestions
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
@@ -42,21 +58,23 @@ export class TagsTopic extends Component {
   }
 
   render() {
-    const { tags } = this.state;
+    const { tags, suggestions } = this.state;
     return (
       <div>
         <ReactTags
-          inputFieldPosition="top"
+          inline
           tags={tags}
+          suggestions={suggestions}
+          delimiters={delimiters}
           handleDelete={this.handleDelete}
           handleAddition={this.handleAddition}
           handleDrag={this.handleDrag}
           handleTagClick={this.handleTagClick}
-          placeholder="메인 토픽을 입력하세요"
+          placeholder="회사명을 검색하세요"
         />
       </div>
     );
   }
 }
 
-export default TagsTopic;
+export default TagsDepart;

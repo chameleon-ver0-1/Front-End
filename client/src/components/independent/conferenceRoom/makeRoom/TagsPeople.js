@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import { TAG } from "./tag";
+import styled from "styled-components";
 
 //TODO: styled-component 적용하기
 const suggestions = TAG.map(tag => {

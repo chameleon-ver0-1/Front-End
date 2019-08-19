@@ -7,34 +7,11 @@
 import React, { Component } from "react";
 import "./signup.style.css";
 import { Link } from "react-router-dom";
+import TagsCompany from "./TagsCompany";
+import TagsDepart from "./TagsDepart";
 
 class SignUp extends Component {
-  state = {
-    open: false,
-    title: ""
-  };
-
   submitRegister(e) {}
-
-  onOpenModal = () => {
-    this.setState({
-      open: true,
-      title: "회사명",
-      placeholder: "회사명을 입력하세요"
-    });
-  };
-
-  onOpenModal2 = () => {
-    this.setState({
-      open: true,
-      title: "부서명",
-      placeholder: "부서명을 입력하세요"
-    });
-  };
-
-  onCloseModal = () => {
-    this.setState({ open: false });
-  };
 
   render() {
     return (
@@ -104,13 +81,14 @@ class SignUp extends Component {
                 placeholder="회사명을 검색하세요"
                 //TODO: 태그로 바꿔야함
               />
-
+              <TagsCompany />
               <input
                 type="text"
                 name="company"
                 className="small-input"
                 placeholder="부서명을 검색하세요"
               />
+              <TagsDepart />
             </div>
           </div>
 
