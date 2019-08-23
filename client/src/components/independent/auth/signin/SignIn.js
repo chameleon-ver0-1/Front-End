@@ -33,7 +33,7 @@ import {
 import GoogleLogin from "react-google-login";
 import KakaoLogin from "react-kakao-login";
 
-import * as service from "../../../../helpers/SignInHelpers";
+import * as service from "../../../../services/SignInService";
 
 const GoogleKey =
   "419409692345-cjddji3koajma5occofknl50cl27scie.apps.googleusercontent.com";
@@ -99,12 +99,13 @@ class SignIn extends Component {
   /*일반 로그인 함수 */
   originLogin = e => {
     console.log("일반 로그인 선택");
-    service
-      .login(this.state.email, this.state.password)
-      .then(
-        res => this.context.router.push("/auth/projectAdd"),
-        err => console.log("로그인에 오류가 생겼습니다.")
-      );
+    service.signIn(this.state.email, this.state.password).then(
+      res => {
+        localStorage.setItem("cool-jwt", res.data);
+        this.context.router.push("/auth/projectAdd");
+      },
+      err => console.log("로그인에 오류가 생겼습니다.")
+    );
     // axios.post("/auth/signin", {
     //     email: this.state.email,
     //     password: this.state.password

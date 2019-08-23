@@ -127,20 +127,6 @@ recognition.onerror = function(event) {
   }
 };
 
-/** STT 시작하는 함수 */
-const onJoin = () => {
-  if (isRecognizing) {
-    alert("이미 참여 중입니다.");
-    return;
-  }
-
-  recognition.lang = language;
-  recognition.start();
-  ignoreEndProcess = false;
-
-  finalTranscript = "";
-};
-
 /** STT 종료하는 함수 */
 const onExit = () => {
   if (isRecognizing) {
@@ -215,6 +201,21 @@ export class TopicDrawerBar extends Component {
     socket.on("message", function(data) {
       writeMessage("other", data.name, data.message);
     });
+
+    /*******************************/
+    /** STT 시작하는 함수 */
+    /*******************************/
+    if (isRecognizing) {
+      alert("이미 참여 중입니다.");
+      return;
+    }
+
+    recognition.lang = language;
+    recognition.start();
+    ignoreEndProcess = false;
+
+    finalTranscript = "";
+    /*******************************/
   }
   render() {
     return (
@@ -255,9 +256,6 @@ export class TopicDrawerBar extends Component {
         </div>
         <section className="center">
           <div className="button-panel">
-            <button id="btnJoin" onClick={onJoin} className="off">
-              Join
-            </button>
             <button id="btnExit" onClick={onExit}>
               Exit
             </button>
