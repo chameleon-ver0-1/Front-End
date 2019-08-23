@@ -11,7 +11,9 @@ import TagsCompany from "./TagsCompany";
 import TagsDepart from "./TagsDepart";
 
 class SignUp extends Component {
-  submitRegister(e) {}
+  submitRegister(e) {
+    /**DB에 저장 */
+  }
 
   render() {
     return (
@@ -93,7 +95,9 @@ class SignUp extends Component {
           </div>
 
           <Link to="/auth/authCheck">
-            <button className="join-btn">가입하기</button>
+            <button className="join-btn" onClick={this.submitRegister}>
+              가입하기
+            </button>
           </Link>
         </div>
       </div>
