@@ -1,19 +1,41 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import setAuthorizationToken from "../utils/setAuthorizationToken";
-import { SET_CURRENT_USER } from "./types";
+import { SET_CURRENT_USER } from "../helpers/types";
 
 /*Axios instance를 통해 config 객체를 넘겨서  Axios instance를 넘기면
 헤더를 중복하여 정의해주지 않아도 된다.*/
-// const signInAxios = axios.create({
-//   baseURL: "https://www.chameleon4switch.cf",
-//   headers: {
-//     Authorization: `Bearer ${AUTH_TOKEN}`,
-//     "Content-Type": "application/json"
-//   },
-//   timeout: 5000
-// });
+const signInAxios = axios.create({
+  baseURL: "http://3.130.208.194:80/api",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  timeout: 5000
+});
+export function signIn(email, password) {
+  return signInAxios.post("auth/signIn", { email, password }).then(res => {
+    const token = res.data.accessToken.token;
+    localStorage.setItem("jwtToken", token);
+    setAuthorizationToken(token);
+    setCurrentUser(jwtDecode(token));
+  });
+}
 
+// export const login = (email, password) => {
+//   signInAxios
+//     .post(`/auth/signin`, { email, password })
+//     .then(res => {
+//       dispatch(loginSuccess(res.data, email));
+//       const token = res.data.token;
+//       axios.defaults.headers.common["Authorization"] = token;
+//       history.pushState("/");
+//     })
+//     .catch(err => {
+//       if (err.response.status === 401) {
+//         dispatch(loginFailure(err));
+//       }
+//     });
+// };
 export function setCurrentUser(user) {
   return {
     type: SET_CURRENT_USER,
@@ -26,14 +48,6 @@ export function logout() {
     setAuthorizationToken(false);
     setCurrentUser({});
   };
-}
-export function login(email, password) {
-  return axios.post("/auth/signin", { email, password }).then(res => {
-    const token = res.data.token;
-    localStorage.setItem("jwtToken", token);
-    setAuthorizationToken(token);
-    setCurrentUser(jwtDecode(token));
-  });
 }
 
 // signInAxios.interceptors.response.use(
