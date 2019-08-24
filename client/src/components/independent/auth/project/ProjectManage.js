@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./projectmanage.style.css";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 export class ProjectManage extends Component {
   render() {
@@ -28,4 +28,4 @@ export class ProjectManage extends Component {
   }
 }
 
-export default ProjectManage;
+export default withRouter(ProjectManage);
