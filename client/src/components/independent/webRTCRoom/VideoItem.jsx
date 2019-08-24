@@ -470,8 +470,7 @@ export class VideoItem extends Component {
           화면 공유
         </button> */}
         <VideosContainer id="videos-container" />
-
-        <div id="room-urls" style={{ width: "100%" }} />
+        <div id="room-urls" style={{ width: "100%" }} />>
         <EmotionStatus id="showEmotion" />
       </VideoFrame>
     );
