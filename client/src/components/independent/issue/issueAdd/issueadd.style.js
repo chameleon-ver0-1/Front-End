@@ -102,6 +102,29 @@ const SubmitBtns = styled.div`
   justify-content: center;
 `;
 
+const AddBtn = styled.button`
+  width: 257px;
+  height: 55px;
+
+  background: var(--white-three);
+  color: var(--pinkish-grey);
+
+  font-size: 16px;
+
+  border: none;
+  align-items: center;
+  text-align: center;
+
+  position: relative;
+  top: -50px;
+  left: 21px;
+  outline: none;
+
+  font-family: NanumSquareB;
+
+  cursor: pointer;
+`;
+
 export {
   PopupContainer,
   PopupTitle,
@@ -116,5 +139,6 @@ export {
   TitleInputBorder,
   TextAreaBorder,
   ConfirmBtn,
-  CancelBtn
+  CancelBtn,
+  AddBtn
 };

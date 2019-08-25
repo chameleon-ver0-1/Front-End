@@ -12,7 +12,7 @@ import Modal from "react-responsive-modal";
 import InitialData from "../comment-data";
 import IssueComment from "../../../../assets/issue/issue_comment.png";
 import CommentProfile from "../../../../assets/home/userProfile_no_shadow.png";
-
+import IssueDetailComments from "./IssueDetailComments";
 import {
   PopupContainer,
   Reservation,
@@ -87,25 +87,7 @@ export default class AddIssueDialog extends Component {
               {Object.keys(this.state.data).map(commentIds => {
                 const comment = this.state.data[commentIds];
 
-                return (
-                  <div width="573px" height="168px">
-                    <SDividedLine />
-                    <div>
-                      <Row>
-                        <img
-                          src={CommentProfile}
-                          width="31px"
-                          height="30px"
-                          style={{ marginTop: "10px" }}
-                        />
-                        <div style={{ marginLeft: "7px", marginTop: "15px" }}>
-                          <Name>{comment.name}</Name>
-                          <CommentContent>{comment.content}</CommentContent>
-                        </div>
-                      </Row>
-                    </div>
-                  </div>
-                );
+                return <IssueDetailComments comment={comment} />;
               })}
             </FreeScrollBar>
           </CommentPanel>
