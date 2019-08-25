@@ -6,6 +6,8 @@
  */
 
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+
 import google from "../../../../assets/signIn/google.png";
 import kakao from "../../../../assets/signIn/kakao.png";
 import {
@@ -33,7 +35,7 @@ import {
 import GoogleLogin from "react-google-login";
 import KakaoLogin from "react-kakao-login";
 
-import * as service from "../../../../helpers/SignInHelpers";
+import * as service from "../../../../services/SignInService";
 
 const GoogleKey =
   "419409692345-cjddji3koajma5occofknl50cl27scie.apps.googleusercontent.com";
@@ -98,31 +100,28 @@ class SignIn extends Component {
 
   /*일반 로그인 함수 */
   originLogin = e => {
-    console.log("일반 로그인 선택");
-    service
-      .login(this.state.email, this.state.password)
-      .then(
-        res => this.context.router.push("/auth/projectAdd"),
-        err => console.log("로그인에 오류가 생겼습니다.")
-      );
-    // axios.post("/auth/signin", {
-    //     email: this.state.email,
-    //     password: this.state.password
-    //   })
-    //   .then(res => {
-    //     localStorage.setItem("cool-jwt", res.data);
-    //     this.props.history.push("/Protected");
-    //   });
+    console.log("[일반 로그인 선택]");
+    console.log("이메일:" + this.state.email);
+    console.log("비밀번호:" + this.state.password);
 
-    document.getElementById("warnId").style.display = this.state.isWarnId
-      ? "inline"
-      : "none";
-    document.getElementById("warnPwd").style.display = this.state.isWarnId
-      ? "inline"
-      : "none";
+    service.signIn(this.state.email, this.state.password).then(
+      res => {
+        this.props.history.push("/auth/projectManage");
+      },
+      err => {
+        console.log("로그인 실패");
+
+        document.getElementById("warnId").style.display = this.state.isWarnId
+          ? "inline"
+          : "none";
+        document.getElementById("warnPwd").style.display = this.state.isWarnId
+          ? "inline"
+          : "none";
+      }
+    );
   };
 
-  componentDidMout = () => {
+  componentDidMount = () => {
     // 외부 라이브러리 연동: D3, masonry, etc
     // 컴포넌트에서 필요한 데이터 요청: Ajax, GraphQL, etc
     // DOM 에 관련된 작업: 스크롤 설정, 크기 읽어오기 등
@@ -165,7 +164,7 @@ class SignIn extends Component {
             <InputBorder>
               <LoginInput
                 type="text"
-                name="username"
+                name="email"
                 placeholder="이메일 형식의 아이디를 입력해주세요"
                 onChange={this.change}
               />
@@ -181,7 +180,6 @@ class SignIn extends Component {
             </Row>
             <InputBorder>
               <LoginInput
-                type="password"
                 name="password"
                 placeholder="비밀번호를 입력해주세요"
                 onChange={this.change}
@@ -265,4 +263,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default withRouter(SignIn);

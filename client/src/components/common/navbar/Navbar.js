@@ -145,6 +145,7 @@ export class Navbar extends Component {
         </div>
       );
     } else if (
+      window.location.pathname === "/auth/projectManage" ||
       window.location.pathname === "/auth/projectAdd" ||
       window.location.pathname === "/auth/projectManage" ||
       window.location.pathname === "/auth/projectList"
