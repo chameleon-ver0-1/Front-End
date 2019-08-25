@@ -18,13 +18,11 @@ export const Reservation = styled.div`
 export const IssueTitle = styled.div`
   color: var(--light-black);
   font-size: 20px;
-  cursor: pointer;
 `;
 export const Line = styled.div`
   width: 2px;
   height: 9px;
   background: var(--pinkish-grey);
-  // margin-left: 7px;
 `;
 export const CreatedBy = styled.div`
   font-size: 12px;
@@ -136,6 +134,8 @@ export const CommentUpdateBtn = styled.button`
   color: var(--brownish-grey);
   margin-left: 2px;
   font-size: 10px;
+  cursor: pointer;
+  outline: none;
 `;
 export const Name = styled.div`
   font-size: 12px;
@@ -189,6 +189,8 @@ export const IssueTitles = styled.button`
   background: none;
   border: none;
   outline: none;
+
+  cursor: pointer;
 `;
 export const IssueContents = styled.div`
   margin-top: 6px;

@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Fade from "react-reveal/Fade";
-
-import Dropdown from "./dropdownmenu/Dropdown";
+import Dropdown from "./dropdown/Dropdown";
 import MessagePopUp from "./messagepopup/MessagePopUp";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -60,13 +59,7 @@ const active = {
 export class Navbar extends Component {
   constructor(props) {
     super(props);
-    // this.state = { show: false };
-    // this.handleClick = this.handleClick.bind(this);
   }
-  // handleClick() {
-  //   this.setState({ show: !this.state.show });
-  //   console.log(this.state.show);
-  // }
 
   render() {
     const Msg = ({ closeToast }) => (
