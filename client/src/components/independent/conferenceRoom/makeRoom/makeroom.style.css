@@ -90,7 +90,6 @@
 }
 
 /***************Tag css**************/
-
 /* Styles for the input */
 div.ReactTags__tagInput {
   margin-bottom: 7px;
@@ -118,6 +117,10 @@ div.ReactTags__tagInput input.ReactTags__tagInputField {
   margin-left: 23px;
 }
 
+.tag-inline-div {
+  margin-left: 38px;
+}
+
 div.ReactTags__selected span.ReactTags__tag {
   border: 1px solid #ddd;
   background: #eee;
@@ -143,7 +146,7 @@ div.ReactTags__suggestions {
 div.ReactTags__suggestions ul {
   list-style-type: none;
   box-shadow: 0.05em 0.01em 0.5em rgba(0, 0, 0, 0.2);
-  background: white;
+  background-color: #efefefb7;
   width: 200px;
 }
 div.ReactTags__suggestions li {
@@ -156,9 +159,9 @@ div.ReactTags__suggestions li mark {
   /* text-decoration: underline; */
   background: none;
   font-weight: 500;
+  color: var(--greenish-teal);
 }
 div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
-  background: #b7cfe0;
   cursor: pointer;
   font-size: 12px;
 }
