@@ -76,20 +76,8 @@ class SignUp extends Component {
             <div className="label">회사 및 부서</div>
 
             <div className="text_search">
-              <input
-                type="text"
-                name="company"
-                className="small-input"
-                placeholder="회사명을 검색하세요"
-                //TODO: 태그로 바꿔야함
-              />
               <TagsCompany />
-              <input
-                type="text"
-                name="company"
-                className="small-input"
-                placeholder="부서명을 검색하세요"
-              />
+
               <TagsDepart />
             </div>
           </div>

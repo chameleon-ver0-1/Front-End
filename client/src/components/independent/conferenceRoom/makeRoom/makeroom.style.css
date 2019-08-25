@@ -91,16 +91,29 @@
 
 /***************Tag css**************/
 /* Styles for the input */
+
+div.ReactTags__tags {
+  position: relative;
+}
+
 div.ReactTags__tagInput {
-  margin-bottom: 7px;
+  margin-bottom: 2px;
   outline: none;
   /* width: 347px;
   height: 28px;
   border-radius: 5px;
   border: solid 1px #efefef;
-  display: inline-block; */
+  display: inline-block;*/
 }
 div.ReactTags__tagInput input.ReactTags__tagInputField {
+  /*TODO: 경우에 따라 Input 모양 변해야 함*/
+  /* height: 31px;
+  margin: 0;
+  font-size: 12px;
+  width: 138px;
+  border: none;
+  background: none;
+  outline: none; */
   margin-left: 23px;
   height: 28px;
   margin: 0;
@@ -121,14 +134,27 @@ div.ReactTags__tagInput input.ReactTags__tagInputField {
   margin-left: 38px;
 }
 
+.tag-div {
+  margin-left: 23px;
+  margin: 0;
+  font-size: 12px;
+  width: 134px;
+  height: 33px;
+  border: solid 1px var(--pinkish-grey);
+  border-radius: 18.8px;
+  padding-left: 11px;
+  padding-right: 11px;
+  outline: none;
+  padding-top: 5px;
+}
+
 div.ReactTags__selected span.ReactTags__tag {
   border: 1px solid #ddd;
   background: #eee;
   font-size: 12px;
-  /* display: inline-block; */
-  padding: 5px;
+  display: inline-block;
+  padding: 4px;
   margin: 0 2px;
-  cursor: move;
   border-radius: 2px;
 }
 

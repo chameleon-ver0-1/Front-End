@@ -60,9 +60,9 @@ export class TagsDepart extends Component {
   render() {
     const { tags, suggestions } = this.state;
     return (
-      <div>
+      <div className="tag-div">
         <ReactTags
-          inline
+          inputFieldPosition="bottom"
           tags={tags}
           suggestions={suggestions}
           delimiters={delimiters}
@@ -70,7 +70,7 @@ export class TagsDepart extends Component {
           handleAddition={this.handleAddition}
           handleDrag={this.handleDrag}
           handleTagClick={this.handleTagClick}
-          placeholder="회사명을 검색하세요"
+          placeholder="부서명을 검색하세요"
         />
       </div>
     );

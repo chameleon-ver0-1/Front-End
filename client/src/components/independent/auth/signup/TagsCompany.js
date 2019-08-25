@@ -60,7 +60,7 @@ export class TagsCompany extends Component {
   render() {
     const { tags, suggestions } = this.state;
     return (
-      <div>
+      <div className="tag-div">
         <ReactTags
           inline
           tags={tags}
