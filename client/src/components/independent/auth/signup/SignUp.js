@@ -77,7 +77,6 @@ class SignUp extends Component {
 
             <div className="text_search">
               <TagsCompany />
-
               <TagsDepart />
             </div>
           </div>

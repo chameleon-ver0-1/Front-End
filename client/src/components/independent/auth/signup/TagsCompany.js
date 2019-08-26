@@ -3,6 +3,20 @@ import { WithContext as ReactTags } from "react-tag-input";
 import styled from "styled-components";
 import { COMPANY } from "./company";
 
+const TAGDIV = styled.div`
+  margin-left: 23px;
+  margin: 0;
+  font-size: 12px;
+  width: 134px;
+  height: 33px;
+  border: solid 1px var(--pinkish-grey);
+  border-radius: 18.8px;
+  padding-left: 11px;
+  padding-right: 11px;
+  outline: none;
+  padding-top: 5px;
+`;
+
 const suggestions = COMPANY.map(tag => {
   return {
     id: tag,
@@ -60,18 +74,24 @@ export class TagsCompany extends Component {
   render() {
     const { tags, suggestions } = this.state;
     return (
-      <div className="tag-div">
-        <ReactTags
-          inline
-          tags={tags}
-          suggestions={suggestions}
-          delimiters={delimiters}
-          handleDelete={this.handleDelete}
-          handleAddition={this.handleAddition}
-          handleDrag={this.handleDrag}
-          handleTagClick={this.handleTagClick}
-          placeholder="회사명을 검색하세요"
-        />
+      <div>
+        <TAGDIV>
+          <ReactTags
+            inputFieldPosition="bottom"
+            tags={tags}
+            suggestions={suggestions}
+            delimiters={delimiters}
+            handleDelete={this.handleDelete}
+            handleAddition={this.handleAddition}
+            handleDrag={this.handleDrag}
+            handleTagClick={this.handleTagClick}
+            autofocus={false}
+            placeholder="회사명을 검색하세요"
+            classNames={{
+              tagInputField: "tagInputField-auth"
+            }}
+          />
+        </TAGDIV>
       </div>
     );
   }

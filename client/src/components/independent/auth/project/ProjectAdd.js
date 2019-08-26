@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./projectadd.style.css";
 import { Link } from "react-router-dom";
+import TagsProjectPeople from "./TagsProjectPeople";
 
 export class ProjectAdd extends Component {
   constructor(props) {
@@ -63,11 +64,7 @@ export class ProjectAdd extends Component {
 
           <div className="p-input-row">
             <div className="p-text">참여자</div>
-            <input
-              type="text"
-              className="p-input"
-              placeholder="함께 할 사람을 추가하세요"
-            />
+            <TagsProjectPeople />
           </div>
         </div>
 

@@ -1,22 +1,20 @@
 import React, { Component } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import styled from "styled-components";
-import { DEPART } from "./depart";
+import { COMPANY } from "../signup/company";
 
-const TAGDIV = styled.div`
-  margin-left: 23px;
-  margin: 0;
-  font-size: 12px;
-  width: 134px;
-  height: 33px;
-  border: solid 1px var(--pinkish-grey);
+const TAGDIV2 = styled.div`
+  width: 210px;
+  height: 38px;
+  object-fit: contain;
   border-radius: 18.8px;
-  padding-left: 11px;
-  padding-right: 11px;
+  border: solid 1px var(--white-two);
+  margin-left: 50px;
+  padding-left: 15px;
+  font-size: 12px;
   outline: none;
-  padding-top: 5px;
 `;
-const suggestions = DEPART.map(tag => {
+const suggestions = COMPANY.map(tag => {
   return {
     id: tag,
     text: tag
@@ -30,7 +28,7 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-export class TagsDepart extends Component {
+export class TagsProjectPeople extends Component {
   constructor(props) {
     super(props);
 
@@ -66,17 +64,16 @@ export class TagsDepart extends Component {
     this.setState({ tags: newTags });
   }
 
-  handleTagClick(index) {
-    console.log("The tag at index " + index + " was clicked");
+  handleTagClick(tag) {
+    console.log("The tag at index " + tag + " was clicked");
   }
 
   render() {
     const { tags, suggestions } = this.state;
     return (
       <div>
-        <TAGDIV>
+        <TAGDIV2>
           <ReactTags
-            inputFieldPosition="bottom"
             tags={tags}
             suggestions={suggestions}
             delimiters={delimiters}
@@ -84,16 +81,17 @@ export class TagsDepart extends Component {
             handleAddition={this.handleAddition}
             handleDrag={this.handleDrag}
             handleTagClick={this.handleTagClick}
+            placeholder="함께할 사람을 추가하세요"
             autofocus={false}
-            placeholder="부서명을 검색하세요"
             classNames={{
-              tagInputField: "tagInputField-auth"
+              tags: "tag-project",
+              tagInputField: "tagInputField-project"
             }}
           />
-        </TAGDIV>
+        </TAGDIV2>
       </div>
     );
   }
 }
 
-export default TagsDepart;
+export default TagsProjectPeople;
