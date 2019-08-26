@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./projectadd.style.css";
 import { Link } from "react-router-dom";
 import TagsProjectPeople from "./TagsProjectPeople";
+import TagsProjectDepart from "./TagsProjectDepart";
 
 export class ProjectAdd extends Component {
   constructor(props) {
@@ -43,13 +44,9 @@ export class ProjectAdd extends Component {
             />
           </div>
 
-          <div className="p-input-row">
+          <div className="p-input-row2">
             <div className="p-text">소속 부서</div>
-            <input
-              type="text"
-              className="p-input"
-              placeholder="프로젝트 내 부서를 추가하세요"
-            />
+            <TagsProjectDepart />
           </div>
 
           <div className="p-input-row">

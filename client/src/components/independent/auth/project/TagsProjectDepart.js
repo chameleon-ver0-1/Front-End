@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import styled from "styled-components";
-import { PEOPLE } from "./people";
+import { DEPART } from "../signup/depart";
 
 const TAGDIV2 = styled.div`
   width: 210px;
@@ -9,13 +9,13 @@ const TAGDIV2 = styled.div`
   object-fit: contain;
   border-radius: 18.8px;
   border: solid 1px var(--white-two);
-  margin-left: 50px;
+  margin-left: 35px;
   padding-left: 15px;
   font-size: 12px;
   outline: none;
 `;
 
-const suggestions = PEOPLE.map(tag => {
+const suggestions = DEPART.map(tag => {
   return {
     id: tag,
     text: tag
@@ -29,7 +29,7 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-export class TagsProjectPeople extends Component {
+export class TagsProjectDepart extends Component {
   constructor(props) {
     super(props);
 
@@ -83,11 +83,11 @@ export class TagsProjectPeople extends Component {
             handleAddition={this.handleAddition}
             handleDrag={this.handleDrag}
             handleTagClick={this.handleTagClick}
-            placeholder="함께할 사람을 추가하세요"
+            placeholder="프로젝트 내 부서를 추가하세요"
             autofocus={false}
             classNames={{
               tags: "tag-project",
-              tagInputField: "tagInputField-project"
+              tagInputField: "tagInputField-project2"
             }}
           />
         </TAGDIV2>
@@ -96,4 +96,4 @@ export class TagsProjectPeople extends Component {
   }
 }
 
-export default TagsProjectPeople;
+export default TagsProjectDepart;

@@ -144,6 +144,17 @@ div.ReactTags__tagInput input.ReactTags__tagInputField {
   margin-top: 2px;
 }
 
+.tagInputField-project2 {
+  width: 155px;
+  height: 30px;
+  object-fit: contain;
+  border: none;
+  font-size: 12px;
+  outline: none;
+  background: none;
+  margin-top: 2px;
+}
+
 /* Styles for selected tags */
 .tagdiv {
   margin-left: 23px;
