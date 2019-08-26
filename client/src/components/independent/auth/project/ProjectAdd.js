@@ -9,12 +9,24 @@ export class ProjectAdd extends Component {
     super(props);
 
     this.state = {
-      projectname: ""
+      projectname: "",
+      depart_tag: null,
+      people_tag: null
     };
   }
 
   addproject = () => {
-    console.log(this.state.projectname);
+    console.log(this.state.depart_tag);
+    console.log(this.state.people_tag);
+  };
+
+  //자식한테 받은 props를 state에 넣기
+  myCallback = dataFromChild => {
+    this.setState({ depart_tag: dataFromChild });
+  };
+
+  myCallback2 = dataFromChild => {
+    this.setState({ people_tag: dataFromChild });
   };
 
   render() {
@@ -46,7 +58,7 @@ export class ProjectAdd extends Component {
 
           <div className="p-input-row2">
             <div className="p-text">소속 부서</div>
-            <TagsProjectDepart />
+            <TagsProjectDepart callbackFromParent={this.myCallback} />
           </div>
 
           <div className="p-input-row">
@@ -61,15 +73,15 @@ export class ProjectAdd extends Component {
 
           <div className="p-input-row">
             <div className="p-text">참여자</div>
-            <TagsProjectPeople />
+            <TagsProjectPeople callbackFromParent={this.myCallback2} />
           </div>
         </div>
 
-        <Link to="/auth/projectList">
-          <button className="p-add-btn" onClick={this.addproject}>
-            개설하기
-          </button>
-        </Link>
+        {/* <Link to="/auth/projectList"> */}
+        <button className="p-add-btn" onClick={this.addproject}>
+          개설하기
+        </button>
+        {/* </Link> */}
       </div>
     );
   }
