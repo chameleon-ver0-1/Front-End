@@ -77,11 +77,11 @@ export class ProjectAdd extends Component {
           </div>
         </div>
 
-        {/* <Link to="/auth/projectList"> */}
-        <button className="p-add-btn" onClick={this.addproject}>
-          개설하기
-        </button>
-        {/* </Link> */}
+        <Link to="/auth/projectList">
+          <button className="p-add-btn" onClick={this.addproject}>
+            개설하기
+          </button>
+        </Link>
       </div>
     );
   }
