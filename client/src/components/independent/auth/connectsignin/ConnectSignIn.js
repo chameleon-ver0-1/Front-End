@@ -9,6 +9,8 @@ import "./connectsignin.style.css";
 import chat_profile from "../../../../assets/chatting/chat_profile.png";
 import search from "../../../../assets/signUp/search.png";
 import { Link } from "react-router-dom";
+import TagsCompany from "./TagsCompany";
+import TagsDepart from "./TagsDepart";
 
 class ConnectSignIn extends Component {
   state = {
@@ -45,14 +47,9 @@ class ConnectSignIn extends Component {
             {/* <label className="label" htmlFor="company">회사 및 부서</label> */}
             <div className="label">회사 및 부서</div>
             <div className="text_search">
-              <input
-                type="text"
-                name="company"
-                className="small-input"
-                //TODO: 태그로 바꿔야함
-              />
-
-              <input type="text" name="company" className="small-input" />
+              <TagsCompany/>
+              <TagsDepart/>
+              
             </div>
           </div>
 
