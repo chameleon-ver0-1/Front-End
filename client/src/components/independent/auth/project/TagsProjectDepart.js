@@ -1,21 +1,20 @@
 import React, { Component } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import styled from "styled-components";
-import { DEPART } from "./depart";
+import { DEPART } from "../signup/depart";
 
-const TAGDIV = styled.div`
-  margin-left: 23px;
-  margin: 0;
-  font-size: 12px;
-  width: 134px;
-  height: 33px;
-  border: solid 1px var(--pinkish-grey);
+const TAGDIV2 = styled.div`
+  width: 210px;
+  height: 38px;
+  object-fit: contain;
   border-radius: 18.8px;
-  padding-left: 11px;
-  padding-right: 11px;
+  border: solid 1px var(--white-two);
+  margin-left: 35px;
+  padding-left: 15px;
+  font-size: 12px;
   outline: none;
-  padding-top: 5px;
 `;
+
 const suggestions = DEPART.map(tag => {
   return {
     id: tag,
@@ -30,7 +29,7 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-export class TagsDepart extends Component {
+export class TagsProjectDepart extends Component {
   constructor(props) {
     super(props);
 
@@ -42,6 +41,7 @@ export class TagsDepart extends Component {
     this.handleAddition = this.handleAddition.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.handleTagClick = this.handleTagClick.bind(this);
+    this.DoingSomethingFn = this.DoingSomethingFn.bind(this);
   }
   /* 태그 */
   handleDelete(i) {
@@ -53,6 +53,7 @@ export class TagsDepart extends Component {
 
   handleAddition(tag) {
     this.setState(state => ({ tags: [...state.tags, tag] }));
+    console.log("tag: " + this.state.tags);
   }
 
   handleDrag(tag, currPos, newPos) {
@@ -66,17 +67,21 @@ export class TagsDepart extends Component {
     this.setState({ tags: newTags });
   }
 
-  handleTagClick(index) {
-    console.log("The tag at index " + index + " was clicked");
+  handleTagClick(tags) {
+    console.log("tags : " + tags + " was clicked");
   }
+
+  DoingSomethingFn = () => {
+    //부모한테 props로 보내기
+    this.props.callbackFromParent(this.state.tags);
+  };
 
   render() {
     const { tags, suggestions } = this.state;
     return (
       <div>
-        <TAGDIV>
+        <TAGDIV2>
           <ReactTags
-            inputFieldPosition="bottom"
             tags={tags}
             suggestions={suggestions}
             delimiters={delimiters}
@@ -84,16 +89,18 @@ export class TagsDepart extends Component {
             handleAddition={this.handleAddition}
             handleDrag={this.handleDrag}
             handleTagClick={this.handleTagClick}
+            placeholder="프로젝트 내 부서를 추가하세요"
             autofocus={false}
-            placeholder="부서명을 검색하세요"
             classNames={{
-              tagInputField: "tagInputField-auth"
+              tags: "tag-project",
+              tagInputField: "tagInputField-project2"
             }}
           />
-        </TAGDIV>
+        </TAGDIV2>
+        <button onClick={this.DoingSomethingFn}>데이터</button>
       </div>
     );
   }
 }
 
-export default TagsDepart;
+export default TagsProjectDepart;

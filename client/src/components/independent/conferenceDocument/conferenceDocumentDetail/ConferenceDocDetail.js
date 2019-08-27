@@ -17,8 +17,8 @@ class ConferenceDocDetail extends Component {
     return (
       <div className="documentdetaildiv">
         <div className="documentDetailTitle">
-          <div className="Title1">4월 간행물 표지 초안</div>
-          <div className="Title2">2019.03.13 PM1:00 화상회의</div>
+          <div className="Title1">{this.props.location.state.title}</div>
+          <div className="Title2">{this.props.location.state.date}</div>
           <div className="save_button_div">
             <button className="save_button">
               <img src={download_off} className="downloadimg" />

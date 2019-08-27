@@ -91,16 +91,27 @@
 
 /***************Tag css**************/
 /* Styles for the input */
+
+div.ReactTags__tags {
+  position: relative;
+}
+
+.tag-project {
+  position: relative;
+  margin-top: 4px;
+}
+
 div.ReactTags__tagInput {
-  margin-bottom: 7px;
+  margin-bottom: 2px;
   outline: none;
   /* width: 347px;
   height: 28px;
   border-radius: 5px;
   border: solid 1px #efefef;
-  display: inline-block; */
+  display: inline-block;*/
 }
 div.ReactTags__tagInput input.ReactTags__tagInputField {
+  /*회의 개설 태그,참여자 모양*/
   margin-left: 23px;
   height: 28px;
   margin: 0;
@@ -110,6 +121,38 @@ div.ReactTags__tagInput input.ReactTags__tagInputField {
   border-radius: 10px;
   padding-left: 11px;
   outline: none;
+}
+
+.tagInputField-auth {
+  height: 31px;
+  margin: 0;
+  font-size: 12px;
+  width: 138px;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.tagInputField-project {
+  width: 130px;
+  height: 30px;
+  object-fit: contain;
+  border: none;
+  font-size: 12px;
+  outline: none;
+  background: none;
+  margin-top: 2px;
+}
+
+.tagInputField-project2 {
+  width: 155px;
+  height: 30px;
+  object-fit: contain;
+  border: none;
+  font-size: 12px;
+  outline: none;
+  background: none;
+  margin-top: 2px;
 }
 
 /* Styles for selected tags */
@@ -125,10 +168,10 @@ div.ReactTags__selected span.ReactTags__tag {
   border: 1px solid #ddd;
   background: #eee;
   font-size: 12px;
-  /* display: inline-block; */
-  padding: 5px;
-  margin: 0 2px;
-  cursor: move;
+  display: inline-block;
+  padding: 2px;
+  margin-left: 2px;
+  margin-bottom: 2px;
   border-radius: 2px;
 }
 

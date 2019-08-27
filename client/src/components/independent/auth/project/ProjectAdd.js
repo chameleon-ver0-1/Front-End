@@ -1,18 +1,32 @@
 import React, { Component } from "react";
 import "./projectadd.style.css";
 import { Link } from "react-router-dom";
+import TagsProjectPeople from "./TagsProjectPeople";
+import TagsProjectDepart from "./TagsProjectDepart";
 
 export class ProjectAdd extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      projectname: ""
+      projectname: "",
+      depart_tag: null,
+      people_tag: null
     };
   }
 
   addproject = () => {
-    console.log(this.state.projectname);
+    console.log(this.state.depart_tag);
+    console.log(this.state.people_tag);
+  };
+
+  //자식한테 받은 props를 state에 넣기
+  myCallback = dataFromChild => {
+    this.setState({ depart_tag: dataFromChild });
+  };
+
+  myCallback2 = dataFromChild => {
+    this.setState({ people_tag: dataFromChild });
   };
 
   render() {
@@ -42,13 +56,9 @@ export class ProjectAdd extends Component {
             />
           </div>
 
-          <div className="p-input-row">
+          <div className="p-input-row2">
             <div className="p-text">소속 부서</div>
-            <input
-              type="text"
-              className="p-input"
-              placeholder="프로젝트 내 부서를 추가하세요"
-            />
+            <TagsProjectDepart callbackFromParent={this.myCallback} />
           </div>
 
           <div className="p-input-row">
@@ -63,11 +73,7 @@ export class ProjectAdd extends Component {
 
           <div className="p-input-row">
             <div className="p-text">참여자</div>
-            <input
-              type="text"
-              className="p-input"
-              placeholder="함께 할 사람을 추가하세요"
-            />
+            <TagsProjectPeople callbackFromParent={this.myCallback2} />
           </div>
         </div>
 
