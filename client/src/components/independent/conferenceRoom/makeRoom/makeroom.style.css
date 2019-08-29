@@ -104,12 +104,10 @@ div.ReactTags__tags {
 div.ReactTags__tagInput {
   margin-bottom: 2px;
   outline: none;
-  /* width: 347px;
-  height: 28px;
-  border-radius: 5px;
-  border: solid 1px #efefef;
-  display: inline-block;*/
+  display: inline-block;
+  margin-left: 2px;
 }
+
 div.ReactTags__tagInput input.ReactTags__tagInputField {
   /*회의 개설 태그,참여자 모양*/
   margin-left: 23px;
@@ -136,7 +134,6 @@ div.ReactTags__tagInput input.ReactTags__tagInputField {
 .tagInputField-project {
   width: 130px;
   height: 30px;
-  object-fit: contain;
   border: none;
   font-size: 12px;
   outline: none;
@@ -147,12 +144,19 @@ div.ReactTags__tagInput input.ReactTags__tagInputField {
 .tagInputField-project2 {
   width: 155px;
   height: 30px;
-  object-fit: contain;
   border: none;
   font-size: 12px;
   outline: none;
   background: none;
   margin-top: 2px;
+}
+
+.tagInputField-people {
+  width: 130px;
+  height: 22px;
+  border: none;
+  font-size: 12px;
+  outline: none;
 }
 
 /* Styles for selected tags */

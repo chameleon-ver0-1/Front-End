@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { DEPART } from "../signup/depart";
 
 const TAGDIV2 = styled.div`
-  width: 210px;
+  width: 280px;
   height: 38px;
   object-fit: contain;
   border-radius: 18.8px;

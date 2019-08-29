@@ -80,7 +80,7 @@ export class ProjectAdd extends Component {
             />
           </div>
 
-          <div className="p-input-row2">
+          <div className="p-input-row">
             <div className="p-text">소속 부서</div>
             <TagsProjectDepart callbackFromParent={this.myCallback} />
           </div>

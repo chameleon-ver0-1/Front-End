@@ -2,7 +2,7 @@
 
 .inner-container4 {
   margin: 60px auto;
-  width: 331px;
+  width: 500px;
 }
 
 .p-input-container {
@@ -12,12 +12,7 @@
 .p-input-row {
   display: flex;
   flex-direction: row;
-  margin-bottom: 25px;
-}
-
-.p-input-row2 {
-  display: flex;
-  flex-direction: row;
+  justify-content: center;
   margin-bottom: 13px;
 }
 
@@ -28,13 +23,11 @@
 }
 
 .p-input {
-  position: absolute;
-  width: 210px;
+  width: 280px;
   height: 38px;
-  object-fit: contain;
   border-radius: 18.8px;
   border: solid 1px var(--white-two);
-  margin-left: 90px;
+  margin-left: 20px;
   padding-left: 15px;
   font-size: 12px;
   outline: none;
@@ -43,7 +36,7 @@
 .p-green-message {
   font-size: 11px;
   color: var(--greenish-teal);
-  margin-left: 190px;
+  margin-left: 300px;
 }
 
 .star2 {
@@ -53,6 +46,7 @@
 }
 
 .p-add-btn {
+  margin-left: 90px;
   margin-top: 37px;
   width: 313px;
   height: 41px;

@@ -5,15 +5,21 @@ import { PEOPLE } from "./people";
 import * as service from "../../../../services/ProjectUserService";
 
 const TAGDIV2 = styled.div`
-  width: 210px;
-  height: 38px;
-  object-fit: contain;
+  width: 280px;
+  height: 76px;
   border-radius: 18.8px;
   border: solid 1px var(--white-two);
   margin-left: 50px;
   padding-left: 15px;
   font-size: 12px;
   outline: none;
+`;
+
+const NOPEOPLE = styled.div`
+  font-size: 11px;
+  color: var(--greenish-teal);
+  margin-left: 210px;
+  display: none;
 `;
 
 const suggestions = PEOPLE.map(tag => {
@@ -36,7 +42,8 @@ export class TagsProjectPeople extends Component {
 
     this.state = {
       tags: [],
-      suggestions: suggestions
+      suggestions: suggestions,
+      nopeople: true
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
@@ -52,11 +59,8 @@ export class TagsProjectPeople extends Component {
   }
 
   handleAddition(tag) {
-    /**TODO: suggestion에 있는 참여자여야 */
-
     service.projectUser(tag).then(
       res => {
-        //this.props.history.push("/auth/projectManage"); -> 화면 바꾸는거
         console.log("참여자 판단 성공");
         this.setState(state => ({ tags: [...state.tags, tag] })); // 태그에 추가
         this.props.callbackFromParent(this.state.tags); //부모한테 props로 보내기
@@ -64,12 +68,9 @@ export class TagsProjectPeople extends Component {
       },
       err => {
         console.log("참여자 판단 실패");
-        // document.getElementById("warnId").style.display = this.state.isWarnId
-        //   ? "inline"
-        //   : "none";
-        // document.getElementById("warnPwd").style.display = this.state.isWarnId
-        //   ? "inline"
-        //   : "none";
+        document.getElementById("nopeople").style.display = this.state.nopeople
+          ? "inline"
+          : "none";
       }
     );
   }
@@ -110,6 +111,7 @@ export class TagsProjectPeople extends Component {
             }}
           />
         </TAGDIV2>
+        <NOPEOPLE id="nopeople">참여자가 존재하지 않습니다.</NOPEOPLE>
       </div>
     );
   }
