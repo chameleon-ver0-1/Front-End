@@ -41,7 +41,6 @@ export class TagsProjectDepart extends Component {
     this.handleAddition = this.handleAddition.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.handleTagClick = this.handleTagClick.bind(this);
-    this.DoingSomethingFn = this.DoingSomethingFn.bind(this);
   }
   /* 태그 */
   handleDelete(i) {
@@ -54,6 +53,8 @@ export class TagsProjectDepart extends Component {
   handleAddition(tag) {
     this.setState(state => ({ tags: [...state.tags, tag] }));
     console.log("tag: " + this.state.tags);
+    //부모한테 props로 보내기
+    this.props.callbackFromParent(this.state.tags);
   }
 
   handleDrag(tag, currPos, newPos) {
@@ -70,11 +71,6 @@ export class TagsProjectDepart extends Component {
   handleTagClick(tags) {
     console.log("tags : " + tags + " was clicked");
   }
-
-  DoingSomethingFn = () => {
-    //부모한테 props로 보내기
-    this.props.callbackFromParent(this.state.tags);
-  };
 
   render() {
     const { tags, suggestions } = this.state;
@@ -97,7 +93,6 @@ export class TagsProjectDepart extends Component {
             }}
           />
         </TAGDIV2>
-        <button onClick={this.DoingSomethingFn}>데이터</button>
       </div>
     );
   }

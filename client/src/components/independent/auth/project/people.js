@@ -1,12 +1,11 @@
 export const PEOPLE = [
-  "안지후",
-  "권소영",
-  "권주희",
-  "조윤영",
-  "한예지",
-  "박재환",
-  "이주영",
-  "유견아",
-  "이경미",
-  "최승훈"
+  "jihu02@naver.com",
+  "onisley0424@naver.com",
+  "yoon980208@naver.com",
+  "yeji9175@naver.com",
+  "wayne@naver.com",
+  "ljy@duksung.ac.kr",
+  "jga@duksung.ac.kr",
+  "lgm@dugsung.ac.kr",
+  "csh@duksung.ac.kr"
 ];

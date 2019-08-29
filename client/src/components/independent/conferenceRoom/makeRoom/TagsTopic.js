@@ -52,6 +52,7 @@ export class TagsTopic extends Component {
           handleAddition={this.handleAddition}
           handleDrag={this.handleDrag}
           handleTagClick={this.handleTagClick}
+          autofocus={false}
           placeholder="메인 토픽을 입력하세요"
         />
       </div>

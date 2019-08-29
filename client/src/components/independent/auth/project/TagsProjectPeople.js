@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import styled from "styled-components";
 import { PEOPLE } from "./people";
+import * as service from "../../../../services/ProjectUserService";
 
 const TAGDIV2 = styled.div`
   width: 210px;
@@ -41,7 +42,6 @@ export class TagsProjectPeople extends Component {
     this.handleAddition = this.handleAddition.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.handleTagClick = this.handleTagClick.bind(this);
-    this.DoingSomethingFn = this.DoingSomethingFn.bind(this);
   }
   /* 태그 */
   handleDelete(i) {
@@ -52,8 +52,26 @@ export class TagsProjectPeople extends Component {
   }
 
   handleAddition(tag) {
-    this.setState(state => ({ tags: [...state.tags, tag] }));
-    console.log("tag: " + this.state.tags);
+    /**TODO: suggestion에 있는 참여자여야 */
+
+    service.projectUser(tag).then(
+      res => {
+        //this.props.history.push("/auth/projectManage"); -> 화면 바꾸는거
+        console.log("참여자 판단 성공");
+        this.setState(state => ({ tags: [...state.tags, tag] })); // 태그에 추가
+        this.props.callbackFromParent(this.state.tags); //부모한테 props로 보내기
+        console.log("tag: " + this.state.tags);
+      },
+      err => {
+        console.log("참여자 판단 실패");
+        // document.getElementById("warnId").style.display = this.state.isWarnId
+        //   ? "inline"
+        //   : "none";
+        // document.getElementById("warnPwd").style.display = this.state.isWarnId
+        //   ? "inline"
+        //   : "none";
+      }
+    );
   }
 
   handleDrag(tag, currPos, newPos) {
@@ -70,11 +88,6 @@ export class TagsProjectPeople extends Component {
   handleTagClick(tags) {
     console.log("tags : " + tags + " was clicked");
   }
-
-  DoingSomethingFn = () => {
-    //부모한테 props로 보내기
-    this.props.callbackFromParent(this.state.tags);
-  };
 
   render() {
     const { tags, suggestions } = this.state;
@@ -97,7 +110,6 @@ export class TagsProjectPeople extends Component {
             }}
           />
         </TAGDIV2>
-        <button onClick={this.DoingSomethingFn}>데이터2</button>
       </div>
     );
   }

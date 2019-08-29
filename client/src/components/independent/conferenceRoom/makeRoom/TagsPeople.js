@@ -71,6 +71,7 @@ export class TagsPeople extends Component {
           handleAddition={this.handleAddition}
           handleDrag={this.handleDrag}
           handleTagClick={this.handleTagClick}
+          autofocus={false}
           placeholder="참여자를 추가하세요"
         />
       </div>
