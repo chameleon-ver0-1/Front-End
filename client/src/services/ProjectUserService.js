@@ -6,14 +6,14 @@ import { SET_CURRENT_USER } from "../helpers/types";
 /*Axios instance를 통해 config 객체를 넘겨서  Axios instance를 넘기면
 헤더를 중복하여 정의해주지 않아도 된다.*/
 const projectUserAxios = axios.create({
-  //baseURL: "https://a.chameleon4switch.cf/api",
+  baseURL: "http://127.0.0.1:4000/api/project/emailCheck",
   headers: {
     "Content-Type": "application/json"
   },
   timeout: 5000
 });
 export function projectUser(email) {
-  return projectUserAxios.post("auth/projectAdd", {email}).then(res => {
+  return projectUserAxios.post("auth/projectAdd", { email }).then(res => {
     console.log(res.data);
 
     console.log("***************************");

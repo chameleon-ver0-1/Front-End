@@ -68,6 +68,7 @@ export class TagsProjectPeople extends Component {
       },
       err => {
         console.log("참여자 판단 실패");
+        console.log(err);
         document.getElementById("nopeople").style.display = this.state.nopeople
           ? "inline"
           : "none";

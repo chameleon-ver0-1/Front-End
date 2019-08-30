@@ -6,7 +6,7 @@ import { SET_CURRENT_USER } from "../helpers/types";
 /*Axios instance를 통해 config 객체를 넘겨서  Axios instance를 넘기면
 헤더를 중복하여 정의해주지 않아도 된다.*/
 const projectAddAxios = axios.create({
-  //baseURL: "https://a.chameleon4switch.cf/api",
+  baseURL: "http://127.0.0.1:4000/api/project/create",
   headers: {
     "Content-Type": "application/json"
   },

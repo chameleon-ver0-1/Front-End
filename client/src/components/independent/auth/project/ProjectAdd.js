@@ -34,6 +34,7 @@ export class ProjectAdd extends Component {
         },
         err => {
           console.log("프로젝트 개설 실패");
+          console.log(err);
           // document.getElementById("warnId").style.display = this.state.isWarnId
           //   ? "inline"
           //   : "none";
@@ -91,7 +92,7 @@ export class ProjectAdd extends Component {
           </div>
         </div>
 
-        <Link to="/auth/projectList">
+        <Link to="/home/issue">
           <button className="p-add-btn" onClick={this.addproject}>
             개설하기
           </button>
