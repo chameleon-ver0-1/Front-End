@@ -107,6 +107,7 @@ export class VideoItem extends Component {
       OfferToReceiveVideo: true
     };
 
+    var videoCpy;
     //모든 로컬 및 원격 미디어 스트림을 수신하기 위한 함수
     connection.onstream = function(event) {
       //onspeaking에서 사용할 부분을 초기화
@@ -116,6 +117,7 @@ export class VideoItem extends Component {
         connection: connection
       });
       //connection1
+      // event.mediaContainer.style.width=""
       connection.videosContainer = document.getElementById("videos-container"); //1개 이상의 비디오들을 담을 div공간을 id값으로 가져온다.
       var video = document.createElement("video"); //비디오 컴포넌트를 생성한다.
       video.id = event.streamid; //각 비디오 화면에 각 스트림의 고유 식별자를 붙인다.
@@ -169,8 +171,8 @@ export class VideoItem extends Component {
 
       video.srcObject = event.stream; //비디오에 stream을 연결한다.
 
-      connection.videosContainer.style.width = "443px";
-      var width = parseInt(connection.videosContainer);
+      connection.videosContainer.style.width = "100%";
+      var width = "500px";
 
       var mediaElement = service.getHTMLMediaElement(video, {
         title: event.userid,
@@ -195,21 +197,20 @@ export class VideoItem extends Component {
         });
       }
       localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
+      videoCpy = video;
     };
-
+    /*****************************/
+    /*음성에 따른 액션*/
+    /*****************************/
     //connection-ing
     connection.onspeaking = function(e) {
       //사용자가 말하는 순간 동안 실행되는 함수
-      // e.streamid, e.userid, e.stream, etc.
       console.log("onspeaking 작동 중");
-      var mediaElement = document.getElementById(e.streamid);
-      mediaElement.style.border = "3px dotted red";
+      videoCpy.style.border = "3px dotted red";
     };
     connection.onsilence = function(e) {
       //사용자가 말을 하지 않는 동안 실행되는 함수
-      // e.streamid, e.userid, e.stream, etc.
-      var mediaElement = document.getElementById(e.streamid);
-      mediaElement.style.border = "none";
+      videoCpy.style.border = "none";
     };
     connection.onvolumechange = function(event) {
       //볼륨의 높낮이가 달라질 때 실행되는 함수
@@ -470,7 +471,7 @@ export class VideoItem extends Component {
           화면 공유
         </button> */}
         <VideosContainer id="videos-container" />
-        <div id="room-urls" style={{ width: "100%" }} />>
+        <div id="room-urls" style={{ width: "100%" }} />
         <EmotionStatus id="showEmotion" />
       </VideoFrame>
     );

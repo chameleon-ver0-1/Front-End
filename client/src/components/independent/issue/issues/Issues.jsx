@@ -96,6 +96,8 @@ export class Issues extends Component {
         >
           {Object.keys(this.state.columns).map(columnId => {
             const column = this.state.columns[columnId];
+
+            
             const tasks = column.taskIds.map(
               taskId => this.state.tasks[taskId]
             );

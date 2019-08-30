@@ -3,7 +3,6 @@ import { NavLink, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Fade from "react-reveal/Fade";
 import Dropdown from "./dropdown/Dropdown";
-import MessagePopUp from "./messagepopup/MessagePopUp";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -36,7 +35,8 @@ import {
   HomeNav,
   NavItem,
   NavClickItem,
-  AuthBox
+  AuthBox,
+  MoveBtn
 } from "./navbar.style";
 
 const active = {
@@ -62,16 +62,21 @@ export class Navbar extends Component {
   }
 
   render() {
+    const roomid = "9월 졸업프로젝트 긴급 회의";
+    const test = () => {};
     const Msg = ({ closeToast }) => (
       <Row>
         <img src={alertToast} width="35px" height="35px" />
         <div style={{ marginLeft: "15px" }}>
-          <AlertTitle>4월 간행물 표지 초안</AlertTitle>
+          <AlertTitle>{roomid}</AlertTitle>
           <AlertContent>화상회의가 잠시 뒤 시작됩니다.</AlertContent>
         </div>
-        <ClosedBtn onClick={closeToast} style={{ marginLeft: "38px" }}>
+        <MoveBtn to={`/room/${roomid}`} className="linklogin">
+          Go!
+        </MoveBtn>
+        {/* <ClosedBtn onClick={closeToast} style={{ marginLeft: "38px" }}>
           <img width="10px" height="10px" src={closedBtn} />
-        </ClosedBtn>
+        </ClosedBtn> */}
       </Row>
     );
     if (
