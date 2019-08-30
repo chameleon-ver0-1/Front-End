@@ -3,7 +3,7 @@ import { WithContext as ReactTags } from "react-tag-input";
 import { TAG } from "./tag";
 import styled from "styled-components";
 
-const TAGDIV3 = styled.div`
+const TAGDIV4 = styled.div`
   width: 347px;
   height: 60px;
   border-radius: 10px;
@@ -51,6 +51,8 @@ export class TagsPeople extends Component {
 
   handleAddition(tag) {
     this.setState(state => ({ tags: [...state.tags, tag] }));
+    this.props.callbackFromParent(this.state.tags);
+    console.log(this.state.tags);
   }
 
   handleDrag(tag, currPos, newPos) {
@@ -71,7 +73,7 @@ export class TagsPeople extends Component {
   render() {
     const { tags, suggestions } = this.state;
     return (
-      <TAGDIV3>
+      <TAGDIV4>
         <ReactTags
           inline
           tags={tags}
@@ -87,7 +89,7 @@ export class TagsPeople extends Component {
             tagInputField: "tagInputField-people"
           }}
         />
-      </TAGDIV3>
+      </TAGDIV4>
     );
   }
 }

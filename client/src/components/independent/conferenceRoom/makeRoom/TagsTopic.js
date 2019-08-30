@@ -2,6 +2,17 @@ import React, { Component } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import styled from "styled-components";
 
+const TAGDIV3 = styled.div`
+  width: 347px;
+  height: 28px;
+  border-radius: 10px;
+  font-size: 12px;
+  border: solid 1px #cccccc;
+  padding-left: 11px;
+  outline: none;
+  padding-top: 2px;
+`;
+
 export class TagsTopic extends Component {
   constructor(props) {
     super(props);
@@ -24,6 +35,8 @@ export class TagsTopic extends Component {
 
   handleAddition(tag) {
     this.setState(state => ({ tags: [...state.tags, tag] }));
+    this.props.callbackFromParent(this.state.tags);
+    console.log(this.state.tags);
   }
 
   handleDrag(tag, currPos, newPos) {
@@ -44,9 +57,9 @@ export class TagsTopic extends Component {
   render() {
     const { tags } = this.state;
     return (
-      <div>
+      <TAGDIV3>
         <ReactTags
-          inputFieldPosition="top"
+          // inputFieldPosition="top"
           tags={tags}
           handleDelete={this.handleDelete}
           handleAddition={this.handleAddition}
@@ -55,7 +68,7 @@ export class TagsTopic extends Component {
           autofocus={false}
           placeholder="메인 토픽을 입력하세요"
         />
-      </div>
+      </TAGDIV3>
     );
   }
 }
