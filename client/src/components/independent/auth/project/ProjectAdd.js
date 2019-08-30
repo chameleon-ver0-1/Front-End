@@ -3,6 +3,7 @@ import "./projectadd.style.css";
 import { Link } from "react-router-dom";
 import TagsProjectPeople from "./TagsProjectPeople";
 import TagsProjectDepart from "./TagsProjectDepart";
+import * as service from "../../../../services/ProjectAddService";
 
 export class ProjectAdd extends Component {
   constructor(props) {
@@ -10,14 +11,38 @@ export class ProjectAdd extends Component {
 
     this.state = {
       projectname: "",
-      depart_tag: null,
-      people_tag: null
+      depart_tag: [],
+      people_tag: []
     };
   }
 
   addproject = () => {
+    //프로젝트 개설하기
+    console.log(this.state.projectname);
     console.log(this.state.depart_tag);
     console.log(this.state.people_tag);
+    service
+      .projectAdd(
+        this.state.projectname,
+        this.state.depart_tag,
+        this.state.people_tag
+      )
+      .then(
+        res => {
+          this.props.history.push("/auth/projectList");
+          console.log("프로젝트 개설 성공");
+        },
+        err => {
+          console.log("프로젝트 개설 실패");
+          console.log(err);
+          // document.getElementById("warnId").style.display = this.state.isWarnId
+          //   ? "inline"
+          //   : "none";
+          // document.getElementById("warnPwd").style.display = this.state.isWarnId
+          //   ? "inline"
+          //   : "none";
+        }
+      );
   };
 
   //자식한테 받은 props를 state에 넣기
@@ -56,19 +81,9 @@ export class ProjectAdd extends Component {
             />
           </div>
 
-          <div className="p-input-row2">
+          <div className="p-input-row">
             <div className="p-text">소속 부서</div>
             <TagsProjectDepart callbackFromParent={this.myCallback} />
-          </div>
-
-          <div className="p-input-row">
-            <div className="p-text">URL</div>
-            <div className="star2">*</div>
-            <input
-              type="text"
-              className="p-input"
-              placeholder="/chameleon.co.kr"
-            />
           </div>
 
           <div className="p-input-row">
@@ -77,7 +92,7 @@ export class ProjectAdd extends Component {
           </div>
         </div>
 
-        <Link to="/auth/projectList">
+        <Link to="/home/issue">
           <button className="p-add-btn" onClick={this.addproject}>
             개설하기
           </button>

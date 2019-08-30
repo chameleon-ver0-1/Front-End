@@ -5,14 +5,15 @@ import "./makeissue.style.css";
 import InitialData from "../../issue/testItem-data";
 
 export class MakeIssue extends Component {
-  state = InitialData;
+  //state = InitialData;
 
   constructor(props) {
     super(props);
 
     this.state = {
       issue: "",
-      tags: []
+      tags: [],
+      initialData: InitialData
     };
   }
 
@@ -56,13 +57,24 @@ export class MakeIssue extends Component {
         <div className="makeroomdiv">
           <div className="roomtitle">{title}</div>
 
-          {/* TODO: issue 데이터 가져오기 */}
           <Tabs>
             <TabList>
               <Tab>TODO</Tab>
               <Tab>DOING</Tab>
               <Tab>DONE</Tab>
             </TabList>
+            {/* <div>
+              {Object.keys(this.state.initialData.columns).map(columnId => {
+                const column = this.state.initialData.columns[columnId];
+                const tasks = column.taskIds.map(
+                  taskId => this.state.initialData.tasks[taskId]
+                );
+
+                return (
+
+                );
+              })}
+            </div> */}
 
             <TabPanel>
               <ul className="issue-list">
@@ -77,18 +89,16 @@ export class MakeIssue extends Component {
                 </li>
                 <li
                   className="issue-item"
-                  onClick={this.issueClicked.bind(this, "b")}
+                  onClick={this.issueClicked.bind(
+                    this,
+                    "b"
+                  )} /* "a"쓴 부분이 ""값을 넘긴다는 뜻. 데이터 받아올때는 "변수.값"의 형태로 */
                 >
                   b
                 </li>
-                <li
-                  className="issue-item"
-                  onClick={this.issueClicked.bind(this, "c")}
-                >
-                  c
-                </li>
               </ul>
             </TabPanel>
+
             <TabPanel>
               <ul className="issue-list">
                 <li className="issue-item">1</li>
@@ -96,6 +106,7 @@ export class MakeIssue extends Component {
                 <li className="issue-item">3</li>
               </ul>
             </TabPanel>
+
             <TabPanel>
               <ul className="issue-list">
                 <li className="issue-item">x</li>
@@ -104,7 +115,6 @@ export class MakeIssue extends Component {
               </ul>
             </TabPanel>
           </Tabs>
-
           <div className="issue-buttons-div">
             <button className="choose-issue" onClick={this.bothClick}>
               선택

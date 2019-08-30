@@ -2,17 +2,24 @@ import React, { Component } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import styled from "styled-components";
 import { PEOPLE } from "./people";
+import * as service from "../../../../services/ProjectUserService";
 
 const TAGDIV2 = styled.div`
-  width: 210px;
-  height: 38px;
-  object-fit: contain;
+  width: 280px;
+  height: 76px;
   border-radius: 18.8px;
   border: solid 1px var(--white-two);
   margin-left: 50px;
   padding-left: 15px;
   font-size: 12px;
   outline: none;
+`;
+
+const NOPEOPLE = styled.div`
+  font-size: 11px;
+  color: var(--greenish-teal);
+  margin-left: 210px;
+  display: none;
 `;
 
 const suggestions = PEOPLE.map(tag => {
@@ -35,13 +42,13 @@ export class TagsProjectPeople extends Component {
 
     this.state = {
       tags: [],
-      suggestions: suggestions
+      suggestions: suggestions,
+      nopeople: true
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.handleTagClick = this.handleTagClick.bind(this);
-    this.DoingSomethingFn = this.DoingSomethingFn.bind(this);
   }
   /* 태그 */
   handleDelete(i) {
@@ -52,8 +59,21 @@ export class TagsProjectPeople extends Component {
   }
 
   handleAddition(tag) {
-    this.setState(state => ({ tags: [...state.tags, tag] }));
-    console.log("tag: " + this.state.tags);
+    service.projectUser(tag).then(
+      res => {
+        console.log("참여자 판단 성공");
+        this.setState(state => ({ tags: [...state.tags, tag] })); // 태그에 추가
+        this.props.callbackFromParent(this.state.tags); //부모한테 props로 보내기
+        console.log("tag: " + this.state.tags);
+      },
+      err => {
+        console.log("참여자 판단 실패");
+        console.log(err);
+        document.getElementById("nopeople").style.display = this.state.nopeople
+          ? "inline"
+          : "none";
+      }
+    );
   }
 
   handleDrag(tag, currPos, newPos) {
@@ -70,11 +90,6 @@ export class TagsProjectPeople extends Component {
   handleTagClick(tags) {
     console.log("tags : " + tags + " was clicked");
   }
-
-  DoingSomethingFn = () => {
-    //부모한테 props로 보내기
-    this.props.callbackFromParent(this.state.tags);
-  };
 
   render() {
     const { tags, suggestions } = this.state;
@@ -97,7 +112,7 @@ export class TagsProjectPeople extends Component {
             }}
           />
         </TAGDIV2>
-        <button onClick={this.DoingSomethingFn}>데이터2</button>
+        <NOPEOPLE id="nopeople">참여자가 존재하지 않습니다.</NOPEOPLE>
       </div>
     );
   }

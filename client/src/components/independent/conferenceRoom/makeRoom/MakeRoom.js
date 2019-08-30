@@ -43,7 +43,9 @@ class MakeRoom extends Component {
       suggestions: suggestions,
       open: false,
       title: "",
-      selectedDate: new Date().toISOString()
+      selectedDate: new Date().toISOString(),
+      topic_tag: [],
+      people_tag: []
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
@@ -99,6 +101,14 @@ class MakeRoom extends Component {
     });
   };
 
+  myCallback = dataFromChild => {
+    this.setState({ topic_tag: dataFromChild });
+  };
+
+  myCallback2 = dataFromChild => {
+    this.setState({ people_tag: dataFromChild });
+  };
+
   render() {
     const { open, title, onCloseModal } = this.props;
     const { tags, suggestions } = this.state;
@@ -124,7 +134,7 @@ class MakeRoom extends Component {
           <div className="row-div">
             <div className="roomtitle2">메인 토픽</div>
             <div className="tagdiv">
-              <TagsTopic />
+              <TagsTopic callbackFromParent={this.myCallback} />
 
               <button className="getissue" onClick={this.onOpenModal}>
                 <img src={searchissue} className="getissueimg" />
@@ -163,7 +173,7 @@ class MakeRoom extends Component {
           <div className="row-div">
             <div className="roomtitle2">참여자</div>
             <div className="tag-inline-div">
-              <TagsPeople />
+              <TagsPeople callbackFromParent={this.myCallback2} />
             </div>
           </div>
 

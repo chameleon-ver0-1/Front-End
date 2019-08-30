@@ -50,4 +50,6 @@
   margin: 46px auto;
   justify-content: center;
   align-items: center;
+  outline: none;
+  font-family: NanumSquareB;
 }
