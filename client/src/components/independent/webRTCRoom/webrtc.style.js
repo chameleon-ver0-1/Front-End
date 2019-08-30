@@ -154,7 +154,8 @@ export const VideoFrame = styled.div`
   padding-top: 19px;
   padding-right: 50px;
 
-  height: 90%;
+  background: pink;
+  height: 100%;
 `;
 export const EmotionStatus = styled.div`
   position: fixed;
@@ -169,7 +170,10 @@ export const EmotionStatus = styled.div`
   border-radius: 45px;
 `;
 export const VideosContainer = styled.div`
+  background: black;
   display: flex;
+  height: 100%;
+
   flex-wrap: wrap;
 `;
 
@@ -284,4 +288,3 @@ export const CopyButton = styled.button`
   border: none;
   font-size: 9px;
 `;
-

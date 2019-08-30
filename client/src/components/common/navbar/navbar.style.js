@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 //////////////////////////////////////
 /*1 Nav*/
 //////////////////////////////////////
-export const NavContainer = styled.div`
+const NavContainer = styled.div`
   display: flex;
   width: 100vw;
   height: 64px;
@@ -12,16 +12,16 @@ export const NavContainer = styled.div`
   align-items: center;
   border-bottom: 1px solid var(--white-two);
 `;
-export const BtnContainer = styled.div`
+const BtnContainer = styled.div`
   flex: 1;
   padding-right: 47px;
   display: flex;
   justify-content: flex-end;
 `;
-export const BtnP = styled.div`
+const BtnP = styled.div`
   padding-right: 7px;
 `;
-export const NavBtn = styled(NavLink)`
+const NavBtn = styled(NavLink)`
   font-size: 1rem;
   font-family: NanumSquareB;
   cursor: pointer;
@@ -51,25 +51,29 @@ export const NavBtn = styled(NavLink)`
 //////////////////////////////////////
 /*2 Nav */
 //////////////////////////////////////
-export const Row = styled.div`
+const Row = styled.div`
   display: flex;
 `;
-export const ClosedBtn = styled.button`
+const ClosedBtn = styled.button`
   border: none;
   cursor: pointer;
   background: none;
   outline: none;
 `;
-export const AlertTitle = styled.div`
+const AlertTitle = styled.div`
   font-size: 12px;
   font-family: NanumSquareEB;
   color: var(--greenish-teal);
+
+  width: 200px;
 `;
-export const AlertContent = styled.div`
+const AlertContent = styled.div`
   font-size: 12px;
   color: var(--brownish-grey);
+
+  width: 200px;
 `;
-export const LogoContainer = styled.div`
+const LogoContainer = styled.div`
   height: 64px;
   width: 200px;
   display: flex;
@@ -77,7 +81,7 @@ export const LogoContainer = styled.div`
   align-items: center;
 `;
 
-export const Nav2Container = styled.div`
+const Nav2Container = styled.div`
   display: flex;
   background: var(--greenish-teal);
   width: 100%;
@@ -85,14 +89,14 @@ export const Nav2Container = styled.div`
   border-bottom: 1px solid var(--white-two);
 `;
 
-export const NavRight = styled.div`
+const NavRight = styled.div`
   flex: 1;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding-right: 29px;
 `;
-export const NoticeBtn = styled.button`
+const NoticeBtn = styled.button`
   width: 20px;
   height: 28px;
   cursor: pointer;
@@ -104,12 +108,12 @@ export const NoticeBtn = styled.button`
   background-repeat: no-repeat;
   background-size: auto;
 `;
-export const UserInfoContainer = styled.div`
+const UserInfoContainer = styled.div`
   width: 150px;
   margin-right: 22px;
   height: 100%;
 `;
-export const UserName = styled.div`
+const UserName = styled.div`
   color: white;
   font-size: 16.5px
   font-family: NanumSquareEB;
@@ -119,12 +123,12 @@ export const UserName = styled.div`
   align-items:center;
 `;
 
-export const UserDepartment = styled.div`
+const UserDepartment = styled.div`
   color: white;
   font-size: 0.6rem;
   font-family: NanumSquareB;
 `;
-export const MoreInfo = styled.button`
+const MoreInfo = styled.button`
   width: 17px;
   height: 37px;
 
@@ -135,7 +139,7 @@ export const MoreInfo = styled.button`
   outline: none;
 `;
 
-export const HomeNav = styled.div`
+const HomeNav = styled.div`
   padding-top: 17px;
   padding-left: 171px;
   display: flex;
@@ -143,7 +147,7 @@ export const HomeNav = styled.div`
   height: 6.64%;
 `;
 
-export const NavItem = styled.div`
+const NavItem = styled.div`
   font-size: 13.5px;
   color: var(--brownish-grey);
   font-family: NanumSquareB;
@@ -154,13 +158,57 @@ export const NavItem = styled.div`
   }
 `;
 
-export const NavClickItem = styled.div`
+const NavClickItem = styled.div`
   font-size: 13.5px;
   color: var(--greenish-teal);
   font-family: NanumSquareB;
   margin-right: 49px;
 `;
-export const AuthBox = styled.div`
+const AuthBox = styled.div`
   margin-left: 57px;
   display: flex;
 `;
+
+const MoveBtn = styled(Link)`
+  font-size: 20px;
+  font-family: NanumSquareEB;
+  color: var(--greenish-teal);
+
+  margin-left: 10px;
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    color: red;
+  }
+`;
+
+export {
+  NavContainer,
+  BtnContainer,
+  BtnP,
+  NavBtn,
+  Row,
+  ClosedBtn,
+  AlertTitle,
+  AlertContent,
+  LogoContainer,
+  Nav2Container,
+  NavRight,
+  NoticeBtn,
+  UserInfoContainer,
+  UserName,
+  UserDepartment,
+  MoreInfo,
+  HomeNav,
+  NavItem,
+  NavClickItem,
+  AuthBox,
+  MoveBtn
+};
