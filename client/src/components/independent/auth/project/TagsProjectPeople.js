@@ -50,6 +50,7 @@ export class TagsProjectPeople extends Component {
     this.handleDrag = this.handleDrag.bind(this);
     this.handleTagClick = this.handleTagClick.bind(this);
   }
+
   /* 태그 */
   handleDelete(i) {
     const { tags } = this.state;
@@ -59,12 +60,14 @@ export class TagsProjectPeople extends Component {
   }
 
   handleAddition(tag) {
-    service.projectUser(tag).then(
+    service.projectUser(JSON.stringify(tag)).then(
       res => {
         console.log("참여자 판단 성공");
-        this.setState(state => ({ tags: [...state.tags, tag] })); // 태그에 추가
-        this.props.callbackFromParent(this.state.tags); //부모한테 props로 보내기
-        console.log("tag: " + this.state.tags);
+        this.setState(state => ({
+          tags: [...state.tags, tag]
+        }));
+        this.props.callbackFromParent(this.state.tags);
+        console.log("tag: " + JSON.stringify(tag));
       },
       err => {
         console.log("참여자 판단 실패");

@@ -6,7 +6,7 @@ import { SET_CURRENT_USER } from "../helpers/types";
 /*Axios instance를 통해 config 객체를 넘겨서  Axios instance를 넘기면
 헤더를 중복하여 정의해주지 않아도 된다.*/
 const projectAddAxios = axios.create({
-  baseURL: "http://127.0.0.1:4000/api/project/create",
+  baseURL: "https://a.chameleon4switch.cf/api",
   headers: {
     "Content-Type": "application/json"
   },
@@ -14,7 +14,7 @@ const projectAddAxios = axios.create({
 });
 export function projectAdd(projectName, projectRoles, projectParticipants) {
   return projectAddAxios
-    .post("auth/projectAdd", { projectName, projectRoles, projectParticipants })
+    .post("project/create", { projectName, projectRoles, projectParticipants })
     .then(res => {
       console.log(res.data);
 
@@ -22,11 +22,11 @@ export function projectAdd(projectName, projectRoles, projectParticipants) {
       console.log(res.data.message);
       console.log("***************************");
 
-      const token = res.data.data.accessToken.token;
-      localStorage.setItem("jwtToken", token);
-      setAuthorizationToken(token);
-      setCurrentUser(jwtDecode(token));
-      console.log(localStorage.getItem("jwtToken"));
+      // const token = res.data.data.accessToken.token;
+      // localStorage.setItem("jwtToken", token);
+      // setAuthorizationToken(token);
+      // setCurrentUser(jwtDecode(token));
+      // console.log(localStorage.getItem("jwtToken"));
     });
 }
 export function setCurrentUser(user) {

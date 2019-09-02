@@ -29,18 +29,12 @@ export class ProjectAdd extends Component {
       )
       .then(
         res => {
-          this.props.history.push("/auth/projectList");
+          this.props.history.push("/home/issue");
           console.log("프로젝트 개설 성공");
         },
         err => {
           console.log("프로젝트 개설 실패");
           console.log(err);
-          // document.getElementById("warnId").style.display = this.state.isWarnId
-          //   ? "inline"
-          //   : "none";
-          // document.getElementById("warnPwd").style.display = this.state.isWarnId
-          //   ? "inline"
-          //   : "none";
         }
       );
   };
@@ -92,11 +86,9 @@ export class ProjectAdd extends Component {
           </div>
         </div>
 
-        <Link to="/home/issue">
-          <button className="p-add-btn" onClick={this.addproject}>
-            개설하기
-          </button>
-        </Link>
+        <button className="p-add-btn" onClick={this.addproject}>
+          개설하기
+        </button>
       </div>
     );
   }
