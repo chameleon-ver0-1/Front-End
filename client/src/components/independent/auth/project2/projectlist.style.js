@@ -26,6 +26,7 @@ const ProjectListItemBtn = styled.div`
   border-radius: 18.8px;
   border: solid 1px var(--greenish-teal);
   font-size: 16px;
+  font-family: NanumSquareB;
   outline: none;
   cursor: pointer;
 
@@ -35,11 +36,21 @@ const ProjectListItemBtn = styled.div`
 
   &:hover {
     background: var(--greenish-teal);
+    color: white;
   }
+`;
+const ProjectListDiv = styled.div`
+  font-size: 14px;
+  color: var(--brownish-grey);
+  font-family: NanumSquareB;
+  width: 300px;
+  display: flex;
+  justify-content: center;
 `;
 export {
   ProjectListContainer,
   ProjectListHeader,
   ProjectListItemContainer,
-  ProjectListItemBtn
+  ProjectListItemBtn,
+  ProjectListDiv
 };

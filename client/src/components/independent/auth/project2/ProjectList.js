@@ -5,7 +5,8 @@ import {
   ProjectListContainer,
   ProjectListHeader,
   ProjectListItemContainer,
-  ProjectListItemBtn
+  ProjectListItemBtn,
+  ProjectListDiv
 } from "./projectlist.style";
 
 export class ProjectList extends Component {
@@ -24,10 +25,8 @@ export class ProjectList extends Component {
     return (
       <ProjectListContainer>
         <ProjectListHeader>참여 중인 프로젝트</ProjectListHeader>
-        <div className="p-explanation">현재 참여 중인 프로젝트 입니다.</div>
-        <div className="p-explanation">
-          접근을 원하시는 프로젝트를 선택하세요.
-        </div>
+        <ProjectListDiv>현재 참여 중인 프로젝트 입니다.</ProjectListDiv>
+        <ProjectListDiv>접근을 원하시는 프로젝트를 선택하세요.</ProjectListDiv>
         <ProjectListItemContainer>
           {Object.keys(this.state.projectLists).map(projectListId => {
             const projectlist = this.state.projectLists[projectListId];
