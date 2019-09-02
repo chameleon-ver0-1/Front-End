@@ -1,8 +1,17 @@
 import React, { Component } from "react";
 import "./projectlist.style.css";
 import { Link } from "react-router-dom";
+import * as service from "../../../../services/ProjectService";
 
 export class ProjectList extends Component {
+  componentDidMount() {
+    service.getProjectList().then(
+      res => {},
+      err => {
+        console.log("프로젝트 리스트 가져오기 실패");
+      }
+    );
+  }
   render() {
     return (
       <div className="inner-container3">
