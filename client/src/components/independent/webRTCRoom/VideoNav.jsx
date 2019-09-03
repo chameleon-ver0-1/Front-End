@@ -15,7 +15,7 @@
  */
 import React, { Component } from "react";
 import logo from "../../../assets/conferenceRoom/videohome_logo.png";
-import user from "../../../assets/conference/people.png";
+import participants from "../../../assets/conferenceRoom/participants.png";
 import mic from "../../../assets/conferenceRoom/videohome_speaking.png";
 
 import Fade from "react-reveal/Fade";
@@ -25,8 +25,8 @@ import {
   UpperNav,
   ConferenceTitle,
   UserCount,
-  CountText,
-  Timer
+  RoundDiv,
+  NavP
 } from "./webrtc.style";
 
 export class VideoNav extends Component {
@@ -44,13 +44,17 @@ export class VideoNav extends Component {
       <UpperNav>
         <ConferenceTitle>4월 간행물 표지 초안</ConferenceTitle>
         <UserCount>
-          <img width="20px" height="21px" margin="17px" src={user} />
+          <RoundDiv style={{ width: "74px" }}>
+            <img width="15px" height="17px" margin="17px" src={participants} />
+            <NavP style={{ color: "white", marginLeft: "5px" }}>4</NavP>
+          </RoundDiv>
         </UserCount>
-        <CountText onClick={this.handleClick}>6</CountText>
         <Fade when={this.state.show}>
           <InviteDialog />
         </Fade>
-        <Timer>1:34:03</Timer>
+        <RoundDiv style={{ width: "74px", color: "var(--greenish-teal)" }}>
+          1:34:03
+        </RoundDiv>
       </UpperNav>
     );
   }

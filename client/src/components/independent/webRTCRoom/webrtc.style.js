@@ -3,11 +3,11 @@ import styled from "styled-components";
 //////////////////////////////////////
 /*WebRTCRoom*/
 //////////////////////////////////////
-export const MainView = styled.div`
+const MainView = styled.div`
   transition: margin-left 0.5s;
   width: 0;
 `;
-export const SideBar = styled.div`
+const SideBar = styled.div`
   height: calc(100% - 48px);
   width: 0;
   position: fixed;
@@ -18,30 +18,30 @@ export const SideBar = styled.div`
   overflow-x: hidden;
   transition: 0.5s;
 `;
-export const VideoBaseContainer = styled.div`
+const VideoBaseContainer = styled.div`
   width: 100vw;
   display: flex;
-  background: var(--brownish-grey);
+  background: #424c53;
 `;
 
-export const SecondBox = styled.div`
+const SecondBox = styled.div`
   width: calc(100vw - 64px);
   height: calc(100vh - 56px);
-  background: var(--brownish-grey);
+  background: #424c53;
 `;
-export const ToggleBtn = styled.div`
-  width: 30px;
-
+const ToggleBtn = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  width: 19px;
+  cursor: pointer;
 `;
 
-export const Row = styled.div`
+const Row = styled.div`
   display: flex;
   width: calc(100vw - 64px);
 `;
-export const ToggleDiv = styled.div`
+const ToggleDiv = styled.div`
   width: calc((100vw - 64px) / 2);
   display: flex;
   justify-content: flex-end;
@@ -50,8 +50,7 @@ export const ToggleDiv = styled.div`
 
 //////////////////////////////////////
 /*VideoNav*/
-//////////////////////////////////////
-export const UpperNav = styled.div`
+const UpperNav = styled.div`
   width: calc((100vw - 64px) / 2);
   height: 56px;
   background: none;
@@ -60,69 +59,53 @@ export const UpperNav = styled.div`
   align-items: center;
 `;
 
-export const ConferenceTitle = styled.div`
+const ConferenceTitle = styled.div`
   margin-left: 26px;
   font-size: 22px;
   color: white;
 
   overflow: hidden;
 `;
-export const UserCount = styled.div`
+const UserCount = styled.div`
   margin-left: 20px;
 `;
-export const CountText = styled.button`
-  color: var(--greenish-teal);
-  font-size: 22px;
-  height: 100%;
-  display: flex;
 
-  margin-left: 8px;
-  align-items: center;
-  overflow: auto;
-  border: none;
-  background: none;
-  outline: none;
-`;
-export const Timer = styled.div`
-  background: var(--greenish-teal);
-  width: 65px;
-  height: 26px;
-
-  margin-left: 14px;
-
-  border-radius: 11.5px;
-  color: white;
-  font-size: 15px;
-  text-align: center;
+const RoundDiv = styled.div`
+  background: #2e373e;
+  height: 28px;
+  border: 1px solid #2e373e;
+  border-radius: 13.5px;
+  box-shadow: 1.9px 2.3px 7px black 0.2;
 
   display: flex;
-  align-items: center;
   justify-content: center;
-
-  overflow: hidden;
+  align-items: center;
+`;
+const NavP = styled.div`
+  font-size: 16.5px;
 `;
 
 //////////////////////////////////////
 /*VideoMenubar */
 //////////////////////////////////////
-export const Logo = styled.div`
+const Logo = styled.div`
   width: 64px;
   height: 62px;
-  background: #555555;
+  background: #2e373e;
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 8px;
 `;
 
-export const LeftNav = styled.div`
+const LeftNav = styled.div`
   width: 64px;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #555555;
+  background: #2e373e;
 `;
-export const ButtonItem = styled.button`
+const ButtonItem = styled.button`
   width: 63px;
   height: 55px;
 
@@ -133,12 +116,13 @@ export const ButtonItem = styled.button`
   justify-content: center;
   align-items: center;
 `;
-export const HomeItem = styled.button`
+const HomeItem = styled.button`
   width: 63px;
   height: 55px;
 
   border: none;
   background: var(--greenish-teal);
+  opacity: 0.5;
   outline: none;
 
   display: flex;
@@ -149,28 +133,26 @@ export const HomeItem = styled.button`
 //////////////////////////////////////
 /*VideoItem */
 //////////////////////////////////////
-export const VideoFrame = styled.div`
+const VideoFrame = styled.div`
   padding-left: 50px;
   padding-top: 19px;
   padding-right: 50px;
 
-  background: pink;
   height: 100%;
 `;
-export const EmotionStatus = styled.div`
+const EmotionStatus = styled.div`
   position: fixed;
   top: 80%;
   width: 50%;
   text-align: center;
   display: inline-block;
-  background: black;
+
   color: white;
   font-size: 15px;
   opacity: 0.4;
   border-radius: 45px;
 `;
-export const VideosContainer = styled.div`
-  background: black;
+const VideosContainer = styled.div`
   display: flex;
   height: 100%;
 
@@ -180,16 +162,16 @@ export const VideosContainer = styled.div`
 //////////////////////////////////////
 /*TopicDrawerBar*/
 //////////////////////////////////////
-export const TopicItem = styled.div`
+const TopicItem = styled.div`
   font-size: 12px;
   height: 31px;
   padding-left: 13px;
   padding-top: 5px;
-  color: var(--brownish-grey);
+  color: #424c53;
   display: flex;
   flex-direction: row;
 `;
-export const TopicButton = styled.button`
+const TopicButton = styled.button`
   display: block;
   margin-left: 100px;
   margin-top: 0px;
@@ -198,7 +180,7 @@ export const TopicButton = styled.button`
   background: none;
   border: none;
 `;
-export const DrawerContainer = styled.div`
+const DrawerContainer = styled.div`
   background: var(--white-four);
   width: 252px;
   height: calc(100%-48px);
@@ -207,12 +189,12 @@ export const DrawerContainer = styled.div`
 //////////////////////////////////////
 /*InviteDialog */
 //////////////////////////////////////
-export const InviteContainer = styled.div`
+const InviteContainer = styled.div`
   position: relative;
   display: inline-block;
 `;
 
-export const Pointer = styled.div`
+const Pointer = styled.div`
   width: 5px;
   height: 5px;
   border-right: 10px solid transparent;
@@ -221,7 +203,7 @@ export const Pointer = styled.div`
   margin-top: 40px;
   margin-left: -18px;
 `;
-export const InviteList = styled.div`
+const InviteList = styled.div`
   width: 205px;
   height: 305px;
   list-style-type: none;
@@ -234,24 +216,24 @@ export const InviteList = styled.div`
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 `;
-export const DivideLine = styled.div`
+const DivideLine = styled.div`
   width: 100%;
   height: 3px;
   background: var(--white-two);
   margin-top: 7px;
 `;
-export const UserText = styled.div`
+const UserText = styled.div`
   font-size: 11px;
   color: var(--brownish-grey);
   margin-left: 10px;
 `;
-export const UserContainer = styled.div`
+const UserContainer = styled.div`
   height: 43px;
   width: 100%;
   display: flex;
   padding-left: 11px;
 `;
-export const CopyContainer = styled.div`
+const CopyContainer = styled.div`
   width: 183px;
   height: 27px;
   border-radius: 5px;
@@ -261,7 +243,7 @@ export const CopyContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
-export const CopyItem = styled.input`
+const CopyItem = styled.input`
   width: 150px;
   height: 23px;
   background: var(--white-four);
@@ -271,7 +253,7 @@ export const CopyItem = styled.input`
   color: var(--brownish-grey);
   font-size: 9px;
 `;
-export const ShowInviteButton = styled.div`
+const ShowInviteButton = styled.div`
   width: 100%;
   color: var(--greenish-teal);
   font-size: 9px;
@@ -282,9 +264,36 @@ export const ShowInviteButton = styled.div`
   padding: 0px;
   text-align: center;
 `;
-export const CopyButton = styled.button`
+const CopyButton = styled.button`
   color: var(--greenish-teal);
   background: none;
   border: none;
   font-size: 9px;
 `;
+
+export {
+  MainView,
+  SideBar,
+  VideoBaseContainer,
+  SecondBox,
+  ToggleBtn,
+  Row,
+  ToggleDiv
+};
+export { UpperNav, ConferenceTitle, UserCount, RoundDiv, NavP };
+
+export {
+  InviteContainer,
+  UserContainer,
+  UserText,
+  DivideLine,
+  Pointer,
+  InviteList,
+  ShowInviteButton,
+  CopyContainer,
+  CopyItem,
+  CopyButton
+};
+export { Logo, LeftNav, ButtonItem, HomeItem };
+export { TopicItem, TopicButton, DrawerContainer };
+export { VideoFrame, EmotionStatus, VideosContainer };

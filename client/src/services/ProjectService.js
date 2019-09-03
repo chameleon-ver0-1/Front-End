@@ -9,11 +9,5 @@ const projectAxios = axios.create({
   timeout: 5000
 });
 export function getProjectList() {
-  return projectAxios.get("project/list").then(res => {
-    console.log(res.data);
-
-    console.log("***************************");
-    console.log(res.data.message);
-    console.log("***************************");
-  });
+  return projectAxios.get("project/list");
 }
