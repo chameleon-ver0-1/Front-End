@@ -8,8 +8,6 @@ import React, { Component } from "react";
 import "./makeroom.style.css";
 import Modal from "react-responsive-modal";
 import { render } from "react-dom";
-import { TAG } from "./tag";
-import { WithContext as ReactTags } from "react-tag-input";
 import { Link } from "react-router-dom";
 import MakeIssue from "../makeIssue/MakeIssue";
 import searchissue from "../../../../assets/conference/searchissue.png";
@@ -18,20 +16,7 @@ import BigDatePicker from "./BigDatePicker";
 import SmallDatePicker from "./SmallDatePicker";
 import TagsTopic from "./TagsTopic";
 import TagsPeople from "./TagsPeople";
-
-const suggestions = TAG.map(tag => {
-  return {
-    id: tag,
-    text: tag
-  };
-});
-
-const KeyCodes = {
-  comma: 188,
-  enter: 13
-};
-
-const delimiters = [KeyCodes.comma, KeyCodes.enter];
+import * as service from "../../../../services/ConferenceRoomService";
 
 class MakeRoom extends Component {
   constructor(props) {
@@ -40,44 +25,12 @@ class MakeRoom extends Component {
     this.state = {
       roomTitle: "none",
       tags: [],
-      suggestions: suggestions,
       open: false,
       title: "",
       selectedDate: new Date().toISOString(),
       topic_tag: [],
       people_tag: []
     };
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleAddition = this.handleAddition.bind(this);
-    this.handleDrag = this.handleDrag.bind(this);
-    this.handleTagClick = this.handleTagClick.bind(this);
-  }
-
-  /* 태그 */
-  handleDelete(i) {
-    const { tags } = this.state;
-    this.setState({
-      tags: tags.filter((tag, index) => index !== i)
-    });
-  }
-
-  handleAddition(tag) {
-    this.setState(state => ({ tags: [...state.tags, tag] }));
-  }
-
-  handleDrag(tag, currPos, newPos) {
-    const tags = [...this.state.tags];
-    const newTags = tags.slice();
-
-    newTags.splice(currPos, 1);
-    newTags.splice(newPos, 0, tag);
-
-    // re-render
-    this.setState({ tags: newTags });
-  }
-
-  handleTagClick(index) {
-    console.log("The tag at index " + index + " was clicked");
   }
 
   /* 이슈에서 가져오기 */
@@ -107,6 +60,32 @@ class MakeRoom extends Component {
 
   myCallback2 = dataFromChild => {
     this.setState({ people_tag: dataFromChild });
+  };
+
+  gotoVideo = () => {
+    //회의실 개설하기
+    console.log(this.state.roomTitle);
+    console.log(this.state.topic_tag);
+    console.log(this.state.startDay);
+    console.log(this.state.people_tag);
+
+    service
+      .confCreate(
+        this.state.roomTitle,
+        this.state.topic_tag,
+        this.state.startDay, //데이터 수정
+        this.state.people_tag
+      )
+      .then(
+        res => {
+          this.props.history.push("/home/issue");
+          console.log("회의실 개설 성공");
+        },
+        err => {
+          console.log("회의실 개설 실패");
+          console.log(err);
+        }
+      );
   };
 
   render() {
@@ -178,9 +157,11 @@ class MakeRoom extends Component {
           </div>
 
           <div className="row-div2">
-            <Link to={`/room/${this.state.roomTitle}`} className="linklogin">
-              <button className="makebutton">개설</button>
-            </Link>
+            {/* <Link to={`/room/${this.state.roomTitle}`} className="linklogin"> */}
+            <button className="makebutton" onClick={this.gotoVideo}>
+              개설
+            </button>
+            {/* </Link> */}
 
             <button className="cancelbutton" onClick={onCloseModal}>
               취소

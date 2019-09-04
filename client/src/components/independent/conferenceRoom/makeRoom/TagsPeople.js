@@ -34,7 +34,8 @@ export class TagsPeople extends Component {
 
     this.state = {
       tags: [],
-      suggestions: suggestions
+      suggestions: suggestions,
+      people: []
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
@@ -50,9 +51,12 @@ export class TagsPeople extends Component {
   }
 
   handleAddition(tag) {
-    this.setState(state => ({ tags: [...state.tags, tag] }));
-    this.props.callbackFromParent(this.state.tags);
-    console.log(this.state.tags);
+    this.setState(state => ({
+      tags: [...state.tags, tag],
+      people: this.state.people.concat(tag.text)
+    }));
+    this.props.callbackFromParent(this.state.people);
+    console.log(this.state.people);
   }
 
   handleDrag(tag, currPos, newPos) {

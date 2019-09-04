@@ -3,7 +3,7 @@ import "./projectadd.style.css";
 import { Link } from "react-router-dom";
 import TagsProjectPeople from "./TagsProjectPeople";
 import TagsProjectDepart from "./TagsProjectDepart";
-import * as service from "../../../../services/ProjectAddService";
+import * as service from "../../../../services/ProjectService";
 
 export class ProjectAdd extends Component {
   constructor(props) {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import styled from "styled-components";
 import { PEOPLE } from "./people";
-import * as service from "../../../../services/ProjectUserService";
+import * as service from "../../../../services/ProjectService";
 
 const TAGDIV2 = styled.div`
   width: 280px;
