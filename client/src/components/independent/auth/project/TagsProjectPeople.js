@@ -43,7 +43,8 @@ export class TagsProjectPeople extends Component {
     this.state = {
       tags: [],
       suggestions: suggestions,
-      nopeople: true
+      nopeople: true,
+      people: []
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
@@ -60,14 +61,18 @@ export class TagsProjectPeople extends Component {
   }
 
   handleAddition(tag) {
-    service.projectUser(JSON.stringify(tag)).then(
+    //JSON.stringify()
+    service.projectUser(tag.text).then(
       res => {
         console.log("참여자 판단 성공");
         this.setState(state => ({
-          tags: [...state.tags, tag]
+          tags: [...state.tags, tag],
+          people: this.state.people.concat(tag.text)
+          // [...state.tags, tag.text]
         }));
-        this.props.callbackFromParent(this.state.tags);
-        console.log("tag: " + JSON.stringify(tag));
+        // this.props.callbackFromParent(this.state.tags);
+        this.props.callbackFromParent(this.state.people);
+        console.log("tag: " + JSON.stringify(this.state.people));
       },
       err => {
         console.log("참여자 판단 실패");

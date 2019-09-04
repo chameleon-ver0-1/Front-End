@@ -35,7 +35,8 @@ export class TagsProjectDepart extends Component {
 
     this.state = {
       tags: [],
-      suggestions: suggestions
+      suggestions: suggestions,
+      depart: []
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
@@ -51,10 +52,13 @@ export class TagsProjectDepart extends Component {
   }
 
   handleAddition(tag) {
-    this.setState(state => ({ tags: [...state.tags, tag] }));
-    console.log("tag: " + this.state.tags);
+    this.setState(state => ({
+      tags: [...state.tags, tag],
+      depart: this.state.depart.concat(tag.text)
+    }));
+    console.log("tag: " + this.state.depart);
     //부모한테 props로 보내기
-    this.props.callbackFromParent(this.state.tags);
+    this.props.callbackFromParent(this.state.depart);
   }
 
   handleDrag(tag, currPos, newPos) {
