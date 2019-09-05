@@ -14,7 +14,7 @@ const SideBar = styled.div`
   z-index: 0;
   top: 56px;
   right: 0;
-  background-color: var(--white-four);
+  background-color: #2e373e;
   overflow-x: hidden;
   transition: 0.5s;
 `;
@@ -70,7 +70,7 @@ const UserCount = styled.div`
   margin-left: 20px;
 `;
 
-const RoundDiv = styled.div`
+const RoundDiv = styled.button`
   background: #2e373e;
   height: 28px;
   border: 1px solid #2e373e;
@@ -80,6 +80,9 @@ const RoundDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
+  outline: none;
 `;
 const NavP = styled.div`
   font-size: 16.5px;
@@ -88,6 +91,7 @@ const NavP = styled.div`
 //////////////////////////////////////
 /*VideoMenubar */
 //////////////////////////////////////
+
 const Logo = styled.div`
   width: 64px;
   height: 62px;
@@ -105,6 +109,18 @@ const LeftNav = styled.div`
   height: 100vh;
   background: #2e373e;
 `;
+
+const LeftUpperDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
+const LeftBottomDiv = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+`;
 const ButtonItem = styled.button`
   width: 63px;
   height: 55px;
@@ -112,6 +128,7 @@ const ButtonItem = styled.button`
   border: none;
   background: none;
   outline: none;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,7 +139,7 @@ const HomeItem = styled.button`
 
   border: none;
   background: var(--greenish-teal);
-  opacity: 0.5;
+  // opacity: 0.5;
   outline: none;
 
   display: flex;
@@ -157,120 +174,202 @@ const VideosContainer = styled.div`
   height: 100%;
 
   flex-wrap: wrap;
+
+  z-index: 1;
 `;
 
 //////////////////////////////////////
 /*TopicDrawerBar*/
 //////////////////////////////////////
+const DrawerContainer = styled.div`
+  background: #424c53;
+  width: 250px;
+  height: calc(100%-48px);
+`;
+const TopicContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 39px;
+`;
 const TopicItem = styled.div`
   font-size: 12px;
-  height: 31px;
+  width: 62.5px;
+  height: 100%;
+
+  background: #2e373e;
+  opacity: 0.5;
+
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const DrawerTitleContainer = styled.div`
+  background: #2e373e;
+  color: white;
+  font-size: 16px;
+
+  height: 45px;
   padding-left: 13px;
   padding-top: 5px;
-  color: #424c53;
   display: flex;
-  flex-direction: row;
+  align-items: center;
 `;
-const TopicButton = styled.button`
-  display: block;
-  margin-left: 100px;
-  margin-top: 0px;
-  width: 16px;
-  height: 16px;
-  background: none;
-  border: none;
+const RecordTime = styled.div`
+  font-size: 10px;
+  color: #616c72;
+  font-family: NanumSquareL;
+
+  margin-left: 14px;
 `;
-const DrawerContainer = styled.div`
-  background: var(--white-four);
-  width: 252px;
-  height: calc(100%-48px);
+const DarkDivideLine = styled.div`
+  background: #2e373e;
+  width: 100%;
+  height: 1px;
+`;
+const RecordItem = styled.div`
+  color: white;
+  width: 164px;
+  font-size: 12px;
+  margin-left: 13px;
+`;
+const RecordBorder = styled.div`
+  display: flex;
+  background: #2e373e;
+  opacity: 0.5;
+  width: 100%;
+  height: auto;
+
+  padding-top: 15px;
+  padding-left: 13px;
+  padding-bottom: 15px;
+`;
+const TimeStamp = styled.div`
+  font-size: 10px;
+  color: white;
 `;
 
 //////////////////////////////////////
 /*InviteDialog */
 //////////////////////////////////////
 const InviteContainer = styled.div`
-  position: relative;
+  position: absolute;
   display: inline-block;
+  background: #ffffff;
+  z-index: 100;
 `;
 
-const Pointer = styled.div`
-  width: 5px;
-  height: 5px;
-  border-right: 10px solid transparent;
-  border-bottom: 20px solid #ffffff;
-  border-left: 10px solid transparent;
-  margin-top: 40px;
-  margin-left: -18px;
-`;
 const InviteList = styled.div`
-  width: 205px;
-  height: 305px;
-  list-style-type: none;
-  margin-top: 8px;
-  top: 55px;
-  right: -30px;
-  background-color: #ffffff;
-  font-weight: bold;
+  z-index: 100;
+  width: 163px;
+  height: auto;
+
   position: absolute;
+  top: 15px;
+  left: -105px;
+  background: #ffffff;
+  font-weight: bold;
+
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
 `;
 const DivideLine = styled.div`
   width: 100%;
-  height: 3px;
+  height: 1px;
   background: var(--white-two);
   margin-top: 7px;
 `;
 const UserText = styled.div`
-  font-size: 11px;
+  font-size: 10px;
+  font-family: NanumSquareB;
   color: var(--brownish-grey);
   margin-left: 10px;
 `;
 const UserContainer = styled.div`
-  height: 43px;
-  width: 100%;
+  height: 40px;
+  width: 163;
   display: flex;
+  background: #ffffff;
+  align-items: center;
   padding-left: 11px;
 `;
-const CopyContainer = styled.div`
-  width: 183px;
-  height: 27px;
-  border-radius: 5px;
-  border: 1px solid #b0b0b0;
-  background: var(--white-four);
-  margin-left: 11px;
-  display: flex;
-  flex-direction: row;
-`;
-const CopyItem = styled.input`
-  width: 150px;
-  height: 23px;
-  background: var(--white-four);
-  border: none;
-  background: none;
-  margin-left: 11px;
-  color: var(--brownish-grey);
-  font-size: 9px;
-`;
-const ShowInviteButton = styled.div`
-  width: 100%;
+
+const ShowInviteButton = styled.button`
+  width: 163px;
+  height: 28px;
   color: var(--greenish-teal);
   font-size: 9px;
-  background: none;
+  background: #f3f3f3;
   border: none;
   outline: none;
-  margin: 0px;
-  padding: 0px;
-  text-align: center;
-`;
-const CopyButton = styled.button`
-  color: var(--greenish-teal);
-  background: none;
-  border: none;
-  font-size: 9px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
 `;
 
+const DialogUpperLine = styled.div`
+  width: 100%;
+  height: 2px;
+  display: flex;
+  justify-content: center;
+`;
+const ShortLine = styled.div`
+  width: 26px;
+  background: var(--greenish-teal);
+`;
+
+//////////////////////////////////////
+/*VideoControlButtons */
+//////////////////////////////////////
+const CircleBtn = styled.button`
+  background: #f25959;
+  width:31px
+  height: 31px;
+  border: 1px solid #f25959;
+  border-radius: 50px;
+  box-shadow: 2.3px 1.9px 7px black 0.2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-right:10px;
+
+  cursor:pointer;
+  outline:none;
+`;
+const VideoControlContainer = styled.div`
+  display: flex;
+  margin-top: 15px;
+  margin-right: 15px;
+`;
+
+//////////////////////////////////////
+/*VideoOrder */
+//////////////////////////////////////
+const VideoOrderContainer = styled.div`
+  width: 781px;
+  height: 42px;
+  border: 1px solid black 0.3;
+  border-radius: 45px;
+
+  position: relative;
+  bottom: 100px;
+  left: 261px;
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+  background: black;
+  opacity: 0.3;
+`;
+const TurnName = styled.div`
+  font-size: 16px;
+  font-family: NanumSqareB;
+  color: white;
+`;
 export {
   MainView,
   SideBar,
@@ -287,13 +386,24 @@ export {
   UserContainer,
   UserText,
   DivideLine,
-  Pointer,
   InviteList,
   ShowInviteButton,
-  CopyContainer,
-  CopyItem,
-  CopyButton
+  ShortLine,
+  DialogUpperLine
 };
-export { Logo, LeftNav, ButtonItem, HomeItem };
-export { TopicItem, TopicButton, DrawerContainer };
+export { Logo, LeftNav, ButtonItem, HomeItem, LeftUpperDiv, LeftBottomDiv };
+export {
+  TopicItem,
+  DrawerContainer,
+  DrawerTitleContainer,
+  RecordTime,
+  TopicContainer,
+  DarkDivideLine,
+  RecordItem,
+  RecordBorder,
+  TimeStamp
+};
 export { VideoFrame, EmotionStatus, VideosContainer };
+
+export { CircleBtn, VideoControlContainer };
+export { VideoOrderContainer, TurnName };

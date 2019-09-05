@@ -15,8 +15,7 @@
  */
 import React, { Component } from "react";
 import logo from "../../../assets/conferenceRoom/videohome_logo.png";
-import participants from "../../../assets/conferenceRoom/participants.png";
-import mic from "../../../assets/conferenceRoom/videohome_speaking.png";
+import participants from "../../../assets/conferenceRoom/videohome_participants.png";
 
 import Fade from "react-reveal/Fade";
 import InviteDialog from "./InviteDialog";
@@ -26,34 +25,68 @@ import {
   ConferenceTitle,
   UserCount,
   RoundDiv,
-  NavP
+  NavP,
+  CircleBtn
 } from "./webrtc.style";
 
 export class VideoNav extends Component {
   constructor(props) {
     super(props);
-    this.state = { show: false };
-    this.handleClick = this.handleClick.bind(this);
+    this.state = { show: false, d: new Date() };
   }
+  componentDidMount() {
+    // Clockcmp 컴포넌트가 불러올때마다 1초씩 this.Change()를 부른다
+
+    this.timeID = setInterval(() => this.onChangeTime(), 1000);
+  }
+  componentWillUnmount() {
+    //종료되면 반복하는것도 클리어시키기
+    clearInterval(this.timeID);
+  }
+  onChangeTime = () => {
+    this.setState({
+      d: new Date()
+    });
+  };
   /*초대링크를 나타내도록 show의 state값을 toggle하는 함수*/
-  handleClick() {
+  showUserList = e => {
     this.setState({ show: !this.state.show });
-  }
+    document.getElementById("userListBtn").style.backgroundColor =
+      "var(--greenish-teal)";
+  };
   render() {
+    var currentTime =
+      this.state.d.getHours() +
+      ":" +
+      this.state.d.getMinutes() +
+      ":" +
+      this.state.d.getSeconds();
     return (
       <UpperNav>
         <ConferenceTitle>4월 간행물 표지 초안</ConferenceTitle>
         <UserCount>
-          <RoundDiv style={{ width: "74px" }}>
+          <RoundDiv
+            id="userListBtn"
+            style={{ width: "54px" }}
+            onClick={this.showUserList}
+          >
             <img width="15px" height="17px" margin="17px" src={participants} />
             <NavP style={{ color: "white", marginLeft: "5px" }}>4</NavP>
           </RoundDiv>
         </UserCount>
+
         <Fade when={this.state.show}>
           <InviteDialog />
         </Fade>
-        <RoundDiv style={{ width: "74px", color: "var(--greenish-teal)" }}>
-          1:34:03
+        <RoundDiv
+          style={{
+            width: "74px",
+            color: "var(--greenish-teal)",
+            marginLeft: "15px",
+            fontSize: "16.5px"
+          }}
+        >
+          {currentTime}
         </RoundDiv>
       </UpperNav>
     );
