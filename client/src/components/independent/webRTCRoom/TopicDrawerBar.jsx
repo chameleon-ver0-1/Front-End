@@ -20,44 +20,19 @@
 import React, { Component } from "react";
 import topicCheckOff from "../../../assets/conferenceRoom/videohome_check_off.png";
 import io from "socket.io-client";
-import { TopicItem, TopicButton, DrawerContainer } from "./webrtc.style";
+import {
+  DrawerContainer,
+  DrawerTitleContainer,
+  RecordTime,
+  TopicContainer,
+  TopicItem,
+  DarkDivideLine,
+  RecordItem,
+  RecordBorder,
+  TimeStamp
+} from "./webrtc.style";
 
-/*토픽 컴포넌트*/
-const topics = [
-  <div>
-    <TopicItem>
-      첫 번째 토픽
-      <TopicButton>
-        <img src={topicCheckOff} width="16px" />
-      </TopicButton>
-    </TopicItem>
-    <hr />
-  </div>
-];
 
-/*토픽에 따른 음성기록을 저장하는 컴포넌트*/
-const records = [
-  <React.Fragment>
-    <div>
-      <textarea
-        value=""
-        type="textarea"
-        wrap="soft"
-        id="stt-message"
-        disabled="true"
-        cols="37"
-        rows="10"
-        style={{
-          fontSize: "12px",
-          paddingTop: "29px",
-          paddingLeft: "18px",
-          paddingBottom: "22px"
-        }}
-      />
-      <hr />
-    </div>
-  </React.Fragment>
-];
 
 //--------------------------------------------------------
 //-----------------Speech Recognition Code----------------
@@ -146,6 +121,7 @@ var socket = null;
 
 var chatLogs = "";
 
+var chatMessage = "";
 /* 인식된 메시지 프론트에 기록하는 함수*/
 function writeMessage(type, name, message) {
   console.log("[채팅방 기록]: " + message);
@@ -157,7 +133,7 @@ function writeMessage(type, name, message) {
 
   chatLogs += "\n" + printName + message;
 
-  document.getElementById("stt-message").value = chatLogs;
+  chatMessage = chatLogs;
 }
 /* socket.io 서버에 유저이름, 인식된 메시지 전송하는 함수 */
 function sender(text) {
@@ -171,12 +147,32 @@ function sender(text) {
 export class TopicDrawerBar extends Component {
   constructor(props) {
     super(props);
-
+    this.state = { d: new Date(), chatLogs: "" };
     this.items = [];
     for (let i = 1; i <= 5; i++) {
       this.items.push(i);
     }
   }
+  componentDidMount() {
+    // Clockcmp 컴포넌트가 불러올때마다 1초씩 this.Change()를 부른다
+
+    this.timeID = setInterval(() => this.onChangeTime(), 1000);
+  }
+  componentWillUnmount() {
+    //종료되면 반복하는것도 클리어시키기
+    clearInterval(this.timeID);
+
+    //회의록 기록 종료
+    if (isRecognizing) {
+      recognition.stop();
+      return;
+    }
+  }
+  onChangeTime = () => {
+    this.setState({
+      d: new Date()
+    });
+  };
 
   componentWillMount() {
     const script = document.createElement("script");
@@ -217,50 +213,41 @@ export class TopicDrawerBar extends Component {
     finalTranscript = "";
     /*******************************/
   }
+
   render() {
+    var currentDate =
+      this.state.d.getFullYear() +
+      "." +
+      this.state.d.getMonth() +
+      "." +
+      this.state.d.getDate() +
+      "." +
+      this.state.d.getHours() +
+      ":" +
+      this.state.d.getMinutes() +
+      ":" +
+      this.state.d.getSeconds();
+
     return (
       <DrawerContainer>
-        <div style={{ backgroundColor: "var(--white-four)" }}>
-          <div>
-            <div
-              style={{
-                color: "var(--greenish-teal)",
-                fontSize: "16px",
-                background: "var(--white-five)",
-                height: "28px",
-                paddingLeft: "13px",
-                paddingTop: "5px"
-              }}
-            >
-              메인 토픽
-            </div>
-            <div style={{ height: "125px" }}>
-              {topics}
-              {topics}
-              {topics}
-            </div>
-          </div>
-          <div
-            style={{
-              color: "var(--greenish-teal)",
-              fontSize: "16px",
-              background: "var(--white-five)",
-              height: "28px",
-              paddingLeft: "13px",
-              paddingTop: "5px"
-            }}
-          >
-            실시간 회의 기록
-          </div>
-          <div>{records}</div>
-        </div>
-        <section className="center">
-          <div className="button-panel">
-            <button id="btnExit" onClick={onExit}>
-              Exit
-            </button>
-          </div>
-        </section>
+        <DrawerTitleContainer>
+          실시간 회의록
+          <RecordTime>{currentDate}</RecordTime>
+        </DrawerTitleContainer>
+        <TopicContainer>
+          <TopicItem>전체</TopicItem>
+          <TopicItem>토픽1</TopicItem>
+          <TopicItem>토픽2</TopicItem>
+          <TopicItem>토픽3</TopicItem>
+        </TopicContainer>
+        <DarkDivideLine />
+        <RecordBorder>
+          <TimeStamp>
+            {this.state.d.getHours()}:{this.state.d.getMinutes()}
+          </TimeStamp>
+          <RecordItem>{chatMessage}</RecordItem>
+        </RecordBorder>
+        <section className="center"></section>
       </DrawerContainer>
     );
   }
