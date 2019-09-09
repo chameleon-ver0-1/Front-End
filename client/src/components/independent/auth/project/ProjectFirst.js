@@ -29,7 +29,7 @@ export class ProjectFirst extends Component {
   }
 
   render() {
-    const { open, title, onCloseModal } = this.props;
+    const { open, title, onCloseModal, id } = this.props;
     return (
       <div>
         <Modal open={open} onClose={onCloseModal} center>

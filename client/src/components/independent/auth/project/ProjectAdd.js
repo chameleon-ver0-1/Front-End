@@ -29,8 +29,12 @@ export class ProjectAdd extends Component {
       )
       .then(
         res => {
-          this.props.history.push("/home/issue");
-          console.log("프로젝트 개설 성공");
+          if (res.data.message === "프로젝트 생성 성공") {
+            this.props.history.push("/home/issue");
+            console.log("프로젝트 개설 성공");
+          } else if (res.data.message === "중복된 프로젝트명") {
+            console.log("프로젝트가 중복되었습니다.");
+          }
         },
         err => {
           console.log("프로젝트 개설 실패");
