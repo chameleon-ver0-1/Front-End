@@ -18,6 +18,7 @@ import React, { Component } from "react";
 import html2canvas from "html2canvas";
 import axios from "axios";
 import * as service from "./getHTMLMediaElement";
+import VideoOrder from "./VioceOrder";
 import { VideoFrame, EmotionStatus, VideosContainer } from "./webrtc.style";
 
 var connection = new window.RTCMultiConnection();
@@ -206,7 +207,7 @@ export class VideoItem extends Component {
     connection.onspeaking = function(e) {
       //사용자가 말하는 순간 동안 실행되는 함수
       console.log("onspeaking 작동 중");
-      videoCpy.style.border = "3px dotted red";
+      videoCpy.style.border = "5px solid var(--greenish-teal)";
     };
     connection.onsilence = function(e) {
       //사용자가 말을 하지 않는 동안 실행되는 함수
@@ -470,9 +471,10 @@ export class VideoItem extends Component {
         {/* <button id="share-screen" onClick={testShare}>
           화면 공유
         </button> */}
-        <VideosContainer id="videos-container" />
+        <VideosContainer id="videos-container"  />
         <div id="room-urls" style={{ width: "100%" }} />
         <EmotionStatus id="showEmotion" />
+
       </VideoFrame>
     );
   }

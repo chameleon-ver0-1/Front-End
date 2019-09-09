@@ -8,7 +8,10 @@ import VideoItem from "./VideoItem";
 import VideoNav from "./VideoNav";
 import VideoMenubar from "./VideoMenubar";
 import TopicDrawerBar from "./TopicDrawerBar";
-import toggle from "../../../assets/conferenceRoom/toggle.png";
+import VideoControlButtons from "./VideoControlButtons";
+import VideoOrder from "./VioceOrder";
+
+import toggle from "../../../assets/conferenceRoom/videohome_toggle.png";
 
 import {
   MainView,
@@ -18,7 +21,8 @@ import {
   ToggleBtn,
   Row,
   ToggleDiv,
-  RoundDiv
+  RoundDiv,
+  CircleBtn
 } from "./webrtc.style";
 
 export class WebRTCRoom extends Component {
@@ -50,6 +54,7 @@ export class WebRTCRoom extends Component {
           <Row>
             <VideoNav />
             <ToggleDiv>
+              <VideoControlButtons />
               <RoundDiv style={{ width: "54px", marginTop: "15px" }}>
                 <ToggleBtn onClick={this.onToggle}>
                   <img id="toggleBtn" src={toggle} width="19px" height="15px" />
@@ -59,6 +64,7 @@ export class WebRTCRoom extends Component {
           </Row>
           <SecondBox>
             <VideoItem />
+            <VideoOrder />
             <MainView id="main">
               <SideBar id="mySidebar" class="sidebar">
                 <TopicDrawerBar />
