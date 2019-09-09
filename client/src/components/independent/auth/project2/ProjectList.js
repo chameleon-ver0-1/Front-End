@@ -33,7 +33,7 @@ export class ProjectList extends Component {
 
             return (
               <ProjectListItemBtn to="/home/issue">
-                {projectlist.projectName}
+                {projectlist.name}
               </ProjectListItemBtn>
             );
           })}
