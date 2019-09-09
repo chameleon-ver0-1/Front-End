@@ -25,6 +25,16 @@ export function signIn(email, password) {
     setAuthorizationToken(token);
     setCurrentUser(jwtDecode(token));
     console.log(localStorage.getItem("jwtToken"));
+
+    const email = res.data.data.userInfo.email;
+    const name = res.data.data.userInfo.name;
+    const nameEn = res.data.data.userInfo.name_en;
+    const profilImg = res.data.data.userInfo.profile_img;
+
+    localStorage.setItem("email", email);
+    localStorage.setItem("name", name);
+    localStorage.setItem("nameEn", nameEn);
+    localStorage.setItem("profilImg", profilImg);
   });
 }
 export function setCurrentUser(user) {
