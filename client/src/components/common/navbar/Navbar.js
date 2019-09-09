@@ -62,6 +62,10 @@ export class Navbar extends Component {
   }
 
   render() {
+    const regexHome = new RegExp("/home");
+    const name = localStorage.getItem("name");
+    const nameEn = localStorage.getItem("nameEn");
+
     const roomid = "9월 졸업프로젝트 긴급 회의";
     const test = () => {};
     const Msg = ({ closeToast }) => (
@@ -79,6 +83,7 @@ export class Navbar extends Component {
         </ClosedBtn> */}
       </Row>
     );
+
     if (
       window.location.pathname === "/auth/signIn" ||
       window.location.pathname === "/auth/signUp" ||
@@ -107,10 +112,7 @@ export class Navbar extends Component {
           </BtnContainer>
         </NavContainer>
       );
-    } else if (
-      window.location.pathname === "/" ||
-      window.location.pathname === "/home"
-    ) {
+    } else if (window.location.pathname === "/") {
       return (
         <div>
           <HomeNav>
@@ -165,7 +167,7 @@ export class Navbar extends Component {
             />
             <UserInfoContainer>
               <UserName style={{ color: "var(--brownish-grey)" }}>
-                권주희 Kwonju hee
+                {name} {nameEn}
               </UserName>
             </UserInfoContainer>
             <MoreInfo>
@@ -174,13 +176,7 @@ export class Navbar extends Component {
           </NavRight>
         </NavContainer>
       );
-    } else if (
-      window.location.pathname === "/home/issue" ||
-      window.location.pathname === "/home/conferenceRoom" ||
-      window.location.pathname === "/home/conferenceDocument" ||
-      window.location.pathname ===
-        "/home/conferenceDocument/conferenceDocumentDetail"
-    ) {
+    } else if (regexHome.test(window.location.pathname)) {
       return (
         <div className="container">
           <Nav2Container>
@@ -200,7 +196,9 @@ export class Navbar extends Component {
                 style={{ marginRight: "13px" }}
               />
               <UserInfoContainer>
-                <UserName>권주희 Kwonju hee</UserName>
+                <UserName>
+                  {name} {nameEn}
+                </UserName>
                 <UserDepartment>디자인 부서</UserDepartment>
               </UserInfoContainer>
               <MoreInfo onClick={() => toast(<Msg />)}>
