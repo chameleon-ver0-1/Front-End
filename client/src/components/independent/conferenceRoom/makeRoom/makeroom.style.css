@@ -157,6 +157,15 @@ div.ReactTags__tagInput input.ReactTags__tagInputField {
   margin-top: 2px;
 }
 
+.tagInputField-project3 {
+  width: 130px;
+  height: 30px;
+  border: none;
+  font-size: 12px;
+  outline: none;
+  background: none;
+}
+
 .tagInputField-people {
   width: 130px;
   height: 22px;

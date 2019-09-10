@@ -18,7 +18,8 @@ export class TagsTopic extends Component {
     super(props);
 
     this.state = {
-      tags: []
+      tags: [],
+      topic: []
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
@@ -34,9 +35,12 @@ export class TagsTopic extends Component {
   }
 
   handleAddition(tag) {
-    this.setState(state => ({ tags: [...state.tags, tag] }));
-    this.props.callbackFromParent(this.state.tags);
-    console.log(this.state.tags);
+    this.setState(state => ({
+      tags: [...state.tags, tag],
+      topic: this.state.topic.concat(tag.text)
+    }));
+    this.props.callbackFromParent(this.state.topic);
+    console.log(this.state.topic);
   }
 
   handleDrag(tag, currPos, newPos) {

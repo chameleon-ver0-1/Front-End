@@ -1,0 +1,70 @@
+@import "../../../../style.css";
+
+.projectfirst-div {
+  width: 369px;
+  height: 321px;
+}
+
+.projectfirst-title {
+  height: 30px;
+  font-family: NanumSquareB;
+  font-size: 20px;
+  color: var(--light-black);
+  display: flex;
+  justify-content: center;
+  margin-top: 38px;
+}
+
+.projectfirst-content {
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.projectfirst-row {
+  margin-top: 20px;
+  object-fit: contain;
+  display: flex;
+  flex-direction: row;
+}
+
+.projectfirst-title2 {
+  font-size: 14px;
+  font-family: NanumSquareB;
+  margin-left: 20px;
+  object-fit: contain;
+}
+
+.projectfirst-content2-div {
+  position: absolute;
+  left: 30%;
+}
+
+.projectfirst-btn {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.projectfirst-ok {
+  width: 75px;
+  height: 38px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: solid 1px var(--greenish-teal);
+  background: none;
+  color: var(--greenish-teal);
+  font-size: 14px;
+  outline: none;
+}
+
+.projectfirst-no {
+  width: 75px;
+  height: 38px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: solid 1px var(--white-two);
+  background: none;
+  color: var(--brownish-grey);
+  font-size: 14px;
+  outline: none;
+}
