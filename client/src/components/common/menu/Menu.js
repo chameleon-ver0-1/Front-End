@@ -46,7 +46,7 @@ export class Menu extends Component {
     if (regex1.test(window.location.pathname)) {
       return (
         <div className="menu-container">
-          <ProjectName>프로젝트명</ProjectName>
+          <ProjectName> {localStorage.getItem("projectName")}</ProjectName>
 
           <NavLink className="link-list" to="/home/issue" activeStyle={active}>
             이슈관리

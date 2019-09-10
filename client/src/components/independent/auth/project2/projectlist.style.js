@@ -19,7 +19,7 @@ const ProjectListItemContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
-const ProjectListItemBtn = styled.div`
+const ProjectListItemBtn = styled.button`
   width: 313px;
   height: 41px;
   color: var(--greenish-teal);

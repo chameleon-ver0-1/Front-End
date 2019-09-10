@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+
 import * as service from "../../../../services/ProjectService";
 import {
   ProjectListContainer,
@@ -21,6 +22,15 @@ export class ProjectList extends Component {
       }
     );
   }
+
+  moveToHome = e => {
+    //참여 중인 프로젝트 첫 판단 해야하는 위치
+
+    const projectName = e.target.name;
+    localStorage.setItem("projectName", projectName);
+    this.props.history.push(`/home/issue/${e.target.id}`);
+  };
+
   render() {
     return (
       <ProjectListContainer>
@@ -32,8 +42,12 @@ export class ProjectList extends Component {
             const projectlist = this.state.projectLists[projectListId];
 
             return (
-              <ProjectListItemBtn to="/home/issue">
-                {projectlist.projectName}
+              <ProjectListItemBtn
+                id={projectlist.id}
+                name={projectlist.name}
+                onClick={this.moveToHome}
+              >
+                {projectlist.name}
               </ProjectListItemBtn>
             );
           })}
