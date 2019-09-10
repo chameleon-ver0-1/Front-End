@@ -9,6 +9,7 @@ const IssueService = axios.create({
   },
   timeout: 5000
 });
-export function getIssueList() {
-  return IssueService.get("issue/get");
+
+export function postIssueList(projectId) {
+  return IssueService.post("issue/get", { projectId });
 }
