@@ -28,6 +28,7 @@ export class ProjectList extends Component {
 
     const projectName = e.target.name;
     localStorage.setItem("projectName", projectName);
+    localStorage.setItem("projectId", e.target.id);
     this.props.history.push(`/home/issue/${e.target.id}`);
   };
 

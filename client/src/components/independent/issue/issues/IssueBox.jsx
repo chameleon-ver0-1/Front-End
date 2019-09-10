@@ -20,7 +20,7 @@ export class IssueBox extends Component {
     return (
       <Container>
         <IssuesTitle>
-          <IssuesTitleStatus>{column.title}</IssuesTitleStatus>
+          {/* <IssuesTitleStatus>{status}</IssuesTitleStatus> */}
           <IssuesTitleCount>{count}</IssuesTitleCount>
         </IssuesTitle>
 

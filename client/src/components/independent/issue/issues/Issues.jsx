@@ -87,6 +87,7 @@ export class Issues extends Component {
   };
 
   render() {
+    const { data } = this.props;
     return (
       <IssueBig>
         <DragDropContext
@@ -97,7 +98,6 @@ export class Issues extends Component {
           {Object.keys(this.state.columns).map(columnId => {
             const column = this.state.columns[columnId];
 
-            
             const tasks = column.taskIds.map(
               taskId => this.state.tasks[taskId]
             );
@@ -105,6 +105,7 @@ export class Issues extends Component {
             return (
               <Issue3>
                 <IssueBox
+                  // status={data.status}
                   key={column.id}
                   column={column}
                   tasks={tasks}
