@@ -9,7 +9,12 @@ export class ProjectFirst extends Component {
     super(props);
 
     this.state = {
-      roles_tag: []
+      projectTitle: "",
+      projectLeader: "",
+      projectParticipants: "",
+      roles_tag: [],
+
+      id: ""
     };
 
     this.projectOk = this.projectOk.bind(this);
@@ -22,6 +27,10 @@ export class ProjectFirst extends Component {
 
   projectOk() {
     //프로젝트 참여
+    this.setState({
+      id: this.props.id
+    });
+    console.log(this.state.id);
   }
 
   projectNo() {
@@ -29,33 +38,74 @@ export class ProjectFirst extends Component {
   }
 
   render() {
-    const { open, title, onCloseModal, id } = this.props;
+    const {
+      open,
+      title,
+      onCloseModal,
+      id,
+      projectTitle,
+      projectLeader,
+      projectParticipants,
+      projectData
+    } = this.props;
+
     return (
       <div>
-        <Modal open={open} onClose={onCloseModal} center>
+        <Modal
+          open={open}
+          onClose={onCloseModal}
+          id={id}
+          projectData={projectData}
+          center
+        >
           <div className="projectfirst-div">
-            <div className="projectfirst-title">프로젝트1</div>
+            <div className="projectfirst-title">{projectTitle}</div>
             <div className="projectfirst-content">
               <div className="projectfirst-row">
                 <div className="projectfirst-title2">개설자</div>
                 <div className="projectfirst-content2-div">
-                  <div className="projectfirst-content2">안지후</div>
+                  {Object.keys(projectLeader).map(Id => {
+                    const projectL = projectLeader[Id];
+                    console.log(projectL);
+                    //TODO: 팝업창에 정보 띄우기 ㅠㅠ
+                    return (
+                      <div className="projectfirst-content2">{projectL}</div>
+                    );
+                  })}
                 </div>
               </div>
 
-              <div className="projectfirst-row">
+              <div className="projectfirst-row2">
                 <div className="projectfirst-title2">참여자</div>
                 <div className="projectfirst-content2-div">
-                  <div className="projectfirst-content2">조윤영</div>
+                  {Object.keys(projectParticipants).map(Id => {
+                    const projectP = projectParticipants[Id];
+                    {
+                      Object.keys(projectP).map(id => {
+                        const projectPn = projectP[id];
+                        console.log(projectPn);
+
+                        return (
+                          <div className="projectfirst-content2">
+                            {projectPn}
+                          </div>
+                        );
+                      });
+                    }
+                  })}
+                  {/* <div className="projectfirst-content2">조윤영</div>
                   <div className="projectfirst-content2">한예지</div>
-                  <div className="projectfirst-content2">권소영</div>
+                  <div className="projectfirst-content2">권소영</div> */}
                 </div>
               </div>
 
               <div className="projectfirst-row">
                 <div className="projectfirst-title2">나의 역할</div>
                 <div className="projectfirst-content2-div">
-                  <TagsProjectRoles callbackFromParent={this.myCallback} />
+                  <TagsProjectRoles
+                    callbackFromParent={this.myCallback}
+                    id={id}
+                  />
                 </div>
               </div>
             </div>

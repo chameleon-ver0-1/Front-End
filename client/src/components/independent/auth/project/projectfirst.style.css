@@ -27,7 +27,13 @@
   display: flex;
   flex-direction: row;
 }
-
+.projectfirst-row2 {
+  margin-top: 20px;
+  height: 80px;
+  object-fit: contain;
+  display: flex;
+  flex-direction: row;
+}
 .projectfirst-title2 {
   font-size: 14px;
   font-family: NanumSquareB;

@@ -29,7 +29,7 @@ const ProjectListItemBtn = styled.button`
   font-family: NanumSquareB;
   outline: none;
   cursor: pointer;
-
+  background: none;
   display: flex;
   align-items: center;
   justify-content: center;

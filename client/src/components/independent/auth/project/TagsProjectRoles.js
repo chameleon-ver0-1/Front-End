@@ -53,6 +53,19 @@ export class TagsProjectRoles extends Component {
 
   confirmRoles() {
     //부서목록 가져오기
+    service.projectRole(this.props.id).then(
+      res => {
+        console.log("---------------------");
+        console.log(res.data.data);
+        //TODO: suggestion에 부서정보 넣기
+        // this.setState({
+        //   suggestions: res.data.data
+        // });
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   handleAddition(tag) {
@@ -80,6 +93,7 @@ export class TagsProjectRoles extends Component {
 
   render() {
     const { tags, suggestions } = this.state;
+    const { id } = this.props;
     return (
       <div>
         <TAGDIV2 onClick={this.confirmRoles}>
@@ -94,7 +108,7 @@ export class TagsProjectRoles extends Component {
             autofocus={false}
             placeholder=""
             classNames={{
-              tags: "tag-project",
+              tags: "tag-project2",
               tagInputField: "tagInputField-project3"
             }}
           />

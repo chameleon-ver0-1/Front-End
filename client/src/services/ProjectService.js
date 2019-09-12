@@ -98,6 +98,7 @@ export function projectRole(projectId) {
     console.log("***************************");
     console.log(res.data.message);
     console.log("***************************");
+    return Promise.resolve(res);
   });
 }
 
