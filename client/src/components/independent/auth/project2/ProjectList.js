@@ -57,7 +57,8 @@ export class ProjectList extends Component {
             projectParticipants: res.data.data.projectParticipants,
             projectData: res.data.data
           });
-          console.log(res.data.data);
+          localStorage.setItem("projectId", projectId);
+          this.props.history.push(`/auth/projectList/${projectId}`);
         }
       },
       err => {

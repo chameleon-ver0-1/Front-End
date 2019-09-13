@@ -13,13 +13,6 @@ const TAGDIV2 = styled.div`
   outline: none;
 `;
 
-const suggestions = PEOPLE.map(tag => {
-  return {
-    id: tag,
-    text: tag
-  };
-});
-
 const KeyCodes = {
   comma: 188,
   enter: 13
@@ -33,7 +26,7 @@ export class TagsProjectRoles extends Component {
 
     this.state = {
       tags: [],
-      suggestions: suggestions,
+      suggestions: [],
       roles: []
     };
     this.handleDelete = this.handleDelete.bind(this);
@@ -56,11 +49,17 @@ export class TagsProjectRoles extends Component {
     service.projectRole(this.props.id).then(
       res => {
         console.log("---------------------");
-        console.log(res.data.data);
-        //TODO: suggestion에 부서정보 넣기
-        // this.setState({
-        //   suggestions: res.data.data
-        // });
+        console.log(res.data);
+
+        this.setState({
+          suggestions: this.state.suggestions.map(gg => {
+            return {
+              id: this.id++,
+              text: res.data[gg].role
+            };
+          })
+        });
+        console.log(this.state.suggestions);
       },
       err => {
         console.log(err);

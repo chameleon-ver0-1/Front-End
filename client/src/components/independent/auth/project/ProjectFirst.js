@@ -27,10 +27,6 @@ export class ProjectFirst extends Component {
 
   projectOk() {
     //프로젝트 참여
-    this.setState({
-      id: this.props.id
-    });
-    console.log(this.state.id);
   }
 
   projectNo() {
@@ -64,10 +60,8 @@ export class ProjectFirst extends Component {
               <div className="projectfirst-row">
                 <div className="projectfirst-title2">개설자</div>
                 <div className="projectfirst-content2-div">
-                  {Object.keys(projectLeader).map(Id => {
-                    const projectL = projectLeader[Id];
-                    console.log(projectL);
-                    //TODO: 팝업창에 정보 띄우기 ㅠㅠ
+                  {Object.keys(projectLeader).map(projectId => {
+                    const projectL = projectLeader.name;
                     return (
                       <div className="projectfirst-content2">{projectL}</div>
                     );
@@ -78,24 +72,12 @@ export class ProjectFirst extends Component {
               <div className="projectfirst-row2">
                 <div className="projectfirst-title2">참여자</div>
                 <div className="projectfirst-content2-div">
-                  {Object.keys(projectParticipants).map(Id => {
-                    const projectP = projectParticipants[Id];
-                    {
-                      Object.keys(projectP).map(id => {
-                        const projectPn = projectP[id];
-                        console.log(projectPn);
-
-                        return (
-                          <div className="projectfirst-content2">
-                            {projectPn}
-                          </div>
-                        );
-                      });
-                    }
+                  {Object.keys(projectParticipants).map(projectId => {
+                    const projectP = projectParticipants[projectId].name;
+                    return (
+                      <div className="projectfirst-content2">{projectP}</div>
+                    );
                   })}
-                  {/* <div className="projectfirst-content2">조윤영</div>
-                  <div className="projectfirst-content2">한예지</div>
-                  <div className="projectfirst-content2">권소영</div> */}
                 </div>
               </div>
 
