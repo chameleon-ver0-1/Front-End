@@ -1,8 +1,9 @@
-@import '../../../../style.css';
+@import "../../../../style.css";
 
 .dropdown {
   position: relative;
   display: inline-block;
+  z-index: 200;
 }
 
 li a {
@@ -30,37 +31,35 @@ li {
   height: 28px;
 }
 
-.tri_alert{
-
+.tri_alert {
 }
 
-.triangle{
+.triangle {
   width: 0px;
   height: 0px;
   border-right: 10px solid transparent;
-  border-bottom: 20px solid #FFFFFF;
+  border-bottom: 20px solid #ffffff;
   border-left: 10px solid transparent;
   margin-top: 35px;
   margin-left: 100%;
-
 }
 
-.alert_ul{
+.alert_ul {
   width: 248px;
   height: 365px;
   list-style-type: none;
   margin: 0;
   padding: 0;
-  top:55px;
-  right:-30px;
-  background-color: #FFFFFF;
-  font-weight:bold;
+  top: 55px;
+  right: -30px;
+  background-color: #ffffff;
+  font-weight: bold;
   position: absolute;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
-.alert_title{
+.alert_title {
   height: 20px;
   font-size: 12px;
   color: var(--brownish-grey);
@@ -73,23 +72,23 @@ li {
   background-color: var(--light-sage);
 }
 
-.alert_div{
+.alert_div {
   display: flex;
   align-content: center;
   justify-content: space-between;
 }
 
-.alert_img{
+.alert_img {
   width: 35px;
   height: 35px;
 }
 
-.alert_text_div{
+.alert_text_div {
   width: 160px;
   height: 28px;
 }
 
-.alert_all{
+.alert_all {
   position: absolute;
   bottom: 0;
   text-align: center;

@@ -45,7 +45,7 @@ const EmotionStatus = styled.div`
 
 export class VideoItem extends Component {
   //FIXME:state값 추가함
-  state = { roomToken: "", dummy: [] };
+  state = { roomToken: "", dummy: []};
 
   /*script가져오는 함수 */
   componentWillMount() {
@@ -278,7 +278,7 @@ export class VideoItem extends Component {
       );
     };
 
-    var playTran; //실시간 전송하기 위한 변수
+    let playTran; //실시간 전송하기 위한 변수
 
     /* 비디오 캡처하는 함수*/
     const capture = () => {
@@ -309,42 +309,37 @@ export class VideoItem extends Component {
           continue;
         }
       }
-
       /*videos-container 캡쳐*/
-      html2canvas(document.getElementById("videos-container")).then(function(
-        canvas
-      ) {
-        axios
-          .post("/trans_data", {
-            img: canvas.toDataURL("image/png")
-          })
-          .then(response => {
-            console.log(response.data);
-          })
-          .catch(response => {
-            console.log(response);
-          });
-
-        //document.getElementById("form").submit();
+      html2canvas(document.getElementById("videos-container")).then(function(canvas) {
+        axios.post("/emotion", {
+          img: canvas.toDataURL("image/png")
+        })
+        .then(response => {
+          if(response.data =='무반응'){
+            document.getElementById("showEmotion").style.visibility="hidden";
+          }
+          else{
+            document.getElementById("showEmotion").style.visibility="visible";
+          }
+          document.getElementById("showEmotion").innerHTML = response.data;
+          console.log(response.data);
+        })
+        .catch(response => {
+          console.log(response);
+        });
       });
     };
 
     const onRekog = () => {
       /*5초마다 capture() 호출*/
-
+      //capture();
       playTran = setInterval(function() {
         capture();
-      }, 5000);
+      }, 4000);
 
       // axios.get('/happy')
       //   .then( response => { console.log(response.data); } ) // SUCCESS
       //   .catch( response => { console.log(response); } ); // ERROR
-
-      // axios.post('/trans_data', {
-      //   name : "한예지"
-      // })
-      // .then( response => { console.log(response.data) } )
-      // .catch( response => { console.log(response) } );
     };
 
     const onStop = () => {
@@ -468,7 +463,7 @@ export class VideoItem extends Component {
 
         <div id="room-urls" style={{ width: "100%" }} />
 
-        <EmotionStatus>안녕</EmotionStatus>
+        <EmotionStatus id="showEmotion" ></EmotionStatus>
       </VideoFrame>
     );
   }

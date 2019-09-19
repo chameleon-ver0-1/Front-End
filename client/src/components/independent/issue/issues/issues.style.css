@@ -11,11 +11,13 @@
   width: 238px;
   height: 20px;
   display: flex;
+  font-family: NanumSquareB;
 
   text-align: center;
 }
 .issues-title-status {
   font-size: 1.15rem;
+  font-family: NanumSquareB;
   color: var(--light-black);
 }
 .issues-title-count {
@@ -36,12 +38,8 @@
 .issues-body {
   margin-top: 66px;
 
-  width: 249px;
-  height: 541px;
-
-  /* padding-top: 19px;
-  padding-left: 18px;
-  padding-right: 18px; */
+  width: 256px;
+  height: 531px;
 
   box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
     var(--box-shadow-blur) var(--box-main-color);

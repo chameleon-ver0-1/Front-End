@@ -1,25 +1,25 @@
-@import '../../../../style.css';
+@import "../../../../style.css";
 
-canvas{
+canvas {
+  margin: auto;
   weight: 500px;
   height: 200px;
-
 }
-.canvas-div{
+.canvas-div {
   width: 711px;
-  height: 200px;
+  height: 270px;
   background-color: #fafafa;
   display: flex;
   justify-content: center;
 }
 
-.documentdetaildiv{
+.documentdetaildiv {
   margin-top: 41px;
   margin-left: 82px;
   width: 711px;
 }
 
-.documentDetailTitle{
+.documentDetailTitle {
   display: flex;
   flex-direction: row;
   height: 40px;
@@ -27,11 +27,11 @@ canvas{
   margin-bottom: 20px;
 }
 
-.Title1{
+.Title1 {
   font-size: 20px;
 }
 
-.Title2{
+.Title2 {
   margin-top: 9px;
   margin-left: 13px;
   color: var(--brownish-grey);
@@ -39,7 +39,7 @@ canvas{
   margin-right: 200px;
 }
 
-.save_button_div{
+.save_button_div {
   margin-top: 9px;
   display: flex;
   justify-content: space-between;
@@ -47,7 +47,7 @@ canvas{
   height: 25px;
 }
 
-.save_button{
+.save_button {
   padding: 2px;
   font-size: 12px;
   color: var(--pinkish-grey);
@@ -56,21 +56,21 @@ canvas{
   border: solid 1px var(--pinkish-grey);
 }
 
-.downloadimg{
+.downloadimg {
   border: none;
   color: var(--pinkish-grey);
   width: 12px;
   height: 12px;
 }
 
-.detail_title{
+.detail_title {
   margin-left: 9px;
   font-size: 16px;
   color: var(--light-black);
   font-weight: bold;
 }
 
-.detail_content{
+.detail_content {
   margin-left: 9px;
   font-size: 16px;
   color: var(--light-black);

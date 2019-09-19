@@ -15,8 +15,8 @@
   width: 212px;
   height: 71px;
 
-  margin-top: 20px;
-  margin-left: 18px;
+  margin-top: 19px;
+  margin-left: 15px;
 
   border-radius: 10px;
 
@@ -53,10 +53,6 @@
   border: none;
 }
 
-/* .issueItem-container:hover ~ .edit-btn {
-  display: none;
-} */
-
 .edit_im {
   width: 10px;
   height: 10px;
@@ -64,24 +60,6 @@
   /* display: none; */
 }
 
-.issueName {
-  width: 109px;
-  height: 14px;
-
-  display: flex;
-  align-content: flex-start;
-
-  margin-left: 12px;
-  font-size: 0.7rem;
-
-  color: var(--light-black);
-}
-.issueInfo {
-  margin-left: 15px;
-  margin-top: 6px;
-  font-size: 0.475rem;
-  color: var(--greenish-teal);
-}
 #issueItem-detail {
   display: flex;
   justify-content: flex-end;
@@ -89,7 +67,6 @@
 
   width: 202px;
   height: 12px;
-  padding-bottom: 8px;
 }
 
 .comment_im {

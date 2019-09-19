@@ -203,28 +203,28 @@ function sender(text) {
 
 export class STTTest extends Component {
   componentWillMount() {
-    const script = document.createElement("script");
+    // const script = document.createElement("script");
 
-    script.src = "http://cdn.socket.io/socket.io-1.4.0.js";
+    // script.src = "http://cdn.socket.io/socket.io-1.4.0.js";
 
-    socket = io.connect(serverURL);
-    socket.on("connection", function(data) {
-      console.log("connect");
-      if (data.type === "connected") {
-        socket.emit("connection", {
-          type: "join",
-          name: name,
-          room: room
-        });
-      }
-    });
+    // socket = io.connect(serverURL);
+    // socket.on("connection", function(data) {
+    //   console.log("connect");
+    //   if (data.type === "connected") {
+    //     socket.emit("connection", {
+    //       type: "join",
+    //       name: name,
+    //       room: room
+    //     });
+    //   }
+    // });
 
-    socket.on("system", function(data) {
-      writeMessage("system", "system", data.message);
-    });
-    socket.on("message", function(data) {
-      writeMessage("other", data.name, data.message);
-    });
+    // socket.on("system", function(data) {
+    //   writeMessage("system", "system", data.message);
+    // });
+    // socket.on("message", function(data) {
+    //   writeMessage("other", data.name, data.message);
+    // });
   }
   render() {
     return (

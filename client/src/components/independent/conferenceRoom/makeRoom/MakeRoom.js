@@ -92,6 +92,7 @@ class MakeRoom extends Component {
             <div className="roomtitle2">방제목</div>
             <input
               className="roominput"
+              placeholder="방 제목을 입력하세요"
               onChange={e => {
                 this.setState({
                   roomTitle: e.target.value
@@ -115,6 +116,7 @@ class MakeRoom extends Component {
               />
             </div>
           </div>
+          <button className="getissue">이슈에서 가져오기</button>
 
           <div className="row-div">
             <div className="roomtitle2">시작 시간</div>
@@ -123,7 +125,7 @@ class MakeRoom extends Component {
 
           <div className="row-div">
             <div className="roomtitle2">참여자</div>
-            <input className="roominput" />
+            <input className="roominput" placeholder="참여자를 추가하세요" />
           </div>
 
           <div className="row-div2">

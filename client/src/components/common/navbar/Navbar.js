@@ -4,18 +4,62 @@ import userProfile from "../../../assets/home/userProfile.png";
 import moreInfo from "../../../assets/home/moreInfo.png";
 import Dropdown from "./dropdownmenu/Dropdown";
 import Fade from "react-reveal/Fade";
-import alert from "../../../assets/home/alert_off.png";
+import alertOff from "../../../assets/home/alert_off.png";
+import alertOn from "../../../assets/home/alert_on.png";
+import alertToast from "../../../assets/home/alrert_list.png";
+import MessagePopUp from "./messagepopup/MessagePopUp";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import styled from "styled-components";
+import closedBtn from "../../../assets/message/closed_btn@3x.png";
+import { css } from "glamor";
+
+const Row = styled.div`
+  display: flex;
+`;
+const ClosedBtn = styled.button`
+  border: none;
+
+  background: none;
+  outline: none;
+`;
+const AlertTitle = styled.div`
+  font-size: 12px;
+  font-family: NanumSquareEB;
+  color: var(--greenish-teal);
+`;
+const AlertContent = styled.div`
+  font-size: 12px;
+  color: var(--brownish-grey);
+`;
 export class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { show: false };
+    this.state = { show: false, haveNotice: true };
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick() {
     this.setState({ show: !this.state.show });
+    console.log(this.state.show);
   }
+  notify = () =>
+    toast("Wow so easy !", {
+      closeButton: true
+    });
 
   render() {
+    const Msg = ({ closeToast }) => (
+      <Row>
+        <img src={alertToast} width="35px" height="35px" />
+        <div style={{ marginLeft: "15px" }}>
+          <AlertTitle>4월 간행물 표지 초안</AlertTitle>
+          <AlertContent>화상회의가 잠시 뒤 시작됩니다.</AlertContent>
+        </div>
+        <ClosedBtn onClick={closeToast} style={{ marginLeft: "38px" }}>
+          <img width="10px" height="10px" src={closedBtn} />
+        </ClosedBtn>
+      </Row>
+    );
     if (
       window.location.pathname === "/auth/signIn" ||
       window.location.pathname === "/auth/signUp" ||
@@ -35,12 +79,12 @@ export class Navbar extends Component {
           </div>
         </div>
       );
-    } else if (
-      window.location.pathname === "/home/issue" ||
-      window.location.pathname === "/home/conferenceRoom" ||
-      window.location.pathname === "/home/conferenceDocument" ||
-      window.location.pathname === "/home/conferenceDocumentDetail"
-    ) {
+    }
+    // window.location.pathname === "/home/issue" ||
+    // window.location.pathname === "/home/conferenceRoom" ||
+    // window.location.pathname === "/home/conferenceDocument" ||
+    // window.location.pathname === "/home/conferenceDocumentDetail"
+    else {
       return (
         <div className="container">
           <div className="nav2-container">
@@ -51,8 +95,8 @@ export class Navbar extends Component {
               </Fade>
               <button className="notice-btn">
                 <img
-                  src={alert}
-                  className="notice_im"
+                  id="notice_im"
+                  src={this.state.haveNotice ? alertOn : alertOff}
                   onClick={this.handleClick}
                 />
               </button>
@@ -66,16 +110,19 @@ export class Navbar extends Component {
                 <p className="userName">권주희 Kwonju hee</p>
                 <p className="userDepartment">디자인 부서</p>
               </div>
-              <button className="moreInfo">
+              <button className="moreInfo" onClick={() => toast(<Msg />)}>
                 <img src={moreInfo} className="moreInfo_im" />
               </button>
             </div>
           </div>
+
+          <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
         </div>
       );
-    } else {
-      return <div />;
     }
+    // } else {
+    //   return <div />;
+    // }
   }
 }
 

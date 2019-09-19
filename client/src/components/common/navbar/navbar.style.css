@@ -9,6 +9,7 @@
   display: flex;
   background: var(--greenish-teal);
 
+  /* position: fixed; */
   width: 100vw;
   height: 64px;
 
@@ -39,19 +40,19 @@
 .notice-btn {
   width: 20px;
   height: 28px;
-
+  outline: none;
   padding-right: 32px;
-
   border: none;
 
   background: none;
   background-repeat: no-repeat;
   background-size: auto;
 }
-.notice_im {
+#notice_im {
   padding-top: 4px;
   width: 20px;
   height: 28px;
+  border: none;
 }
 
 .userProfile {
@@ -71,11 +72,13 @@
   width: 200px;
   color: white;
   font-size: 0.83rem;
+  font-family: NanumSquareEB;
 }
 
 .userDepartment {
   color: white;
   font-size: 0.6rem;
+  font-family: NanumSquareB;
 }
 
 .moreInfo {
@@ -95,6 +98,7 @@
 
 .nav-container {
   display: flex;
+  /* position: fixed; */
 
   width: 100vw;
   height: 64px;
@@ -133,17 +137,21 @@
   font-size: 1rem;
   /* TODO : 폰트 사이즈 지정*/
   /* padding-right: 7px; */
+  font-family: NanumSquareB;
 
   width: 80px;
   height: 33px;
 
   border: 1px solid var(--white-two);
   border-radius: 16.5px;
+  outline: none;
 
   color: var(--brownish-grey);
+
+  font-size: 13.5px;
 }
 
-.dropdown_menu{
+.dropdown_menu {
   background: #f6f6;
   width: 100px;
   height: 100px;

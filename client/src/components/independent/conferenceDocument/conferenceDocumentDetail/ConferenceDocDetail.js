@@ -43,30 +43,15 @@ class ConferenceDocDetail extends Component {
       gridSize: 18,
       hover: window.drawBox,
       click: function(item) {
-        //수정 해야함
+        //TODO: 해당 텍스트로 이동해야 함
         alert(item[0] + ": " + item[1]);
       }
     });
   }
 
   render() {
-    return (
-      <div className="documentdetaildiv">
-        <div className="documentDetailTitle">
-          <div className="Title1">4월 간행물 표지 초안</div>
-          <div className="Title2">2019.03.13 PM1:00 화상회의</div>
-          <div className="save_button_div">
-            <button className="save_button">
-              <img src={download_off} className="downloadimg" />
-              전체본
-            </button>
-            <button className="save_button">
-              <img src={download_off} className="downloadimg" />
-              요약본
-            </button>
-          </div>
-        </div>
-
+    const togopdf = (
+      <div className="togopdf">
         <div className="wordclouddiv">
           <div className="detail_title">키워드맵</div>
           <div className="canvas-div">
@@ -103,6 +88,26 @@ class ConferenceDocDetail extends Component {
             요약 : 주제3에 대한 요약이 이곳에 들어갑니다.
           </div>
         </div>
+      </div>
+    );
+    return (
+      <div className="documentdetaildiv">
+        <div className="documentDetailTitle">
+          <div className="Title1">4월 간행물 표지 초안</div>
+          <div className="Title2">2019.03.13 PM1:00 화상회의</div>
+          <div className="save_button_div">
+            <button className="save_button">
+              <img src={download_off} className="downloadimg" />
+              전체본
+            </button>
+            <button className="save_button">
+              <img src={download_off} className="downloadimg" />
+              요약본
+            </button>
+          </div>
+        </div>
+
+        {togopdf}
       </div>
     );
   }
