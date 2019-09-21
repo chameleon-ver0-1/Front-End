@@ -18,8 +18,7 @@ export class ProjectList extends Component {
     id: "",
     projectTitle: "",
     projectLeader: "",
-    projectParticipants: [],
-    projectData: [[]]
+    projectParticipants: []
   };
   componentDidMount() {
     service.getProjectList().then(
@@ -53,9 +52,8 @@ export class ProjectList extends Component {
             open: true,
             title: "회의 개설하기",
             projectTitle: res.data.data.projectName,
-            projectLeader: res.data.data.projectLeader,
-            projectParticipants: res.data.data.projectParticipants,
-            projectData: res.data.data
+            projectLeader: res.data.data.projectLeader.name,
+            projectParticipants: res.data.data.projectParticipants
           });
           localStorage.setItem("projectId", projectId);
           this.props.history.push(`/auth/projectList/${projectId}`);
@@ -99,7 +97,6 @@ export class ProjectList extends Component {
             projectTitle={this.state.projectTitle}
             projectLeader={this.state.projectLeader}
             projectParticipants={this.state.projectParticipants}
-            projectData={this.state.projectData}
           />
         </ProjectListItemContainer>
       </ProjectListContainer>

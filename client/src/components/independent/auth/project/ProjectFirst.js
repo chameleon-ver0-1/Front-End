@@ -27,10 +27,32 @@ export class ProjectFirst extends Component {
 
   projectOk() {
     //프로젝트 참여
+    const projectId = this.props.id;
+    service.projectOK(projectId, this.state.roles_tag).then(
+      res => {
+        console.log("프로젝트 참여!");
+
+        localStorage.setItem("projectId", projectId);
+        this.props.history.push(`/home/issue/${projectId}`);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   projectNo() {
     //프로젝트 거절
+    const projectId = this.props.id;
+    service.projectNO(projectId).then(
+      res => {
+        console.log("프로젝트 거절!");
+        //this.setState({ open: false });
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   render() {
@@ -41,31 +63,19 @@ export class ProjectFirst extends Component {
       id,
       projectTitle,
       projectLeader,
-      projectParticipants,
-      projectData
+      projectParticipants
     } = this.props;
 
     return (
       <div>
-        <Modal
-          open={open}
-          onClose={onCloseModal}
-          id={id}
-          projectData={projectData}
-          center
-        >
+        <Modal open={open} onClose={onCloseModal} id={id} center>
           <div className="projectfirst-div">
             <div className="projectfirst-title">{projectTitle}</div>
             <div className="projectfirst-content">
               <div className="projectfirst-row">
                 <div className="projectfirst-title2">개설자</div>
                 <div className="projectfirst-content2-div">
-                  {Object.keys(projectLeader).map(projectId => {
-                    const projectL = projectLeader.name;
-                    return (
-                      <div className="projectfirst-content2">{projectL}</div>
-                    );
-                  })}
+                  <div className="projectfirst-content2">{projectLeader}</div>
                 </div>
               </div>
 

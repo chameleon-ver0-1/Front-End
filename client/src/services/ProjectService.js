@@ -98,7 +98,7 @@ const projectOKAxios = axios.create({
 });
 export function projectOK(projectId, role) {
   return projectOKAxios
-    .post("project/participate", { projectId, role })
+    .post("project/participate/" + projectId, { role })
     .then(res => {
       console.log(res.data);
 
@@ -118,6 +118,6 @@ const projectNOAxios = axios.create({
   },
   timeout: 5000
 });
-export function projectNO() {
-  return projectNOAxios.get("project/refuse");
+export function projectNO(projectId) {
+  return projectNOAxios.get("project/refuse/" + projectId);
 }
