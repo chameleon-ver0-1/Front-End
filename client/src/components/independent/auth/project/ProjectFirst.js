@@ -12,7 +12,7 @@ export class ProjectFirst extends Component {
       projectTitle: "",
       projectLeader: "",
       projectParticipants: "",
-      roles_tag: [],
+      roles_tag: ["개발"],
 
       id: ""
     };
@@ -28,6 +28,10 @@ export class ProjectFirst extends Component {
   projectOk() {
     //프로젝트 참여
     const projectId = this.props.id;
+
+    console.log(projectId);
+    console.log(this.state.roles_tag);
+    //TODO: 태그 값 불러오기
     service.projectOK(projectId, this.state.roles_tag).then(
       res => {
         console.log("프로젝트 참여!");
