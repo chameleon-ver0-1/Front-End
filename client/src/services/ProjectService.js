@@ -69,16 +69,7 @@ const projectFirstAxios = axios.create({
   timeout: 5000
 });
 export function projectFirst(projectId) {
-  return projectFirstAxios
-    .post("project/firstCheck", { projectId })
-    .then(res => {
-      console.log(res.data);
-
-      console.log("***************************");
-      console.log(res.data.message);
-      console.log("***************************");
-      return Promise.resolve(res);
-    });
+  return projectFirstAxios.get("project/firstCheck/" + projectId);
 }
 
 /**부서 목록 가져오기 */
@@ -92,13 +83,7 @@ const projectRoleAxios = axios.create({
   timeout: 5000
 });
 export function projectRole(projectId) {
-  return projectRoleAxios.post("project/roleList", { projectId }).then(res => {
-    console.log(res.data);
-
-    console.log("***************************");
-    console.log(res.data.message);
-    console.log("***************************");
-  });
+  return projectRoleAxios.get("project/roleList/" + projectId);
 }
 
 /**프로젝트 참여 OK */
@@ -113,7 +98,7 @@ const projectOKAxios = axios.create({
 });
 export function projectOK(projectId, role) {
   return projectOKAxios
-    .post("project/participate", { projectId, role })
+    .post("project/participate/" + projectId, { role })
     .then(res => {
       console.log(res.data);
 
@@ -134,11 +119,5 @@ const projectNOAxios = axios.create({
   timeout: 5000
 });
 export function projectNO(projectId) {
-  return projectNOAxios.post("project/refuse", { projectId }).then(res => {
-    console.log(res.data);
-
-    console.log("***************************");
-    console.log(res.data.message);
-    console.log("***************************");
-  });
+  return projectNOAxios.get("project/refuse/" + projectId);
 }

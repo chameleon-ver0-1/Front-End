@@ -78,7 +78,7 @@ class MakeRoom extends Component {
       )
       .then(
         res => {
-          this.props.history.push("/home/issue");
+          //this.props.history.push("/home/issue");
           console.log("회의실 개설 성공");
         },
         err => {
@@ -136,6 +136,7 @@ class MakeRoom extends Component {
               onChange={this.handleChange}
               minDate={new Date()}
               relativeSize={true}
+              dateFormat="yyyy/MM/dd"
             />
             <DatePicker
               customInput={<SmallDatePicker />}
@@ -144,7 +145,7 @@ class MakeRoom extends Component {
               showTimeSelect
               showTimeSelectOnly
               dateFormat="h:mm aa"
-              timeCaption="Time"
+              timeCaption="Time:"
               relativeSize={true}
             />
           </div>

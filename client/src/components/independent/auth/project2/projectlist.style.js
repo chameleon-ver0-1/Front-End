@@ -14,7 +14,7 @@ const ProjectListHeader = styled.div`
 `;
 const ProjectListItemContainer = styled.div`
   margin-top: 40px;
-  height: 150px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -29,7 +29,7 @@ const ProjectListItemBtn = styled.button`
   font-family: NanumSquareB;
   outline: none;
   cursor: pointer;
-
+  background: none;
   display: flex;
   align-items: center;
   justify-content: center;

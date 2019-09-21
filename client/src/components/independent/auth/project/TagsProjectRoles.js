@@ -13,13 +13,6 @@ const TAGDIV2 = styled.div`
   outline: none;
 `;
 
-const suggestions = PEOPLE.map(tag => {
-  return {
-    id: tag,
-    text: tag
-  };
-});
-
 const KeyCodes = {
   comma: 188,
   enter: 13
@@ -33,7 +26,7 @@ export class TagsProjectRoles extends Component {
 
     this.state = {
       tags: [],
-      suggestions: suggestions,
+      suggestions: [{ id: 0, text: "" }],
       roles: []
     };
     this.handleDelete = this.handleDelete.bind(this);
@@ -53,6 +46,22 @@ export class TagsProjectRoles extends Component {
 
   confirmRoles() {
     //부서목록 가져오기
+    service.projectRole(this.props.id).then(
+      res => {
+        console.log("---------------------");
+        console.log(res.data);
+
+        {
+          this.state.suggestions.map((contact, i) => {
+            return (this.state.suggestions.text = res.data.data[i].role);
+          });
+        }
+        console.log(this.state.suggestions);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   handleAddition(tag) {
@@ -80,6 +89,7 @@ export class TagsProjectRoles extends Component {
 
   render() {
     const { tags, suggestions } = this.state;
+    const { id } = this.props;
     return (
       <div>
         <TAGDIV2 onClick={this.confirmRoles}>
@@ -94,7 +104,7 @@ export class TagsProjectRoles extends Component {
             autofocus={false}
             placeholder=""
             classNames={{
-              tags: "tag-project",
+              tags: "tag-project2",
               tagInputField: "tagInputField-project3"
             }}
           />

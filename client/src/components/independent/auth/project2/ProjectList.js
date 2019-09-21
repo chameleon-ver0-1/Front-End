@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import ProjectFirst from "../project/ProjectFirst";
 import * as service from "../../../../services/ProjectService";
 import {
   ProjectListContainer,
@@ -11,7 +11,15 @@ import {
 } from "./projectlist.style";
 
 export class ProjectList extends Component {
-  state = { projectLists: [] };
+  state = {
+    projectLists: [],
+    open: false,
+    title: "",
+    id: "",
+    projectTitle: "",
+    projectLeader: "",
+    projectParticipants: []
+  };
   componentDidMount() {
     service.getProjectList().then(
       res => {
@@ -27,9 +35,38 @@ export class ProjectList extends Component {
     //참여 중인 프로젝트 첫 판단 해야하는 위치
 
     const projectName = e.target.name;
-    localStorage.setItem("projectName", projectName);
-    localStorage.setItem("projectId", e.target.id);
-    this.props.history.push(`/home/issue/${e.target.id}`);
+    const projectId = e.target.id;
+
+    service.projectFirst(projectId).then(
+      res => {
+        console.log("첫 판단 성공");
+        if (res.data.data === false) {
+          //프로젝트 처음 아닐 때
+          localStorage.setItem("projectName", projectName);
+          localStorage.setItem("projectId", projectId);
+          this.props.history.push(`/home/issue/${projectId}`);
+        } else {
+          //프로젝트가 처음일 때
+          this.setState({
+            id: projectId,
+            open: true,
+            title: "회의 개설하기",
+            projectTitle: res.data.data.projectName,
+            projectLeader: res.data.data.projectLeader.name,
+            projectParticipants: res.data.data.projectParticipants
+          });
+          localStorage.setItem("projectId", projectId);
+          this.props.history.push(`/auth/projectList/${projectId}`);
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
   };
 
   render() {
@@ -52,6 +89,15 @@ export class ProjectList extends Component {
               </ProjectListItemBtn>
             );
           })}
+          <ProjectFirst
+            open={this.state.open}
+            title={this.state.title}
+            onCloseModal={this.onCloseModal}
+            id={this.state.id}
+            projectTitle={this.state.projectTitle}
+            projectLeader={this.state.projectLeader}
+            projectParticipants={this.state.projectParticipants}
+          />
         </ProjectListItemContainer>
       </ProjectListContainer>
     );

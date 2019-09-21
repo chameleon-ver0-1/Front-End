@@ -32,7 +32,7 @@ export class ConferenceRoomDetail extends Component {
   submitRegister(e) {}
 
   onOpenModal = () => {
-    this.setState({ open: true });
+    this.setState({ open: true, title: "회의 개설하기" });
   };
 
   onCloseModal = () => {

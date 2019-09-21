@@ -101,6 +101,10 @@ div.ReactTags__tags {
   margin-top: 4px;
 }
 
+.tag-project2 {
+  position: relative;
+}
+
 div.ReactTags__tagInput {
   margin-bottom: 2px;
   outline: none;
