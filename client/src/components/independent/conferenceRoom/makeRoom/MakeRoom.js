@@ -27,7 +27,7 @@ class MakeRoom extends Component {
       tags: [],
       open: false,
       title: "",
-      selectedDate: new Date().toISOString(),
+      selectedDate: "2019-09-07T12:40:00Z",
       topic_tag: [],
       people_tag: []
     };
@@ -64,28 +64,30 @@ class MakeRoom extends Component {
 
   gotoVideo = () => {
     //회의실 개설하기
+
     console.log(this.state.roomTitle);
     console.log(this.state.topic_tag);
     console.log(this.state.startDay);
     console.log(this.state.people_tag);
 
-    service
-      .confCreate(
-        this.state.roomTitle,
-        this.state.topic_tag,
-        this.state.startDay, //데이터 수정
-        this.state.people_tag
-      )
-      .then(
-        res => {
-          //this.props.history.push("/home/issue");
-          console.log("회의실 개설 성공");
-        },
-        err => {
-          console.log("회의실 개설 실패");
-          console.log(err);
-        }
-      );
+    // service
+    //   .confCreate(
+    //     localStorage.getItem("projectId"),
+    //     this.state.roomTitle,
+    //     this.state.topic_tag,
+    //     this.state.startDay, //데이터 수정
+    //     this.state.people_tag
+    //   )
+    //   .then(
+    //     res => {
+    //       this.props.history.push(`/room/${this.state.roomTitle}`);
+    //       console.log("회의실 개설 성공");
+    //     },
+    //     err => {
+    //       console.log("회의실 개설 실패");
+    //       console.log(err);
+    //     }
+    //   );
   };
 
   render() {
@@ -158,11 +160,11 @@ class MakeRoom extends Component {
           </div>
 
           <div className="row-div2">
-            {/* <Link to={`/room/${this.state.roomTitle}`} className="linklogin"> */}
-            <button className="makebutton" onClick={this.gotoVideo}>
-              개설
-            </button>
-            {/* </Link> */}
+            <Link to={`/room/${this.state.roomTitle}`} className="linklogin">
+              <button className="makebutton" onClick={this.gotoVideo}>
+                개설
+              </button>
+            </Link>
 
             <button className="cancelbutton" onClick={onCloseModal}>
               취소
