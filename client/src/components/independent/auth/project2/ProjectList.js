@@ -40,7 +40,6 @@ export class ProjectList extends Component {
 
     service.projectFirst(projectId).then(
       res => {
-        console.log("첫 판단 성공");
         if (res.data.data === false) {
           //프로젝트 처음 아닐 때
           localStorage.setItem("projectName", projectName);
@@ -48,6 +47,7 @@ export class ProjectList extends Component {
           this.props.history.push(`/home/issue/${projectId}`);
         } else {
           //프로젝트가 처음일 때
+          console.log("첫 판단 성공");
           this.setState({
             id: projectId,
             open: true,

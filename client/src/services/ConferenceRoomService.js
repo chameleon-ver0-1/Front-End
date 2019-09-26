@@ -9,9 +9,14 @@ const confCreateAxios = axios.create({
   },
   timeout: 5000
 });
-export function confCreate(title, mainTopics, startTime, members) {
+export function confCreate(projectId, title, mainTopics, startTime, members) {
   return confCreateAxios
-    .post("conf_room/create", { title, mainTopics, startTime, members })
+    .post("conf_room/create/" + projectId, {
+      title,
+      mainTopics,
+      startTime,
+      members
+    })
     .then(res => {
       console.log(res.data);
 
