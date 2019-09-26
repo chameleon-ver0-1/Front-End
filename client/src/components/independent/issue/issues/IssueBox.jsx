@@ -13,18 +13,17 @@ import {
 
 export class IssueBox extends Component {
   render() {
-    const { column, count, tasks, isTodos } = this.props;
+    const { column, count, tasks } = this.props;
 
     //TODO: backgroundColor: $(props.isDraggingOver ? 'skyblue':'white');
 
     return (
       <Container>
         <IssuesTitle>
-          {/* <IssuesTitleStatus>{status}</IssuesTitleStatus> */}
           <IssuesTitleCount>{count}</IssuesTitleCount>
         </IssuesTitle>
 
-        <Droppable droppableId={column.id}>
+        <Droppable droppableId={column._id}>
           {(provided, snapshot) => (
             <ItemList
               ref={provided.innerRef}
@@ -33,7 +32,12 @@ export class IssueBox extends Component {
             >
               <FreeScrollBar>
                 {tasks.map((task, index) => (
-                  <IssueItem key={task.id} task={task} index={index} />
+                  // <IssueItem
+                  //   // key={task.id}
+                  //   task={task}
+                  //   index={index}
+                  // />
+                  <div>s</div>
                 ))}
                 {provided.placeholder}
               </FreeScrollBar>

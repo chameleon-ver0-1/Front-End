@@ -64,7 +64,7 @@ export class WebRTCRoom extends Component {
           </Row>
           <SecondBox>
             <VideoItem />
-            <VideoOrder />
+            {/* <VideoOrder /> */}
             <MainView id="main">
               <SideBar id="mySidebar" class="sidebar">
                 <TopicDrawerBar />

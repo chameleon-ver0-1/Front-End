@@ -18,13 +18,8 @@ import React, { Component } from "react";
 import html2canvas from "html2canvas";
 import axios from "axios";
 import * as service from "./getHTMLMediaElement";
-import VideoOrder from "./VioceOrder";
+
 import { VideoFrame, EmotionStatus, VideosContainer } from "./webrtc.style";
-
-var connection = new window.RTCMultiConnection();
-
-connection.autoCloseEntireSession = true; //개설자가 방을 나가면 방을 닫는 설정
-connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/"; //socket.io 신호 서버 URL을 설정
 
 //FIXME:
 // connection.iceServers = [
@@ -37,6 +32,9 @@ connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/"; //socket
 //     ]
 //   }
 // ];
+var connection = new window.RTCMultiConnection();
+connection.autoCloseEntireSession = true; //개설자가 방을 나가면 방을 닫는 설정
+connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/"; //socket.io 신호 서버 URL을 설정
 
 export class VideoItem extends Component {
   //FIXME:state값 추가함
@@ -294,6 +292,7 @@ export class VideoItem extends Component {
 
     /* 비디오 캡처하는 함수*/
     const capture = () => {
+      console.log("captrue 작동 중");
       /*videos-container 캡쳐하기 전 비디오 위에 비디오 캡쳐 이미지 놓기*/
       connection.showImage = document.getElementById("show-image");
       var canvas = document.createElement("canvas");
@@ -325,20 +324,24 @@ export class VideoItem extends Component {
       html2canvas(document.getElementById("videos-container")).then(function(
         canvas
       ) {
+        console.log("캡처 완료했습니다");
         axios
           .post("/emotion", {
             img: canvas.toDataURL("image/png")
           })
-          .then(response => {
-            if (response.data == "무반응") {
-              document.getElementById("showEmotion").style.visibility =
-                "hidden";
-            } else {
-              document.getElementById("showEmotion").style.visibility =
-                "visible";
-            }
-            document.getElementById("showEmotion").innerHTML = response.data;
-            console.log(response.data);
+          .then(res => {
+            console.log(res.data);
+            console.log("데이터를 받았습니다.");
+            //   if (response.data == "무반응") {
+            //     document.getElementById("showEmotion").style.visibility =
+            //       "hidden";
+            //   } else {
+            //   document.getElementById("showEmotion").style.visibility =
+            //     "visible";
+            // }
+            document.getElementById("showEmotion").style.visibility = "visible";
+            document.getElementById("showEmotion").innerHTML = res.data.message;
+            console.log(res.data);
           })
           .catch(response => {
             console.log(response);
@@ -350,7 +353,8 @@ export class VideoItem extends Component {
     //capture();
     playTran = setInterval(function() {
       capture();
-    }, 6000);
+      console.log("감정인식 중입니다....");
+    }, 5000);
 
     // axios.get('/happy')
     //   .then( response => { console.log(response.data); } ) // SUCCESS
@@ -471,10 +475,9 @@ export class VideoItem extends Component {
         {/* <button id="share-screen" onClick={testShare}>
           화면 공유
         </button> */}
-        <VideosContainer id="videos-container"  />
+        <VideosContainer id="videos-container" />
         <div id="room-urls" style={{ width: "100%" }} />
         <EmotionStatus id="showEmotion" />
-
       </VideoFrame>
     );
   }

@@ -37,7 +37,7 @@ export class IssueItem extends Component {
   render() {
     return (
       <React.Fragment>
-        <Draggable draggableId={this.props.task.id} index={this.props.index}>
+        <Draggable draggableId={this.props.task._id} index={this.props.index}>
           {(provided, snapshot) => (
             <Container
               onMouseOver={this.editAppear}
@@ -48,7 +48,7 @@ export class IssueItem extends Component {
               isDragging={snapshot.isDragging}
             >
               <IssueTitles onClick={this.openDialog}>
-                {this.props.task.contentTitle}
+                {this.props.task.title}
               </IssueTitles>
               <IssueContents>
                 {this.props.task.content}

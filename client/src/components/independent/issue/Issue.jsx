@@ -14,13 +14,12 @@ const IssueContainer = styled.div`
 export class issue extends Component {
   state = { issueLists: [] };
   componentDidMount() {
-    service.postIssueList(localStorage.getItem("projectId")).then(
+    service.getIssueList().then(
       res => {
         console.log("***************************");
         console.log(res.data.message);
         console.log("***************************");
         this.setState({ issueLists: res.data.data });
-        console.log(res.data.data.deptData);
       },
       err => {
         console.log("이슈 리스트 가져오기 실패");
@@ -31,9 +30,9 @@ export class issue extends Component {
     const { issueLists } = this.state;
     return (
       <IssueContainer>
-        <IssueDep dep={issueLists.deptData} />
+        <IssueDep data={issueLists} />
         <BoxContainer>
-          <Issues data={issueLists.issueData} />
+          <Issues data={issueLists} />
         </BoxContainer>
         <IssueAdd />
       </IssueContainer>

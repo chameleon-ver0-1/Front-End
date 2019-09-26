@@ -24,6 +24,7 @@ export class ProjectList extends Component {
     service.getProjectList().then(
       res => {
         this.setState({ projectLists: res.data.data });
+        console.log(res.data.data);
       },
       err => {
         console.log("프로젝트 리스트 가져오기 실패");
