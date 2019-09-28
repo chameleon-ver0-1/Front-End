@@ -3,6 +3,7 @@ import IssueItem from "../issueItem/IssueItem";
 import IssueAdd from "../issueAdd/IssueAdd";
 import { Droppable } from "react-beautiful-dnd";
 import FreeScrollBar from "react-free-scrollbar";
+import * as service from "../../../../services/IssueService";
 import {
   Container,
   ItemList,
@@ -12,15 +13,27 @@ import {
 } from "./issues.style";
 
 export class IssueBox extends Component {
+  state = { taskItemLists: [] };
+
+  componentDidMount() {
+    service.getIssueList().then(
+      res => {
+        console.log("*********************************");
+        console.log("task Item 요청 성공");
+        console.log("*********************************");
+        this.setState({ taskItemLists: res.data.data.taskData });
+        console.log(this.state.taskItemLists);
+      },
+      err => {
+        console.log("이슈 아이템 가져오기 실패");
+      }
+    );
+  }
   render() {
     const { column, count, tasks } = this.props;
 
     //TODO: backgroundColor: $(props.isDraggingOver ? 'skyblue':'white');
 
-    //FIXME: 지운오빠 여기야
-    const taskItem = tasks.map((task, index) => (
-      <IssueItem key={index} task={task} index={index} />
-    ));
     return (
       <Container>
         <IssuesTitle>
@@ -37,7 +50,24 @@ export class IssueBox extends Component {
               isDraggingOver={snapshot.isDraggingOver}
             >
               <FreeScrollBar>
-                {taskItem}
+                {tasks.map((task, index) => {
+                  console.log("$$$$$$$$$$$$$$$");
+                  console.log(task);
+                  console.log("$$$$$$$$$$$$$$$");
+                  const taskItem = this.state.taskItemLists.filter(function(
+                    element
+                  ) {
+                    console.log(element._id);
+                    return element._id === task;
+                  });
+                  return (
+                    <IssueItem
+                      key={taskItem._id}
+                      task={taskItem}
+                      index={index}
+                    />
+                  );
+                })}
                 {provided.placeholder}
               </FreeScrollBar>
             </ItemList>
