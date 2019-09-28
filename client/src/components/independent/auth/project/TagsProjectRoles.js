@@ -26,7 +26,7 @@ export class TagsProjectRoles extends Component {
 
     this.state = {
       tags: [],
-      suggestions: [{ id: 0, text: "" }],
+      suggestions: [],
       roles: []
     };
     this.handleDelete = this.handleDelete.bind(this);
@@ -49,12 +49,14 @@ export class TagsProjectRoles extends Component {
     service.projectRole(this.props.id).then(
       res => {
         console.log("---------------------");
-        console.log(res.data);
-
         {
-          this.state.suggestions.map((contact, i) => {
-            return (this.state.suggestions.text = res.data.data[i].role);
-          });
+          for (var i = 0; i < res.data.data.length; i++) {
+            this.setState(state => ({
+              suggestions: [
+                { id: res.data.data[i].role, text: res.data.data[i].role }
+              ]
+            }));
+          }
         }
         console.log(this.state.suggestions);
       },
