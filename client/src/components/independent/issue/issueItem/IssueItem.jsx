@@ -33,11 +33,23 @@ export class IssueItem extends Component {
   onCloseModal = () => {
     this.setState({ open: false });
   };
+  componentDidMount() {}
 
   render() {
+    console.log("+++++++++++++++++++++++++++");
+
+    //FIXME: 지운오빠 여기야
+    const { task } = this.props;
+    console.log(task);
+    // console.log(task.title);
+    // console.log(this.props.task.title);
+
+    console.log("+++++++++++++++++++++++++++");
+
     return (
       <React.Fragment>
-        <Draggable draggableId={this.props.task._id} index={this.props.index}>
+        ss
+        {/* <Draggable draggableId={this.props.index} index={this.props.index}>
           {(provided, snapshot) => (
             <Container
               onMouseOver={this.editAppear}
@@ -72,7 +84,7 @@ export class IssueItem extends Component {
               </IssueItemDetail>
             </Container>
           )}
-        </Draggable>
+        </Draggable> */}
         <IssueDetailDialog
           open={this.state.open}
           onCloseModal={this.onCloseModal}

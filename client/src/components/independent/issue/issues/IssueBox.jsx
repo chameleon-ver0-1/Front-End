@@ -17,9 +17,15 @@ export class IssueBox extends Component {
 
     //TODO: backgroundColor: $(props.isDraggingOver ? 'skyblue':'white');
 
+    //FIXME: 지운오빠 여기야
+    const taskItem = tasks.map((task, index) => (
+      <IssueItem key={index} task={task} index={index} />
+    ));
     return (
       <Container>
         <IssuesTitle>
+          <IssuesTitleStatus>{column.status}</IssuesTitleStatus>
+
           <IssuesTitleCount>{count}</IssuesTitleCount>
         </IssuesTitle>
 
@@ -31,14 +37,7 @@ export class IssueBox extends Component {
               isDraggingOver={snapshot.isDraggingOver}
             >
               <FreeScrollBar>
-                {tasks.map((task, index) => (
-                  // <IssueItem
-                  //   // key={task.id}
-                  //   task={task}
-                  //   index={index}
-                  // />
-                  <div>s</div>
-                ))}
+                {taskItem}
                 {provided.placeholder}
               </FreeScrollBar>
             </ItemList>
