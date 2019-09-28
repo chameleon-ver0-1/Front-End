@@ -102,48 +102,25 @@ export class Issues extends Component {
           onDragUpdate={this.onDragUpdate}
           onDragEnd={this.onDragEnd}
         >
-          sss
+          {/* FIXME: 지운오빠 여기야 */}
           {Object.keys(this.state.taskLists).map(columnId => {
             const column = this.state.taskLists[columnId];
             const tasks = column.taskIds.map(
-              taskId => this.state.taskItemLists[taskId]
+              taskId => this.state.taskItemLists[`task-${taskId}`]
             );
-            console.log("%%%%%%%%%%%%%%%%");
-            console.log(column.status);
-            console.log(column._id);
-            console.log("%%%%%%%%%%%%%%%%");
+            // const tasks = column.taskIds;
+
             return (
               <Issue3>
                 <IssueBox
                   key={column._id}
                   column={column}
                   tasks={tasks}
-                  count="1"
+                  count={Object.keys(tasks).length}
                 />
-                sssssss
               </Issue3>
             );
           })}
-          {/* {Object.keys(this.state.taskLists.columnData).map(columnId => {
-            const column = this.state.taskLists.columnData[columnId];
-
-            const tasks = column.taskIds.map(
-              taskId => this.state.taskData[taskId]
-            );
-            return <div>ss</div>;
-            return (
-            <Issue3>
-              <IssueBox
-                // status={data.status}
-                key={column.id}
-                column={column}
-                tasks={tasks}
-                count={column.count}
-                isTodos={column.isTodo}
-              />
-            </Issue3>
-            );
-          })} */}
         </DragDropContext>
       </IssueBig>
     );
