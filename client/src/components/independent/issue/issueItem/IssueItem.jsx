@@ -40,8 +40,8 @@ export class IssueItem extends Component {
 
     //FIXME: 지운오빠 여기야
     const { task } = this.props;
-    console.log(task);
-    // console.log(task.title);
+    console.log(task[0]);
+    // console.log(task[0].title);
     // console.log(this.props.task.title);
 
     console.log("+++++++++++++++++++++++++++");

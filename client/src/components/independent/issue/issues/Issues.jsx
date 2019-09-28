@@ -105,9 +105,7 @@ export class Issues extends Component {
           {/* FIXME: 지운오빠 여기야 */}
           {Object.keys(this.state.taskLists).map(columnId => {
             const column = this.state.taskLists[columnId];
-            const tasks = column.taskIds.map(
-              taskId => this.state.taskItemLists[`task-${taskId}`]
-            );
+            const tasks = column.taskIds;
             // const tasks = column.taskIds;
 
             return (
@@ -116,7 +114,7 @@ export class Issues extends Component {
                   key={column._id}
                   column={column}
                   tasks={tasks}
-                  count={Object.keys(tasks).length}
+                  count={tasks.length}
                 />
               </Issue3>
             );
