@@ -22,6 +22,7 @@ export const IssueTitle = styled.div`
 export const Line = styled.div`
   width: 2px;
   height: 9px;
+  margin-left: 15px;
   background: var(--pinkish-grey);
 `;
 export const CreatedBy = styled.div`

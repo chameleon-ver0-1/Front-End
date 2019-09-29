@@ -16,14 +16,12 @@ export class Issues extends Component {
   componentDidMount() {
     service.getIssueList().then(
       res => {
-        console.log("*********************************");
-        console.log("task 요청 성공");
-        console.log("*********************************");
-
-        this.setState({ taskLists: res.data.data.columnData });
-        console.log(this.state.taskLists);
-        this.setState({ taskItemLists: res.data.data.taskData });
-        console.log(this.state.taskItemLists);
+        const {
+          columnData: taskLists,
+          taskData: taskItemLists
+        } = res.data.data;
+        this.setState({ taskLists, taskItemLists });
+        console.log("taskList 0", this.state.taskLists[0]);
       },
       err => {
         console.log("이슈 아이템 가져오기 실패");
@@ -35,6 +33,7 @@ export class Issues extends Component {
   };
 
   onDragEnd = result => {
+    const { taskLists, taskItemLists } = this.state;
     // const issueName = document.querySelector(".issues-body");
     // issueName.style.color = "inherit";
     // issueName.style.backgroundColor = "inherit";
@@ -49,8 +48,8 @@ export class Issues extends Component {
     ) {
       return;
     }
-    const start = this.state.taskLists[source.droppableId];
-    const finish = this.state.taskLists[destination.droppableId];
+    const start = taskLists[source.droppableId];
+    const finish = taskLists[destination.droppableId];
     if (start === finish) {
       const newItemIds = Array.from(start.taskIds);
       newItemIds.splice(source.index, 1); //드래그하는 해당 카드를 배열에서 삭제
@@ -102,20 +101,18 @@ export class Issues extends Component {
           onDragUpdate={this.onDragUpdate}
           onDragEnd={this.onDragEnd}
         >
-          {/* FIXME: 지운오빠 여기야 */}
           {Object.keys(this.state.taskLists).map(columnId => {
             const column = this.state.taskLists[columnId];
-            const tasks = column.taskIds;
-            // const tasks = column.taskIds;
+            const tasks = [];
+            column.taskIds.forEach(id => {
+              tasks.push(
+                ...this.state.taskItemLists.filter(item => item._id === id)
+              );
+            });
 
             return (
-              <Issue3>
-                <IssueBox
-                  key={column._id}
-                  column={column}
-                  tasks={tasks}
-                  count={tasks.length}
-                />
+              <Issue3 key={column._id}>
+                <IssueBox column={column} tasks={tasks} count={tasks.length} />
               </Issue3>
             );
           })}

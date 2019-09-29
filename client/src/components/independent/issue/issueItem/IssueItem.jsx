@@ -36,20 +36,11 @@ export class IssueItem extends Component {
   componentDidMount() {}
 
   render() {
-    console.log("+++++++++++++++++++++++++++");
-
-    //FIXME: 지운오빠 여기야
-    const { task } = this.props;
-    console.log(task[0]);
-    // console.log(task[0].title);
-    // console.log(this.props.task.title);
-
-    console.log("+++++++++++++++++++++++++++");
+    const { task, index, status } = this.props;
 
     return (
       <React.Fragment>
-        ss
-        {/* <Draggable draggableId={this.props.index} index={this.props.index}>
+        <Draggable draggableId={task._id} index={index}>
           {(provided, snapshot) => (
             <Container
               onMouseOver={this.editAppear}
@@ -59,11 +50,9 @@ export class IssueItem extends Component {
               ref={provided.innerRef}
               isDragging={snapshot.isDragging}
             >
-              <IssueTitles onClick={this.openDialog}>
-                {this.props.task.title}
-              </IssueTitles>
+              <IssueTitles onClick={this.openDialog}>{task.title}</IssueTitles>
               <IssueContents>
-                {this.props.task.content}
+                {task.content}ㄴㄴㄴ
                 <img
                   width="7px"
                   height="12px"
@@ -79,13 +68,16 @@ export class IssueItem extends Component {
                   height="12px"
                   src={comment}
                 />
-                <CommentCount>3</CommentCount>
+                <CommentCount>{task.commentIds.length}</CommentCount>
                 <img width="13px" height="12px" src={file} />
               </IssueItemDetail>
             </Container>
           )}
-        </Draggable> */}
+        </Draggable>
         <IssueDetailDialog
+          key={task._id}
+          task={task}
+          status={status}
           open={this.state.open}
           onCloseModal={this.onCloseModal}
         />
