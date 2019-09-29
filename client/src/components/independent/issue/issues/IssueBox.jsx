@@ -3,6 +3,7 @@ import IssueItem from "../issueItem/IssueItem";
 import IssueAdd from "../issueAdd/IssueAdd";
 import { Droppable } from "react-beautiful-dnd";
 import FreeScrollBar from "react-free-scrollbar";
+
 import * as service from "../../../../services/IssueService";
 import {
   Container,
@@ -27,7 +28,6 @@ export class IssueBox extends Component {
 
           <IssuesTitleCount>{count}</IssuesTitleCount>
         </IssuesTitle>
-
         <Droppable droppableId={column._id}>
           {(provided, snapshot) => (
             <ItemList
@@ -37,13 +37,22 @@ export class IssueBox extends Component {
             >
               <FreeScrollBar>
                 {tasks.map((task, index) => {
-                  return <IssueItem key={task._id} task={task} index={index} />;
+                  return (
+                    <IssueItem
+                      status={column.status}
+                      key={task._id}
+                      task={task}
+                      index={index}
+                    />
+                  );
                 })}
                 {provided.placeholder}
               </FreeScrollBar>
             </ItemList>
           )}
         </Droppable>
+
+        <IssueAdd />
       </Container>
     );
   }

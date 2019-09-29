@@ -36,9 +36,7 @@ export class IssueItem extends Component {
   componentDidMount() {}
 
   render() {
-    const { task, index } = this.props;
-    console.log("task", task.title);
-    console.log("comment", task.commentIds.length);
+    const { task, index, status } = this.props;
 
     return (
       <React.Fragment>
@@ -54,7 +52,7 @@ export class IssueItem extends Component {
             >
               <IssueTitles onClick={this.openDialog}>{task.title}</IssueTitles>
               <IssueContents>
-                {task.content}
+                {task.content}ㄴㄴㄴ
                 <img
                   width="7px"
                   height="12px"
@@ -78,6 +76,8 @@ export class IssueItem extends Component {
         </Draggable>
         <IssueDetailDialog
           key={task._id}
+          task={task}
+          status={status}
           open={this.state.open}
           onCloseModal={this.onCloseModal}
         />

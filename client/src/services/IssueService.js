@@ -10,5 +10,8 @@ const IssueService = axios.create({
 });
 
 export function getIssueList() {
-  return IssueService.get(`issue/5d81b2ae5153213193b78842`);
+  return IssueService.get(`issue/${localStorage.getItem("projectId")}`);
+}
+export function getCommentList() {
+  return IssueService.get(`issue/get/${localStorage.getItem("projectId")}`);
 }

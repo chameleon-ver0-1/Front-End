@@ -101,7 +101,6 @@ export class Issues extends Component {
           onDragUpdate={this.onDragUpdate}
           onDragEnd={this.onDragEnd}
         >
-          {/* FIXME: 지운오빠 여기야 */}
           {Object.keys(this.state.taskLists).map(columnId => {
             const column = this.state.taskLists[columnId];
             const tasks = [];
