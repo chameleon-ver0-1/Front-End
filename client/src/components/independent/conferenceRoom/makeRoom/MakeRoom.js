@@ -70,24 +70,24 @@ class MakeRoom extends Component {
     console.log(this.state.startDay);
     console.log(this.state.people_tag);
 
-    // service
-    //   .confCreate(
-    //     localStorage.getItem("projectId"),
-    //     this.state.roomTitle,
-    //     this.state.topic_tag,
-    //     this.state.startDay, //데이터 수정
-    //     this.state.people_tag
-    //   )
-    //   .then(
-    //     res => {
-    //       this.props.history.push(`/room/${this.state.roomTitle}`);
-    //       console.log("회의실 개설 성공");
-    //     },
-    //     err => {
-    //       console.log("회의실 개설 실패");
-    //       console.log(err);
-    //     }
-    //   );
+    service
+      .confCreate(
+        localStorage.getItem("projectId"),
+        this.state.roomTitle,
+        this.state.topic_tag,
+        this.state.selectedDate, //TODO: 데이터 수정
+        this.state.people_tag
+      )
+      .then(
+        res => {
+          this.props.history.push(`/room/${this.state.roomTitle}`);
+          console.log("회의실 개설 성공");
+        },
+        err => {
+          console.log("회의실 개설 실패");
+          console.log(err);
+        }
+      );
   };
 
   render() {
@@ -160,11 +160,11 @@ class MakeRoom extends Component {
           </div>
 
           <div className="row-div2">
-            <Link to={`/room/${this.state.roomTitle}`} className="linklogin">
-              <button className="makebutton" onClick={this.gotoVideo}>
-                개설
-              </button>
-            </Link>
+            {/* <Link to={`/room/${this.state.roomTitle}`} className="linklogin"> */}
+            <button className="makebutton" onClick={this.gotoVideo}>
+              개설
+            </button>
+            {/* </Link> */}
 
             <button className="cancelbutton" onClick={onCloseModal}>
               취소

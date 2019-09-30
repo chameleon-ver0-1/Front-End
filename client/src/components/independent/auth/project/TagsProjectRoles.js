@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import styled from "styled-components";
-import { PEOPLE } from "./people";
 import * as service from "../../../../services/ProjectService";
 
 const TAGDIV2 = styled.div`
@@ -26,7 +25,8 @@ export class TagsProjectRoles extends Component {
 
     this.state = {
       tags: [],
-      suggestions: [{ id: 0, text: "" }],
+      sug: [],
+      suggestions: [],
       roles: []
     };
     this.handleDelete = this.handleDelete.bind(this);
@@ -38,9 +38,10 @@ export class TagsProjectRoles extends Component {
 
   /* 태그 */
   handleDelete(i) {
-    const { tags } = this.state;
+    const { tags, roles } = this.state;
     this.setState({
-      tags: tags.filter((tag, index) => index !== i)
+      tags: tags.filter((tag, index) => index !== i),
+      roles: roles.filter((tag, index) => index !== i)
     });
   }
 
@@ -49,12 +50,15 @@ export class TagsProjectRoles extends Component {
     service.projectRole(this.props.id).then(
       res => {
         console.log("---------------------");
-        console.log(res.data);
-
         {
-          this.state.suggestions.map((contact, i) => {
-            return (this.state.suggestions.text = res.data.data[i].role);
-          });
+          for (var i = 0; i < res.data.data.length; i++) {
+            this.setState(state => ({
+              sug: [
+                { id: res.data.data[i].role, text: res.data.data[i].role }
+              ],
+              suggestions: this.state.suggestions.concat(this.state.sug)
+            }));
+          }
         }
         console.log(this.state.suggestions);
       },

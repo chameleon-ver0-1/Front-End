@@ -12,7 +12,7 @@ export class ProjectFirst extends Component {
       projectTitle: "",
       projectLeader: "",
       projectParticipants: "",
-      roles_tag: ["개발"],
+      roles_tag: "",
 
       id: ""
     };
@@ -22,7 +22,7 @@ export class ProjectFirst extends Component {
   }
 
   myCallback = dataFromChild => {
-    this.setState({ roles_tag: dataFromChild });
+    this.setState({ roles_tag: dataFromChild.toString() });
   };
 
   projectOk() {
@@ -30,14 +30,16 @@ export class ProjectFirst extends Component {
     const projectId = this.props.id;
 
     console.log(projectId);
-    console.log(this.state.roles_tag);
-    //TODO: 태그 값 불러오기
+    console.log(this.state.roles_tag + "+++++++++");
     service.projectOK(projectId, this.state.roles_tag).then(
       res => {
         console.log("프로젝트 참여!");
 
         localStorage.setItem("projectId", projectId);
-        this.props.history.push(`/home/issue/${projectId}`);
+        setTimeout(() => {
+          this.props.history.push(`/home/issue/${projectId}`);
+        }, 5001);
+        //this.props.history.push(`/home/issue/${projectId}`);
       },
       err => {
         console.log(err);
@@ -51,7 +53,7 @@ export class ProjectFirst extends Component {
     service.projectNO(projectId).then(
       res => {
         console.log("프로젝트 거절!");
-        //this.setState({ open: false });
+        this.props.onCloseModal();
       },
       err => {
         console.log(err);
