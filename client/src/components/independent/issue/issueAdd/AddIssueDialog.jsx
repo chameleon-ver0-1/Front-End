@@ -19,6 +19,8 @@ import SmallDatePicker from "./SmallDatePicker";
 import DatePickStyle from "./datepicker.style.css";
 import CheckBox from "./CheckBox";
 
+import * as service from "../../../../services/IssueService";
+
 import {
   SubmitBtns,
   PopupContainer,
@@ -38,7 +40,13 @@ import {
 
 var count = 1;
 export default class AddIssueDialog extends Component {
-  state = { checked: false, selectedDate: new Date().toISOString() };
+  state = {
+    checked: false,
+    selectedDate: new Date().toISOString(),
+    dDate: new Date(),
+    isAttatch: false,
+    isConf: false
+  };
 
   handleCheckboxChange = event => {
     this.setState({
@@ -63,6 +71,8 @@ export default class AddIssueDialog extends Component {
     count++;
   };
   handleChange = date => {
+    this.setState({ dDate: date });
+
     this.setState({
       startDay: date
     });
@@ -72,7 +82,66 @@ export default class AddIssueDialog extends Component {
       startDate: date
     });
   };
-  exHandleChange = () => {};
+  contentHandleChange = e => {
+    // e.target.checked == "true"
+    //   ? (document.getElementById("showContent").style.display = "inline")
+    //   : (document.getElementById("showContent").style.display = "none");
+    console.log("check!", e.target.checked);
+  };
+  confHandleChange = e => {
+    this.setState({
+      isConf: e.target.checked
+    });
+  };
+  attachHandleChange = e => {
+    this.setState({
+      isAttatch: e.target.checked
+    });
+  };
+  postIssueItem = () => {
+    // projectId,
+    // title,
+    // dDay,
+    // content,
+    // isConfScheduled,
+    // attachment,
+    // dept,
+    // username,
+    // usernameEn,
+    // userImg
+    var projectId = localStorage.getItem("projectId");
+    var title = document.getElementById("titleInput").value;
+    var date = this.state.dDate;
+    var content = document.getElementById("contentInput").value;
+    var isConfScheduled = this.state.isConf;
+    var attachment = "test.txt";
+    var dept = "귀여움"; //FIXME: 선택된 부서 지정.
+    var username = localStorage.getItem("name");
+    var usernameEn = localStorage.getItem("nameEn");
+    var userImg = localStorage.getItem("profilImg");
+
+    console.log("pId", projectId);
+    console.log("title", title);
+    console.log("content", content);
+
+    service
+      .postIssue(
+        projectId,
+        title,
+        date,
+        content,
+        isConfScheduled,
+        attachment,
+        dept,
+        username,
+        usernameEn,
+        userImg
+      )
+      .then(res => {
+        console.log(res.data);
+      });
+  };
+
   render() {
     const { open, onCloseModal, status } = this.props;
 
@@ -85,7 +154,7 @@ export default class AddIssueDialog extends Component {
             <Row>
               <PopupLabel>제목</PopupLabel>
               <TitleInputBorder>
-                <TitleInput />
+                <TitleInput id="titleInput" />
               </TitleInputBorder>
             </Row>
             <Row style={{ marginTop: "20px" }}>
@@ -116,13 +185,14 @@ export default class AddIssueDialog extends Component {
                   id="selectShow"
                   style={{ width: "16px", height: "16px", marginLeft: "38px" }}
                   type="checkbox"
-                  onChange={this.exHandleChange}
+                  onChange={this.contentHandleChange}
                 />
 
                 <SelectLabel>설명</SelectLabel>
               </CheckContainer>
-              <TextAreaBorder>
+              <TextAreaBorder id="showContent">
                 <textarea
+                  id="contentInput"
                   type="textarea"
                   wrap="soft"
                   cols="49"
@@ -139,13 +209,21 @@ export default class AddIssueDialog extends Component {
             </SelectRow>
             <SelectRow style={{ marginTop: "30px" }}>
               <CheckContainer>
-                <input style={{ marginLeft: "38px" }} type="checkbox" />
+                <input
+                  style={{ marginLeft: "38px" }}
+                  type="checkbox"
+                  onChange={this.confHandleChange}
+                />
                 <SelectLabel>화상회의</SelectLabel>
               </CheckContainer>
             </SelectRow>
             <SelectRow style={{ marginTop: "15px" }}>
               <CheckContainer>
-                <input style={{ marginLeft: "38px" }} type="checkbox" />
+                <input
+                  style={{ marginLeft: "38px" }}
+                  type="checkbox"
+                  onChange={this.attachHandleChange}
+                />
                 <SelectLabel>첨부파일</SelectLabel>
               </CheckContainer>
               <input
@@ -159,7 +237,7 @@ export default class AddIssueDialog extends Component {
               />
             </SelectRow>
             <SubmitBtns>
-              <ConfirmBtn>확인</ConfirmBtn>
+              <ConfirmBtn onClick={this.postIssueItem}>확인</ConfirmBtn>
               <CancelBtn>취소</CancelBtn>
             </SubmitBtns>
           </div>
