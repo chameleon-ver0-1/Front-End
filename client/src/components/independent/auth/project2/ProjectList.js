@@ -37,6 +37,7 @@ export class ProjectList extends Component {
 
     const projectName = e.target.name;
     const projectId = e.target.id;
+    console.log(projectId);
 
     service.projectFirst(projectId).then(
       res => {
@@ -56,7 +57,12 @@ export class ProjectList extends Component {
             projectLeader: res.data.data.projectLeader.name,
             projectParticipants: res.data.data.projectParticipants
           });
+
           localStorage.setItem("projectId", projectId);
+          console.log(
+            "projectId",
+            localStorage.getItem("projectId", projectId)
+          );
           this.props.history.push(`/auth/projectList/${projectId}`);
         }
       },
@@ -80,25 +86,29 @@ export class ProjectList extends Component {
           {Object.keys(this.state.projectLists).map(projectListId => {
             const projectlist = this.state.projectLists[projectListId];
 
+            console.log("key", projectlist.id);
             return (
-              <ProjectListItemBtn
-                id={projectlist.id}
-                name={projectlist.name}
-                onClick={this.moveToHome}
-              >
-                {projectlist.name}
-              </ProjectListItemBtn>
+              <div key={projectlist.id}>
+                <ProjectListItemBtn
+                  id={projectlist.id}
+                  name={projectlist.name}
+                  onClick={this.moveToHome}
+                >
+                  {projectlist.name}
+                </ProjectListItemBtn>
+                <ProjectFirst
+                  key={projectlist.id}
+                  open={this.state.open}
+                  title={this.state.title}
+                  onCloseModal={this.onCloseModal}
+                  id={this.state.id}
+                  projectTitle={this.state.projectTitle}
+                  projectLeader={this.state.projectLeader}
+                  projectParticipants={this.state.projectParticipants}
+                ></ProjectFirst>
+              </div>
             );
           })}
-          <ProjectFirst
-            open={this.state.open}
-            title={this.state.title}
-            onCloseModal={this.onCloseModal}
-            id={this.state.id}
-            projectTitle={this.state.projectTitle}
-            projectLeader={this.state.projectLeader}
-            projectParticipants={this.state.projectParticipants}
-          />
         </ProjectListItemContainer>
       </ProjectListContainer>
     );

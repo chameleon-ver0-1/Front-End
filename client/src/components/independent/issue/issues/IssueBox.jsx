@@ -51,8 +51,7 @@ export class IssueBox extends Component {
             </ItemList>
           )}
         </Droppable>
-
-        <IssueAdd />
+        <IssueAdd key={column._id} id="addIssue" status={column.status} />
       </Container>
     );
   }
