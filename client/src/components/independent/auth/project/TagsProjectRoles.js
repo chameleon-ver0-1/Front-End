@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import styled from "styled-components";
-import { PEOPLE } from "./people";
 import * as service from "../../../../services/ProjectService";
 
 const TAGDIV2 = styled.div`
@@ -26,6 +25,7 @@ export class TagsProjectRoles extends Component {
 
     this.state = {
       tags: [],
+      sug: [],
       suggestions: [],
       roles: []
     };
@@ -38,9 +38,10 @@ export class TagsProjectRoles extends Component {
 
   /* 태그 */
   handleDelete(i) {
-    const { tags } = this.state;
+    const { tags, roles } = this.state;
     this.setState({
-      tags: tags.filter((tag, index) => index !== i)
+      tags: tags.filter((tag, index) => index !== i),
+      roles: roles.filter((tag, index) => index !== i)
     });
   }
 
@@ -52,9 +53,10 @@ export class TagsProjectRoles extends Component {
         {
           for (var i = 0; i < res.data.data.length; i++) {
             this.setState(state => ({
-              suggestions: [
+              sug: [
                 { id: res.data.data[i].role, text: res.data.data[i].role }
-              ]
+              ],
+              suggestions: this.state.suggestions.concat(this.state.sug)
             }));
           }
         }

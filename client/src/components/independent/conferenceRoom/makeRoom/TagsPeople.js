@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { WithContext as ReactTags } from "react-tag-input";
 import { TAG } from "./tag";
 import styled from "styled-components";
+import * as service from "../../../../services/ConferenceRoomService";
 
 const TAGDIV4 = styled.div`
   width: 347px;
@@ -44,19 +45,32 @@ export class TagsPeople extends Component {
   }
   /* 태그 */
   handleDelete(i) {
-    const { tags } = this.state;
+    const { tags, people } = this.state;
     this.setState({
-      tags: tags.filter((tag, index) => index !== i)
+      tags: tags.filter((tag, index) => index !== i),
+      people: people.filter((tag, index) => index !== i)
     });
   }
 
   handleAddition(tag) {
-    this.setState(state => ({
-      tags: [...state.tags, tag],
-      people: this.state.people.concat(tag.text)
-    }));
-    this.props.callbackFromParent(this.state.people);
-    console.log(this.state.people);
+    //TODO: projectId 가져오기
+    service.confParticipants(localStorage.getItem("projectId"), tag.text).then(
+      res => {
+        console.log("참여자 판단 성공");
+        this.setState(state => ({
+          tags: [...state.tags, tag],
+          people: this.state.people.concat(tag.text)
+          // [...state.tags, tag.text]
+        }));
+        // this.props.callbackFromParent(this.state.tags);
+        this.props.callbackFromParent(this.state.people);
+        console.log("tag: " + JSON.stringify(this.state.people));
+      },
+      err => {
+        console.log("참여자 판단 실패");
+        console.log(err);
+      }
+    );
   }
 
   handleDrag(tag, currPos, newPos) {
