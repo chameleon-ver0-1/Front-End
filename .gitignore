@@ -23,6 +23,8 @@ chrome-user-data
 *.swp
 *.swo
 parameters.json
+smiling-cistern-244006-ce347f991082.json
+auth.js
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies

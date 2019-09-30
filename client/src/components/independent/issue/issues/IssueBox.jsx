@@ -3,6 +3,8 @@ import IssueItem from "../issueItem/IssueItem";
 import IssueAdd from "../issueAdd/IssueAdd";
 import { Droppable } from "react-beautiful-dnd";
 import FreeScrollBar from "react-free-scrollbar";
+
+import * as service from "../../../../services/IssueService";
 import {
   Container,
   ItemList,
@@ -12,6 +14,8 @@ import {
 } from "./issues.style";
 
 export class IssueBox extends Component {
+  state = { taskItemLists: [] };
+
   render() {
     const { column, count, tasks } = this.props;
 
@@ -20,9 +24,10 @@ export class IssueBox extends Component {
     return (
       <Container>
         <IssuesTitle>
+          <IssuesTitleStatus>{column.status}</IssuesTitleStatus>
+
           <IssuesTitleCount>{count}</IssuesTitleCount>
         </IssuesTitle>
-
         <Droppable droppableId={column._id}>
           {(provided, snapshot) => (
             <ItemList
@@ -31,19 +36,22 @@ export class IssueBox extends Component {
               isDraggingOver={snapshot.isDraggingOver}
             >
               <FreeScrollBar>
-                {tasks.map((task, index) => (
-                  // <IssueItem
-                  //   // key={task.id}
-                  //   task={task}
-                  //   index={index}
-                  // />
-                  <div>s</div>
-                ))}
+                {tasks.map((task, index) => {
+                  return (
+                    <IssueItem
+                      status={column.status}
+                      key={task._id}
+                      task={task}
+                      index={index}
+                    />
+                  );
+                })}
                 {provided.placeholder}
               </FreeScrollBar>
             </ItemList>
           )}
         </Droppable>
+        <IssueAdd key={column._id} id="addIssue" status={column.status} />
       </Container>
     );
   }

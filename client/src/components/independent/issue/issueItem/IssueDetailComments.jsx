@@ -16,7 +16,9 @@ export class IssueDetailComments extends Component {
               style={{ marginTop: "10px" }}
             />
             <div style={{ marginLeft: "7px", marginTop: "15px" }}>
-              <Name>{comment.name}</Name>
+              <Name>
+                {comment.name} {comment.name_en}
+              </Name>
               <CommentContent>{comment.content}</CommentContent>
             </div>
           </Row>

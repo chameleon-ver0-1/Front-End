@@ -53,4 +53,5 @@ export const IssuesTitleStatus = styled.div`
 export const IssuesTitleCount = styled.div`
   font-size: 22.5px;
   color: var(--white-two);
+  margin-left: 12px;
 `;

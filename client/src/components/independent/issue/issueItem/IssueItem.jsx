@@ -5,7 +5,7 @@ import comment from "../../../../assets/issue/issue_comment.png";
 import file from "../../../../assets/issue/issue_file.png";
 import conference from "../../../../assets/issue/issue_video_conference.png";
 import IssueDetailDialog from "./IssueDetailDialog";
-
+import * as service from "../../../../services/IssueService";
 import { Draggable } from "react-beautiful-dnd";
 import {
   Container,
@@ -25,7 +25,9 @@ export class IssueItem extends Component {
     };
   }
   openDialog = () => {
-    console.log("click");
+    localStorage.setItem("issueId", this.props.task._id);
+    console.log("issueId", localStorage.getItem("issueId"));
+
     this.setState({
       open: true
     });
@@ -33,11 +35,14 @@ export class IssueItem extends Component {
   onCloseModal = () => {
     this.setState({ open: false });
   };
+  componentDidMount() {}
 
   render() {
+    const { task, index, status } = this.props;
+
     return (
       <React.Fragment>
-        <Draggable draggableId={this.props.task._id} index={this.props.index}>
+        <Draggable draggableId={task._id} index={index}>
           {(provided, snapshot) => (
             <Container
               onMouseOver={this.editAppear}
@@ -47,11 +52,9 @@ export class IssueItem extends Component {
               ref={provided.innerRef}
               isDragging={snapshot.isDragging}
             >
-              <IssueTitles onClick={this.openDialog}>
-                {this.props.task.title}
-              </IssueTitles>
+              <IssueTitles onClick={this.openDialog}>{task.title}</IssueTitles>
               <IssueContents>
-                {this.props.task.content}
+                {task.content}
                 <img
                   width="7px"
                   height="12px"
@@ -67,13 +70,16 @@ export class IssueItem extends Component {
                   height="12px"
                   src={comment}
                 />
-                <CommentCount>3</CommentCount>
+                <CommentCount>{task.commentIds.length}</CommentCount>
                 <img width="13px" height="12px" src={file} />
               </IssueItemDetail>
             </Container>
           )}
         </Draggable>
         <IssueDetailDialog
+          key={task._id}
+          task={task}
+          status={status}
           open={this.state.open}
           onCloseModal={this.onCloseModal}
         />

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "smiling-cistern-244006",
+  "private_key_id": "ce347f9910827d72228391ab7256b6f0901f636f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCiHxujjVFCmspR\ntolZLA+FNuu6ZUMejloQQzWuAlMEISxwH2bgQFyqauDT9DXEUkK1bklPmnA27Sea\nn8oeGc3g/DCWvG/1VC8OFJI44McnPqf1EPzheY7FluUU+Fmw5T9yR+X0Ji+KWXMJ\nPZi32O4cvf8GGST5QKFSgHT+VuhGls5KpNAGlX2R2DHnlbWoYG/w8vOjHJrxk+Ve\njCf+16Y2/5kvdGx3XIzK9uY1wkhVcbtRwF7pCi6k6Rf2bBLhtC5XV3gaUoODGc0R\nxvlcxQQcfkjiDYUIlPipwb41LP0M+cw/iZmD6+AZZOFK1ksdKQAsaZ44mLwQItrs\ndYhP0EyrAgMBAAECggEAP9yxLoQEdpAzEm0tPYs1sewof4xUHD1HDRDsnFceDIpk\nzuYPyFaSKi9f0R5p76PX01BWYJ0dhwV0jFxVafYQO4gcO8SO9bzrrEg+MVmaGcN8\ntfSzKL6RlxQRuWj7K8uiaooX80z3fTAvOHyjJAi4A2p0gxp0jhr/cVhYvbfOV79+\nxQyR57N/q3Vn03IQbPGaSHB1D3VkJ+FKBwiYm5GPFrXHzCIu/xBekkw8XHkELNRG\nHZtlkFTu8cah1wM4vkHHcW9CVZTLMXuK+zLgfbge/eXFHdp64LihHmfJCqa0zc8i\nHBgJZrRUHzIWXTYU4jBanKzX5q3fDk//gLyvf5x3wQKBgQDhLz5T4oPHMeZCl4On\nMx362ARFREzqRsKn2Jr7K+KkrcdCkNryP8wLAmjfsRP2qyuxD0WyEpOU0eJHLled\naKiP/aelR2ihkklfH5yMeC3lmTEWIRoDeC6Xj0MW6B54Nl2vWNV0HmFJ/uwBH9Nv\noISvZ983e/EaIHf0xFFKcX95vQKBgQC4Tp1kYPEIz0ZjrrF5AkoUsL55D51wHoG7\navGTRyesA9Ek3DhELjWyYvvVFpiTc5w+SC0O7ssED5R22A30yKsYkSbciJblIYkl\nc0IHgKCr5lab1LViCb20QGfkH5pODi56jwWkvB0U/1vdZf00QVR2FSVeNq/8F/oX\nuy3WndwihwKBgAbSCIA/7x/cag4AStOIn9LWMiLq861w4Tp2PBN5e87jGJLykj8e\nIY7/zq9fzKv++T7OqJzBJUkvpjvjsnGpFtnto+NEq22hYamI6pPym+lFX5A9Bm2u\neTLL+ws5kpqvgtzpwuVWejnkh79s+Fl8Miih68fhcCcLbrayL4giseq9AoGAePJm\nCNww8KYMvBeEsTNWZ/OAWzNrDouGePX6J7r3BsPOeJDnf56PcEvSlQhqAcFJU/nL\nT9RWd4i91at8pRkWZl3CkdA0rZJvTJsxRnkbdxMF3OceTIK18daeFq7CdNyLlbPL\ncUpdD01v/H8URTll8sN3rTbYD+ewH+iecQtQzXsCgYALx6T0dEjknoglMsCPDq7P\nGREhoBfSg+dmke1Dk0CWE3MIVDMFWjYOMUlEUYOXdqR0Ll2hEc+wz8KWJjultiv/\nI6KBraC/Sn7p7VmZZsAGuXsDIxNlMHgmD4NsOKKI3qB7nA7bpBGIqF3vUYZcd/I4\nrFNwyS7mrgdGsizXbQvNrA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "dkswlgn0202-gmail-com@smiling-cistern-244006.iam.gserviceaccount.com",
+  "client_id": "103244402819754484260",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dkswlgn0202-gmail-com%40smiling-cistern-244006.iam.gserviceaccount.com"
+}

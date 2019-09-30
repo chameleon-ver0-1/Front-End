@@ -74,10 +74,10 @@ export default class AddIssueDialog extends Component {
   };
   exHandleChange = () => {};
   render() {
-    const { open, onCloseModal } = this.props;
+    const { open, onCloseModal, status } = this.props;
 
     return (
-      <Modal open={open} onClose={onCloseModal} center>
+      <Modal key={status} open={open} onClose={onCloseModal} center>
         <PopupContainer>
           <div>
             <PopupTitle>TODO 추가하기</PopupTitle>

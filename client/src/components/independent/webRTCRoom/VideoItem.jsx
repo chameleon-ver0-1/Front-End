@@ -324,24 +324,21 @@ export class VideoItem extends Component {
       html2canvas(document.getElementById("videos-container")).then(function(
         canvas
       ) {
-        console.log("캡처 완료했습니다");
         axios
           .post("/emotion", {
             img: canvas.toDataURL("image/png")
           })
-          .then(res => {
-            console.log(res.data);
-            console.log("데이터를 받았습니다.");
-            //   if (response.data == "무반응") {
-            //     document.getElementById("showEmotion").style.visibility =
-            //       "hidden";
-            //   } else {
-            //   document.getElementById("showEmotion").style.visibility =
-            //     "visible";
-            // }
-            document.getElementById("showEmotion").style.visibility = "visible";
-            document.getElementById("showEmotion").innerHTML = res.data.message;
-            console.log(res.data);
+          .then(response => {
+            if (response.data.data === false) {
+              document.getElementById("showEmotion").style.visibility =
+                "hidden";
+            } else {
+              document.getElementById("showEmotion").style.visibility =
+                "visible";
+            }
+            document.getElementById("showEmotion").innerHTML =
+              response.data.message;
+            console.log(response.data);
           })
           .catch(response => {
             console.log(response);

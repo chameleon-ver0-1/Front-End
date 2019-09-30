@@ -97,13 +97,9 @@ export class Chat extends Component {
   };
 
   render() {
-    if (
-      window.location.pathname === "/home/issue" ||
-      window.location.pathname === "/home/conferenceRoom" ||
-      window.location.pathname === "/home/conferenceDocument" ||
-      window.location.pathname ===
-        "/home/conferenceDocument/conferenceDocumentDetail"
-    ) {
+    const regex = new RegExp("/home");
+
+    if (regex.test(window.location.pathname)) {
       return (
         <ChatContainer>
           <ChatContent>

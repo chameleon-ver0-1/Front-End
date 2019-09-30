@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import IssueDep from "./issueDepartment/IssueDep";
 import Issues from "./issues/Issues";
 import styled from "styled-components";
-import IssueAdd from "./issueAdd/IssueAdd";
+
 import * as service from "../../../services/IssueService";
 
 const BoxContainer = styled.div`
@@ -34,7 +34,7 @@ export class issue extends Component {
         <BoxContainer>
           <Issues data={issueLists} />
         </BoxContainer>
-        <IssueAdd />
+
       </IssueContainer>
     );
   }
