@@ -57,7 +57,6 @@ export default class AddIssueDialog extends Component {
     service.getCommentList(this.props.task._id).then(
       res => {
         this.state.commentList = res.data.data;
-        console.log("commentList:", this.state.commentList);
       },
       err => {
         console.log("이슈 아이템 가져오기 실패");
@@ -67,7 +66,6 @@ export default class AddIssueDialog extends Component {
   render() {
     const { open, onCloseModal, task, status, commentList } = this.props;
 
-    console.log("conf", task.isConfScheduled);
     return (
       <Modal open={open} onClose={onCloseModal} center>
         <PopupContainer>

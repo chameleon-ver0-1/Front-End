@@ -25,3 +25,28 @@ export function postComment(taskId, username, usernameEn, userImg, content) {
     content
   });
 }
+export function postIssue(
+  projectId,
+  title,
+  dDay,
+  content,
+  isConfScheduled,
+  attachment,
+  dept,
+  username,
+  usernameEn,
+  userImg
+) {
+  return IssueAxios.post("create/task", {
+    projectId,
+    title,
+    dDay,
+    content,
+    isConfScheduled,
+    attachment,
+    dept,
+    username,
+    usernameEn,
+    userImg
+  });
+}
