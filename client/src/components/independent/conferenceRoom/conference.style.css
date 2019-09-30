@@ -30,6 +30,7 @@
   color: var(--greenish-teal);
   position: right;
   outline: none;
+  cursor: pointer;
 }
 
 .circle_container {

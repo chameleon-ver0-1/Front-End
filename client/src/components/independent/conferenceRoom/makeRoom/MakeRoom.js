@@ -17,6 +17,7 @@ import SmallDatePicker from "./SmallDatePicker";
 import TagsTopic from "./TagsTopic";
 import TagsPeople from "./TagsPeople";
 import * as service from "../../../../services/ConferenceRoomService";
+import { withRouter } from "react-router-dom";
 
 class MakeRoom extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class MakeRoom extends Component {
       tags: [],
       open: false,
       title: "",
-      selectedDate: "2019-09-07T12:40:00Z",
+      selectedDate: "2019-09-07T12:40:00Z", //FIXME: 임시로 박아놓음
       topic_tag: [],
       people_tag: []
     };
@@ -176,4 +177,4 @@ class MakeRoom extends Component {
   }
 }
 
-export default MakeRoom;
+export default withRouter(MakeRoom);

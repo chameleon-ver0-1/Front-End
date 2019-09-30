@@ -77,6 +77,7 @@
   background: none;
   font-size: 14px;
   outline: none;
+  cursor: pointer;
 }
 
 .cancelbutton {
@@ -87,6 +88,7 @@
   border-radius: 10px;
   font-size: 14px;
   outline: none;
+  cursor: pointer;
 }
 
 /***************Tag css**************/
