@@ -29,10 +29,19 @@ export class IssueAdd extends Component {
   };
 
   render() {
+    const { status } = this.props;
     return (
-      <div style={{ width: "0px", height: "0px" }}>
+      <div
+        style={{
+          width: "0px",
+          height: "0px",
+          display: status == "TODO" ? "inline" : "none"
+        }}
+      >
         <AddBtn onClick={this.openDialog}>+ TODO 추가하기</AddBtn>
         <AddIssueDialog
+          key={status}
+          status={status}
           open={this.state.open}
           onCloseModal={this.onCloseModal}
           callbackIssueInfo={this.getIssueInfo}

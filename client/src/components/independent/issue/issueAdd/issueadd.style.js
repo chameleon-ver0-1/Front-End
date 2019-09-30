@@ -103,7 +103,7 @@ const SubmitBtns = styled.div`
 `;
 
 const AddBtn = styled.button`
-  width: 257px;
+  width: 260px;
   height: 55px;
 
   background: var(--white-three);
@@ -115,9 +115,6 @@ const AddBtn = styled.button`
   align-items: center;
   text-align: center;
 
-  position: relative;
-  top: -50px;
-  left: 21px;
   outline: none;
 
   font-family: NanumSquareB;

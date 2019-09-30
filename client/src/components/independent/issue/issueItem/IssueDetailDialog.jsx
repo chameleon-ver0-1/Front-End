@@ -35,12 +35,29 @@ import {
   CommentContent
 } from "./issueItem.style";
 export default class AddIssueDialog extends Component {
-  state = InitialData;
+  state = { commentList: [] };
 
+  /*댓글 생성하기 함수 */
+  postComment = () => {
+    console.log("taskId", this.props.task._id);
+
+    service
+      .postComment(
+        this.props.task._id,
+        localStorage.getItem("name"),
+        localStorage.getItem("nameEn"),
+        localStorage.getItem("profilImg"),
+        document.getElementById("commentInput").value
+      )
+      .then(res => {
+        console.log(res.data);
+      });
+  };
   componentDidMount() {
-    service.getCommentList().then(
+    service.getCommentList(this.props.task._id).then(
       res => {
-        console.log("comments", res.data.data);
+        this.state.commentList = res.data.data;
+        console.log("commentList:", this.state.commentList);
       },
       err => {
         console.log("이슈 아이템 가져오기 실패");
@@ -48,12 +65,19 @@ export default class AddIssueDialog extends Component {
     );
   }
   render() {
-    const { open, onCloseModal, task, status } = this.props;
+    const { open, onCloseModal, task, status, commentList } = this.props;
 
+    console.log("conf", task.isConfScheduled);
     return (
       <Modal open={open} onClose={onCloseModal} center>
         <PopupContainer>
-          <Reservation>년.월.일 시간 화상회의</Reservation>
+          <Reservation
+            style={{
+              display: task.isConfScheduled == false ? "none" : "inline"
+            }}
+          >
+            년.월.일 시간 화상회의
+          </Reservation>
           <Row>
             <IssueTitle>{task.title}</IssueTitle>
             <Line />
@@ -63,11 +87,7 @@ export default class AddIssueDialog extends Component {
           </Row>
           <DividedLine />
           <Row>
-            <IssueContent>
-              3월 13일 오후 1시 진행될 회의와 관련한 참고자료 입니다. 파일
-              다운로드후, 회의 전까지 정독바랍니다. 확인 하신 분들은 댓글
-              달아주세요.
-            </IssueContent>
+            <IssueContent>{task.content}</IssueContent>
             <ContentButtons>
               <ContentButton>참여자</ContentButton>
               <ContentButton>첨부파일</ContentButton>
@@ -89,32 +109,19 @@ export default class AddIssueDialog extends Component {
               <CommentInputBorder>
                 <CommentInput
                   type="text"
-                  id="issueTitle"
+                  id="commentInput"
                   defaultValue=""
                   placeholder="의견을 작성하세요"
                 />
               </CommentInputBorder>
-              <CommentUpdateBtn>등록</CommentUpdateBtn>
+              <CommentUpdateBtn onClick={this.postComment}>
+                등록
+              </CommentUpdateBtn>
             </Row>
 
             <FreeScrollBar>
-              {/* {Object.keys(task.commentIds).map(columnId => {
-            const column = this.state.taskLists[columnId];
-            const tasks = [];
-            column.taskIds.forEach(id => {
-              tasks.push(
-                ...this.state.taskItemLists.filter(item => item._id === id)
-              );
-            });
-
-            return (
-              <Issue3 key={column._id}>
-                return <IssueDetailComments comment={comment} />;
-              </Issue3>
-            );
-          })} */}
-              {Object.keys(this.state.data).map(commentIds => {
-                const comment = this.state.data[commentIds];
+              {Object.keys(this.state.commentList).map(commentIds => {
+                const comment = this.state.commentList[commentIds];
 
                 return <IssueDetailComments comment={comment} />;
               })}
