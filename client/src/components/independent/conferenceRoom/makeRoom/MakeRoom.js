@@ -28,7 +28,7 @@ class MakeRoom extends Component {
       tags: [],
       open: false,
       title: "",
-      selectedDate: "2019-09-07T12:40:00Z", //FIXME: 임시로 박아놓음
+      selectedDate: "", //FIXME: 임시로 박아놓음
       topic_tag: [],
       people_tag: []
     };
@@ -68,7 +68,13 @@ class MakeRoom extends Component {
 
     console.log(this.state.roomTitle);
     console.log(this.state.topic_tag);
-    console.log(this.state.startDay);
+    console.log(
+      this.state.startDay.toDateString() +
+        " " +
+        this.state.startDate.toTimeString()
+    );
+    //console.log(this.state.startDate.toTimeString());
+    //console.log(this.state.selectedDate);
     console.log(this.state.people_tag);
 
     service
@@ -76,7 +82,9 @@ class MakeRoom extends Component {
         localStorage.getItem("projectId"),
         this.state.roomTitle,
         this.state.topic_tag,
-        this.state.selectedDate, //TODO: 데이터 수정
+        this.state.startDay.toDateString() +
+          " " +
+          this.state.startDate.toTimeString(),
         this.state.people_tag
       )
       .then(

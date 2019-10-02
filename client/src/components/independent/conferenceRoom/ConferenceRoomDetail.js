@@ -69,28 +69,64 @@ export class ConferenceRoomDetail extends Component {
             <Slider className="slider">
               <Slide index={0} className="slide-index0">
                 <div className="slide_div">
-                  <Circle1 />
-                  <Circle1 />
-                  <Circle1 />
-                  <Circle1 />
+                  <Circle1
+                    time="12:30~"
+                    title="개발팀 전체 회의"
+                    name="권소영"
+                  />
+                  <Circle1
+                    time="13:30~"
+                    title="기획팀 전체 회의"
+                    name="안지후"
+                  />
+                  <Circle1 time="16:00~" title="Front-end 회의" name="조윤영" />
+                  <Circle1
+                    time="16:30~"
+                    title="Back-end 전체 회의"
+                    name="한예지"
+                  />
                 </div>
               </Slide>
 
               <Slide index={1}>
                 <div className="slide_div">
-                  <Circle1 />
-                  <Circle1 />
-                  <Circle1 />
-                  <Circle1 />
+                  <Circle1
+                    time="12:30~"
+                    title="개발팀 전체 회의"
+                    name="권소영"
+                  />
+                  <Circle1
+                    time="13:30~"
+                    title="기획팀 전체 회의"
+                    name="안지후"
+                  />
+                  <Circle1 time="16:00~" title="Front-end 회의" name="조윤영" />
+                  <Circle1
+                    time="16:30~"
+                    title="Back-end 전체 회의"
+                    name="한예지"
+                  />
                 </div>
               </Slide>
 
               <Slide index={2}>
                 <div className="slide_div">
-                  <Circle1 />
-                  <Circle1 />
-                  <Circle1 />
-                  <Circle1 />
+                  <Circle1
+                    time="12:30~"
+                    title="개발팀 전체 회의"
+                    name="권소영"
+                  />
+                  <Circle1
+                    time="13:30~"
+                    title="기획팀 전체 회의"
+                    name="안지후"
+                  />
+                  <Circle1 time="16:00~" title="Front-end 회의" name="조윤영" />
+                  <Circle1
+                    time="16:30~"
+                    title="Back-end 전체 회의"
+                    name="한예지"
+                  />
                 </div>
               </Slide>
             </Slider>
@@ -121,28 +157,88 @@ export class ConferenceRoomDetail extends Component {
             <Slider className="slider">
               <Slide index={0} className="slide-index0">
                 <div className="slide_div">
-                  <Circle2 />
-                  <Circle2 />
-                  <Circle2 />
-                  <Circle2 />
+                  <Circle2
+                    date="2019.08.15"
+                    time="11:00~"
+                    title="8월 중간평가"
+                    name="박우창"
+                  />
+                  <Circle2
+                    date="2019.09.01"
+                    time="13:00~"
+                    title="카멜레On 결과 비교"
+                    name="박우창"
+                  />
+                  <Circle2
+                    date="2019.09.20"
+                    time="16:00~"
+                    title="Front-end 회의"
+                    name="조윤영"
+                  />
+                  <Circle2
+                    date="2019.10.01"
+                    time="09:00~"
+                    title="디자인/Front 회의"
+                    name="안지후"
+                  />
                 </div>
               </Slide>
 
               <Slide index={1}>
                 <div className="slide_div">
-                  <Circle2 />
-                  <Circle2 />
-                  <Circle2 />
-                  <Circle2 />
+                  <Circle2
+                    date="2019.08.15"
+                    time="11:00~"
+                    title="8월 중간평가"
+                    name="박우창"
+                  />
+                  <Circle2
+                    date="2019.09.01"
+                    time="13:00~"
+                    title="카멜레On 결과 비교"
+                    name="박우창"
+                  />
+                  <Circle2
+                    date="2019.09.20"
+                    time="16:00~"
+                    title="Front-end 회의"
+                    name="조윤영"
+                  />
+                  <Circle2
+                    date="2019.10.01"
+                    time="09:00~"
+                    title="디자인/Front 회의"
+                    name="안지후"
+                  />
                 </div>
               </Slide>
 
               <Slide index={2}>
                 <div className="slide_div">
-                  <Circle2 />
-                  <Circle2 />
-                  <Circle2 />
-                  <Circle2 />
+                  <Circle2
+                    date="2019.08.15"
+                    time="11:00~"
+                    title="8월 중간평가"
+                    name="박우창"
+                  />
+                  <Circle2
+                    date="2019.09.01"
+                    time="13:00~"
+                    title="카멜레On 결과 비교"
+                    name="박우창"
+                  />
+                  <Circle2
+                    date="2019.09.20"
+                    time="16:00~"
+                    title="Front-end 회의"
+                    name="조윤영"
+                  />
+                  <Circle2
+                    date="2019.10.01"
+                    time="09:00~"
+                    title="디자인/Front 회의"
+                    name="안지후"
+                  />
                 </div>
               </Slide>
             </Slider>

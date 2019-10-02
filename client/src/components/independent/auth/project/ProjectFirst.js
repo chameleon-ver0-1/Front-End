@@ -72,7 +72,16 @@ export class ProjectFirst extends Component {
 
     return (
       <div>
-        <Modal open={open} onClose={onCloseModal} id={id} center>
+        <Modal
+          open={open}
+          onClose={onCloseModal}
+          id={id}
+          styles={{
+            overlay: { background: "#F2000000" },
+            modal: { boxShadow: "1px solid #000000" }
+          }}
+          center
+        >
           <div className="projectfirst-div">
             <div className="projectfirst-title">{projectTitle}</div>
             <div className="projectfirst-content">

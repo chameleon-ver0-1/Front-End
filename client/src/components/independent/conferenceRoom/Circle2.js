@@ -53,11 +53,11 @@ export class Circle2 extends Component {
   render() {
     return (
       <div>
-        <Circle_date>2019.08.06</Circle_date>
+        <Circle_date>{this.props.date}</Circle_date>
         <Circle_conference>
-          <Circle_time>12:30~</Circle_time>
-          <Circle_title>개발팀 전체 회의</Circle_title>
-          <Circle_name>권주희 Kwon ju hee</Circle_name>
+          <Circle_time>{this.props.time}</Circle_time>
+          <Circle_title>{this.props.title}</Circle_title>
+          <Circle_name>{this.props.name}</Circle_name>
           <div className="circle_hori">
             <img src={people} className="people" />
             <Circle_people>5/6</Circle_people>
