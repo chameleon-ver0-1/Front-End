@@ -46,9 +46,9 @@ export class Circle1 extends Component {
     return (
       <div>
         <Circle_conference>
-          <Circle_time>12:30~</Circle_time>
-          <Circle_title>개발팀 전체 회의</Circle_title>
-          <Circle_name>권주희 Kwon ju hee</Circle_name>
+          <Circle_time>{this.props.time}</Circle_time>
+          <Circle_title>{this.props.title}</Circle_title>
+          <Circle_name>{this.props.name}</Circle_name>
           <div className="circle_hori">
             <img src={people} className="people" />
             <Circle_people>5/6</Circle_people>

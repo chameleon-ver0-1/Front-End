@@ -55,4 +55,5 @@
   border: solid 1px var(--greenish-teal);
   background-color: var(--greenish-teal);
   color: #ffffff;
+  cursor: pointer;
 }

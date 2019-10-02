@@ -3,6 +3,7 @@ import Modal from "react-responsive-modal";
 import "./projectfirst.style.css";
 import { TagsProjectRoles } from "./TagsProjectRoles";
 import * as service from "../../../../services/ProjectService";
+import { withRouter } from "react-router-dom";
 
 export class ProjectFirst extends Component {
   constructor(props) {
@@ -36,10 +37,7 @@ export class ProjectFirst extends Component {
         console.log("프로젝트 참여!");
 
         localStorage.setItem("projectId", projectId);
-        setTimeout(() => {
-          this.props.history.push(`/home/issue/${projectId}`);
-        }, 5001);
-        //this.props.history.push(`/home/issue/${projectId}`);
+        this.props.history.push(`/home/issue/${projectId}`);
       },
       err => {
         console.log(err);
@@ -74,7 +72,16 @@ export class ProjectFirst extends Component {
 
     return (
       <div>
-        <Modal open={open} onClose={onCloseModal} id={id} center>
+        <Modal
+          open={open}
+          onClose={onCloseModal}
+          id={id}
+          styles={{
+            overlay: { background: "#F2000000" },
+            modal: { boxShadow: "1px solid #000000" }
+          }}
+          center
+        >
           <div className="projectfirst-div">
             <div className="projectfirst-title">{projectTitle}</div>
             <div className="projectfirst-content">
@@ -122,4 +129,4 @@ export class ProjectFirst extends Component {
   }
 }
 
-export default ProjectFirst;
+export default withRouter(ProjectFirst);
