@@ -80,6 +80,7 @@ export class Issues extends Component {
 
       this.setState({ taskLists: newState.taskLists });
       // console.log("새로운 taskList", taskLists);
+      //TODO: 소영아1
       return;
     }
     // //Moving from one list to another
@@ -106,6 +107,7 @@ export class Issues extends Component {
       }
     };
     this.setState({ taskLists: newState.taskLists });
+    //TODO: 소영아2
     return;
   };
 
