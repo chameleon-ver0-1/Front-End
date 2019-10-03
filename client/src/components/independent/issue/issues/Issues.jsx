@@ -11,7 +11,7 @@ import { Issue3, IssueBig } from "./issues.style";
 import * as service from "../../../../services/IssueService";
 
 export class Issues extends Component {
-  state = { taskLists: [], taskItemLists: [] };
+  state = { taskLists: [], taskItemLists: [], currentDep: "" };
 
   componentDidMount() {
     service.getIssueList().then(
@@ -20,13 +20,22 @@ export class Issues extends Component {
           columnData: taskLists,
           taskData: taskItemLists
         } = res.data.data;
+
         this.setState({ taskLists, taskItemLists });
+        const current = res.data.data.roleData[0].role;
+        this.setState({ currentDep: current });
       },
       err => {
         console.log("이슈 아이템 가져오기 실패");
       }
     );
   }
+  componentWillUpdate = () => {
+    console.log("this.props.currentDep", this.props.currentDep);
+  };
+  componentWillReceiveProps = () => {
+    console.log("this.props.currentDep", this.props.currentDep);
+  };
   onDragStart = () => {
     // document.childNodes.backgroundColor = "orange";
   };
@@ -50,22 +59,17 @@ export class Issues extends Component {
     const start = taskLists[source.droppableId];
 
     const finish = taskLists[destination.droppableId];
-    console.log("droppableId", source.droppableId);
-    console.log("start", start);
-    console.log("start", start.taskIds);
 
     if (start === finish) {
       const newItemIds = Array.from(start.taskIds);
       newItemIds.splice(source.index, 1); //드래그하는 해당 카드를 배열에서 삭제
       newItemIds.splice(destination.index, 0, draggableId); //드래그를 끝낸 위치에 드래그하는 카드를 추가한다.
 
-      console.log("newItemIds", newItemIds);
-
       const newColumn = {
         ...start,
         taskIds: newItemIds
       };
-      console.log("newColumn", newColumn);
+
       const newState = {
         ...this.state,
         taskLists: {
@@ -73,7 +77,7 @@ export class Issues extends Component {
           [newColumn.status]: newColumn
         }
       };
-      console.log("newState", newState.taskLists);
+
       this.setState({ taskLists: newState.taskLists });
       // console.log("새로운 taskList", taskLists);
       return;
@@ -85,14 +89,14 @@ export class Issues extends Component {
       ...start,
       taskIds: startItemIds
     };
-    console.log("newStart", newStart);
+
     const finishItemIds = Array.from(finish.taskIds);
     finishItemIds.splice(destination.index, 0, draggableId);
     const newFinish = {
       ...finish,
       taskIds: finishItemIds
     };
-    console.log("newFin", newFinish);
+
     const newState = {
       ...this.state,
       taskLists: {
@@ -106,6 +110,7 @@ export class Issues extends Component {
   };
 
   render() {
+    console.log("this.props.currentDep", this.props.currentDep);
     return (
       <IssueBig>
         <DragDropContext
@@ -114,30 +119,33 @@ export class Issues extends Component {
           onDragEnd={this.onDragEnd}
         >
           {Object.keys(this.state.taskLists).map((columnId, index) => {
-            console.log("columnID", columnId);
             const column = this.state.taskLists[columnId];
-            console.log("column", column);
-            console.log("taskIdds", column.taskIds);
+
             const tasks = [];
+            const tasksByDep = [];
             column.taskIds.forEach(id => {
-              console.log("taskIds", id);
               tasks.push(
                 ...this.state.taskItemLists.filter(item => item._id === id)
               );
             });
 
+            tasksByDep.push(
+              tasks.filter(t => t.dept === this.props.currentDep)
+            );
+            console.log(tasksByDep);
             return (
               <Issue3 key={column._id}>
                 <IssueBox
                   droppableId={String(index)}
                   column={column}
-                  tasks={tasks}
-                  count={tasks.length}
+                  tasks={tasksByDep[0]}
+                  count={tasksByDep[0].length}
                 />
               </Issue3>
             );
           })}
         </DragDropContext>
+        <div>{this.props.currentDep}</div>
       </IssueBig>
     );
   }
