@@ -21,7 +21,6 @@ export class Issues extends Component {
           taskData: taskItemLists
         } = res.data.data;
         this.setState({ taskLists, taskItemLists });
-        console.log("taskList 0", this.state.taskLists);
       },
       err => {
         console.log("이슈 아이템 가져오기 실패");
@@ -33,7 +32,7 @@ export class Issues extends Component {
   };
 
   onDragEnd = result => {
-    const { taskLists, taskItemLists } = this.state;
+    const { taskLists } = this.state;
     // const issueName = document.querySelector(".issues-body");
     // issueName.style.color = "inherit";
     // issueName.style.backgroundColor = "inherit";
@@ -49,48 +48,60 @@ export class Issues extends Component {
       return;
     }
     const start = taskLists[source.droppableId];
+
     const finish = taskLists[destination.droppableId];
+    console.log("droppableId", source.droppableId);
     console.log("start", start);
-    // if (start === finish) {
-    //   const newItemIds = Array.from(start.taskIds);
-    //   newItemIds.splice(source.index, 1); //드래그하는 해당 카드를 배열에서 삭제
-    //   newItemIds.splice(destination.index, 0, draggableId); //드래그를 끝낸 위치에 드래그하는 카드를 추가한다.
-    //   const newColumn = {
-    //     ...start,
-    //     taskIds: newItemIds
-    //   };
-    //   const newState = {
-    //     ...this.state,
-    //     columns: {
-    //       ...this.state.taskLists,
-    //       [newColumn.id]: newColumn
-    //     }
-    //   };
-    //   this.setState({ taskLists: newState });
-    //   return;
-    // }
+    console.log("start", start.taskIds);
+
+    if (start === finish) {
+      const newItemIds = Array.from(start.taskIds);
+      newItemIds.splice(source.index, 1); //드래그하는 해당 카드를 배열에서 삭제
+      newItemIds.splice(destination.index, 0, draggableId); //드래그를 끝낸 위치에 드래그하는 카드를 추가한다.
+
+      console.log("newItemIds", newItemIds);
+
+      const newColumn = {
+        ...start,
+        taskIds: newItemIds
+      };
+      console.log("newColumn", newColumn);
+      const newState = {
+        ...this.state,
+        taskLists: {
+          ...this.state.taskLists,
+          [newColumn.status]: newColumn
+        }
+      };
+      console.log("newState", newState.taskLists);
+      this.setState({ taskLists: newState.taskLists });
+      // console.log("새로운 taskList", taskLists);
+      return;
+    }
     // //Moving from one list to another
-    // const startItemIds = Array.from(start.taskIds);
-    // startItemIds.splice(source.index, 1);
-    // const newStart = {
-    //   ...start,
-    //   taskIds: startItemIds
-    // };
-    // const finishItemIds = Array.from(finish.taskIds);
-    // finishItemIds.splice(destination.index, 0, draggableId);
-    // const newFinish = {
-    //   ...finish,
-    //   taskIds: finishItemIds
-    // };
-    // const newState = {
-    //   ...this.state,
-    //   columns: {
-    //     ...this.state.taskLists,
-    //     [newStart.id]: newStart,
-    //     [newFinish.id]: newFinish
-    //   }
-    // };
-    // this.setState({ taskLists: newState });
+    const startItemIds = Array.from(start.taskIds);
+    startItemIds.splice(source.index, 1);
+    const newStart = {
+      ...start,
+      taskIds: startItemIds
+    };
+    console.log("newStart", newStart);
+    const finishItemIds = Array.from(finish.taskIds);
+    finishItemIds.splice(destination.index, 0, draggableId);
+    const newFinish = {
+      ...finish,
+      taskIds: finishItemIds
+    };
+    console.log("newFin", newFinish);
+    const newState = {
+      ...this.state,
+      taskLists: {
+        ...this.state.taskLists,
+        [newStart.status]: newStart,
+        [newFinish.status]: newFinish
+      }
+    };
+    this.setState({ taskLists: newState.taskLists });
     return;
   };
 
@@ -102,11 +113,14 @@ export class Issues extends Component {
           onDragUpdate={this.onDragUpdate}
           onDragEnd={this.onDragEnd}
         >
-          {Object.keys(this.state.taskLists).map(columnId => {
+          {Object.keys(this.state.taskLists).map((columnId, index) => {
+            console.log("columnID", columnId);
             const column = this.state.taskLists[columnId];
-            console.log("columnId", columnId);
+            console.log("column", column);
+            console.log("taskIdds", column.taskIds);
             const tasks = [];
             column.taskIds.forEach(id => {
+              console.log("taskIds", id);
               tasks.push(
                 ...this.state.taskItemLists.filter(item => item._id === id)
               );
@@ -114,7 +128,12 @@ export class Issues extends Component {
 
             return (
               <Issue3 key={column._id}>
-                <IssueBox column={column} tasks={tasks} count={tasks.length} />
+                <IssueBox
+                  droppableId={String(index)}
+                  column={column}
+                  tasks={tasks}
+                  count={tasks.length}
+                />
               </Issue3>
             );
           })}

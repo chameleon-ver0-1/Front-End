@@ -39,6 +39,7 @@ connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/"; //socket
 export class VideoItem extends Component {
   //FIXME:state값 추가함
   state = { roomToken: "", dummy: [] };
+  /* 비디오 캡처하는 함수*/
 
   componentWillMount() {
     /***********************************/
@@ -284,6 +285,37 @@ export class VideoItem extends Component {
       })
     );
 
+    // axios.get('/happy')
+    //   .then( response => { console.log(response.data); } ) // SUCCESS
+    //   .catch( response => { console.log(response); } ); // ERROR
+  }
+
+  state = { roomKey: "undefined" };
+
+  render() {
+    /*신규 화상회의 방 개설하는 함수 */
+
+    // function afterOpenOrJoin() {
+    //   connection.socket.on(connection.socketCustomEvent, function(
+    //     message,
+    //     error
+    //   ) {
+    //     if (message.userid === connection.userid) return; // ignore self messages
+    //     if (message.justSharedMyScreen === true) {
+    //       var video = document.getElementById(message.userid);
+    //       if (video) {
+    //         video.querySelector("video").srcObject = null;
+    //       }
+    //     }
+    //     if (message.justStoppedMyScreen === true) {
+    //       var video = document.getElementById(message.userid);
+    //       if (video) {
+    //         video.querySelector("video").srcObject = null;
+    //       }
+    //     }
+    //   });
+    // }
+
     /***********************************/
     //감정인식 부분
     /***********************************/
@@ -292,7 +324,6 @@ export class VideoItem extends Component {
 
     /* 비디오 캡처하는 함수*/
     const capture = () => {
-      console.log("captrue 작동 중");
       /*videos-container 캡쳐하기 전 비디오 위에 비디오 캡쳐 이미지 놓기*/
       connection.showImage = document.getElementById("show-image");
       var canvas = document.createElement("canvas");
@@ -346,43 +377,19 @@ export class VideoItem extends Component {
       });
     };
 
-    /*5초마다 capture() 호출*/
-    //capture();
-    playTran = setInterval(function() {
-      capture();
-      console.log("감정인식 중입니다....");
-    }, 5000);
+    const onRekog = () => {
+      /*5초마다 capture() 호출*/
+      //capture();
+      console.log("감정인식 시작");
+      playTran = setInterval(function() {
+        console.log("감정 인식 중입니다...");
+        capture();
+      }, 5000);
 
-    // axios.get('/happy')
-    //   .then( response => { console.log(response.data); } ) // SUCCESS
-    //   .catch( response => { console.log(response); } ); // ERROR
-  }
-
-  state = { roomKey: "undefined" };
-
-  render() {
-    /*신규 화상회의 방 개설하는 함수 */
-
-    // function afterOpenOrJoin() {
-    //   connection.socket.on(connection.socketCustomEvent, function(
-    //     message,
-    //     error
-    //   ) {
-    //     if (message.userid === connection.userid) return; // ignore self messages
-    //     if (message.justSharedMyScreen === true) {
-    //       var video = document.getElementById(message.userid);
-    //       if (video) {
-    //         video.querySelector("video").srcObject = null;
-    //       }
-    //     }
-    //     if (message.justStoppedMyScreen === true) {
-    //       var video = document.getElementById(message.userid);
-    //       if (video) {
-    //         video.querySelector("video").srcObject = null;
-    //       }
-    //     }
-    //   });
-    // }
+      // axios.get('/happy')
+      //   .then( response => { console.log(response.data); } ) // SUCCESS
+      //   .catch( response => { console.log(response); } ); // ERROR
+    };
 
     const onStop = () => {
       //clearInterval(playTran);
@@ -472,6 +479,7 @@ export class VideoItem extends Component {
         {/* <button id="share-screen" onClick={testShare}>
           화면 공유
         </button> */}
+        <button onClick={onRekog}>감정인식 시작</button>
         <VideosContainer id="videos-container" />
         <div id="room-urls" style={{ width: "100%" }} />
         <EmotionStatus id="showEmotion" />
