@@ -17,7 +17,7 @@ export class IssueBox extends Component {
   state = { taskItemLists: [] };
 
   render() {
-    const { column, count, tasks } = this.props;
+    const { column, count, tasks, droppableId } = this.props;
 
     //TODO: backgroundColor: $(props.isDraggingOver ? 'skyblue':'white');
 
@@ -28,7 +28,7 @@ export class IssueBox extends Component {
 
           <IssuesTitleCount>{count}</IssuesTitleCount>
         </IssuesTitle>
-        <Droppable droppableId={column._id}>
+        <Droppable droppableId={column.status}>
           {(provided, snapshot) => (
             <ItemList
               ref={provided.innerRef}

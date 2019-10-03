@@ -13,9 +13,6 @@ export class IssueAdd extends Component {
     };
   }
 
-  componentDidMount = () => {
-    console.log(this.props.isShow);
-  };
   openDialog = () => {
     this.setState({
       open: true

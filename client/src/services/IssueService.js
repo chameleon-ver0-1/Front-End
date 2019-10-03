@@ -13,7 +13,6 @@ export function getIssueList() {
   return IssueAxios.get(`${localStorage.getItem("projectId")}`);
 }
 export function getCommentList(issueId) {
-  console.log("commentAPI확인", issueId);
   return IssueAxios.get(`get/${issueId}`);
 }
 export function postComment(taskId, username, usernameEn, userImg, content) {
