@@ -77,8 +77,7 @@ export class ProjectFirst extends Component {
           onClose={onCloseModal}
           id={id}
           styles={{
-            overlay: { background: "#F2000000" },
-            modal: { boxShadow: "1px solid #000000" }
+            overlay: { background: "#F2000000" }
           }}
           center
         >
