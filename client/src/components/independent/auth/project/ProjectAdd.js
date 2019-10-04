@@ -31,6 +31,7 @@ export class ProjectAdd extends Component {
         res => {
           console.log(res.data.data._id);
           if (res.data.message === "프로젝트 생성 성공") {
+            localStorage.setItem("projectName", res.data.data.name);
             localStorage.setItem("projectId", res.data.data._id);
             this.props.history.push(`/home/issue/${res.data.data._id}`);
             console.log("프로젝트 개설 성공");
