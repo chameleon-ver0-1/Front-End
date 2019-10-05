@@ -10,11 +10,33 @@ import { Link } from "react-router-dom";
 import DocData from "./data/doc.json";
 import axios from "axios";
 import ConferencePosts from "./ConferencePosts";
+import download_off from "../../../assets/doc/download_off.png";
+import DocumentTag from "./DocumentTag";
+import * as services from "../../../services/DocumentService";
 
 export class ConferenceDoc extends Component {
   constructor(props) {
     super(props);
-    this.state = DocData;
+    // this.state = DocData;
+    this.state = {
+      documentList: "",
+      count: 1
+    };
+  }
+
+  componentDidMount() {
+    services
+      .getDocumentList(localStorage.getItem("projectId"), this.state.count)
+      .then(
+        res => {
+          console.log("회의록 목록이 뜬다");
+          console.log(res.data.data.confLogs);
+        },
+        err => {
+          console.log(err);
+          console.log("희의록 목록이 안뜬다");
+        }
+      );
   }
 
   handleClick() {
@@ -35,52 +57,57 @@ export class ConferenceDoc extends Component {
               <div className="table_head_text4">다운로드</div>
             </div>
 
-            <ConferencePosts />
-          </div>
-
-          {/* <table className="documentroom_table">
-            <tr className="table_head">
-              <th>회의제목</th>
-              <th>회의시간</th>
-              <th>파일명</th>
-              <th>보기 및 다운로드</th>
-              <th />
-            </tr>
-
+            {/* <ConferencePosts /> */}
             {DocData.map((docDetail, index) => {
               return (
-                <tr className="table_content">
-                  <td>
-                    <Link
-                      to="/home/conferenceDocumentDetail"
-                      className="linkdocumentdetail"
-                      onClick="handleClick()"
-                    >
-                      <button className="todetail">{docDetail.title}</button>
-                    </Link>
-                  </td>
-                  <td>{docDetail.date}</td>
-                  <td />
-                  <td>
-                    <button className="doc_button">
-                      <img src={doc_off} className="doc_buttonimg" />
-                    </button>
-                    <button className="doc_button">
-                      <img src={download_off} className="doc_buttonimg" />
-                    </button>
-                  </td>
-                </tr>
+                <ul className="post-ul">
+                  <li className="post-li">
+                    <ul className="post-row-list">
+                      <li className="post-row-list-item1">
+                        <Link
+                          to={{
+                            pathname:
+                              "/home/conferenceDocument/conferenceDocumentDetail",
+                            state: {
+                              title: docDetail.title,
+                              date: docDetail.date
+                            }
+                          }}
+                          className="linkdocumentdetail"
+                        >
+                          <button className="todetail">
+                            {docDetail.title}
+                          </button>
+                        </Link>
+                      </li>
+                      <li className="post-row-list-item2">{docDetail.date}</li>
+                      <li className="post-row-list-item3">
+                        <div className="post-row-list-item-tag">
+                          <DocumentTag />
+                        </div>
+                      </li>
+                      <li className="post-row-list-item4">
+                        <button className="post-row-list-item-btn">
+                          <img
+                            src={download_off}
+                            className="post-row-list-item-img"
+                          />
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
               );
             })}
-          </table> */}
+          </div>
 
-          {/* <div className="pagination">
+          <div className="pagination">
             <button className="page_button">1</button>
             <button className="page_button">2</button>
             <button className="page_button">3</button>
             <button className="page_button">4</button>
             <button className="page_button">5</button>
-          </div> */}
+          </div>
 
           <div className="conference_search">
             <select className="search_select">
