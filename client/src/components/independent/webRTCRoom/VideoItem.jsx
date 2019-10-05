@@ -365,7 +365,6 @@ export class VideoItem extends Component {
           setTimeout(reCheckRoomPresence, 5000);
         });
       })();
-      disableInputButtons();
     }
 
     /*detect 2G*/
