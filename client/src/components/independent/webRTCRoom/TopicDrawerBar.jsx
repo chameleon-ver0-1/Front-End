@@ -32,8 +32,6 @@ import {
   TimeStamp
 } from "./webrtc.style";
 
-
-
 //--------------------------------------------------------
 //-----------------Speech Recognition Code----------------
 //--------------------------------------------------------
@@ -147,15 +145,19 @@ function sender(text) {
 export class TopicDrawerBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { d: new Date(), chatLogs: "" };
+    this.state = { d: new Date(), chatLogs: "", startTime: new Date() };
     this.items = [];
     for (let i = 1; i <= 5; i++) {
       this.items.push(i);
     }
   }
   componentDidMount() {
-    // Clockcmp 컴포넌트가 불러올때마다 1초씩 this.Change()를 부른다
+    /*회의 시작 시간 state에 담아둔다: 회의 종료 시간과 계산하여 회의 총 시간 계산 예정 */
+    this.setState({
+      startTime: new Date()
+    });
 
+    // Clockcmp 컴포넌트가 불러올때마다 1초씩 this.Change()를 부른다
     this.timeID = setInterval(() => this.onChangeTime(), 1000);
   }
   componentWillUnmount() {
@@ -235,12 +237,14 @@ export class TopicDrawerBar extends Component {
           <RecordTime>{currentDate}</RecordTime>
         </DrawerTitleContainer>
         <TopicContainer>
-          <TopicItem>전체</TopicItem>
+          {/* Topic GET API 받아와서 map으로 for문 돌릴 부분 */}
           <TopicItem>토픽1</TopicItem>
           <TopicItem>토픽2</TopicItem>
           <TopicItem>토픽3</TopicItem>
         </TopicContainer>
+
         <DarkDivideLine />
+        {/* RecordBox: 정적이 길게 흐르기 전까지를 기준으로 기록을 보여주는 RecordBox,즉 소영이 너가 쌓아내려갈 DIV */}
         <RecordBorder>
           <TimeStamp>
             {this.state.d.getHours()}:{this.state.d.getMinutes()}
