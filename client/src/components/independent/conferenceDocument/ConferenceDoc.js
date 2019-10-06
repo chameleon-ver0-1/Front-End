@@ -22,6 +22,8 @@ export class ConferenceDoc extends Component {
       documentList: "",
       count: 1
     };
+
+    this.pageNext = this.pageNext.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +33,9 @@ export class ConferenceDoc extends Component {
         res => {
           console.log("회의록 목록이 뜬다");
           console.log(res.data.data.confLogs);
+          this.setState({
+            documentList: res.data.data.confLogs
+          });
         },
         err => {
           console.log(err);
@@ -42,6 +47,13 @@ export class ConferenceDoc extends Component {
   handleClick() {
     console.log("click");
   }
+
+  pageNext = e => {
+    console.log(e.target.id);
+    this.setState({
+      count: e.target.id
+    });
+  };
 
   render() {
     return (
@@ -58,7 +70,47 @@ export class ConferenceDoc extends Component {
             </div>
 
             {/* <ConferencePosts /> */}
-            {DocData.map((docDetail, index) => {
+            {Object.keys(this.state.documentList).map(Id => {
+              const list = this.state.documentList[Id];
+              return (
+                <ul className="post-ul">
+                  <li className="post-li">
+                    <ul className="post-row-list">
+                      <li className="post-row-list-item1">
+                        <Link
+                          to={{
+                            pathname:
+                              "/home/conferenceDocument/conferenceDocumentDetail",
+                            state: {
+                              title: list.title,
+                              date: list.startTime
+                            }
+                          }}
+                          className="linkdocumentdetail"
+                        >
+                          <button className="todetail">{list.title}</button>
+                        </Link>
+                      </li>
+                      <li className="post-row-list-item2">{list.startTime}</li>
+                      <li className="post-row-list-item3">
+                        <div className="post-row-list-item-tag">
+                          <DocumentTag topic={list.mainTopics} />
+                        </div>
+                      </li>
+                      <li className="post-row-list-item4">
+                        <button className="post-row-list-item-btn">
+                          <img
+                            src={download_off}
+                            className="post-row-list-item-img"
+                          />
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              );
+            })}
+            {/* {DocData.map((docDetail, index) => {
               return (
                 <ul className="post-ul">
                   <li className="post-li">
@@ -98,15 +150,67 @@ export class ConferenceDoc extends Component {
                   </li>
                 </ul>
               );
-            })}
+            })} */}
           </div>
 
-          <div className="pagination">
-            <button className="page_button">1</button>
-            <button className="page_button">2</button>
-            <button className="page_button">3</button>
-            <button className="page_button">4</button>
-            <button className="page_button">5</button>
+          <div className="pagination-div">
+            <div className="pagination">
+              {/* <button className="page_button" onClick={this.pageNext} id="1">
+                1
+              </button>
+              <button className="page_button" onClick={this.pageNext} id="2">
+                2
+              </button>
+              <button className="page_button" onClick={this.pageNext} id="3">
+                3
+              </button>
+              <button className="page_button" onClick={this.pageNext} id="4">
+                4
+              </button>
+              <button className="page_button" onClick={this.pageNext} id="5">
+                5
+              </button> */}
+              <Link
+                to={`/home/conferenceDocument/${localStorage.getItem(
+                  "projectId"
+                )}?pageNo=1`}
+                className="page_button"
+              >
+                1
+              </Link>
+              <Link
+                to={`/home/conferenceDocument/${localStorage.getItem(
+                  "projectId"
+                )}?pageNo=2`}
+                className="page_button"
+              >
+                2
+              </Link>
+              <Link
+                to={`/home/conferenceDocument/${localStorage.getItem(
+                  "projectId"
+                )}?pageNo=3`}
+                className="page_button"
+              >
+                3
+              </Link>
+              <Link
+                to={`/home/conferenceDocument/${localStorage.getItem(
+                  "projectId"
+                )}?pageNo=4`}
+                className="page_button"
+              >
+                4
+              </Link>
+              <Link
+                to={`/home/conferenceDocument/${localStorage.getItem(
+                  "projectId"
+                )}?pageNo=5`}
+                className="page_button"
+              >
+                5
+              </Link>
+            </div>
           </div>
 
           <div className="conference_search">
