@@ -20,15 +20,36 @@ export class ConferenceDoc extends Component {
     // this.state = DocData;
     this.state = {
       documentList: "",
-      count: 1
+      search: ""
     };
 
     this.pageNext = this.pageNext.bind(this);
+    this.search = this.search.bind(this);
   }
 
   componentDidMount() {
+    services.getDocumentList(localStorage.getItem("projectId"), 1).then(
+      res => {
+        console.log("회의록 목록이 뜬다");
+        console.log(res.data.data.confLogs);
+        this.setState({
+          documentList: res.data.data.confLogs
+        });
+      },
+      err => {
+        console.log(err);
+        console.log("희의록 목록이 안뜬다");
+      }
+    );
+  }
+
+  handleClick() {
+    console.log("click");
+  }
+
+  pageNext = e => {
     services
-      .getDocumentList(localStorage.getItem("projectId"), this.state.count)
+      .getDocumentList(localStorage.getItem("projectId"), e.target.id)
       .then(
         res => {
           console.log("회의록 목록이 뜬다");
@@ -42,18 +63,25 @@ export class ConferenceDoc extends Component {
           console.log("희의록 목록이 안뜬다");
         }
       );
-  }
-
-  handleClick() {
-    console.log("click");
-  }
-
-  pageNext = e => {
-    console.log(e.target.id);
-    this.setState({
-      count: e.target.id
-    });
   };
+
+  search() {
+    services
+      .getDocumentSearch(localStorage.getItem("projectId"), this.state.search)
+      .then(
+        res => {
+          console.log("검색이 된다");
+          console.log(res.data.data.confLogs);
+          this.setState({
+            documentList: res.data.data.confLogs
+          });
+        },
+        err => {
+          console.log(err);
+          console.log("검색이 안된다");
+        }
+      );
+  }
 
   render() {
     return (
@@ -92,6 +120,7 @@ export class ConferenceDoc extends Component {
                         </Link>
                       </li>
                       <li className="post-row-list-item2">{list.startTime}</li>
+                      {/* TODO: ISOString */}
                       <li className="post-row-list-item3">
                         <div className="post-row-list-item-tag">
                           <DocumentTag topic={list.mainTopics} />
@@ -171,42 +200,42 @@ export class ConferenceDoc extends Component {
                 5
               </button> */}
               <Link
-                to={`/home/conferenceDocument/${localStorage.getItem(
-                  "projectId"
-                )}?pageNo=1`}
+                to={`?pageNo=1`}
                 className="page_button"
+                onClick={this.pageNext}
+                id="1"
               >
                 1
               </Link>
               <Link
-                to={`/home/conferenceDocument/${localStorage.getItem(
-                  "projectId"
-                )}?pageNo=2`}
+                to={`?pageNo=2`}
                 className="page_button"
+                onClick={this.pageNext}
+                id="2"
               >
                 2
               </Link>
               <Link
-                to={`/home/conferenceDocument/${localStorage.getItem(
-                  "projectId"
-                )}?pageNo=3`}
+                to={`?pageNo=3`}
                 className="page_button"
+                onClick={this.pageNext}
+                id="3"
               >
                 3
               </Link>
               <Link
-                to={`/home/conferenceDocument/${localStorage.getItem(
-                  "projectId"
-                )}?pageNo=4`}
+                to={`?pageNo=4`}
                 className="page_button"
+                onClick={this.pageNext}
+                id="4"
               >
                 4
               </Link>
               <Link
-                to={`/home/conferenceDocument/${localStorage.getItem(
-                  "projectId"
-                )}?pageNo=5`}
+                to={`?pageNo=5`}
                 className="page_button"
+                onClick={this.pageNext}
+                id="5"
               >
                 5
               </Link>
@@ -226,9 +255,21 @@ export class ConferenceDoc extends Component {
             <input
               placeholder="회의 제목이나 날짜를 입력하세요"
               className="search_input"
+              onChange={e => {
+                this.setState({
+                  search: e.target.value
+                });
+              }}
             />
 
-            <button className="search_button">검색</button>
+            {/* <button className="search_button" onClick={this.search}>검색</button> */}
+            <Link
+              to={`?search=${this.state.search}`}
+              className="search_button"
+              onClick={this.search}
+            >
+              검색
+            </Link>
           </div>
         </div>
       </div>
