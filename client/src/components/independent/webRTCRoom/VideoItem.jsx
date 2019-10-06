@@ -39,12 +39,9 @@ connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/"; //socket
 export class VideoItem extends Component {
   //FIXME:state값 추가함
   state = { roomToken: "", dummy: [] };
-  /* 비디오 캡처하는 함수*/
 
+  /*script가져오는 함수 */
   componentWillMount() {
-    /***********************************/
-    /*script가져오는 함수 */
-    /***********************************/
     const script = document.createElement("script");
 
     script.src = "https://cdn.webrtc-experiment.com/RTCMultiConnection.js";
@@ -56,28 +53,36 @@ export class VideoItem extends Component {
       "https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js";
     script.src =
       "https://rtcmulticonnection.herokuapp.com/node_modules/webrtc-adapter/out/adapter.js";
+    script.src = "./getHTMLMediaElement.jsx";
 
-    /*screen sharing을 위한 script */
     script.src = "https://cdn.WebRTC-Experiment.com/getScreenId.js";
     script.src = "https://webrtc.github.io/adapter/adapter-latest.js";
-    script.src = "https://www.webrtc-experiment.com/common.js";
 
-    /*말하는 순간을 잡기 위한 script */
-    script.src = "https://cdn.webrtc-experiment.com/hark.js";
     script.async = true;
 
     document.body.appendChild(script);
+  }
+  componentDidMount() {
+    /*신규 화상회의방을 개설하고 들어가는 함수 */
+    connection.openOrJoin(
+      document.getElementById("testRoomId", function(
+        isRoomExist,
+        roomid,
+        error
+      ) {
+        if (error) {
+          // disableInputButtons(true);
+          alert(error);
+        } else if (connection.isInitiator === true) {
+          // showRoomURL(roomid);
+        }
+      })
+    );
+  }
 
-    /***********************************/
-    /*스트리밍 연결*/
-    /***********************************/
+  state = { roomKey: "undefined" };
 
-    var RMCMediaTrack = {
-      cameraStream: null,
-      cameraTrack: null,
-      screen: null
-    };
-
+  render() {
     (function() {
       var params = {},
         r = /([^&=]+)=?([^&]*)/g;
@@ -91,66 +96,29 @@ export class VideoItem extends Component {
       window.params = params;
     })();
 
-    // connection.socketMessageEvent = "video-conference-demo";
-    //FIXME:
-    connection.socketMessageEvent = "video-screen-demo";
+    connection.socketMessageEvent = "video-conference-demo";
 
-    //비디오와 오디오를 통한 회의를 하고자할 경우,
     connection.session = {
       audio: true,
       video: true
     };
 
-    //createOffer이나 createAnswer API가 호출될 때마다 사용해야하는 제한 조건을 강제 실행할 수 있다.
     connection.sdpConstraints.mandatory = {
       OfferToReceiveAudio: true,
       OfferToReceiveVideo: true
     };
 
-    var videoCpy;
-    //모든 로컬 및 원격 미디어 스트림을 수신하기 위한 함수
     connection.onstream = function(event) {
-      //onspeaking에서 사용할 부분을 초기화
-      initHark({
-        stream: event.stream,
-        streamedObject: event,
-        connection: connection
-      });
       //connection1
-      // event.mediaContainer.style.width=""
       connection.videosContainer = document.getElementById("videos-container"); //1개 이상의 비디오들을 담을 div공간을 id값으로 가져온다.
       var video = document.createElement("video"); //비디오 컴포넌트를 생성한다.
-      video.id = event.streamid; //각 비디오 화면에 각 스트림의 고유 식별자를 붙인다.
-      video.style.width = "100%";
-      video.style.height = "100%";
+      video.id = event.streamid;
 
-      video.style.border = "solid 1px var(--greenish-teal)";
-
+      console.log("onstream 정상 작동 중");
       event.mediaElement.removeAttribute("src");
       event.mediaElement.removeAttribute("srcObject");
       event.mediaElement.muted = true;
       event.mediaElement.volume = 0;
-
-      //FIXME:
-      var existing = document.getElementById(event.streamid);
-      if (existing && existing.parentNode) {
-        existing.parentNode.removeChild(existing);
-      }
-
-      //로컬이고 Video stream일 경우,
-      if (event.type === "local" && event.stream.isVideo) {
-        RMCMediaTrack.cameraStream = event.stream;
-
-        navigator.mediaDevices
-          .getUserMedia({ video: true, audio: true })
-          .then(
-            stream =>
-              (RMCMediaTrack.cameraTrack = stream.getTracks(
-                event.stream,
-                "video"
-              )[0])
-          );
-      }
 
       try {
         video.setAttributeNode(document.createAttribute("autoplay"));
@@ -171,24 +139,16 @@ export class VideoItem extends Component {
 
       video.srcObject = event.stream; //비디오에 stream을 연결한다.
 
-      connection.videosContainer.style.width = "100%";
-      var width = "500px";
+      var width = 400; //임의의 너비 길이의 변수
+      var height = 1000;
+      video.width = width; //비디오의 너비를 설정한다.
 
-      var mediaElement = service.getHTMLMediaElement(video, {
-        title: event.userid,
-        buttons: ["mute-audio", "mute-video"],
-        width: width,
-        showOnMouseEnter: false
-      });
+      video.buttons = "full-screen"; //전체화면으로 확장되는 버튼을 추가한다.
+      video.style.marginLeft = "16px"; //각 비디오의 왼쪽 마진을 설정한다.
 
-      connection.videosContainer.appendChild(mediaElement); //비디오를 div공간에 추가한다.
+      connection.videosContainer.appendChild(video); //비디오를 div공간에 추가한다.
 
-      //TODO: get
-      setTimeout(function() {
-        mediaElement.media.play();
-      }, 5000);
-      mediaElement.id = event.streamid;
-
+      localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
       if (event.type === "local") {
         connection.socket.on("disconnect", function() {
           if (!connection.getAllParticipants().length) {
@@ -196,64 +156,15 @@ export class VideoItem extends Component {
           }
         });
       }
-      localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
-      videoCpy = video;
     };
-    /*****************************/
-    /*음성에 따른 액션*/
-    /*****************************/
-    //connection-ing
-    connection.onspeaking = function(e) {
-      //사용자가 말하는 순간 동안 실행되는 함수
-      console.log("onspeaking 작동 중");
-      videoCpy.style.border = "5px solid var(--greenish-teal)";
-    };
-    connection.onsilence = function(e) {
-      //사용자가 말을 하지 않는 동안 실행되는 함수
-      videoCpy.style.border = "none";
-    };
-    connection.onvolumechange = function(event) {
-      //볼륨의 높낮이가 달라질 때 실행되는 함수
-      event.mediaElement.style.borderWidth = event.volume;
-    };
-
-    function initHark(args) {
-      if (!window.hark) {
-        throw "Please link hark.js";
-        return;
-      }
-
-      var connection = args.connection;
-      var streamedObject = args.streamedObject;
-      var stream = args.stream;
-
-      var options = {};
-      var speechEvents = window.hark(stream, options);
-
-      speechEvents.on("speaking", function() {
-        connection.onspeaking(streamedObject);
-      });
-
-      speechEvents.on("stopped_speaking", function() {
-        connection.onsilence(streamedObject);
-      });
-
-      speechEvents.on("volume_change", function(volume, threshold) {
-        streamedObject.volume = volume;
-        streamedObject.threshold = threshold;
-        connection.onvolumechange(streamedObject);
-      });
-    }
 
     //connection2
-    //비활성화된(중지된) 비디오를 제거
     connection.onstreamended = function(event) {
       var mediaElement = document.getElementById(event.streamid);
       if (mediaElement) {
         mediaElement.parentNode.removeChild(mediaElement);
       }
     };
-
     connection.onMediaError = function(e) {
       if (e.message === "Concurrent mic process limit.") {
         if (window.DetectRTC.audioInputDevices.length <= 1) {
@@ -269,57 +180,47 @@ export class VideoItem extends Component {
         connection.join(connection.sessionid);
       }
     };
-    /*******************************************/
-    /*신규 화상회의방을 개설하고 들어가는 함수 */
-    /*******************************************/
-    connection.openOrJoin(
-      document.getElementById("room-id".value, function(
-        isRoomExist,
-        roomid,
-        error
+
+    //TODO: 화면 공유 버튼 on/off state에 따라서 함수 실행시키기
+    /*화면 공유 함수*/
+    const getScreenId = (error, sourceId, screen_constraints) => {
+      if (
+        navigator.userAgent.indexOf("Edge") !== -1 &&
+        (!!navigator.msSaveOrOpenBlob || !!navigator.msSaveBlob)
       ) {
-        if (error) {
-          alert(error);
-        } else if (connection.isInitiator === true) {
-        }
-      })
-    );
+        navigator.getDisplayMedia(screen_constraints).then(
+          stream => {
+            document.querySelector("video").srcObject = stream;
+          },
+          error => {
+            alert("Please make sure to use Edge 17 or higher.");
+          }
+        );
+        return;
+      }
+      //TODO: 화면 공유 버튼 on/off state에 따라서 함수 실행시키기
+      //chrome extension 설치 여부 detection
+      // const getChromeExtensionStatus = status => {
+      //   if (status === "installed-enabled") alert("installed");
+      //   if (status === "installed-disabled") alert("installed but disabled");
+      //   // etc.
+      // };
 
-    // axios.get('/happy')
-    //   .then( response => { console.log(response.data); } ) // SUCCESS
-    //   .catch( response => { console.log(response); } ); // ERROR
-  }
+      navigator.mediaDevices
+        .getUserMedia(screen_constraints)
+        .then(function(stream) {
+          document.querySelector("video").srcObject = stream;
 
-  state = { roomKey: "undefined" };
+          // share this "MediaStream" object using RTCPeerConnection API
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+    };
 
-  render() {
-    /*신규 화상회의 방 개설하는 함수 */
-
-    // function afterOpenOrJoin() {
-    //   connection.socket.on(connection.socketCustomEvent, function(
-    //     message,
-    //     error
-    //   ) {
-    //     if (message.userid === connection.userid) return; // ignore self messages
-    //     if (message.justSharedMyScreen === true) {
-    //       var video = document.getElementById(message.userid);
-    //       if (video) {
-    //         video.querySelector("video").srcObject = null;
-    //       }
-    //     }
-    //     if (message.justStoppedMyScreen === true) {
-    //       var video = document.getElementById(message.userid);
-    //       if (video) {
-    //         video.querySelector("video").srcObject = null;
-    //       }
-    //     }
-    //   });
-    // }
-
-    /***********************************/
-    //감정인식 부분
-    /***********************************/
-
+    /*******************************************/
+    //감정인식 로직: 화면의 비율 가로길이 기준으로 3/2이상은 펼쳐져 있어야 정상 작동하는 모습 볼 수 있음..
+    /*******************************************/
     let playTran; //실시간 전송하기 위한 변수
 
     /* 비디오 캡처하는 함수*/
@@ -360,6 +261,7 @@ export class VideoItem extends Component {
             img: canvas.toDataURL("image/png")
           })
           .then(response => {
+            console.log(response.data);
             if (response.data.data === false) {
               document.getElementById("showEmotion").style.visibility =
                 "hidden";
@@ -371,8 +273,8 @@ export class VideoItem extends Component {
               response.data.message;
             console.log(response.data);
           })
-          .catch(response => {
-            console.log(response);
+          .catch(e => {
+            console.log(e);
           });
       });
     };
@@ -382,9 +284,9 @@ export class VideoItem extends Component {
       //capture();
       console.log("감정인식 시작");
       playTran = setInterval(function() {
-        console.log("감정 인식 중입니다...");
+        console.log("감정인식 중입니다.");
         capture();
-      }, 5000);
+      }, 6000);
 
       // axios.get('/happy')
       //   .then( response => { console.log(response.data); } ) // SUCCESS
@@ -392,7 +294,7 @@ export class VideoItem extends Component {
     };
 
     const onStop = () => {
-      //clearInterval(playTran);
+      clearInterval(playTran);
       console.log("종료");
     };
 
@@ -416,9 +318,10 @@ export class VideoItem extends Component {
       var roomURLsDiv = document.getElementById("room-urls");
       roomURLsDiv.innerHTML = html;
       roomURLsDiv.style.display = "block";
-
+      //FIXME:state값 추가함
+      // this.state.roomToken = roomQueryStringURL;
+      // this.state.roomKey = html;
       this.state.roomToken = roomQueryStringURL;
-      console.log("roomURL" + roomQueryStringURL);
     };
 
     /*roomid setting*/
@@ -444,7 +347,6 @@ export class VideoItem extends Component {
 
     //TODO: roomid를 직접 받아와야하는 부분
     var roomid = window.params.roomid;
-    // var roomid = txtRoomId;
 
     if (!roomid && hashString.length) {
       roomid = hashString;
@@ -479,6 +381,7 @@ export class VideoItem extends Component {
         {/* <button id="share-screen" onClick={testShare}>
           화면 공유
         </button> */}
+
         <button onClick={onRekog}>감정인식 시작</button>
         <VideosContainer id="videos-container" />
         <div id="room-urls" style={{ width: "100%" }} />
