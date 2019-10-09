@@ -124,13 +124,14 @@ var chatMessage;
 
 /* 인식된 메시지 프론트에 기록하는 함수*/
 function writeMessage(color, name, message) {
-  console.log("[채팅방 기록]: " + name + ' -> ' + message);
+  console.log("[채팅방 기록]: " + name + " -> " + message);
 
   chatColor = color;
   chatName = name;
   chatMessage = message;
 
   // TODO: FIXME: 여기에서 div를 추가하는 함수를 호출할 수 있어야 합니다. @윤영님
+  console.log("loglog => " + chatColor + ": " + chatName + ": " + chatMessage);
 }
 /* socket.io 서버에 유저이름, 인식된 메시지 전송하는 함수 */
 function sender(text) {
@@ -184,7 +185,6 @@ export class TopicDrawerBar extends Component {
     socket = io.connect(serverURL);
 
     socket.on("connection", function(data) {
-
       if (data.type === "connected") {
         color = data.color;
 
