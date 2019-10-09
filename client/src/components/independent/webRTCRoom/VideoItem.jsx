@@ -42,6 +42,9 @@ export class VideoItem extends Component {
 
   /*script가져오는 함수 */
   componentWillMount() {
+    /***********************************/
+    /*script가져오는 함수 */
+    /***********************************/
     const script = document.createElement("script");
 
     script.src = "https://cdn.webrtc-experiment.com/RTCMultiConnection.js";
@@ -53,11 +56,14 @@ export class VideoItem extends Component {
       "https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js";
     script.src =
       "https://rtcmulticonnection.herokuapp.com/node_modules/webrtc-adapter/out/adapter.js";
-    script.src = "./getHTMLMediaElement.jsx";
 
+    /*screen sharing을 위한 script */
     script.src = "https://cdn.WebRTC-Experiment.com/getScreenId.js";
     script.src = "https://webrtc.github.io/adapter/adapter-latest.js";
+    script.src = "https://www.webrtc-experiment.com/common.js";
 
+    /*말하는 순간을 잡기 위한 script */
+    script.src = "https://cdn.webrtc-experiment.com/hark.js";
     script.async = true;
 
     document.body.appendChild(script);
@@ -83,6 +89,12 @@ export class VideoItem extends Component {
   state = { roomKey: "undefined" };
 
   render() {
+    var RMCMediaTrack = {
+      cameraStream: null,
+      cameraTrack: null,
+      screen: null
+    };
+
     (function() {
       var params = {},
         r = /([^&=]+)=?([^&]*)/g;
@@ -96,7 +108,7 @@ export class VideoItem extends Component {
       window.params = params;
     })();
 
-    connection.socketMessageEvent = "video-conference-demo";
+    connection.socketMessageEvent = "video-screen-demo";
 
     connection.session = {
       audio: true,
@@ -108,17 +120,50 @@ export class VideoItem extends Component {
       OfferToReceiveVideo: true
     };
 
+    var videoCpy;
+
     connection.onstream = function(event) {
+      //onspeaking에서 사용할 부분을 초기화
+      initHark({
+        stream: event.stream,
+        streamedObject: event,
+        connection: connection
+      });
       //connection1
+      // event.mediaContainer.style.width=""
       connection.videosContainer = document.getElementById("videos-container"); //1개 이상의 비디오들을 담을 div공간을 id값으로 가져온다.
       var video = document.createElement("video"); //비디오 컴포넌트를 생성한다.
-      video.id = event.streamid;
+      video.id = event.streamid; //각 비디오 화면에 각 스트림의 고유 식별자를 붙인다.
+      video.style.width = "100%";
+      video.style.height = "100%";
 
-      console.log("onstream 정상 작동 중");
+      video.style.border = "solid 1px var(--greenish-teal)";
+
       event.mediaElement.removeAttribute("src");
       event.mediaElement.removeAttribute("srcObject");
       event.mediaElement.muted = true;
       event.mediaElement.volume = 0;
+
+      //FIXME:
+      var existing = document.getElementById(event.streamid);
+      if (existing && existing.parentNode) {
+        existing.parentNode.removeChild(existing);
+      }
+
+      //로컬이고 Video stream일 경우,
+      if (event.type === "local" && event.stream.isVideo) {
+        RMCMediaTrack.cameraStream = event.stream;
+
+        navigator.mediaDevices
+          .getUserMedia({ video: true, audio: true })
+          .then(
+            stream =>
+              (RMCMediaTrack.cameraTrack = stream.getTracks(
+                event.stream,
+                "video"
+              )[0])
+          );
+      }
 
       try {
         video.setAttributeNode(document.createAttribute("autoplay"));
@@ -139,16 +184,24 @@ export class VideoItem extends Component {
 
       video.srcObject = event.stream; //비디오에 stream을 연결한다.
 
-      var width = 400; //임의의 너비 길이의 변수
-      var height = 1000;
-      video.width = width; //비디오의 너비를 설정한다.
+      connection.videosContainer.style.width = "100%";
+      var width = "500px";
 
-      video.buttons = "full-screen"; //전체화면으로 확장되는 버튼을 추가한다.
-      video.style.marginLeft = "16px"; //각 비디오의 왼쪽 마진을 설정한다.
+      var mediaElement = service.getHTMLMediaElement(video, {
+        title: event.userid,
+        buttons: ["mute-audio", "mute-video"],
+        width: width,
+        showOnMouseEnter: false
+      });
 
-      connection.videosContainer.appendChild(video); //비디오를 div공간에 추가한다.
+      connection.videosContainer.appendChild(mediaElement); //비디오를 div공간에 추가한다.
 
-      localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
+      //TODO: get
+      setTimeout(function() {
+        mediaElement.media.play();
+      }, 5000);
+      mediaElement.id = event.streamid;
+
       if (event.type === "local") {
         connection.socket.on("disconnect", function() {
           if (!connection.getAllParticipants().length) {
@@ -156,7 +209,55 @@ export class VideoItem extends Component {
           }
         });
       }
+      localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
+      videoCpy = video;
     };
+    /*****************************/
+    /*음성에 따른 액션*/
+    /*****************************/
+    //connection-ing
+    connection.onspeaking = function(e) {
+      //사용자가 말하는 순간 동안 실행되는 함수
+      console.log("onspeaking 작동 중");
+      videoCpy.style.border = "3px solid var(--greenish-teal)";
+    };
+    connection.onsilence = function(e) {
+      //사용자가 말을 하지 않는 동안 실행되는 함수
+      videoCpy.style.border = "none";
+    };
+    connection.onvolumechange = function(event) {
+      //볼륨의 높낮이가 달라질 때 실행되는 함수
+      // event.mediaElement.style.borderWidth = event.volume;
+      videoCpy.style.borderWidth = event.volume;
+    };
+
+    function initHark(args) {
+      if (!window.hark) {
+        throw "Please link hark.js";
+        return;
+      }
+
+      var connection = args.connection;
+      var streamedObject = args.streamedObject;
+      var stream = args.stream;
+
+      var options = {};
+      var speechEvents = window.hark(stream, options);
+
+      speechEvents.on("speaking", function() {
+        connection.onspeaking(streamedObject);
+      });
+
+      speechEvents.on("stopped_speaking", function() {
+        connection.onsilence(streamedObject);
+      });
+
+      speechEvents.on("volume_change", function(volume, threshold) {
+        streamedObject.volume = volume;
+        streamedObject.threshold = threshold;
+        connection.onvolumechange(streamedObject);
+      });
+    }
 
     //connection2
     connection.onstreamended = function(event) {

@@ -49,3 +49,9 @@ export function postIssue(
     userImg
   });
 }
+
+export function postUpdateIssue(columnData) {
+  return IssueAxios.post("savestatus", {
+    columnData
+  });
+}

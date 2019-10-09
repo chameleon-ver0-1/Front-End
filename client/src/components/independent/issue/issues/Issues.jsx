@@ -11,7 +11,11 @@ import { Issue3, IssueBig } from "./issues.style";
 import * as service from "../../../../services/IssueService";
 
 export class Issues extends Component {
-  state = { taskLists: [], taskItemLists: [], currentDep: "" };
+  state = {
+    taskLists: [],
+    taskItemLists: [],
+    currentDep: ""
+  };
 
   componentDidMount() {
     service.getIssueList().then(
@@ -24,6 +28,7 @@ export class Issues extends Component {
         this.setState({ taskLists, taskItemLists });
         const current = res.data.data.roleData[0].role;
         this.setState({ currentDep: current });
+        console.log("초기 taskLists", this.state.taskLists);
       },
       err => {
         console.log("이슈 아이템 가져오기 실패");
@@ -41,7 +46,7 @@ export class Issues extends Component {
   };
 
   onDragEnd = result => {
-    const { taskLists } = this.state;
+    const { taskLists, updateTaskList } = this.state;
     // const issueName = document.querySelector(".issues-body");
     // issueName.style.color = "inherit";
     // issueName.style.backgroundColor = "inherit";
@@ -79,8 +84,12 @@ export class Issues extends Component {
       };
 
       this.setState({ taskLists: newState.taskLists });
-      // console.log("새로운 taskList", taskLists);
-      //TODO: 소영아1
+      console.log("요청을 보내는 taskLists", this.state.taskLists);
+      service.postUpdateIssue(newState.taskLists).then(res => {
+        console.log("************이슈 업데이트****************");
+        console.log(res.data);
+        console.log("************이슈 업데이트****************");
+      });
       return;
     }
     // //Moving from one list to another
@@ -107,12 +116,17 @@ export class Issues extends Component {
       }
     };
     this.setState({ taskLists: newState.taskLists });
-    //TODO: 소영아2
+    console.log("요청을 보내는 taskLists", newState.taskLists);
+    service.postUpdateIssue(newState.taskLists).then(res => {
+      console.log("************이슈 업데이트****************");
+      console.log(res.data);
+      console.log("************이슈 업데이트****************");
+    });
+
     return;
   };
 
   render() {
-    console.log("this.props.currentDep", this.props.currentDep);
     return (
       <IssueBig>
         <DragDropContext
@@ -134,7 +148,6 @@ export class Issues extends Component {
             tasksByDep.push(
               tasks.filter(t => t.dept === this.props.currentDep)
             );
-            console.log(tasksByDep);
             return (
               <Issue3 key={column._id}>
                 <IssueBox
