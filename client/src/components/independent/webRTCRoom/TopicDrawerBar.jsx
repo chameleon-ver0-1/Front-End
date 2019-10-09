@@ -81,7 +81,7 @@ recognition.onresult = function(event) {
 
   for (let i = event.resultIndex; i < event.results.length; ++i) {
     if (event.results[i].isFinal) {
-      // TODO: 소켓서버로 인식된 결과 문장 전송
+      // 인식된 문장이 끝났을 경우
       sender(event.results[i][0].transcript);
     } else {
       interimTranscript += event.results[i][0].transcript;
@@ -112,34 +112,35 @@ const onExit = () => {
 //-----------------Send to socket.io Server---------------
 //--------------------------------------------------------
 
-var serverURL = "localhost:50000";
-var name = "me";
-var room = "100";
+var serverURL = "https://s.chameleon4switch.cf/";
+var name; // FIXME: 지금 접속한 userName(한글) 넣어주세요, 윤영님!
+var color;
+var room; // FIXME: 회의실 입장 API에서 받아온 confId 넣어주세요, 윤영님!
 var socket = null;
 
-var chatLogs = "";
+var chatColor;
+var chatName;
+var chatMessage;
 
-var chatMessage = "";
 /* 인식된 메시지 프론트에 기록하는 함수*/
-function writeMessage(type, name, message) {
-  console.log("[채팅방 기록]: " + message);
+function writeMessage(color, name, message) {
+  console.log("[채팅방 기록]: " + name + " -> " + message);
 
-  var printName = "";
-  if (type === "me") {
-    printName = name + ":";
-  }
+  chatColor = color;
+  chatName = name;
+  chatMessage = message;
 
-  chatLogs += "\n" + printName + message;
-
-  chatMessage = chatLogs;
+  // TODO: FIXME: 여기에서 div를 추가하는 함수를 호출할 수 있어야 합니다. @윤영님
+  console.log("loglog => " + chatColor + ": " + chatName + ": " + chatMessage);
 }
 /* socket.io 서버에 유저이름, 인식된 메시지 전송하는 함수 */
 function sender(text) {
   socket.emit("user", {
+    color: color,
     name: name,
     message: text
   });
-  writeMessage("me", name, text);
+  writeMessage(color, name, text);
 }
 
 export class TopicDrawerBar extends Component {
@@ -182,9 +183,11 @@ export class TopicDrawerBar extends Component {
     script.src = "http://cdn.socket.io/socket.io-1.4.0.js";
 
     socket = io.connect(serverURL);
+
     socket.on("connection", function(data) {
-      console.log("connect");
       if (data.type === "connected") {
+        color = data.color;
+
         socket.emit("connection", {
           type: "join",
           name: name,
@@ -194,10 +197,11 @@ export class TopicDrawerBar extends Component {
     });
 
     socket.on("system", function(data) {
-      writeMessage("system", "system", data.message);
+      writeMessage("FIXME", "system", data.message); // FIXME: 시스템 컬러값 아무거나 하나 정해서 FIXME에 넣어주세요, 윤영님!
     });
+
     socket.on("message", function(data) {
-      writeMessage("other", data.name, data.message);
+      writeMessage(data.color, data.name, data.message);
     });
 
     /*******************************/

@@ -151,9 +151,9 @@ const HomeItem = styled.button`
 /*VideoItem */
 //////////////////////////////////////
 const VideoFrame = styled.div`
-  padding-left: 50px;
+  padding-left: 30px;
   padding-top: 19px;
-  padding-right: 50px;
+  padding-right: 30px;
 
   height: 100%;
 `;
@@ -172,7 +172,7 @@ const EmotionStatus = styled.div`
 const VideosContainer = styled.div`
   display: flex;
   height: 100%;
-
+  width: 1340px;
   flex-wrap: wrap;
 
   z-index: 1;
