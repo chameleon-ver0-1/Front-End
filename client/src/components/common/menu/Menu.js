@@ -48,20 +48,24 @@ export class Menu extends Component {
         <div className="menu-container">
           <ProjectName> {localStorage.getItem("projectName")}</ProjectName>
 
-          <NavLink className="link-list" to="/home/issue" activeStyle={active}>
+          <NavLink
+            className="link-list"
+            to={`/home/issue/${localStorage.getItem("projectId")}`}
+            activeStyle={active}
+          >
             이슈관리
           </NavLink>
           <NavLink
             className="link-list"
             activeStyle={active}
-            to="/home/conferenceRoom"
+            to={`/home/conferenceRoom/${localStorage.getItem("projectId")}`}
           >
             회의실
           </NavLink>
           <NavLink
             className="link-list"
             activeStyle={active}
-            to="/home/conferenceDocument"
+            to={`/home/conferenceDocument/${localStorage.getItem("projectId")}`}
           >
             회의록
           </NavLink>

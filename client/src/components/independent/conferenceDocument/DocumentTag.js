@@ -19,7 +19,8 @@ export class DocumentTag extends Component {
     const { tags } = this.state;
     return (
       <div className="tags">
-        <ReactTags tags={tags} readOnly />
+        {/* TODO: id 값 적용 */}
+        <ReactTags tags={this.props.topic} readOnly />
       </div>
     );
   }

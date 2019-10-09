@@ -4,6 +4,14 @@ import "./projectfirst.style.css";
 import { TagsProjectRoles } from "./TagsProjectRoles";
 import * as service from "../../../../services/ProjectService";
 import { withRouter } from "react-router-dom";
+import styled from "styled-components";
+
+const NOPEOPLE = styled.div`
+  font-size: 11px;
+  color: var(--greenish-teal);
+  margin-left: 210px;
+  display: none;
+`;
 
 export class ProjectFirst extends Component {
   constructor(props) {
@@ -14,7 +22,7 @@ export class ProjectFirst extends Component {
       projectLeader: "",
       projectParticipants: "",
       roles_tag: "",
-
+      nopeople: true,
       id: ""
     };
 
@@ -35,6 +43,14 @@ export class ProjectFirst extends Component {
     service.projectOK(projectId, this.state.roles_tag).then(
       res => {
         console.log("프로젝트 참여!");
+
+        //TODO: 참여자 없으면 예외처리
+        if (this.state.roles_tag == "") {
+          document.getElementById("nopeople").style.display = this.state
+            .nopeople
+            ? "inline"
+            : "none";
+        }
 
         localStorage.setItem("projectId", projectId);
         this.props.history.push(`/home/issue/${projectId}`);
@@ -121,6 +137,7 @@ export class ProjectFirst extends Component {
                 거절
               </button>
             </div>
+            <NOPEOPLE id="nopeople">참여자가 존재하지 않습니다.</NOPEOPLE>
           </div>
         </Modal>
       </div>

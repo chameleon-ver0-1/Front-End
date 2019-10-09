@@ -66,11 +66,14 @@ class App extends Component {
               <Route path="/auth/projectManage" component={ProjectManage} />
               <Route path="/auth/projectAdd" component={ProjectAdd} />
               <Route path="/auth/projectList" component={ProjectList} />
-              <Route path="/home/conferenceRoom" component={ConferenceRoom} />
+              <Route
+                path="/home/conferenceRoom/:projectId"
+                component={ConferenceRoom}
+              />
               <Route path="/room/:roomTokenId" component={WebRTCRoom} />
               <Route
                 exact
-                path="/home/conferenceDocument"
+                path="/home/conferenceDocument/:projectId"
                 render={props => (
                   <React.Fragment>
                     <ConferenceDocument />

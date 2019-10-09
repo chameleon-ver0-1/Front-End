@@ -199,6 +199,11 @@ a {
   justify-content: center;
 }
 
+.pagination-div {
+  display: flex;
+  justify-content: center;
+}
+
 .pagination {
   border: none;
   width: 142px;
@@ -220,11 +225,12 @@ a {
   background: none;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 
 .conference_search {
   margin-left: 210px;
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 21px;
 }
 
