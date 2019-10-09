@@ -9,20 +9,44 @@ const SmallTimeBorder = styled.div`
   margin-left: 18px;
   font-size: 14px;
   color: var(--light-black);
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
+const SmallTimeBorderN = styled.div`
+  width: 70px;
+  height: 29px;
+  border-radius: 10px;
+  border: solid 1px #ebebe0;
+  margin-left: 18px;
+  font-size: 14px;
+  color: var(--light-black);
+  background: #ebebe0;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 export class SmallDatePicker extends Component {
   render() {
-    return (
-      <div>
-        <SmallTimeBorder onClick={this.props.onClick}>
-          {this.props.value}
-        </SmallTimeBorder>
-      </div>
-    );
+    if (this.props.able == "able") {
+      return (
+        <div>
+          <SmallTimeBorder onClick={this.props.onClick}>
+            {this.props.value}
+          </SmallTimeBorder>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <SmallTimeBorderN onClick={this.props.onClick}>
+            {this.props.value}
+          </SmallTimeBorderN>
+        </div>
+      );
+    }
   }
 }
 
