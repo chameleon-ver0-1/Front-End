@@ -37,7 +37,7 @@ export class ProjectFirst extends Component {
   projectOk() {
     //프로젝트 참여
     const projectId = this.props.id;
-
+    const projectName = this.props.projectTitle;
     console.log(projectId);
     console.log(this.state.roles_tag + "+++++++++");
     service.projectOK(projectId, this.state.roles_tag).then(
@@ -51,7 +51,7 @@ export class ProjectFirst extends Component {
             ? "inline"
             : "none";
         }
-
+        localStorage.setItem("projectName", projectName);
         localStorage.setItem("projectId", projectId);
         this.props.history.push(`/home/issue/${projectId}`);
       },

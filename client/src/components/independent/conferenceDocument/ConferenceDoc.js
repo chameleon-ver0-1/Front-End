@@ -98,7 +98,7 @@ export class ConferenceDoc extends Component {
             </div>
 
             {/* <ConferencePosts /> */}
-            {Object.keys(this.state.documentList).map(Id => {
+            {/* {Object.keys(this.state.documentList).map(Id => {
               const list = this.state.documentList[Id];
               return (
                 <ul className="post-ul">
@@ -120,7 +120,6 @@ export class ConferenceDoc extends Component {
                         </Link>
                       </li>
                       <li className="post-row-list-item2">{list.startTime}</li>
-                      {/* TODO: ISOString */}
                       <li className="post-row-list-item3">
                         <div className="post-row-list-item-tag">
                           <DocumentTag topic={list.mainTopics} />
@@ -138,8 +137,8 @@ export class ConferenceDoc extends Component {
                   </li>
                 </ul>
               );
-            })}
-            {/* {DocData.map((docDetail, index) => {
+            })} */}
+            {DocData.map((docDetail, index) => {
               return (
                 <ul className="post-ul">
                   <li className="post-li">
@@ -147,8 +146,9 @@ export class ConferenceDoc extends Component {
                       <li className="post-row-list-item1">
                         <Link
                           to={{
-                            pathname:
-                              "/home/conferenceDocument/conferenceDocumentDetail",
+                            pathname: `/home/conferenceDocument/conferenceDocumentDetail/${localStorage.getItem(
+                              "projectId"
+                            )}`,
                             state: {
                               title: docDetail.title,
                               date: docDetail.date
@@ -164,7 +164,7 @@ export class ConferenceDoc extends Component {
                       <li className="post-row-list-item2">{docDetail.date}</li>
                       <li className="post-row-list-item3">
                         <div className="post-row-list-item-tag">
-                          <DocumentTag />
+                          <DocumentTag text={docDetail.tags} />
                         </div>
                       </li>
                       <li className="post-row-list-item4">
@@ -179,7 +179,7 @@ export class ConferenceDoc extends Component {
                   </li>
                 </ul>
               );
-            })} */}
+            })}
           </div>
 
           <div className="pagination-div">

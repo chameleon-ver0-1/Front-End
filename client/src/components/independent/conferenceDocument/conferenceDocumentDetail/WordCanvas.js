@@ -6,13 +6,16 @@ export class WordCanvas extends Component {
   componentDidMount() {
     WordCloud(this.refs["my-canvas"], {
       list: [
-        ["카멜레온", 15],
-        ["컴퓨터공학과", 13],
-        ["졸프", 10],
-        ["화상회의", 8],
-        ["회의록", 4],
-        ["노트북", 10],
-        ["wordcloud", 7]
+        ["화상회의", 18],
+        ["웹", 15],
+        ["플랫폼", 13],
+        ["WebRTC", 10],
+        ["협업툴", 9],
+        ["회의록", 8],
+        ["자동화", 6],
+        ["졸업 프로젝트", 5],
+        ["React", 4],
+        ["NodeJS", 4]
       ],
 
       weightFactor: 2,
@@ -22,7 +25,7 @@ export class WordCanvas extends Component {
           return "#c0c0c0";
         } else if (weight >= 5 && weight < 10) {
           return "#696969";
-        } else if (weight >= 10 && weight < 15) {
+        } else if (weight >= 10 && weight < 17) {
           return "#202020";
         } else {
           return "#34c88a";

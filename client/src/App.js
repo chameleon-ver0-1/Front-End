@@ -82,7 +82,7 @@ class App extends Component {
               />
 
               <Route
-                path="/home/conferenceDocument/conferenceDocumentDetail"
+                path="/home/conferenceDocument/conferenceDocumentDetail/:projectId"
                 component={ConferenceDocumentDetail}
               />
               <Route path="/postTest" component={PostTest} />

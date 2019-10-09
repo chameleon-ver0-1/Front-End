@@ -28,10 +28,12 @@ class MakeRoom extends Component {
       tags: [],
       open: false,
       title: "",
-      selectedDate: "", //FIXME: 임시로 박아놓음
+      selectedDate: new Date().toISOString(), //현재 시간
       topic_tag: [],
       people_tag: []
     };
+
+    this.startNow = this.startNow.bind(this);
   }
 
   /* 이슈에서 가져오기 */
@@ -63,16 +65,32 @@ class MakeRoom extends Component {
     this.setState({ people_tag: dataFromChild });
   };
 
+  startNow() {
+    //TODO: datepicker 비활성화
+    // document.getElementById("datepicker").
+  }
+
   gotoVideo = () => {
     //회의실 개설하기
 
+    const { startDay, startDate } = this.state;
+
+    var datetime = new Date(
+      startDay.getFullYear(),
+      startDay.getMonth(),
+      startDay.getDate(),
+      startDate.getHours() + 9,
+      startDate.getMinutes(),
+      startDate.getSeconds()
+    );
+    console.log(datetime.toISOString());
     console.log(this.state.roomTitle);
     console.log(this.state.topic_tag);
-    console.log(
-      this.state.startDay.toDateString() +
-        " " +
-        this.state.startDate.toTimeString()
-    );
+    // console.log(
+    //   this.state.startDay.toDateString() +
+    //     " " +
+    //     this.state.startDate.toTimeString()
+    // );
     //console.log(this.state.startDate.toTimeString());
     //console.log(this.state.selectedDate);
     console.log(this.state.people_tag);
@@ -82,15 +100,16 @@ class MakeRoom extends Component {
         localStorage.getItem("projectId"),
         this.state.roomTitle,
         this.state.topic_tag,
-        this.state.startDay.toDateString() +
-          " " +
-          this.state.startDate.toTimeString(),
+        datetime,
         this.state.people_tag
       )
       .then(
         res => {
-          this.props.history.push(`/room/${this.state.roomTitle}`);
+          //this.props.history.push(`/room/${this.state.roomTitle}`);
           console.log("회의실 개설 성공");
+          console.log(res);
+          //지금 시작하면 바로 화상회의 넘어가기
+          //시간 버튼 누르면 회의실 api 호출
         },
         err => {
           console.log("회의실 개설 실패");
@@ -104,6 +123,17 @@ class MakeRoom extends Component {
     const { tags, suggestions } = this.state;
     // const classes = useStyles;
 
+    const datepicker = (
+      <DatePicker
+        id="datepicker"
+        customInput={<BigDatePicker />}
+        selected={this.state.startDay}
+        onChange={this.handleChange}
+        minDate={new Date()}
+        relativeSize={true}
+        dateFormat="yyyy/MM/dd"
+      />
+    );
     return (
       <Modal open={open} onClose={onCloseModal} center>
         <div className="makeroomdiv">
@@ -141,15 +171,9 @@ class MakeRoom extends Component {
 
           <div className="row-div">
             <div className="roomtitle2">시작 시간</div>
+            {datepicker}
             <DatePicker
-              customInput={<BigDatePicker />}
-              selected={this.state.startDay}
-              onChange={this.handleChange}
-              minDate={new Date()}
-              relativeSize={true}
-              dateFormat="yyyy/MM/dd"
-            />
-            <DatePicker
+              id="datepicker"
               customInput={<SmallDatePicker />}
               selected={this.state.startDate}
               onChange={this.handleChange2}
@@ -159,6 +183,7 @@ class MakeRoom extends Component {
               timeCaption="Time:"
               relativeSize={true}
             />
+            <button onClick={this.startNow}>지금 시작</button>
           </div>
 
           <div className="row-div">
