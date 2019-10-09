@@ -24,7 +24,7 @@
 }
 
 .table_head {
-  width: 711px;
+  width: 751px;
   height: 37px;
   background: #f6f6f6;
   border-top: 1px solid var(--white-two);
@@ -50,7 +50,7 @@
 .table_head_text3 {
   font-size: 16px;
   margin-top: 7px;
-  margin-left: 150px;
+  margin-left: 180px;
 }
 
 .table_head_text4 {
@@ -127,7 +127,7 @@
 
 .post-row-list-item3 {
   position: absolute;
-  left: 430px;
+  left: 410px;
   list-style-type: none;
   padding-left: 0px;
   padding-top: 0px;
@@ -142,12 +142,13 @@
 .post-row-list-item-tag {
   display: flex;
   flex-direction: row;
-  width: 200px;
+  justify-content: center;
+  width: 240px;
 }
 
 .post-row-list-item4 {
   position: absolute;
-  left: 650px;
+  left: 670px;
   list-style-type: none;
   padding-left: 0px;
   padding-top: 0px;
@@ -210,6 +211,7 @@ a {
   height: 13px;
   display: flex;
   justify-content: space-between;
+  text-decoration: none;
 }
 
 .page-item {
@@ -217,6 +219,7 @@ a {
   list-style: none;
   padding-left: 0px;
   font-size: 14px;
+  text-decoration: none;
 }
 
 .page_button {
@@ -254,9 +257,11 @@ a {
 .search_button {
   margin-left: 2px;
   font-size: 10px;
-  width: 36px;
+  width: 50px;
   height: 27px;
   background-color: var(--greenish-teal);
   border: none;
   color: #ffffff;
+  padding: 8px;
+  text-decoration: none;
 }

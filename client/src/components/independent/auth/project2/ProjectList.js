@@ -57,7 +57,7 @@ export class ProjectList extends Component {
             projectLeader: res.data.data.projectLeader.name,
             projectParticipants: res.data.data.projectParticipants
           });
-
+          localStorage.setItem("projectName", projectName);
           localStorage.setItem("projectId", projectId);
           console.log(
             "projectId",

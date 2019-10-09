@@ -2,6 +2,8 @@ import React from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import download_off from "../../../../assets/doc/download_off.png";
+import "./conferencedocdetail.style.css";
+
 const pxToMm = px => {
   return Math.floor(px / document.getElementById("myMm").offsetHeight);
 };
@@ -32,7 +34,7 @@ const PrintButton = ({ id, label }) => (
       onClick={() => {
         const input = document.getElementById(id);
         const inputHeightMm = pxToMm(input.offsetHeight);
-        const a4WidthMm = 210;
+        const a4WidthMm = 250;
         const a4HeightMm = 297;
         const a4HeightPx = mmToPx(a4HeightMm);
         const numPages =

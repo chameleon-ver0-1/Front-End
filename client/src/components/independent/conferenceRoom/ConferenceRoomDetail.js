@@ -22,12 +22,29 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import MakeRoom from "./makeRoom/MakeRoom";
 import Circle1 from "./Circle1";
 import Circle2 from "./Circle2";
+import * as services from "../../../services/ConferenceRoomService";
 
 export class ConferenceRoomDetail extends Component {
   state = {
     open: false,
     title: ""
   };
+
+  componentDidMount() {
+    // console.log(localStorage.getItem("projectId"));
+    // var getProjectId = localStorage.getItem("projectId");
+    // console.log("var 확인", getProjectId);
+    // services.confInclude(getProjectId);
+
+    services.confInclude(localStorage.getItem("projectId")).then(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
 
   submitRegister(e) {}
 
