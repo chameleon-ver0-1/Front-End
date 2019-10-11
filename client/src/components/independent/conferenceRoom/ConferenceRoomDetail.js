@@ -23,13 +23,17 @@ import MakeRoom from "./makeRoom/MakeRoom";
 import Circle1 from "./Circle1";
 import Circle2 from "./Circle2";
 import * as services from "../../../services/ConferenceRoomService";
+import { withRouter } from "react-router-dom";
 
 export class ConferenceRoomDetail extends Component {
-  state = {
-    open: false,
-    title: "",
-    includeList: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      title: "",
+      includeList: []
+    };
+  }
 
   componentDidMount() {
     services.confInclude(localStorage.getItem("projectId")).then(
@@ -199,6 +203,7 @@ export class ConferenceRoomDetail extends Component {
                         name={includeList.adminEmail}
                         nowP={includeList.isConfYMembersTotal}
                         allP={includeList.membersTotal}
+                        id={includeList.id}
                       />
                     );
                   })}
@@ -273,4 +278,4 @@ export class ConferenceRoomDetail extends Component {
   }
 }
 
-export default ConferenceRoomDetail;
+export default withRouter(ConferenceRoomDetail);
