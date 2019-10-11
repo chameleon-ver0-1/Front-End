@@ -233,3 +233,12 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   cursor: pointer;
   font-size: 12px;
 }
+
+.time-start-label {
+  font-size: 13px;
+}
+
+.checkbox {
+  margin-left: 10px;
+  margin-top: 8px;
+}

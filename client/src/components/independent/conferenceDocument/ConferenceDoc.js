@@ -122,7 +122,7 @@ export class ConferenceDoc extends Component {
                       <li className="post-row-list-item2">{list.startTime}</li>
                       <li className="post-row-list-item3">
                         <div className="post-row-list-item-tag">
-                          <DocumentTag topic={list.mainTopics} />
+                          <DocumentTag text={list.mainTopics} />
                         </div>
                       </li>
                       <li className="post-row-list-item4">

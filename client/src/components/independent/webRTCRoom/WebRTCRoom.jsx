@@ -10,7 +10,7 @@ import VideoMenubar from "./VideoMenubar";
 import TopicDrawerBar from "./TopicDrawerBar";
 import VideoControlButtons from "./VideoControlButtons";
 import VideoOrder from "./VioceOrder";
-
+import * as services from "../../../services/VideoService.js";
 import toggle from "../../../assets/conferenceRoom/videohome_toggle.png";
 
 import {
@@ -29,6 +29,18 @@ export class WebRTCRoom extends Component {
   constructor(props) {
     super(props);
     this.state = { slideMenuActive: false };
+  }
+
+  componentDidMount() {
+    services.getVideoStart(localStorage.getItem("roomId")).then(
+      res => {
+        console.log("화상회의에 오신 걸 환영합니다");
+        console.log(res.data);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   onToggle = () => {

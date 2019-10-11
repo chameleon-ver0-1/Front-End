@@ -45,20 +45,5 @@ export function confParticipants(projectId, userName) {
 // }
 
 export function confInclude(projectId) {
-  console.log("안녕");
-
-  return confCreateAxios
-    .get(`conf_room/includedList/${projectId}`)
-    .then(res => {
-      console.log("******************************됐나?********************");
-      console.log(res.data);
-      console.log("******************************됐나?********************");
-    });
-  // return confCreateAxios
-  //   .get(`conf_room/includedList/${localStorage.getItem("projectId")}`)
-  //   .then(res => {
-  //     console.log("******************************됐나?********************");
-  //     console.log(res.data);
-  //     console.log("******************************됐나?********************");
-  //   });
+  return confCreateAxios.get(`conf_room/includedList/${projectId}`);
 }

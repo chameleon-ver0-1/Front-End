@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import people from "../../../assets/conference/people.png";
 import Conference from "./data/conference.json";
+import { withRouter } from "react-router-dom";
 
 const Circle_conference = styled.div`
   border-radius: 64px;
@@ -17,6 +18,7 @@ const Circle_conference = styled.div`
 const Circle_title = styled.div`
   font-size: 14px;
   text-align: center;
+  cursor: pointer;
 `;
 
 const Circle_name = styled.div`
@@ -37,30 +39,48 @@ const Circle_time = styled.div`
   font-size: 10px;
   color: #ffffff;
   text-align: center;
-  margin-left: 94px;
+  margin-left: 100px;
+  padding-left: 2px;
   display: flex;
   align-items: center;
 `;
 
 const Circle_date = styled.div`
-  width: 84px;
+  width: 75px;
   height: 14px;
   margin: auto;
   border-bottom: 1px solid;
   padding-bottom: 10px;
 `;
 export class Circle2 extends Component {
+  constructor(props) {
+    super(props);
+
+    this.gotoVideo = this.gotoVideo.bind(this);
+  }
+
+  gotoVideo(id) {
+    //화상회의로 이동
+    console.log(id);
+    localStorage.setItem("roomId", id);
+    this.props.history.push(`/room/${localStorage.getItem("roomId")}`);
+  }
+
   render() {
+    const { id, date, time, title, name, nowP, allP } = this.props;
+
     return (
-      <div>
-        <Circle_date>{this.props.date}</Circle_date>
+      <div onClick={() => this.gotoVideo(id)} style={{ cursor: "pointer" }}>
+        <Circle_date>{date}</Circle_date>
         <Circle_conference>
-          <Circle_time>{this.props.time}</Circle_time>
-          <Circle_title>{this.props.title}</Circle_title>
-          <Circle_name>{this.props.name}</Circle_name>
+          <Circle_time>{time}</Circle_time>
+          <Circle_title>{title}</Circle_title>
+          <Circle_name>{name}</Circle_name>
           <div className="circle_hori">
             <img src={people} className="people" />
-            <Circle_people>5/6</Circle_people>
+            <Circle_people>
+              {nowP}/{allP}
+            </Circle_people>
           </div>
         </Circle_conference>
       </div>
@@ -68,4 +88,4 @@ export class Circle2 extends Component {
   }
 }
 
-export default Circle2;
+export default withRouter(Circle2);
