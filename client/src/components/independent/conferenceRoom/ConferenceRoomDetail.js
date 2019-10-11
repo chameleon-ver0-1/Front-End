@@ -23,7 +23,7 @@ import MakeRoom from "./makeRoom/MakeRoom";
 import Circle1 from "./Circle1";
 import Circle2 from "./Circle2";
 import * as services from "../../../services/ConferenceRoomService";
-import { withRouter } from "react-router-dom";
+import moment from "moment";
 
 export class ConferenceRoomDetail extends Component {
   constructor(props) {
@@ -38,12 +38,9 @@ export class ConferenceRoomDetail extends Component {
   componentDidMount() {
     services.confInclude(localStorage.getItem("projectId")).then(
       res => {
-        console.log(res.data.data);
-        //console.log(res + " : 이것은 res다");
         this.setState({
           includeList: res.data.data
         });
-        console.log(this.state.includeList.length);
       },
       err => {
         console.log(err);
@@ -182,23 +179,11 @@ export class ConferenceRoomDetail extends Component {
                   {Object.keys(this.state.includeList).map(id => {
                     const includeList = this.state.includeList[id];
                     const dateTime = new Date(includeList.startTime);
-
+                    console.log(dateTime);
                     return (
                       <Circle2
-                        date={
-                          dateTime.getFullYear() +
-                          "." +
-                          (dateTime.getMonth() + 1) +
-                          "." +
-                          dateTime.getDate()
-                        }
-                        time={
-                          dateTime.getHours() -
-                          9 +
-                          ":" +
-                          dateTime.getMinutes() +
-                          "~"
-                        }
+                        date={moment(dateTime).format("YYYY.MM.DD")}
+                        time={moment(dateTime).format("HH:mm~")}
                         title={includeList.title}
                         name={includeList.adminEmail}
                         nowP={includeList.isConfYMembersTotal}
@@ -278,4 +263,4 @@ export class ConferenceRoomDetail extends Component {
   }
 }
 
-export default withRouter(ConferenceRoomDetail);
+export default ConferenceRoomDetail;

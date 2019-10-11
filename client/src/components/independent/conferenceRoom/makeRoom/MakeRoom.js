@@ -72,7 +72,7 @@ class MakeRoom extends Component {
       startDay.getFullYear(),
       startDay.getMonth(),
       startDay.getDate(),
-      startDate.getHours() + 9,
+      startDate.getHours(),
       startDate.getMinutes(),
       startDate.getSeconds()
     );

@@ -14,6 +14,7 @@
     "jwt-decode": "^2.2.0",
     "lorem-ipsum": "^2.0.3",
     "material-ui": "^0.20.2",
+    "moment": "^2.24.0",
     "natural-drag-animation-rbdnd": "^2.0.1",
     "optional": "^0.1.4",
     "prop-types": "^15.7.2",
@@ -60,7 +61,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy":"http://localhost:5000",
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": "react-app"
   },
