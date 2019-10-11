@@ -37,13 +37,14 @@ const Circle_time = styled.div`
   font-size: 10px;
   color: #ffffff;
   text-align: center;
-  margin-left: 94px;
+  margin-left: 100px;
+  padding-left: 2px;
   display: flex;
   align-items: center;
 `;
 
 const Circle_date = styled.div`
-  width: 84px;
+  width: 75px;
   height: 14px;
   margin: auto;
   border-bottom: 1px solid;
@@ -60,7 +61,9 @@ export class Circle2 extends Component {
           <Circle_name>{this.props.name}</Circle_name>
           <div className="circle_hori">
             <img src={people} className="people" />
-            <Circle_people>5/6</Circle_people>
+            <Circle_people>
+              {this.props.nowP}/{this.props.allP}
+            </Circle_people>
           </div>
         </Circle_conference>
       </div>

@@ -7,8 +7,6 @@
 import React, { Component } from "react";
 import "./makeroom.style.css";
 import Modal from "react-responsive-modal";
-import { render } from "react-dom";
-import { Link } from "react-router-dom";
 import MakeIssue from "../makeIssue/MakeIssue";
 import searchissue from "../../../../assets/conference/searchissue.png";
 import DatePicker from "react-datepicker";
@@ -140,7 +138,7 @@ class MakeRoom extends Component {
 
   render() {
     const { open, title, onCloseModal } = this.props;
-    const { tags, suggestions, isChecked } = this.state;
+    const { isChecked } = this.state;
 
     return (
       <Modal open={open} onClose={onCloseModal} center>
@@ -165,7 +163,7 @@ class MakeRoom extends Component {
               <TagsTopic callbackFromParent={this.myCallback} />
 
               <button className="getissue" onClick={this.onOpenModal}>
-                <img src={searchissue} className="getissueimg" />
+                <img src={searchissue} className="getissueimg" alt="" />
                 이슈에서 가져오기
               </button>
             </div>

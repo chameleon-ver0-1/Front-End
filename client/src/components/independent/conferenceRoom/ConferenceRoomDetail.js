@@ -9,8 +9,8 @@ import "./conference.style.css";
 import "../../../style.css";
 import left from "../../../assets/conference/left.png";
 import right from "../../../assets/conference/right.png";
-import people from "../../../assets/conference/people.png";
-import styled, { css } from "styled-components";
+// import people from "../../../assets/conference/people.png";
+// import styled, { css } from "styled-components";
 import {
   CarouselProvider,
   Slider,
@@ -27,18 +27,19 @@ import * as services from "../../../services/ConferenceRoomService";
 export class ConferenceRoomDetail extends Component {
   state = {
     open: false,
-    title: ""
+    title: "",
+    includeList: []
   };
 
   componentDidMount() {
-    // console.log(localStorage.getItem("projectId"));
-    // var getProjectId = localStorage.getItem("projectId");
-    // console.log("var 확인", getProjectId);
-    // services.confInclude(getProjectId);
-
     services.confInclude(localStorage.getItem("projectId")).then(
       res => {
-        console.log(res);
+        console.log(res.data.data);
+        //console.log(res + " : 이것은 res다");
+        this.setState({
+          includeList: res.data.data
+        });
+        console.log(this.state.includeList.length);
       },
       err => {
         console.log(err);
@@ -57,7 +58,7 @@ export class ConferenceRoomDetail extends Component {
   };
 
   render() {
-    if (this.props.title == "현재 진행중인 회의") {
+    if (this.props.title === "현재 진행중인 회의") {
       return (
         <div className="conferenceroom_container">
           <div className="conferenceroom_text">{this.props.title}</div>
@@ -80,7 +81,7 @@ export class ConferenceRoomDetail extends Component {
             naturalSlideHeight={200}
           >
             <ButtonBack className="left_right_l">
-              <img src={left} className="left_right_img" />
+              <img src={left} className="left_right_img" alt="" />
             </ButtonBack>
 
             <Slider className="slider">
@@ -149,7 +150,7 @@ export class ConferenceRoomDetail extends Component {
             </Slider>
 
             <ButtonNext className="left_right_r">
-              <img src={right} className="left_right_img" />
+              <img src={right} className="left_right_img" alt="" />
             </ButtonNext>
           </CarouselProvider>
         </div>
@@ -168,40 +169,42 @@ export class ConferenceRoomDetail extends Component {
             naturalSlideHeight={200}
           >
             <ButtonBack className="left_right_l2">
-              <img src={left} className="left_right_img" />
+              <img src={left} className="left_right_img" alt="" />
             </ButtonBack>
 
             <Slider className="slider">
               <Slide index={0} className="slide-index0">
                 <div className="slide_div">
-                  <Circle2
-                    date="2019.08.15"
-                    time="11:00~"
-                    title="8월 중간평가"
-                    name="박우창"
-                  />
-                  <Circle2
-                    date="2019.09.01"
-                    time="13:00~"
-                    title="카멜레On 결과 비교"
-                    name="박우창"
-                  />
-                  <Circle2
-                    date="2019.09.20"
-                    time="16:00~"
-                    title="Front-end 회의"
-                    name="조윤영"
-                  />
-                  <Circle2
-                    date="2019.10.01"
-                    time="09:00~"
-                    title="디자인/Front 회의"
-                    name="안지후"
-                  />
+                  {Object.keys(this.state.includeList).map(id => {
+                    const includeList = this.state.includeList[id];
+                    const dateTime = new Date(includeList.startTime);
+
+                    return (
+                      <Circle2
+                        date={
+                          dateTime.getFullYear() +
+                          "." +
+                          (dateTime.getMonth() + 1) +
+                          "." +
+                          dateTime.getDate()
+                        }
+                        time={
+                          dateTime.getHours() -
+                          9 +
+                          ":" +
+                          dateTime.getMinutes() +
+                          "~"
+                        }
+                        title={includeList.title}
+                        name={includeList.adminEmail}
+                        nowP={includeList.isConfYMembersTotal}
+                        allP={includeList.membersTotal}
+                      />
+                    );
+                  })}
                 </div>
               </Slide>
-
-              <Slide index={1}>
+              {/* <Slide index={1}>
                 <div className="slide_div">
                   <Circle2
                     date="2019.08.15"
@@ -257,11 +260,11 @@ export class ConferenceRoomDetail extends Component {
                     name="안지후"
                   />
                 </div>
-              </Slide>
+              </Slide> */}
             </Slider>
 
             <ButtonNext className="left_right_r2">
-              <img src={right} className="left_right_img" />
+              <img src={right} className="left_right_img" alt="" />
             </ButtonNext>
           </CarouselProvider>
         </div>

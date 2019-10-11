@@ -46,6 +46,11 @@
   height: 200px;
 }
 
+.slide-index0 {
+  display: flex;
+  flex-direction: row;
+}
+
 .slide_div {
   display: flex;
   flex-direction: row;
