@@ -68,15 +68,7 @@ class MakeRoom extends Component {
     //회의실 개설하기
     const { startDay, startDate } = this.state;
 
-    var datetime = new Date(
-      startDay.getFullYear(),
-      startDay.getMonth(),
-      startDay.getDate(),
-      startDate.getHours(),
-      startDate.getMinutes(),
-      startDate.getSeconds()
-    );
-    console.log(datetime.toISOString());
+    //console.log(datetime.toISOString());
     console.log(this.state.roomTitle);
     console.log(this.state.topic_tag);
     console.log(this.state.people_tag);
@@ -93,6 +85,8 @@ class MakeRoom extends Component {
         )
         .then(
           res => {
+            console.log(res.data.data.id);
+            localStorage.setItem("roomId", res.data.data.id);
             this.props.history.push(`/room/${this.state.roomTitle}`);
             console.log("바로 넘어가는 회의실 개설 성공");
             console.log(res);
@@ -104,12 +98,21 @@ class MakeRoom extends Component {
         );
     } else {
       //설정한 시간, 활성화 -> 회의목록으로 넘어가기
+      var datetime = new Date(
+        startDay.getFullYear(),
+        startDay.getMonth(),
+        startDay.getDate(),
+        startDate.getHours(),
+        startDate.getMinutes(),
+        startDate.getSeconds()
+      );
+
       service
         .confCreate(
           localStorage.getItem("projectId"),
           this.state.roomTitle,
           this.state.topic_tag,
-          datetime,
+          datetime.toISOString(),
           this.state.people_tag
         )
         .then(
@@ -119,7 +122,8 @@ class MakeRoom extends Component {
             );
             console.log("회의목록 돌아가서 데이터 확인하자");
             this.props.onCloseModal();
-            //자동 새로고침 방법은 없을까
+            //TODO: 자동 새로고침 방법
+            this.forceUpdate();
           },
           err => {
             console.log("회의목록으로 못돌아감");

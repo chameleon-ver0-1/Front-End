@@ -53,9 +53,7 @@ export class TagsProjectRoles extends Component {
         {
           for (var i = 0; i < res.data.data.length; i++) {
             this.setState(state => ({
-              sug: [
-                { id: res.data.data[i].role, text: res.data.data[i].role }
-              ],
+              sug: [{ id: res.data.data[i].role, text: res.data.data[i].role }],
               suggestions: this.state.suggestions.concat(this.state.sug)
             }));
           }
@@ -69,10 +67,18 @@ export class TagsProjectRoles extends Component {
   }
 
   handleAddition(tag) {
-    this.setState(state => ({
-      tags: [...state.tags, tag],
-      roles: this.state.roles.concat(tag.text)
-    }));
+    this.setState(
+      state => {
+        return {
+          tags: [...state.tags, tag],
+          roles: this.state.roles.concat(tag.text)
+        };
+      },
+      () => {
+        console.log("tag: " + this.state.roles);
+      }
+    );
+
     this.props.callbackFromParent(this.state.roles);
   }
 

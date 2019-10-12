@@ -36,6 +36,7 @@ export class ConferenceRoomDetail extends Component {
   }
 
   componentDidMount() {
+    this.forceUpdate();
     services.confInclude(localStorage.getItem("projectId")).then(
       res => {
         this.setState({
@@ -174,26 +175,39 @@ export class ConferenceRoomDetail extends Component {
             </ButtonBack>
 
             <Slider className="slider">
-              <Slide index={0} className="slide-index0">
-                <div className="slide_div">
-                  {Object.keys(this.state.includeList).map(id => {
-                    const includeList = this.state.includeList[id];
-                    const dateTime = new Date(includeList.startTime);
-                    console.log(dateTime);
-                    return (
-                      <Circle2
-                        date={moment(dateTime).format("YYYY.MM.DD")}
-                        time={moment(dateTime).format("HH:mm~")}
-                        title={includeList.title}
-                        name={includeList.adminEmail}
-                        nowP={includeList.isConfYMembersTotal}
-                        allP={includeList.membersTotal}
-                        id={includeList.id}
-                      />
-                    );
-                  })}
-                </div>
-              </Slide>
+              {[0, 1, 2].map(id => {
+                console.log(id + "+++++++++++");
+                //TODO: 4개씩 뿌려주는거!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                return (
+                  <Slide index={id} className="slide-index0">
+                    <div className="slide_div">
+                      {Object.keys(this.state.includeList).map(id => {
+                        const includeList = this.state.includeList[id];
+                        const dateTime = new Date(includeList.startTime);
+                        //let index = 0;
+                        let count = 0;
+                        count++;
+                        console.log(count + " : count");
+                        // if (id > 3 && id <= 7) {
+                        //   break;
+                        // }
+                        return (
+                          <Circle2
+                            date={moment(dateTime).format("YYYY.MM.DD")}
+                            time={moment(dateTime).format("HH:mm~")}
+                            title={includeList.title}
+                            name={includeList.adminEmail}
+                            nowP={includeList.isConfYMembersTotal}
+                            allP={includeList.membersTotal}
+                            id={includeList.id}
+                          />
+                        );
+                      })}
+                    </div>
+                  </Slide>
+                );
+              })}
+
               {/* <Slide index={1}>
                 <div className="slide_div">
                   <Circle2
