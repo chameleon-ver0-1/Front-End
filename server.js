@@ -1,46 +1,51 @@
-'use strict';
+"use strict";
 
-const express = require('express');
+const express = require("express");
 const app = express();
-const bodyParser = require('body-parser');
-const AWS = require('aws-sdk'); //
-const parameters = require('./parameters');//
-const fs = require('fs');
-const cors = require('cors');
-const automl = require('@google-cloud/automl');//
+const bodyParser = require("body-parser");
+const AWS = require("aws-sdk"); //
+const parameters = require("./parameters"); //
+const fs = require("fs");
+const cors = require("cors");
+const automl = require("@google-cloud/automl"); //
 // const PythonShell = require('python-shell');
 // const automl = require('./automl');
 //이미지 자르기
-const sharp = require('sharp');//
-const sizeOf = require('image-size');//
+const sharp = require("sharp"); //
+const sizeOf = require("image-size"); //
 
 const port = process.env.PORT || 5000;
 
 //모듈 분리
 const rekognition = new AWS.Rekognition({
-  apiVersion: '2016-06-27',
+  apiVersion: "2016-06-27",
   accessKeyId: parameters.AWS.accessKeyId,
   secretAccessKey: parameters.AWS.secretAccessKey,
   region: parameters.AWS.region
 });
 
-
 var count = 0;
 var data;
 
-app.use(bodyParser.json({
-  limit: '50mb'
-}));
-app.use(bodyParser.urlencoded({
-  limit: '50mb',
-  extended: true
-}));
+app.use(
+  bodyParser.json({
+    limit: "50mb"
+  })
+);
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true
+  })
+);
 
 app.use(bodyParser.json());
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST']
-}))
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST"]
+  })
+);
 
 //pattern１
 // C:/Users/yejiH/Documents/Front-End/client/build/
@@ -48,15 +53,18 @@ app.use(cors({
 // app.get('/*', function(req, res) {
 //     res.sendFile('/home/ubuntu/Front-End/client/build/');
 // });
-app.use(express.static("/Users/cho-yoonyoung/Front-End/client/build/"));
+app.use(express.static("/Users/cho-yoonyoung/Gradu2019/client/build/"));
 app.get("/*", function(req, res) {
-  res.sendFile("/Users/cho-yoonyoung/Front-End/client/build/");
+  res.sendFile("/Users/cho-yoonyoung/Gradu2019/client/build/");
 });
 
-app.post('/trans_data', function (req, res) {
+app.post("/trans_data", function(req, res) {
   //console.log(count);
   var img = req.body.img;
-  var buffer = new Buffer.from(img.replace(/^data:image\/(png|gif|jpeg);base64,/, ''), 'base64');
+  var buffer = new Buffer.from(
+    img.replace(/^data:image\/(png|gif|jpeg);base64,/, ""),
+    "base64"
+  );
 
   //로컬에서 불러온 이미지
   var params = {
@@ -66,31 +74,42 @@ app.post('/trans_data', function (req, res) {
     }
   };
 
-  rekognition.detectFaces(params, function (err, data) {
-    if (err) console.log(err, err.stack); // an error occurred
+  rekognition.detectFaces(params, function(err, data) {
+    if (err) console.log(err, err.stack);
+    // an error occurred
     else {
       try {
-        var seconds = (new Date()).getSeconds();
+        var seconds = new Date().getSeconds();
         //console.log(seconds);
         //console.log("전송됨");
-        fs.writeFileSync("./result.json", "{" + '"1":' + JSON.stringify(data.FaceDetails[0].Emotions));
+        fs.writeFileSync(
+          "./result.json",
+          "{" + '"1":' + JSON.stringify(data.FaceDetails[0].Emotions)
+        );
 
-        //TODO: 예지 - 넘겨온 이미지의 사람얼굴이 1명이 아닐때  
+        //TODO: 예지 - 넘겨온 이미지의 사람얼굴이 1명이 아닐때
         if (data.FaceDetails.length != 1) {
           for (var i = 1; i < data.FaceDetails.length; i++) {
-            fs.appendFileSync('./result.json', "," + '"' + (i + 1) + '":' + JSON.stringify(data.FaceDetails[i].Emotions));
+            fs.appendFileSync(
+              "./result.json",
+              "," +
+                '"' +
+                (i + 1) +
+                '":' +
+                JSON.stringify(data.FaceDetails[i].Emotions)
+            );
           }
         }
-        fs.appendFileSync('./result.json', "}");
+        fs.appendFileSync("./result.json", "}");
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
     }
-    //TODO: 예지 - HAPPY감정 
+    //TODO: 예지 - HAPPY감정
     var happySum = 0;
     var len = data.FaceDetails.length;
     for (var i = 0; i < len; i++) {
-      var emo = data.FaceDetails[i].Emotions.filter(function (emo) {
+      var emo = data.FaceDetails[i].Emotions.filter(function(emo) {
         return emo.Type == "HAPPY";
       });
       happySum += emo[0].Confidence;
@@ -102,18 +121,16 @@ app.post('/trans_data', function (req, res) {
 
     if (happyAvg >= 7.3) {
       res.status(201).json({
-        message: '과반수의 참여자가 긍정의 반응을 보였습니다.',
+        message: "과반수의 참여자가 긍정의 반응을 보였습니다.",
         data: true
       });
     } else {
       res.status(201).json({
-        message: '무반응',
+        message: "무반응",
         data: false
       });
     }
-
   });
-
 
   //TODO: 예지 - 브라우저에 토스트메세지를 띄우기 위한 반환값 설정
   // for(var i=1; i<data.FaceDetails.length;i++){
@@ -142,11 +159,13 @@ app.post('/trans_data', function (req, res) {
 });
 
 //TODO: 진짜 감정요청 부분
-app.post('/emotion', async function (req, res) {
-
+app.post("/emotion", async function(req, res) {
   var img = req.body.img;
   //모듈분리
-  var buffer = new Buffer.from(img.replace(/^data:image\/(png|gif|jpeg);base64,/, ''), 'base64');
+  var buffer = new Buffer.from(
+    img.replace(/^data:image\/(png|gif|jpeg);base64,/, ""),
+    "base64"
+  );
   var dimensions = sizeOf(buffer);
 
   //var outputImage = 'crop.jpg';
@@ -157,8 +176,9 @@ app.post('/emotion', async function (req, res) {
       Bytes: buffer
     }
   };
-  await rekognition.detectFaces(params, function (err, data) {
-    if (err) console.log(err, err.stack); // an error occurred
+  await rekognition.detectFaces(params, function(err, data) {
+    if (err) console.log(err, err.stack);
+    // an error occurred
     else {
       //과반수 수
       var goodCount = 0;
@@ -173,26 +193,35 @@ app.post('/emotion', async function (req, res) {
       try {
         for (var i = 0; i < data.FaceDetails.length; i++) {
           //console.log(data.FaceDetails[i].Landmarks);
-          var leftEyeBrowLeft = data.FaceDetails[i].Landmarks.filter(function (e) {
+          var leftEyeBrowLeft = data.FaceDetails[i].Landmarks.filter(function(
+            e
+          ) {
             return e.Type == "leftEyeBrowLeft";
           });
-          var chinBottom = data.FaceDetails[i].Landmarks.filter(function (e) {
+          var chinBottom = data.FaceDetails[i].Landmarks.filter(function(e) {
             return e.Type == "chinBottom";
           });
-          var rightEyeBrowRight = data.FaceDetails[i].Landmarks.filter(function (e) {
+          var rightEyeBrowRight = data.FaceDetails[i].Landmarks.filter(function(
+            e
+          ) {
             return e.Type == "rightEyeBrowRight";
           });
 
-          var width = Math.round(rightEyeBrowRight[0].X * dimensions.width) - Math.round(leftEyeBrowLeft[0].X * dimensions.width) + 30;
-          var height = Math.round(chinBottom[0].Y * dimensions.height) - Math.round(leftEyeBrowLeft[0].Y * dimensions.height) + 10;
+          var width =
+            Math.round(rightEyeBrowRight[0].X * dimensions.width) -
+            Math.round(leftEyeBrowLeft[0].X * dimensions.width) +
+            30;
+          var height =
+            Math.round(chinBottom[0].Y * dimensions.height) -
+            Math.round(leftEyeBrowLeft[0].Y * dimensions.height) +
+            10;
           var left = Math.round(leftEyeBrowLeft[0].X * dimensions.width) - 15;
           var top = Math.round(leftEyeBrowLeft[0].Y * dimensions.height) - 20;
-         
 
           // sharp(buffer)
-          //     .extract({ width: width, 
-          //                height: height, 
-          //                left: left, 
+          //     .extract({ width: width,
+          //                height: height,
+          //                left: left,
           //                top: top})
           //     .toFile(outputImage)
           //     .then(function(new_file_info) {
@@ -201,9 +230,9 @@ app.post('/emotion', async function (req, res) {
           //     .catch(function(err) {
           //       console.log(err);
           //     });
-          
+
           //모듈분리 - automlImg로
-          sharp(buffer) 
+          sharp(buffer)
             .extract({
               width: width,
               height: height,
@@ -211,7 +240,7 @@ app.post('/emotion', async function (req, res) {
               top: top
             })
             .toBuffer()
-            .then(function(data){
+            .then(function(data) {
               async function main(
                 projectId,
                 computeRegion,
@@ -227,57 +256,67 @@ app.post('/emotion', async function (req, res) {
                 computeRegion = parameters.AutoML.computeRegion;
                 modelId = parameters.AutoML.modelId;
                 scoreThreshold = parameters.AutoML.scoreThreshold;
-        
+
                 // Get the full path of the model.
-                const modelFullId = client.modelPath(projectId, computeRegion, modelId);
-        
+                const modelFullId = client.modelPath(
+                  projectId,
+                  computeRegion,
+                  modelId
+                );
+
                 // Read the file content for prediction.
                 const content = data;
                 const params = {};
-        
+
                 if (scoreThreshold) {
                   params.score_threshold = scoreThreshold;
                 }
-        
+
                 // Set the payload by giving the content and type of the file.
                 const payload = {};
                 payload.image = {
                   imageBytes: content
                 };
-        
+
                 // params is additional domain-specific parameters.
                 // currently there is no additional parameters supported.
                 const [response] = await client.predict({
                   name: modelFullId,
                   payload: payload,
-                  params: params,
+                  params: params
                 });
                 console.log(`Prediction results:`);
                 response.payload.forEach(result => {
                   console.log(`Predicted class name: ${result.displayName}`);
-                  console.log(`Predicted class score: ${result.classification.score}`);
-        
+                  console.log(
+                    `Predicted class score: ${result.classification.score}`
+                  );
+
                   //임계값 설정 부분
                   //good의 임계값이 0.7이상일때
-                  if (result.displayName == 'good' && result.classification.score >= 0.6) {
-                    goodValue+=result.classification.score;
+                  if (
+                    result.displayName == "good" &&
+                    result.classification.score >= 0.6
+                  ) {
+                    goodValue += result.classification.score;
                     goodCount++;
                     console.log("good: " + goodCount);
-        
                   }
                   //bad의 임계값이 0.8이상일때
-                  else if (result.displayName == 'bad' && result.classification.score >= 0.9) {
-                    badValue+=result.classification.score;
+                  else if (
+                    result.displayName == "bad" &&
+                    result.classification.score >= 0.9
+                  ) {
+                    badValue += result.classification.score;
                     badCount++;
                     console.log("bad: " + badCount);
                   }
                   //good, bad가 0.8을 못넘으면 무표정인 걸로 간주하고 no인것도 포함
                   else {
-                    noValue+=result.classification.score;
+                    noValue += result.classification.score;
                     noCount++;
                     console.log("no: " + noCount);
                   }
-        
                 });
               }
               main(...process.argv.slice(2)).catch(err => {
@@ -297,35 +336,34 @@ app.post('/emotion', async function (req, res) {
       console.log(majority + " " + goodCount);
       console.log(majority + " " + badCount);
       console.log(majority + " " + noCount);
-      console.log(majority + " " + goodValue/majority);
-      console.log(majority + " " + badValue/majority);
-      console.log(majority + " " + noValue/majority);
+      console.log(majority + " " + goodValue / majority);
+      console.log(majority + " " + badValue / majority);
+      console.log(majority + " " + noValue / majority);
       if (goodCount >= majority) {
         console.log("긍정");
         res.status(201).json({
-          message: '과반수 이상의 참여자가 긍정의 반응을 보였습니다',
-          data: goodValue/majority
+          message: "과반수 이상의 참여자가 긍정의 반응을 보였습니다",
+          data: goodValue / majority
         });
       } else if (badCount >= majority) {
         console.log("부정");
         res.status(201).json({
-          message: '과반수 이상의 참여자가 부정의 반응을 보였습니다',
-          data: badValue/majority
+          message: "과반수 이상의 참여자가 부정의 반응을 보였습니다",
+          data: badValue / majority
         });
       } else if (noCount >= majority) {
         console.log("무반응");
         res.status(201).json({
-          message: '무반응',
+          message: "무반응",
           data: false
         });
       } else {
         res.status(500).json({
-          message: '감정 인식 오류 발생',
+          message: "감정 인식 오류 발생",
           data: false
         });
       }
     }, 2500);
-    
   });
   //res.send("오류");
 });

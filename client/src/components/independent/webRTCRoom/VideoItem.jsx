@@ -42,9 +42,6 @@ export class VideoItem extends Component {
 
   /*script가져오는 함수 */
   componentWillMount() {
-    /***********************************/
-    /*script가져오는 함수 */
-    /***********************************/
     const script = document.createElement("script");
 
     script.src = "https://cdn.webrtc-experiment.com/RTCMultiConnection.js";
@@ -56,14 +53,11 @@ export class VideoItem extends Component {
       "https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js";
     script.src =
       "https://rtcmulticonnection.herokuapp.com/node_modules/webrtc-adapter/out/adapter.js";
+    script.src = "./getHTMLMediaElement.jsx";
 
-    /*screen sharing을 위한 script */
     script.src = "https://cdn.WebRTC-Experiment.com/getScreenId.js";
     script.src = "https://webrtc.github.io/adapter/adapter-latest.js";
-    script.src = "https://www.webrtc-experiment.com/common.js";
 
-    /*말하는 순간을 잡기 위한 script */
-    script.src = "https://cdn.webrtc-experiment.com/hark.js";
     script.async = true;
 
     document.body.appendChild(script);
@@ -84,17 +78,79 @@ export class VideoItem extends Component {
         }
       })
     );
+    /*******************************************/
+    //감정인식 로직: 화면의 비율 가로길이 기준으로 3/2이상은 펼쳐져 있어야 정상 작동하는 모습 볼 수 있음..
+    /*******************************************/
+    let playTran; //실시간 전송하기 위한 변수
+
+    /* 비디오 캡처하는 함수*/
+    const capture = () => {
+      /*videos-container 캡쳐하기 전 비디오 위에 비디오 캡쳐 이미지 놓기*/
+      connection.showImage = document.getElementById("show-image");
+      var canvas = document.createElement("canvas");
+      var videos = document.querySelectorAll("video");
+
+      var context = canvas.getContext("2d");
+
+      /*비디오 각각을 반복문을 통해 별도로 캡쳐*/
+      for (var i = 0, len = videos.length; i < len; i++) {
+        var v = videos[i];
+        if (!v.id) continue;
+        try {
+          var ratio = v.videoWidth / v.videoHeight;
+          var w = v.videoWidth - 100;
+          var h = parseInt(w / ratio, 10);
+          canvas.setAttribute("width", w);
+          canvas.setAttribute("height", h);
+          context.fillRect(0, 0, w, h);
+          context.drawImage(v, 0, 0, w, h);
+          v.style.width = "400px";
+          v.style.height = "300px"; //-->이걸로 해결
+          v.style.backgroundImage = `url(${canvas.toDataURL("image/png")})`;
+          v.style.backgroundSize = "cover";
+        } catch (e) {
+          continue;
+        }
+      }
+      /*videos-container 캡쳐*/
+      html2canvas(document.getElementById("videos-container")).then(function(
+        canvas
+      ) {
+        axios
+          .post("/emotion", {
+            img: canvas.toDataURL("image/png")
+          })
+          .then(response => {
+            console.log(response.data);
+            if (response.data.data === false) {
+              document.getElementById("showEmotion").style.visibility =
+                "hidden";
+            } else {
+              document.getElementById("showEmotion").style.visibility =
+                "visible";
+            }
+            document.getElementById("showEmotion").innerHTML =
+              response.data.message;
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      });
+    };
+
+    /*5초마다 capture() 호출*/
+    //capture();
+    console.log("감정인식 시작");
+    playTran = setInterval(function() {
+      console.log("감정인식 중입니다.");
+      capture();
+    }, 6000);
   }
 
   state = { roomKey: "undefined" };
 
   render() {
-    var RMCMediaTrack = {
-      cameraStream: null,
-      cameraTrack: null,
-      screen: null
-    };
-
     (function() {
       var params = {},
         r = /([^&=]+)=?([^&]*)/g;
@@ -108,7 +164,7 @@ export class VideoItem extends Component {
       window.params = params;
     })();
 
-    connection.socketMessageEvent = "video-screen-demo";
+    connection.socketMessageEvent = "video-conference-demo";
 
     connection.session = {
       audio: true,
@@ -123,12 +179,6 @@ export class VideoItem extends Component {
     var videoCpy;
 
     connection.onstream = function(event) {
-      //onspeaking에서 사용할 부분을 초기화
-      initHark({
-        stream: event.stream,
-        streamedObject: event,
-        connection: connection
-      });
       //connection1
       // event.mediaContainer.style.width=""
       connection.videosContainer = document.getElementById("videos-container"); //1개 이상의 비디오들을 담을 div공간을 id값으로 가져온다.
@@ -148,21 +198,6 @@ export class VideoItem extends Component {
       var existing = document.getElementById(event.streamid);
       if (existing && existing.parentNode) {
         existing.parentNode.removeChild(existing);
-      }
-
-      //로컬이고 Video stream일 경우,
-      if (event.type === "local" && event.stream.isVideo) {
-        RMCMediaTrack.cameraStream = event.stream;
-
-        navigator.mediaDevices
-          .getUserMedia({ video: true, audio: true })
-          .then(
-            stream =>
-              (RMCMediaTrack.cameraTrack = stream.getTracks(
-                event.stream,
-                "video"
-              )[0])
-          );
       }
 
       try {
@@ -212,52 +247,6 @@ export class VideoItem extends Component {
       localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
       videoCpy = video;
     };
-    /*****************************/
-    /*음성에 따른 액션*/
-    /*****************************/
-    //connection-ing
-    connection.onspeaking = function(e) {
-      //사용자가 말하는 순간 동안 실행되는 함수
-      console.log("onspeaking 작동 중");
-      videoCpy.style.border = "3px solid var(--greenish-teal)";
-    };
-    connection.onsilence = function(e) {
-      //사용자가 말을 하지 않는 동안 실행되는 함수
-      videoCpy.style.border = "none";
-    };
-    connection.onvolumechange = function(event) {
-      //볼륨의 높낮이가 달라질 때 실행되는 함수
-      // event.mediaElement.style.borderWidth = event.volume;
-      videoCpy.style.borderWidth = event.volume;
-    };
-
-    function initHark(args) {
-      if (!window.hark) {
-        throw "Please link hark.js";
-        return;
-      }
-
-      var connection = args.connection;
-      var streamedObject = args.streamedObject;
-      var stream = args.stream;
-
-      var options = {};
-      var speechEvents = window.hark(stream, options);
-
-      speechEvents.on("speaking", function() {
-        connection.onspeaking(streamedObject);
-      });
-
-      speechEvents.on("stopped_speaking", function() {
-        connection.onsilence(streamedObject);
-      });
-
-      speechEvents.on("volume_change", function(volume, threshold) {
-        streamedObject.volume = volume;
-        streamedObject.threshold = threshold;
-        connection.onvolumechange(streamedObject);
-      });
-    }
 
     //connection2
     connection.onstreamended = function(event) {
@@ -388,10 +377,6 @@ export class VideoItem extends Component {
         console.log("감정인식 중입니다.");
         capture();
       }, 6000);
-
-      // axios.get('/happy')
-      //   .then( response => { console.log(response.data); } ) // SUCCESS
-      //   .catch( response => { console.log(response); } ); // ERROR
     };
 
     const onStop = () => {
