@@ -52,11 +52,18 @@ export class TagsProjectDepart extends Component {
   }
 
   handleAddition(tag) {
-    this.setState(state => ({
-      tags: [...state.tags, tag],
-      depart: this.state.depart.concat(tag.text)
-    }));
-    console.log("tag: " + this.state.depart);
+    this.setState(
+      state => {
+        return {
+          tags: [...state.tags, tag],
+          depart: this.state.depart.concat(tag.text)
+        };
+      },
+      () => {
+        console.log("tag: " + this.state.depart);
+      }
+    );
+
     //부모한테 props로 보내기
     this.props.callbackFromParent(this.state.depart);
   }

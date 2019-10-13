@@ -23,6 +23,8 @@ export function confCreate(projectId, title, mainTopics, startTime, members) {
       console.log("***************************");
       console.log(res.data.message);
       console.log("***************************");
+
+      return Promise.resolve(res);
     });
 }
 

@@ -36,6 +36,7 @@ export class WebRTCRoom extends Component {
       res => {
         console.log("화상회의에 오신 걸 환영합니다");
         console.log(res.data);
+        //FIXME: 데이터 찍어놓음~!
       },
       err => {
         console.log(err);

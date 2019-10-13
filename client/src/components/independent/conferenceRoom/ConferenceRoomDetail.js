@@ -23,7 +23,7 @@ import MakeRoom from "./makeRoom/MakeRoom";
 import Circle1 from "./Circle1";
 import Circle2 from "./Circle2";
 import * as services from "../../../services/ConferenceRoomService";
-import { withRouter } from "react-router-dom";
+import moment from "moment";
 
 export class ConferenceRoomDetail extends Component {
   constructor(props) {
@@ -36,14 +36,12 @@ export class ConferenceRoomDetail extends Component {
   }
 
   componentDidMount() {
+    this.forceUpdate();
     services.confInclude(localStorage.getItem("projectId")).then(
       res => {
-        console.log(res.data.data);
-        //console.log(res + " : 이것은 res다");
         this.setState({
           includeList: res.data.data
         });
-        console.log(this.state.includeList.length);
       },
       err => {
         console.log(err);
@@ -177,38 +175,39 @@ export class ConferenceRoomDetail extends Component {
             </ButtonBack>
 
             <Slider className="slider">
-              <Slide index={0} className="slide-index0">
-                <div className="slide_div">
-                  {Object.keys(this.state.includeList).map(id => {
-                    const includeList = this.state.includeList[id];
-                    const dateTime = new Date(includeList.startTime);
+              {[0, 1, 2].map(id => {
+                console.log(id + "+++++++++++");
+                //TODO: 4개씩 뿌려주는거!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                return (
+                  <Slide index={id} className="slide-index0">
+                    <div className="slide_div">
+                      {Object.keys(this.state.includeList).map(id => {
+                        const includeList = this.state.includeList[id];
+                        const dateTime = new Date(includeList.startTime);
+                        //let index = 0;
+                        let count = 0;
+                        count++;
+                        console.log(count + " : count");
+                        // if (id > 3 && id <= 7) {
+                        //   break;
+                        // }
+                        return (
+                          <Circle2
+                            date={moment(dateTime).format("YYYY.MM.DD")}
+                            time={moment(dateTime).format("HH:mm~")}
+                            title={includeList.title}
+                            name={includeList.adminEmail}
+                            nowP={includeList.isConfYMembersTotal}
+                            allP={includeList.membersTotal}
+                            id={includeList.id}
+                          />
+                        );
+                      })}
+                    </div>
+                  </Slide>
+                );
+              })}
 
-                    return (
-                      <Circle2
-                        date={
-                          dateTime.getFullYear() +
-                          "." +
-                          (dateTime.getMonth() + 1) +
-                          "." +
-                          dateTime.getDate()
-                        }
-                        time={
-                          dateTime.getHours() -
-                          9 +
-                          ":" +
-                          dateTime.getMinutes() +
-                          "~"
-                        }
-                        title={includeList.title}
-                        name={includeList.adminEmail}
-                        nowP={includeList.isConfYMembersTotal}
-                        allP={includeList.membersTotal}
-                        id={includeList.id}
-                      />
-                    );
-                  })}
-                </div>
-              </Slide>
               {/* <Slide index={1}>
                 <div className="slide_div">
                   <Circle2
@@ -278,4 +277,4 @@ export class ConferenceRoomDetail extends Component {
   }
 }
 
-export default withRouter(ConferenceRoomDetail);
+export default ConferenceRoomDetail;

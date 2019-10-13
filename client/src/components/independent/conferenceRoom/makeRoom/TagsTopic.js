@@ -35,10 +35,18 @@ export class TagsTopic extends Component {
   }
 
   handleAddition(tag) {
-    this.setState(state => ({
-      tags: [...state.tags, tag],
-      topic: this.state.topic.concat(tag.text)
-    }));
+    this.setState(
+      state => {
+        return {
+          tags: [...state.tags, tag],
+          topic: this.state.topic.concat(tag.text)
+        };
+      },
+      () => {
+        console.log("tag: " + this.state.topic);
+      }
+    );
+
     this.props.callbackFromParent(this.state.topic);
     console.log(this.state.topic);
   }

@@ -40,13 +40,12 @@ const Circle_time = styled.div`
   color: #ffffff;
   text-align: center;
   margin-left: 100px;
-  padding-left: 2px;
   display: flex;
   align-items: center;
 `;
 
 const Circle_date = styled.div`
-  width: 75px;
+  width: 80px;
   height: 14px;
   margin: auto;
   border-bottom: 1px solid;
