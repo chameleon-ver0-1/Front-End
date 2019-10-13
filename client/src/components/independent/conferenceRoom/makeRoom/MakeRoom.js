@@ -87,7 +87,7 @@ class MakeRoom extends Component {
           res => {
             console.log(res.data.data.id);
             localStorage.setItem("roomId", res.data.data.id);
-            this.props.history.push(`/room/${this.state.roomTitle}`);
+            this.props.history.push(`/room/${localStorage.getItem("roomId")}`);
             console.log("바로 넘어가는 회의실 개설 성공");
             console.log(res);
           },

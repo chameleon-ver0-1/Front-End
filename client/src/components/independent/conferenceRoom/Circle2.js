@@ -62,7 +62,7 @@ export class Circle2 extends Component {
     //화상회의로 이동
     console.log(id);
     localStorage.setItem("roomId", id);
-    this.props.history.push(`/room/${this.props.title}`);
+    this.props.history.push(`/room/${localStorage.getItem("roomId")}`);
   }
 
   render() {
