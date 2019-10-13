@@ -160,7 +160,6 @@ export class Issues extends Component {
             );
           })}
         </DragDropContext>
-        <div>{this.props.currentDep}</div>
       </IssueBig>
     );
   }

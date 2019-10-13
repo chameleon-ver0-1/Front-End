@@ -432,13 +432,12 @@ export class VideoItem extends Component {
     }
 
     //TODO: roomid를 직접 받아와야하는 부분
-    var roomid = window.params.roomid;
+    var roomid = localStorage.getItem("roomId");
 
     if (!roomid && hashString.length) {
       roomid = hashString;
     }
     if (roomid && roomid.length) {
-      document.getElementsByClassName("room-id").value = roomid;
       localStorage.setItem(connection.socketMessageEvent, roomid);
 
       /*auto-join-room*/
