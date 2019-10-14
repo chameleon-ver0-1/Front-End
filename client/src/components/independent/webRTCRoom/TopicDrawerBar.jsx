@@ -145,7 +145,6 @@ function messageBox(name, message) {
 
   boxes.push(box);
   console.log(JSON.stringify(boxes) + "***");
-  
 }
 
 /* socket.io 서버에 유저이름, 인식된 메시지 전송하는 함수 */
@@ -249,6 +248,7 @@ export class TopicDrawerBar extends Component {
       ":" +
       this.state.d.getSeconds();
 
+    const { startTime, mainTopics } = this.props;
     return (
       <DrawerContainer>
         <DrawerTitleContainer>
@@ -257,9 +257,10 @@ export class TopicDrawerBar extends Component {
         </DrawerTitleContainer>
         <TopicContainer>
           {/* Topic GET API 받아와서 map으로 for문 돌릴 부분 */}
-          <TopicItem>토픽1</TopicItem>
-          <TopicItem>토픽2</TopicItem>
-          <TopicItem>토픽3</TopicItem>
+          {Object.keys(mainTopics).map(topicId => {
+            const topic = mainTopics[topicId];
+            return <TopicItem>{topic}</TopicItem>;
+          })}
         </TopicContainer>
 
         <DarkDivideLine />
