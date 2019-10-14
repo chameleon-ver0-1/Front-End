@@ -113,14 +113,16 @@ const onExit = () => {
 //--------------------------------------------------------
 
 var serverURL = "https://s.chameleon4switch.cf/";
-var name; // FIXME: 지금 접속한 userName(한글) 넣어주세요, 윤영님!
+var name = localStorage.getItem("name");
 var color;
-var room; // FIXME: 회의실 입장 API에서 받아온 confId 넣어주세요, 윤영님!
+var room = localStorage.getItem("roomId");
 var socket = null;
 
 var chatColor;
 var chatName;
 var chatMessage;
+
+var boxes = new Array();
 
 /* 인식된 메시지 프론트에 기록하는 함수*/
 function writeMessage(color, name, message) {
@@ -130,9 +132,22 @@ function writeMessage(color, name, message) {
   chatName = name;
   chatMessage = message;
 
-  // TODO: FIXME: 여기에서 div를 추가하는 함수를 호출할 수 있어야 합니다. @윤영님
+  messageBox(chatName, chatMessage);
   console.log("loglog => " + chatColor + ": " + chatName + ": " + chatMessage);
 }
+
+/* STT 영역 추가하는 함수 */
+function messageBox(name, message) {
+  var box = new Object();
+
+  box.name = name;
+  box.message = message;
+
+  boxes.push(box);
+  console.log(JSON.stringify(boxes) + "***");
+  
+}
+
 /* socket.io 서버에 유저이름, 인식된 메시지 전송하는 함수 */
 function sender(text) {
   socket.emit("user", {
@@ -197,7 +212,7 @@ export class TopicDrawerBar extends Component {
     });
 
     socket.on("system", function(data) {
-      writeMessage("FIXME", "system", data.message); // FIXME: 시스템 컬러값 아무거나 하나 정해서 FIXME에 넣어주세요, 윤영님!
+      writeMessage("#34c88a", "system", data.message);
     });
 
     socket.on("message", function(data) {
@@ -249,12 +264,21 @@ export class TopicDrawerBar extends Component {
 
         <DarkDivideLine />
         {/* RecordBox: 정적이 길게 흐르기 전까지를 기준으로 기록을 보여주는 RecordBox,즉 소영이 너가 쌓아내려갈 DIV */}
-        <RecordBorder>
-          <TimeStamp>
-            {this.state.d.getHours()}:{this.state.d.getMinutes()}
-          </TimeStamp>
-          <RecordItem>{chatMessage}</RecordItem>
-        </RecordBorder>
+        {Object.keys(boxes).map(id => {
+          const box = boxes[id];
+          console.log(box.name + "*******");
+          return (
+            <RecordBorder>
+              <TimeStamp>
+                {this.state.d.getHours()}:{this.state.d.getMinutes()}
+              </TimeStamp>
+              <RecordItem>
+                {box.name}:{box.message}
+              </RecordItem>
+            </RecordBorder>
+          );
+        })}
+
         <section className="center"></section>
       </DrawerContainer>
     );
