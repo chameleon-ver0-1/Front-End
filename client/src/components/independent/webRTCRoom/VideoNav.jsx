@@ -61,9 +61,11 @@ export class VideoNav extends Component {
       this.state.d.getMinutes() +
       ":" +
       this.state.d.getSeconds();
+
+    const { memberList, title, onEmotionStart } = this.props;
     return (
       <UpperNav>
-        <ConferenceTitle>4월 간행물 표지 초안</ConferenceTitle>
+        <ConferenceTitle>{title}</ConferenceTitle>
         <UserCount>
           <RoundDiv
             id="userListBtn"
@@ -76,17 +78,32 @@ export class VideoNav extends Component {
         </UserCount>
 
         <Fade when={this.state.show}>
-          <InviteDialog />
+          <InviteDialog memberList={memberList} />
         </Fade>
         <RoundDiv
           style={{
-            width: "74px",
+            width: "80px",
             color: "var(--greenish-teal)",
             marginLeft: "15px",
-            fontSize: "16.5px"
+            fontSize: "16.5px",
+            paddingLeft: "15px",
+            paddingRight: "15px"
           }}
         >
           {currentTime}
+        </RoundDiv>
+        <RoundDiv
+          onClick={onEmotionStart}
+          style={{
+            width: "auto",
+            color: "white",
+            marginLeft: "10px",
+            fontSize: "16.5px",
+            paddingLeft: "15px",
+            paddingRight: "15px"
+          }}
+        >
+          감정인식
         </RoundDiv>
       </UpperNav>
     );

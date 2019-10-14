@@ -28,7 +28,14 @@ import {
 export class WebRTCRoom extends Component {
   constructor(props) {
     super(props);
-    this.state = { slideMenuActive: false };
+    this.state = {
+      slideMenuActive: false,
+      memberList: [],
+      title: "",
+      startTime: new Date(),
+      mainTopics: [],
+      isEmotionReq: false
+    };
   }
 
   componentDidMount() {
@@ -36,7 +43,13 @@ export class WebRTCRoom extends Component {
       res => {
         console.log("화상회의에 오신 걸 환영합니다");
         console.log(res.data);
-        //FIXME: 데이터 찍어놓음~!
+
+        this.setState({
+          memberList: res.data.data.members,
+          title: res.data.data.confTitle,
+          startTime: res.data.data.startTime,
+          mainTopics: res.data.data.mainTopics
+        });
       },
       err => {
         console.log(err);
@@ -57,15 +70,25 @@ export class WebRTCRoom extends Component {
       document.getElementById("main").style.marginRight = "0px";
     }
   };
+
+  onEmotionStart = () => {
+    this.setState({ isEmotionReq: true });
+    console.log("emotion 인식 시작!");
+  };
   render() {
     // this.state.slideMenuActive = false;
 
+    const { memberList, title, startTime, mainTopics } = this.state;
     return (
       <VideoBaseContainer>
         <VideoMenubar />
         <div>
           <Row>
-            <VideoNav />
+            <VideoNav
+              memberList={memberList}
+              title={title}
+              onEmotionStart={this.onEmotionStart}
+            />
             <ToggleDiv>
               <VideoControlButtons />
               <RoundDiv style={{ width: "54px", marginTop: "15px" }}>
@@ -76,11 +99,11 @@ export class WebRTCRoom extends Component {
             </ToggleDiv>
           </Row>
           <SecondBox>
-            <VideoItem />
+            <VideoItem emotionStatus={this.state.isEmotionReq} />
             {/* <VideoOrder /> */}
             <MainView id="main">
               <SideBar id="mySidebar" class="sidebar">
-                <TopicDrawerBar />
+                <TopicDrawerBar startTime={startTime} mainTopics={mainTopics} />
               </SideBar>
             </MainView>
           </SecondBox>

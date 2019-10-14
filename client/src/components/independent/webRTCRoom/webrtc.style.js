@@ -63,7 +63,7 @@ const ConferenceTitle = styled.div`
   margin-left: 26px;
   font-size: 22px;
   color: white;
-
+  font-family: NanumSquareB;
   overflow: hidden;
 `;
 const UserCount = styled.div`
@@ -77,6 +77,7 @@ const RoundDiv = styled.button`
   border-radius: 13.5px;
   box-shadow: 1.9px 2.3px 7px black 0.2;
 
+  font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -233,6 +234,7 @@ const RecordItem = styled.div`
   color: white;
   width: 164px;
   font-size: 12px;
+  font-family: NanumSquareL;
   margin-left: 13px;
 `;
 const RecordBorder = styled.div`
