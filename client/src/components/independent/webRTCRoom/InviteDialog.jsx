@@ -59,7 +59,7 @@ class InviteDialog extends React.Component {
           <DialogUpperLine>
             <ShortLine />
           </DialogUpperLine>
-          {Object.keys(memberList).map(memberId => {
+          {/* {Object.keys(memberList).map(memberId => {
             const member = memberList[memberId];
             return (
               <div>
@@ -70,7 +70,7 @@ class InviteDialog extends React.Component {
                 <DivideLine />
               </div>
             );
-          })}
+          })} */}
 
           <ShowInviteButton onClick={this.onURLCopy}>
             +초대하기

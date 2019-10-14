@@ -77,6 +77,7 @@ const RoundDiv = styled.button`
   border-radius: 13.5px;
   box-shadow: 1.9px 2.3px 7px black 0.2;
 
+  font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;

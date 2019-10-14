@@ -33,7 +33,8 @@ export class WebRTCRoom extends Component {
       memberList: [],
       title: "",
       startTime: new Date(),
-      mainTopics: []
+      mainTopics: [],
+      isEmotionReq: false
     };
   }
 
@@ -69,6 +70,11 @@ export class WebRTCRoom extends Component {
       document.getElementById("main").style.marginRight = "0px";
     }
   };
+
+  onEmotionStart = () => {
+    this.setState({ isEmotionReq: true });
+    console.log("emotion 인식 시작!");
+  };
   render() {
     // this.state.slideMenuActive = false;
 
@@ -78,7 +84,11 @@ export class WebRTCRoom extends Component {
         <VideoMenubar />
         <div>
           <Row>
-            <VideoNav memberList={memberList} title={title} />
+            <VideoNav
+              memberList={memberList}
+              title={title}
+              onEmotionStart={this.onEmotionStart}
+            />
             <ToggleDiv>
               <VideoControlButtons />
               <RoundDiv style={{ width: "54px", marginTop: "15px" }}>
@@ -89,7 +99,7 @@ export class WebRTCRoom extends Component {
             </ToggleDiv>
           </Row>
           <SecondBox>
-            <VideoItem />
+            <VideoItem emotionStatus={this.state.isEmotionReq} />
             {/* <VideoOrder /> */}
             <MainView id="main">
               <SideBar id="mySidebar" class="sidebar">

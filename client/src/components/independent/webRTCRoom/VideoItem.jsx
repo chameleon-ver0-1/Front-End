@@ -21,17 +21,6 @@ import * as service from "./getHTMLMediaElement";
 
 import { VideoFrame, EmotionStatus, VideosContainer } from "./webrtc.style";
 
-//FIXME:
-// connection.iceServers = [
-//   {
-//     urls: [
-//       "stun:stun.l.google.com:19302",
-//       "stun:stun1.l.google.com:19302",
-//       "stun:stun2.l.google.com:19302",
-//       "stun:stun.l.google.com:19302?transport=udp"
-//     ]
-//   }
-// ];
 var connection = new window.RTCMultiConnection();
 connection.autoCloseEntireSession = true; //개설자가 방을 나가면 방을 닫는 설정
 connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/"; //socket.io 신호 서버 URL을 설정
@@ -78,8 +67,13 @@ export class VideoItem extends Component {
         }
       })
     );
+  }
+
+  state = { roomKey: "undefined" };
+  componentWillReceiveProps(nextProps) {
+    // this.props 는 아직 바뀌지 않은 상태
     /*******************************************/
-    //감정인식 로직: 화면의 비율 가로길이 기준으로 3/2이상은 펼쳐져 있어야 정상 작동하는 모습 볼 수 있음..
+    //감정인식 로직: 화면의 비율 가로길이 기준으로 2/3이상은 펼쳐져 있어야 정상 작동하는 모습 볼 수 있음..
     /*******************************************/
     let playTran; //실시간 전송하기 위한 변수
 
@@ -139,18 +133,19 @@ export class VideoItem extends Component {
       });
     };
 
-    /*5초마다 capture() 호출*/
-    //capture();
-    console.log("감정인식 시작");
-    playTran = setInterval(function() {
-      console.log("감정인식 중입니다.");
-      capture();
-    }, 6000);
+    if (nextProps.emotionStatus == true) {
+      /*5초마다 capture() 호출*/
+      //capture();
+      console.log("감정인식 시작");
+      playTran = setInterval(function() {
+        console.log("감정인식 중입니다.");
+        capture();
+      }, 6000);
+    }
   }
 
-  state = { roomKey: "undefined" };
-
   render() {
+    const { emotionStatus } = this.props;
     (function() {
       var params = {},
         r = /([^&=]+)=?([^&]*)/g;
@@ -466,8 +461,6 @@ export class VideoItem extends Component {
         {/* <button id="share-screen" onClick={testShare}>
           화면 공유
         </button> */}
-
-        <button onClick={onRekog}>감정인식 시작</button>
         <VideosContainer id="videos-container" />
         <div id="room-urls" style={{ width: "100%" }} />
         <EmotionStatus id="showEmotion" />
