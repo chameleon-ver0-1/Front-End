@@ -35,12 +35,7 @@ export class Issues extends Component {
       }
     );
   }
-  componentWillUpdate = () => {
-    console.log("this.props.currentDep", this.props.currentDep);
-  };
-  componentWillReceiveProps = () => {
-    console.log("this.props.currentDep", this.props.currentDep);
-  };
+
   onDragStart = () => {
     // document.childNodes.backgroundColor = "orange";
   };

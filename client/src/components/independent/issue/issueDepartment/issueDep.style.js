@@ -11,7 +11,7 @@ export const DepContainer = styled.div`
 `;
 export const DepItem = styled.button`
   margin-right: 89px;
-  width: 70px;
+  width: auto;
 
   text-decoration: none;
   font-size: 24px;
