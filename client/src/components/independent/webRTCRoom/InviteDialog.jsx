@@ -52,16 +52,25 @@ class InviteDialog extends React.Component {
   };
 
   render() {
+    const { memberList } = this.props;
     return (
       <InviteContainer>
         <InviteList>
           <DialogUpperLine>
             <ShortLine />
           </DialogUpperLine>
-          {item}
-          {item}
-          {item}
-          {item}
+          {Object.keys(memberList).map(memberId => {
+            const member = memberList[memberId];
+            return (
+              <div>
+                <UserContainer>
+                  <img width="28px" height="28px" src={userProfile} />
+                  <UserText>{member}</UserText>
+                </UserContainer>
+                <DivideLine />
+              </div>
+            );
+          })}
 
           <ShowInviteButton onClick={this.onURLCopy}>
             +초대하기

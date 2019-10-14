@@ -61,9 +61,11 @@ export class VideoNav extends Component {
       this.state.d.getMinutes() +
       ":" +
       this.state.d.getSeconds();
+
+    const { memberList, title } = this.props;
     return (
       <UpperNav>
-        <ConferenceTitle>4월 간행물 표지 초안</ConferenceTitle>
+        <ConferenceTitle>{title}</ConferenceTitle>
         <UserCount>
           <RoundDiv
             id="userListBtn"
@@ -76,7 +78,7 @@ export class VideoNav extends Component {
         </UserCount>
 
         <Fade when={this.state.show}>
-          <InviteDialog />
+          <InviteDialog memberList={memberList} />
         </Fade>
         <RoundDiv
           style={{
