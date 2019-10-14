@@ -156,7 +156,7 @@ const VideoFrame = styled.div`
   padding-top: 19px;
   padding-right: 30px;
 
-  height: 100%;
+  height: 100vh-56px;
 `;
 const EmotionStatus = styled.div`
   position: fixed;
@@ -192,7 +192,7 @@ const TopicContainer = styled.div`
   width: 100%;
   height: 39px;
 `;
-const TopicItem = styled.div`
+const TopicItem = styled.button`
   font-size: 12px;
   width: 62.5px;
   height: 100%;
@@ -201,6 +201,9 @@ const TopicItem = styled.div`
   opacity: 0.5;
 
   color: white;
+
+  cursor: pointer;
+  outline: none;
 
   display: flex;
   justify-content: center;

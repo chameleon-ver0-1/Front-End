@@ -160,7 +160,12 @@ function sender(text) {
 export class TopicDrawerBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { d: new Date(), chatLogs: "", startTime: new Date() };
+    this.state = {
+      d: new Date(),
+      chatLogs: "",
+      startTime: new Date(),
+      isTopicClicked: []
+    };
     this.items = [];
     for (let i = 1; i <= 5; i++) {
       this.items.push(i);
@@ -174,6 +179,16 @@ export class TopicDrawerBar extends Component {
 
     // Clockcmp 컴포넌트가 불러올때마다 1초씩 this.Change()를 부른다
     this.timeID = setInterval(() => this.onChangeTime(), 1000);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    nextProps.mainTopics.forEach((topic, index) => {
+      if (index == 0) {
+        this.state.isTopicClicked.push(true);
+      } else {
+        this.state.isTopicClicked.push(false);
+      }
+    });
   }
   componentWillUnmount() {
     //종료되면 반복하는것도 클리어시키기
@@ -233,7 +248,15 @@ export class TopicDrawerBar extends Component {
     finalTranscript = "";
     /*******************************/
   }
+  onTopicChange = e => {
+    const newIsTopicClicked = [];
+    this.state.isTopicClicked.forEach(index => {
+      newIsTopicClicked.push(false);
+    });
+    newIsTopicClicked[e.target.id] = true;
 
+    this.setState({ isTopicClicked: newIsTopicClicked });
+  };
   render() {
     var currentDate =
       this.state.d.getFullYear() +
@@ -259,7 +282,19 @@ export class TopicDrawerBar extends Component {
           {/* Topic GET API 받아와서 map으로 for문 돌릴 부분 */}
           {Object.keys(mainTopics).map(topicId => {
             const topic = mainTopics[topicId];
-            return <TopicItem>{topic}</TopicItem>;
+            return (
+              <TopicItem
+                onClick={this.onTopicChange}
+                id={topicId}
+                style={{
+                  color: this.state.isTopicClicked[topicId]
+                    ? "var(--greenish-teal)"
+                    : "white"
+                }}
+              >
+                {topic}
+              </TopicItem>
+            );
           })}
         </TopicContainer>
 
