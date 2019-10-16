@@ -34,7 +34,8 @@ export class WebRTCRoom extends Component {
       title: "",
       startTime: new Date(),
       mainTopics: [],
-      isEmotionReq: false
+      isEmotionReq: false,
+      id: ""
     };
   }
 
@@ -48,8 +49,10 @@ export class WebRTCRoom extends Component {
           memberList: res.data.data.members,
           title: res.data.data.confTitle,
           startTime: res.data.data.startTime,
-          mainTopics: res.data.data.mainTopics
+          mainTopics: res.data.data.mainTopics,
+          roomId: res.data.data.confId
         });
+
       },
       err => {
         console.log(err);
@@ -78,10 +81,10 @@ export class WebRTCRoom extends Component {
   render() {
     // this.state.slideMenuActive = false;
 
-    const { memberList, title, startTime, mainTopics } = this.state;
+    const { memberList, title, startTime, mainTopics, roomId } = this.state;
     return (
       <VideoBaseContainer>
-        <VideoMenubar />
+        <VideoMenubar roomId={roomId} />
         <div>
           <Row>
             <VideoNav
