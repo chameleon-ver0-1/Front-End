@@ -14,6 +14,19 @@ export function getVideoStart(roomId) {
     `/enterConf/${localStorage.getItem("projectId")}/${roomId}`
   );
 }
+
+export function postVideoData(projectId, role) {
+  return VideoAxios.post(`/confInfo/${projectId}/${role}`).then(res => {
+    console.log(res.data);
+
+    console.log("***************************");
+    console.log(res.data.message);
+    console.log("***************************");
+
+    return Promise.resolve(res);
+  });
+}
+
 export function postVideoExit(roomId) {
   return VideoAxios.post(
     `/exitConf/${localStorage.getItem("projectId")}/${roomId}`
