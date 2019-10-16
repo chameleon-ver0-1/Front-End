@@ -132,14 +132,16 @@ function writeMessage(color, name, message) {
   chatName = name;
   chatMessage = message;
 
-  messageBox(chatName, chatMessage);
+  messageBox(chatColor, chatName, chatMessage);
   console.log("loglog => " + chatColor + ": " + chatName + ": " + chatMessage);
 }
 
 /* STT 영역 추가하는 함수 */
-function messageBox(name, message) {
+function messageBox(color, name, message) {
   var box = new Object();
 
+  //FIXME: 소영아 요기 아래 box.color = color; 로만 바꾸면 돼~!
+  box.color = "#34c88a";
   box.name = name;
   box.message = message;
 
@@ -308,7 +310,7 @@ export class TopicDrawerBar extends Component {
               <TimeStamp>
                 {this.state.d.getHours()}:{this.state.d.getMinutes()}
               </TimeStamp>
-              <RecordItem>
+              <RecordItem style={{ color: box.color }}>
                 {box.name}:{box.message}
               </RecordItem>
             </RecordBorder>
