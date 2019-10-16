@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const videoAxios = axios.create({
-  baseURL: "https://a.chameleon4switch.cf/api/conf_room/enterConf",
+const VideoAxios = axios.create({
+  baseURL: "https://a.chameleon4switch.cf/api/conf_room",
   headers: {
     ContentType: "application/json",
     Authorization: localStorage.getItem("jwtToken")
@@ -10,5 +10,12 @@ const videoAxios = axios.create({
 });
 
 export function getVideoStart(roomId) {
-  return videoAxios.get(`/${localStorage.getItem("projectId")}/${roomId}`);
+  return VideoAxios.get(
+    `/enterConf/${localStorage.getItem("projectId")}/${roomId}`
+  );
+}
+export function postVideoExit(roomId) {
+  return VideoAxios.post(
+    `/exitConf/${localStorage.getItem("projectId")}/${roomId}`
+  );
 }

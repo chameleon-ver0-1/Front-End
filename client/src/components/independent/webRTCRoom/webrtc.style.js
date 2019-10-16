@@ -159,16 +159,23 @@ const VideoFrame = styled.div`
   height: 100vh-56px;
 `;
 const EmotionStatus = styled.div`
-  position: fixed;
-  top: 80%;
-  width: 50%;
-  text-align: center;
-  display: inline-block;
+  position: absolute;
 
+  top: 50%;
+  left: 40%;
+  width: 220px;
+
+  display: flex;
+  text-align: center;
+  align-items: baseline;
+  padding: 10px;
+  font-size: 14px;
+
+  background: black;
   color: white;
-  font-size: 15px;
-  opacity: 0.4;
-  border-radius: 45px;
+
+  opacity: 0.5;
+  border-radius: 10px;
 `;
 const VideosContainer = styled.div`
   display: flex;
@@ -177,6 +184,69 @@ const VideosContainer = styled.div`
   flex-wrap: wrap;
 
   z-index: 1;
+`;
+const EmotionCircle = styled.div`
+  background: #2e373e;
+  font-family: NanumSquareEB;
+
+  --box-main-color: rgba(0, 0, 0, 0.2);
+  --box-shadow-h-offset: 2.3px;
+  --box-shadow-v-offset: 1.9px;
+  --box-shadow-blur: 7px;
+
+  width: 47px;
+  height: 47px;
+  border-radius: 60px;
+
+  box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
+    var(--box-shadow-blur) var(--box-main-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const EmotionButton = styled.button`
+  background: #2e373e;
+  font-size: 20px;
+  color: #616c72;
+  font-family: NanumSquareEB;
+
+  --box-main-color: rgba(0, 0, 0, 0.2);
+  --box-shadow-h-offset: 2.3px;
+  --box-shadow-v-offset: 1.9px;
+  --box-shadow-blur: 7px;
+
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+
+  box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
+    var(--box-shadow-blur) var(--box-main-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  outline: none;
+  cursor: pointer;
+  border: 0px;
+`;
+const ConnectLine = styled.div`
+  width: 100px;
+  height: 2px;
+  background: #2e373e;
+`;
+const EmotionSwitch = styled.div`
+  position: absolute;
+  left: 40%;
+  top: 90%;
+
+  height: 47px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 `;
 
 //////////////////////////////////////
@@ -408,7 +478,15 @@ export {
   RecordBorder,
   TimeStamp
 };
-export { VideoFrame, EmotionStatus, VideosContainer };
+export {
+  VideoFrame,
+  EmotionStatus,
+  VideosContainer,
+  EmotionButton,
+  EmotionCircle,
+  EmotionSwitch,
+  ConnectLine
+};
 
 export { CircleBtn, VideoControlContainer };
 export { VideoOrderContainer, TurnName };
