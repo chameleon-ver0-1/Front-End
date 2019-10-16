@@ -3,6 +3,7 @@ import styled from "styled-components";
 import people from "../../../assets/conference/people.png";
 import Conference from "./data/conference.json";
 import { withRouter } from "react-router-dom";
+import * as service from "../../../services/VideoService";
 
 const Circle_conference = styled.div`
   border-radius: 64px;
@@ -55,6 +56,9 @@ export class Circle2 extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      video_data: []
+    };
     this.gotoVideo = this.gotoVideo.bind(this);
   }
 
@@ -62,7 +66,24 @@ export class Circle2 extends Component {
     //화상회의로 이동
     console.log(id);
     localStorage.setItem("roomId", id);
-    this.props.history.push(`/room/${localStorage.getItem("roomId")}`);
+    // this.props.history.push(`/room/${localStorage.getItem("roomId")}`);
+
+    /**회의 시작 API */
+    service.getVideoStart(localStorage.getItem("roomId")).then(
+      res => {
+        console.log("화상회의에 오신 걸 환영합니다");
+        console.log(res.data);
+
+        this.setState({
+          video_data: res.data
+        });
+
+        this.props.history.push(`/room/${localStorage.getItem("roomId")}`);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   render() {
