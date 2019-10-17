@@ -50,13 +50,11 @@ recognition.interimResults = true; // 끝나지 않은 상태의 음성 반환 �
 
 /** STT 인식 시작 함수*/
 recognition.onstart = function() {
-  console.log("onstart", arguments);
   isRecognizing = true;
 };
 
 /** STT 인식 종료 함수*/
 recognition.onend = function() {
-  console.log("onend", arguments);
   isRecognizing = false;
 
   if (ignoreEndProcess) {
@@ -64,15 +62,14 @@ recognition.onend = function() {
   }
 
   if (!finalTranscript) {
-    console.log("empty finalTranscript");
     return false;
   }
 };
 /** 인식된 결과 처리 함수 */
 recognition.onresult = function(event) {
-  console.log("onresult", event);
 
   let interimTranscript = "";
+  
   if (typeof event.results === "undefined") {
     recognition.onend = null;
     recognition.stop();
@@ -87,9 +84,6 @@ recognition.onresult = function(event) {
       interimTranscript += event.results[i][0].transcript;
     }
   }
-
-  console.log("finalTranscript", finalTranscript);
-  console.log("interimTranscript", interimTranscript);
 };
 /** 에러 처리 함수 */
 recognition.onerror = function(event) {
@@ -125,7 +119,6 @@ var boxes = new Array();
 function writeMessage(color, name, message) {
   var box = new Object();
 
-  console.log('here is color => '+ color)
   box.color = color;
   box.name = name;
   box.message = message;
@@ -203,8 +196,6 @@ export class TopicDrawerBar extends Component {
     socket.on("connection", function(data) {
       if (data.type === "connected") {
         color = data.color;
-
-        console.log('here is my color! => '+color);
 
         socket.emit("connection", {
           type: "join",
