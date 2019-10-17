@@ -114,34 +114,19 @@ const onExit = () => {
 
 var serverURL = "https://s.chameleon4switch.cf/";
 var name = localStorage.getItem("name");
-var color;
 var room = localStorage.getItem("roomId");
+var color;
 var socket = null;
-
-var chatColor;
-var chatName;
-var chatMessage;
 
 var boxes = new Array();
 
+
 /* 인식된 메시지 프론트에 기록하는 함수*/
 function writeMessage(color, name, message) {
-  console.log("[채팅방 기록]: " + name + " -> " + message);
-
-  chatColor = color;
-  chatName = name;
-  chatMessage = message;
-
-  messageBox(chatColor, chatName, chatMessage);
-  console.log("loglog => " + chatColor + ": " + chatName + ": " + chatMessage);
-}
-
-/* STT 영역 추가하는 함수 */
-function messageBox(color, name, message) {
   var box = new Object();
 
-  //FIXME: 소영아 요기 아래 box.color = color; 로만 바꾸면 돼~!
-  box.color = "#34c88a";
+  console.log('here is color => '+ color)
+  box.color = color;
   box.name = name;
   box.message = message;
 
@@ -219,6 +204,8 @@ export class TopicDrawerBar extends Component {
       if (data.type === "connected") {
         color = data.color;
 
+        console.log('here is my color! => '+color);
+
         socket.emit("connection", {
           type: "join",
           name: name,
@@ -228,7 +215,7 @@ export class TopicDrawerBar extends Component {
     });
 
     socket.on("system", function(data) {
-      writeMessage("#34c88a", "system", data.message);
+      writeMessage(color, "system", data.message);
     });
 
     socket.on("message", function(data) {
