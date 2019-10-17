@@ -215,7 +215,7 @@ export class TopicDrawerBar extends Component {
     });
 
     socket.on("system", function(data) {
-      writeMessage(color, "system", data.message);
+      writeMessage('#eeeeee', "system", data.message);
     });
 
     socket.on("message", function(data) {
