@@ -80,10 +80,6 @@ export class VideoItem extends Component {
         }
       })
     );
-  }
-
-  state = { roomKey: "undefined" };
-  componentWillReceiveProps(nextProps) {
     // this.props 는 아직 바뀌지 않은 상태
     /*******************************************/
     //감정인식 로직: 화면의 비율 가로길이 기준으로 2/3이상은 펼쳐져 있어야 정상 작동하는 모습 볼 수 있음..
@@ -146,13 +142,16 @@ export class VideoItem extends Component {
       });
     };
 
-    if (nextProps.emotionStatus == true) {
+    this.state = { roomKey: "undefined" };
+
+    const EmotionStart = () => {
       /*5초마다 capture() 호출*/
       //capture();
       this.setState({
         isShowEmotionStart: true,
         isEmotionHearing: true
       });
+
       setTimeout(() => {
         this.setState({
           isShowEmotionStart: false
@@ -163,7 +162,7 @@ export class VideoItem extends Component {
         console.log("감정인식 중입니다.");
         capture();
       }, 6000);
-    }
+    };
   }
 
   render() {
@@ -426,7 +425,7 @@ export class VideoItem extends Component {
         <EmotionSwitch>
           <EmotionCircle />
           <ConnectLine />
-          <EmotionButton>OFF</EmotionButton>
+          <EmotionButton onClick={this.EmotionStart}>OFF</EmotionButton>
           <ConnectLine />
           <EmotionCircle />
         </EmotionSwitch>

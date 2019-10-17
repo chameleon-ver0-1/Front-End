@@ -92,7 +92,7 @@ export class VideoNav extends Component {
         >
           {currentTime}
         </RoundDiv>
-        <RoundDiv
+        {/* <RoundDiv
           onClick={onEmotionStart}
           style={{
             width: "auto",
@@ -104,7 +104,7 @@ export class VideoNav extends Component {
           }}
         >
           감정인식
-        </RoundDiv>
+        </RoundDiv> */}
       </UpperNav>
     );
   }

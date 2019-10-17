@@ -70,7 +70,7 @@ recognition.onend = function() {
 };
 /** 인식된 결과 처리 함수 */
 recognition.onresult = function(event) {
-  console.log("onresult", event);
+  // console.log("onresult", event);
 
   let interimTranscript = "";
   if (typeof event.results === "undefined") {
@@ -88,8 +88,8 @@ recognition.onresult = function(event) {
     }
   }
 
-  console.log("finalTranscript", finalTranscript);
-  console.log("interimTranscript", interimTranscript);
+  // console.log("finalTranscript", finalTranscript);
+  // console.log("interimTranscript", interimTranscript);
 };
 /** 에러 처리 함수 */
 recognition.onerror = function(event) {
@@ -120,18 +120,17 @@ var socket = null;
 
 var boxes = new Array();
 
-
 /* 인식된 메시지 프론트에 기록하는 함수*/
 function writeMessage(color, name, message) {
   var box = new Object();
 
-  console.log('here is color => '+ color)
+  // console.log("here is color => " + color);
   box.color = color;
   box.name = name;
   box.message = message;
 
   boxes.push(box);
-  console.log(JSON.stringify(boxes) + "***");
+  // console.log(JSON.stringify(boxes) + "***");
 }
 
 /* socket.io 서버에 유저이름, 인식된 메시지 전송하는 함수 */
@@ -204,7 +203,7 @@ export class TopicDrawerBar extends Component {
       if (data.type === "connected") {
         color = data.color;
 
-        console.log('here is my color! => '+color);
+        // console.log('here is my color! => '+color);
 
         socket.emit("connection", {
           type: "join",
@@ -291,7 +290,7 @@ export class TopicDrawerBar extends Component {
         {/* RecordBox: 정적이 길게 흐르기 전까지를 기준으로 기록을 보여주는 RecordBox,즉 소영이 너가 쌓아내려갈 DIV */}
         {Object.keys(boxes).map(id => {
           const box = boxes[id];
-          console.log(box.name + "*******");
+          // console.log(box.name + "*******");
           return (
             <RecordBorder>
               <TimeStamp>
