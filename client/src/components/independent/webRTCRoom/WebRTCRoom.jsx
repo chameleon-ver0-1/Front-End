@@ -54,12 +54,12 @@ export class WebRTCRoom extends Component {
           console.log("화상회의에 오신 걸 환영합니다");
           console.log(res.data);
 
-          // this.setState({
-          //   memberList: res.data.data.members,
-          //   title: res.data.data.confTitle,
-          //   startTime: res.data.data.startTime,
-          //   mainTopics: res.data.data.mainTopics
-          // });
+          this.setState({
+            memberList: res.data.data.members,
+            title: res.data.data.confTitle,
+            startTime: res.data.data.startTime,
+            mainTopics: res.data.data.mainTopics
+          });
         },
         err => {
           console.log(err);
