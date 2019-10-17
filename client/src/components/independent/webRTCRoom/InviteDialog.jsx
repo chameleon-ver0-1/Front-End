@@ -59,18 +59,22 @@ class InviteDialog extends React.Component {
           <DialogUpperLine>
             <ShortLine />
           </DialogUpperLine>
-          {/* {Object.keys(memberList).map(memberId => {
-            const member = memberList[memberId];
+          {Object.keys(memberList).map(memberId => {
+            const name = memberList[memberId].name;
+            const nameEn = memberList[memberId].nameEn;
+            const email = memberList[memberId].email;
             return (
               <div>
                 <UserContainer>
                   <img width="28px" height="28px" src={userProfile} />
-                  <UserText>{member}</UserText>
+                  <UserText>
+                    {name} {nameEn}
+                  </UserText>
                 </UserContainer>
                 <DivideLine />
               </div>
             );
-          })} */}
+          })}
 
           <ShowInviteButton onClick={this.onURLCopy}>
             +초대하기
