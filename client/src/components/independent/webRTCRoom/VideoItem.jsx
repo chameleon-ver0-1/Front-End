@@ -18,16 +18,10 @@ import React, { Component } from "react";
 import html2canvas from "html2canvas";
 import axios from "axios";
 import * as service from "./getHTMLMediaElement";
+import EmotionStatusBar from "./EmotionStatusBar";
+import loading from "../../../assets/conference/emotion_loading.gif";
 
-import {
-  VideoFrame,
-  EmotionStatus,
-  VideosContainer,
-  EmotionCircle,
-  EmotionButton,
-  EmotionSwitch,
-  ConnectLine
-} from "./webrtc.style";
+import { VideoFrame, VideosContainer } from "./webrtc.style";
 
 var connection = new window.RTCMultiConnection();
 connection.autoCloseEntireSession = true; //개설자가 방을 나가면 방을 닫는 설정
@@ -35,12 +29,18 @@ connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/"; //socket
 
 export class VideoItem extends Component {
   //FIXME:state값 추가함
-  state = {
-    roomToken: "",
-    dummy: [],
-    isShowEmotionStart: false,
-    isEmotionHearing: false
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      roomToken: "",
+      dummy: [],
+      isShowEmotionStart: false,
+      isEmotionHearing: false,
+      emotion: "",
+      isWaiting: false
+    };
+  }
 
   /*script가져오는 함수 */
   componentWillMount() {
@@ -81,92 +81,9 @@ export class VideoItem extends Component {
       })
     );
     // this.props 는 아직 바뀌지 않은 상태
-    /*******************************************/
-    //감정인식 로직: 화면의 비율 가로길이 기준으로 2/3이상은 펼쳐져 있어야 정상 작동하는 모습 볼 수 있음..
-    /*******************************************/
-    let playTran; //실시간 전송하기 위한 변수
-
-    /* 비디오 캡처하는 함수*/
-    const capture = () => {
-      /*videos-container 캡쳐하기 전 비디오 위에 비디오 캡쳐 이미지 놓기*/
-      connection.showImage = document.getElementById("show-image");
-      var canvas = document.createElement("canvas");
-      var videos = document.querySelectorAll("video");
-
-      var context = canvas.getContext("2d");
-
-      /*비디오 각각을 반복문을 통해 별도로 캡쳐*/
-      for (var i = 0, len = videos.length; i < len; i++) {
-        var v = videos[i];
-        if (!v.id) continue;
-        try {
-          var ratio = v.videoWidth / v.videoHeight;
-          var w = v.videoWidth - 100;
-          var h = parseInt(w / ratio, 10);
-          canvas.setAttribute("width", w);
-          canvas.setAttribute("height", h);
-          context.fillRect(0, 0, w, h);
-          context.drawImage(v, 0, 0, w, h);
-          v.style.width = "400px";
-          v.style.height = "300px"; //-->이걸로 해결
-          v.style.backgroundImage = `url(${canvas.toDataURL("image/png")})`;
-          v.style.backgroundSize = "cover";
-        } catch (e) {
-          continue;
-        }
-      }
-      /*videos-container 캡쳐*/
-      html2canvas(document.getElementById("videos-container")).then(function(
-        canvas
-      ) {
-        axios
-          .post("/emotion", {
-            img: canvas.toDataURL("image/png")
-          })
-          .then(response => {
-            console.log(response.data);
-            if (response.data.data === false) {
-              document.getElementById("showEmotion").style.visibility =
-                "hidden";
-            } else {
-              document.getElementById("showEmotion").style.visibility =
-                "visible";
-            }
-            document.getElementById("showEmotion").innerHTML =
-              response.data.message;
-            console.log(response.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      });
-    };
-
-    this.state = { roomKey: "undefined" };
-
-    const EmotionStart = () => {
-      /*5초마다 capture() 호출*/
-      //capture();
-      this.setState({
-        isShowEmotionStart: true,
-        isEmotionHearing: true
-      });
-
-      setTimeout(() => {
-        this.setState({
-          isShowEmotionStart: false
-        });
-      }, 2000); // 시간. 2초 후 실행
-
-      playTran = setInterval(function() {
-        console.log("감정인식 중입니다.");
-        capture();
-      }, 6000);
-    };
   }
 
   render() {
-    const { emotionStatus } = this.props;
     (function() {
       var params = {},
         r = /([^&=]+)=?([^&]*)/g;
@@ -324,8 +241,143 @@ export class VideoItem extends Component {
         });
     };
 
+    /*******************************************/
+    //감정인식 로직: 화면의 비율 가로길이 기준으로 3/2이상은 펼쳐져 있어야 정상 작동하는 모습 볼 수 있음..
+    /*******************************************/
+    let playTran; //실시간 전송하기 위한 변수
+    var emotionResponse = "";
+    /* 비디오 캡처하는 함수*/
+    const capture = () => {
+      /*videos-container 캡쳐하기 전 비디오 위에 비디오 캡쳐 이미지 놓기*/
+      connection.showImage = document.getElementById("show-image");
+      var canvas = document.createElement("canvas");
+      var videos = document.querySelectorAll("video");
+
+      var context = canvas.getContext("2d");
+
+      /*비디오 각각을 반복문을 통해 별도로 캡쳐*/
+      for (var i = 0, len = videos.length; i < len; i++) {
+        var v = videos[i];
+        if (!v.id) continue;
+        try {
+          var ratio = v.videoWidth / v.videoHeight;
+          var w = v.videoWidth - 100;
+          var h = parseInt(w / ratio, 10);
+          canvas.setAttribute("width", w);
+          canvas.setAttribute("height", h);
+          context.fillRect(0, 0, w, h);
+          context.drawImage(v, 0, 0, w, h);
+          v.style.width = "400px";
+          v.style.height = "300px"; //-->이걸로 해결
+          v.style.backgroundImage = `url(${canvas.toDataURL("image/png")})`;
+          v.style.backgroundSize = "cover";
+        } catch (e) {
+          continue;
+        }
+      }
+
+      /*videos-container 캡쳐*/
+      html2canvas(document.getElementById("videos-container")).then(function(
+        canvas
+      ) {
+        axios
+          .post("/emotion", {
+            img: canvas.toDataURL("image/png")
+          })
+          .then(response => {
+            console.log(response.data);
+            if (response.data.data === false) {
+              emotionResponse = "...";
+            }
+            if (
+              response.data.message ==
+              "과반수 이상의 참여자가 긍정의 반응을 보였습니다"
+            ) {
+              emotionResponse = "긍정";
+            } else if (
+              response.data.message ==
+              "과반수 이상의 참여자가 부정의 반응을 보였습니다"
+            ) {
+              emotionResponse = "부정";
+            } else {
+              emotionResponse = "무표정";
+            }
+            console.log(response.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      });
+
+      this.setState({
+        isWaiting: false
+      });
+
+      document.getElementById("emotionDiv").innerHTML = emotionResponse;
+
+      setTimeout(() => {
+        this.setState({
+          isWaiting: true
+        });
+      }, 2000); // 시간. 2초 후 실행
+
+      this.setState({ emotion: emotionResponse });
+    };
+    const EmotionCheck = () => {
+      //디자인 토글
+
+      /*5초마다 capture() 호출*/
+      //capture();
+      if (this.state.isEmotionHearing == false) {
+        document.getElementById("showEmotion").innerHTML =
+          "감정 분석을 시작합니다.";
+        document.getElementById("emotionBtn").style.background = "#28875f";
+        document.getElementById("emotionDiv").innerHTML = "ON";
+
+        this.setState({
+          isShowEmotionStart: true,
+          isEmotionHearing: true
+        });
+
+        setTimeout(() => {
+          document.getElementById("emotionBtn").style.background = "#2e373e";
+
+          this.setState({
+            isShowEmotionStart: false,
+            isWaiting: true
+          });
+        }, 2000); // 시간. 2초 후 실행
+
+        playTran = setInterval(function() {
+          console.log("감정인식 중입니다.");
+
+          capture();
+        }, 6000);
+      } else {
+        clearInterval(playTran);
+
+        this.setState({
+          isEmotionHearing: false,
+          isShowEmotionStart: true,
+          isWaiting: false
+        });
+
+        document.getElementById("emotionDiv").innerHTML = "OFF";
+        document.getElementById("emotionBtn").style.background = "#ae4747";
+
+        document.getElementById("showEmotion").innerHTML =
+          "감정 분석을 종료합니다.";
+
+        setTimeout(() => {
+          this.setState({
+            isShowEmotionStart: false
+          });
+        }, 2000); // 시간. 2초 후 실행
+      }
+    };
+
     // const onStop = () => {
-    //   clearInterval(playTran);
+
     //   console.log("종료");
     // };
 
@@ -408,27 +460,8 @@ export class VideoItem extends Component {
 
     return (
       <VideoFrame id="video-home-container">
-        {/* <button id="share-screen" onClick={testShare}>
-          화면 공유
-        </button> */}
-        {/* <button type="button" onClick={onStop}>
-        감정인식 종료
-        </button> */}
         <VideosContainer id="videos-container" />
-        <div id="room-urls" style={{ width: "100%" }} />
-        <EmotionStatus
-          id="showEmotion"
-          style={{ display: this.state.isShowEmotionStart ? "inline" : "none" }}
-        >
-          감정 인식을 시작합니다.
-        </EmotionStatus>
-        <EmotionSwitch>
-          <EmotionCircle />
-          <ConnectLine />
-          <EmotionButton onClick={this.EmotionStart}>OFF</EmotionButton>
-          <ConnectLine />
-          <EmotionCircle />
-        </EmotionSwitch>
+        <EmotionStatusBar status={this.state} EmotionCheck={EmotionCheck} />
       </VideoFrame>
     );
   }

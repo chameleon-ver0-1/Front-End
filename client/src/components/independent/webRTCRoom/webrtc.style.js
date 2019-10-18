@@ -207,9 +207,9 @@ const EmotionCircle = styled.div`
 `;
 
 const EmotionButton = styled.button`
-  background: #2e373e;
+  background: #ae4747;
   font-size: 20px;
-  color: #616c72;
+  color: white;
   font-family: NanumSquareEB;
 
   --box-main-color: rgba(0, 0, 0, 0.2);
@@ -239,7 +239,7 @@ const ConnectLine = styled.div`
 `;
 const EmotionSwitch = styled.div`
   position: absolute;
-  left: 40%;
+  left: 50%;
   top: 90%;
 
   height: 47px;
@@ -404,6 +404,7 @@ const CircleBtn = styled.button`
   width:31px
   height: 31px;
   border: 1px solid #f25959;
+  color:white;
   border-radius: 50px;
   box-shadow: 2.3px 1.9px 7px black 0.2;
 
