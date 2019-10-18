@@ -9,6 +9,7 @@ import {
   CheckLeaveDiv
 } from "./webrtc.style";
 export class CheckLeaveDialog extends Component {
+  //FIXME: TO소영: 여기는 회의실 나가기 버튼 함수란다.
   onExit = () => {
     service.postVideoExit(localStorage.getItem("roomId"));
 

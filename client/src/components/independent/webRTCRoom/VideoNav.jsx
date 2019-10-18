@@ -57,6 +57,7 @@ export class VideoNav extends Component {
     document.getElementById("userListBtn").style.backgroundColor =
       "var(--greenish-teal)";
   };
+    //FIXME: TO소영: 여기는 회의실 종료 버튼 함수란다.
   onStopConference = () => {
     service.postVideoStop(localStorage.getItem("roomId"));
     this.props.history.push(
