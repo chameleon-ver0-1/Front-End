@@ -85,6 +85,34 @@ const RoundDiv = styled.button`
   cursor: pointer;
   outline: none;
 `;
+
+const TimeDiv = styled.button`
+  background: #2e373e;
+  height: 28px;
+  border: 1px solid #2e373e;
+  border-radius: 13.5px;
+  box-shadow: 1.9px 2.3px 7px black 0.2;
+
+  font-size: 16px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  outline: none;
+  width: auto;
+  color: var(--greenish-teal);
+  margin-left: 15px;
+  font-size: 16.5px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  &:hover {
+    background: #f25959;
+    color: white;
+  }
+`;
 const NavP = styled.div`
   font-size: 16.5px;
 `;
@@ -207,9 +235,9 @@ const EmotionCircle = styled.div`
 `;
 
 const EmotionButton = styled.button`
-  background: #2e373e;
+  background: #ae4747;
   font-size: 20px;
-  color: #616c72;
+  color: white;
   font-family: NanumSquareEB;
 
   --box-main-color: rgba(0, 0, 0, 0.2);
@@ -232,6 +260,11 @@ const EmotionButton = styled.button`
   cursor: pointer;
   border: 0px;
 `;
+const EmotionDiv = styled.div`
+  font-size: 20px;
+  color: white;
+  font-family: NanumSquareEB;
+`;
 const ConnectLine = styled.div`
   width: 100px;
   height: 2px;
@@ -239,7 +272,7 @@ const ConnectLine = styled.div`
 `;
 const EmotionSwitch = styled.div`
   position: absolute;
-  left: 40%;
+  left: 50%;
   top: 90%;
 
   height: 47px;
@@ -404,6 +437,7 @@ const CircleBtn = styled.button`
   width:31px
   height: 31px;
   border: 1px solid #f25959;
+  color:white;
   border-radius: 50px;
   box-shadow: 2.3px 1.9px 7px black 0.2;
 
@@ -445,6 +479,45 @@ const TurnName = styled.div`
   font-family: NanumSqareB;
   color: white;
 `;
+
+//////////////////////////////////////
+/*CheckLeaveDialog */
+//////////////////////////////////////
+const CheckLeaveContainer = styled.div`
+  width: 314px;
+  height: 163px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+const CheckLeaveDiv = styled.div`
+  color: var(--light-black);
+  font-family: NanumSquareB
+  font-size:14px;
+`;
+const CheckButtonItem = styled.button`
+  width: 75px;
+  height: 38px;
+  color: var(--brownish-grey)
+  font-family:NanumSquareB;
+  font-size: 14px;
+  border: solid 1px var(--white-two);
+  border-radius:10px;
+
+  outline:none;
+  cursor:pointer;
+
+  &:hover {
+    background:var(--greenish-teal);
+    color:white;
+  }
+`;
+const RowButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 27px;
+`;
 export {
   MainView,
   SideBar,
@@ -454,7 +527,7 @@ export {
   Row,
   ToggleDiv
 };
-export { UpperNav, ConferenceTitle, UserCount, RoundDiv, NavP };
+export { UpperNav, ConferenceTitle, UserCount, RoundDiv, TimeDiv, NavP };
 
 export {
   InviteContainer,
@@ -485,8 +558,10 @@ export {
   EmotionButton,
   EmotionCircle,
   EmotionSwitch,
-  ConnectLine
+  ConnectLine,
+  EmotionDiv
 };
 
 export { CircleBtn, VideoControlContainer };
 export { VideoOrderContainer, TurnName };
+export { CheckLeaveContainer, CheckButtonItem, RowButtons, CheckLeaveDiv };

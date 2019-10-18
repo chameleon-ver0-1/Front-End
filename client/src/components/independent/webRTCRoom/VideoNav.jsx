@@ -19,14 +19,16 @@ import participants from "../../../assets/conferenceRoom/videohome_participants.
 
 import Fade from "react-reveal/Fade";
 import InviteDialog from "./InviteDialog";
-
+import * as service from "../../../services/VideoService";
+import { withRouter } from "react-router-dom";
 import {
   UpperNav,
   ConferenceTitle,
   UserCount,
   RoundDiv,
   NavP,
-  CircleBtn
+  CircleBtn,
+  TimeDiv
 } from "./webrtc.style";
 
 export class VideoNav extends Component {
@@ -34,6 +36,7 @@ export class VideoNav extends Component {
     super(props);
     this.state = { show: false, d: new Date() };
   }
+
   componentDidMount() {
     // Clockcmp 컴포넌트가 불러올때마다 1초씩 this.Change()를 부른다
 
@@ -53,6 +56,12 @@ export class VideoNav extends Component {
     this.setState({ show: !this.state.show });
     document.getElementById("userListBtn").style.backgroundColor =
       "var(--greenish-teal)";
+  };
+  onStopConference = () => {
+    service.postVideoStop(localStorage.getItem("roomId"));
+    this.props.history.push(
+      `/home/conferenceRoom/${localStorage.getItem("projectId")}`
+    );
   };
   render() {
     var currentTime =
@@ -80,34 +89,10 @@ export class VideoNav extends Component {
         <Fade when={this.state.show}>
           <InviteDialog memberList={memberList} />
         </Fade>
-        <RoundDiv
-          style={{
-            width: "80px",
-            color: "var(--greenish-teal)",
-            marginLeft: "15px",
-            fontSize: "16.5px",
-            paddingLeft: "15px",
-            paddingRight: "15px"
-          }}
-        >
-          {currentTime}
-        </RoundDiv>
-        {/* <RoundDiv
-          onClick={onEmotionStart}
-          style={{
-            width: "auto",
-            color: "white",
-            marginLeft: "10px",
-            fontSize: "16.5px",
-            paddingLeft: "15px",
-            paddingRight: "15px"
-          }}
-        >
-          감정인식
-        </RoundDiv> */}
+        <TimeDiv onClick={this.onStopConference}>{currentTime}</TimeDiv>
       </UpperNav>
     );
   }
 }
 
-export default VideoNav;
+export default withRouter(VideoNav);

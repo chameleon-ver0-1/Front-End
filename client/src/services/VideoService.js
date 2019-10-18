@@ -32,3 +32,8 @@ export function postVideoExit(roomId) {
     `/exitConf/${localStorage.getItem("projectId")}/${roomId}`
   );
 }
+export function postVideoStop(roomId) {
+  return VideoAxios.post(
+    `/endConf/${localStorage.getItem("projectId")}/${roomId}`
+  );
+}

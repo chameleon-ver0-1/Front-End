@@ -12,7 +12,8 @@ import logoIcon from "../../../assets/conferenceRoom/videohome_logo.png";
 import exitOn from "../../../assets/conferenceRoom/videohome_exit_on.png";
 import exitOff from "../../../assets/conferenceRoom/videdohome_exit_off.png";
 import * as service from "../../../services/VideoService";
-import { withRouter } from "react-router-dom";
+
+import CheckLeaveDialog from "./CheckLeaveDialog";
 
 import {
   Logo,
@@ -31,19 +32,16 @@ export class VideoMenubar extends Component {
       mouseCheck: false
     };
   }
-  ///FIXME: 작업 하고 있던 공간 10/15
-  onExit = () => {
+
+  openDialog = () => {
     this.setState({
       open: true
     });
-    console.log("roomId가 제대로 담겨서 post를 보내는가?", this.props.roomId);
-    service.postVideoExit(this.props.roomId);
-
-    this.props.history.push(`/home/issue/${localStorage.getItem("projectId")}`);
   };
-  onExitCancel = () => {
+  onCloseModal = () => {
     this.setState({ open: false });
   };
+
   render() {
     return (
       <LeftNav>
@@ -59,13 +57,17 @@ export class VideoMenubar extends Component {
           </ButtonItem>
         </LeftUpperDiv>
         <LeftBottomDiv>
-          <ButtonItem onClick={this.onExit}>
+          <ButtonItem onClick={this.openDialog}>
             <img width="29px" height="25px" src={exitOff} />
           </ButtonItem>
         </LeftBottomDiv>
+        <CheckLeaveDialog
+          open={this.state.open}
+          onCloseModal={this.onCloseModal}
+        />
       </LeftNav>
     );
   }
 }
 
-export default withRouter(VideoMenubar);
+export default VideoMenubar;
