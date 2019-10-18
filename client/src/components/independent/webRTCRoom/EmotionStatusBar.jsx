@@ -9,17 +9,10 @@ import {
   EmotionSwitch,
   EmotionCircle,
   ConnectLine,
-  EmotionButton
+  EmotionButton,
+  EmotionDiv
 } from "./webrtc.style";
-import { useAnimation } from "react-rebound";
-
-function toggle(Inner) {
-  return props => {
-    const [toggled, setToggled] = React.useState(false);
-    const onClick = React.useCallback(() => setToggled(t => !t), []);
-    return <Inner {...props} toggled={toggled} onClick={onClick} />;
-  };
-}
+import { Animate } from "react-rebound";
 
 export class EmotionStatusBar extends Component {
   render() {
@@ -33,17 +26,25 @@ export class EmotionStatusBar extends Component {
           감정 분석을 시작합니다.
         </EmotionStatus>
         <EmotionSwitch>
-          <EmotionCircle
-            style={{
-              visibility: status.isEmotionHearing ? "visible" : "hidden"
-            }}
+          <Animate
+            scaleX={status.emotion == "긍정" ? 1.4 : 1}
+            scaleY={status.emotion == "긍정" ? 1.4 : 1}
+            tension={200}
+            friction={400}
+            delay={100}
           >
-            <img
-              width="43px"
-              height="42px"
-              src={status.emotion == "긍정" ? positive : positive_default}
-            ></img>
-          </EmotionCircle>
+            <EmotionCircle
+              style={{
+                visibility: status.isEmotionHearing ? "visible" : "hidden"
+              }}
+            >
+              <img
+                width="43px"
+                height="42px"
+                src={status.emotion == "긍정" ? positive : positive_default}
+              ></img>
+            </EmotionCircle>
+          </Animate>
           <ConnectLine
             style={{
               visibility: status.isEmotionHearing ? "visible" : "hidden"
@@ -57,12 +58,12 @@ export class EmotionStatusBar extends Component {
               style={{ display: status.isWaiting ? "inline" : "none" }}
               src={loading}
             ></img>
-            <div
+            <EmotionDiv
               id="emotionDiv"
               style={{ display: status.isWaiting ? "none" : "inline" }}
             >
               OFF
-            </div>
+            </EmotionDiv>
           </EmotionButton>
 
           <ConnectLine
@@ -71,17 +72,25 @@ export class EmotionStatusBar extends Component {
               visibility: status.isEmotionHearing ? "visible" : "hidden"
             }}
           />
-          <EmotionCircle
-            style={{
-              visibility: status.isEmotionHearing ? "visible" : "hidden"
-            }}
+          <Animate
+            scaleX={status.emotion == "부정" ? 1.4 : 1}
+            scaleY={status.emotion == "부정" ? 1.4 : 1}
+            tension={200}
+            friction={400}
+            delay={100}
           >
-            <img
-              width="43px"
-              height="42px"
-              src={status.emotion == "부정" ? negative : negative_default}
-            ></img>
-          </EmotionCircle>
+            <EmotionCircle
+              style={{
+                visibility: status.isEmotionHearing ? "visible" : "hidden"
+              }}
+            >
+              <img
+                width="43px"
+                height="42px"
+                src={status.emotion == "부정" ? negative : negative_default}
+              ></img>
+            </EmotionCircle>
+          </Animate>
         </EmotionSwitch>
       </div>
     );

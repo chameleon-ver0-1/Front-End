@@ -315,13 +315,14 @@ export class VideoItem extends Component {
 
       document.getElementById("emotionDiv").innerHTML = emotionResponse;
 
+      this.setState({ emotion: emotionResponse });
+
       setTimeout(() => {
         this.setState({
-          isWaiting: true
+          isWaiting: true,
+          emotion: "none"
         });
       }, 2000); // 시간. 2초 후 실행
-
-      this.setState({ emotion: emotionResponse });
     };
     const EmotionCheck = () => {
       //디자인 토글
