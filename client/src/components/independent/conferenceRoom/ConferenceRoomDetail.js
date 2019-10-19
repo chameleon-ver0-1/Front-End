@@ -42,6 +42,7 @@ export class ConferenceRoomDetail extends Component {
         this.setState({
           includeList: res.data.data
         });
+        console.log(this.state.includeList);
       },
       err => {
         console.log(err);
@@ -191,12 +192,17 @@ export class ConferenceRoomDetail extends Component {
                         // if (id > 3 && id <= 7) {
                         //   break;
                         // }
+
                         return (
                           <Circle2
                             date={moment(dateTime).format("YYYY.MM.DD")}
                             time={moment(dateTime).format("HH:mm~")}
                             title={includeList.title}
-                            name={includeList.adminEmail}
+                            name={
+                              includeList.confLeaderName +
+                              " " +
+                              includeList.confLeaderName_en
+                            }
                             nowP={includeList.isConfYMembersTotal}
                             allP={includeList.membersTotal}
                             id={includeList.id}
