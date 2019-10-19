@@ -237,8 +237,10 @@ export default class AddIssueDialog extends Component {
               />
             </SelectRow>
             <SubmitBtns>
-              <ConfirmBtn onClick={this.postIssueItem}>확인</ConfirmBtn>
-              <CancelBtn>취소</CancelBtn>
+              <ConfirmBtn onClick={this.postIssueItem} onClick={onCloseModal}>
+                확인
+              </ConfirmBtn>
+              <CancelBtn onClick={onCloseModal}>취소</CancelBtn>
             </SubmitBtns>
           </div>
         </PopupContainer>
