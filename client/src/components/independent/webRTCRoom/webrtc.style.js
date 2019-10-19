@@ -342,6 +342,14 @@ const RecordItem = styled.div`
   font-size: 12px;
   font-family: NanumSquareL;
   margin-left: 13px;
+  display: inline-block;
+`;
+const RecordItemColor = styled.div`
+  color: white;
+  font-size: 12px;
+  font-family: NanumSquareL;
+  display: inline-block;
+  margin-right: 5px;
 `;
 const RecordBorder = styled.div`
   display: flex;
@@ -548,6 +556,7 @@ export {
   TopicContainer,
   DarkDivideLine,
   RecordItem,
+  RecordItemColor,
   RecordBorder,
   TimeStamp
 };

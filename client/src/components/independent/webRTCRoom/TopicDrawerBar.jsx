@@ -28,6 +28,7 @@ import {
   TopicItem,
   DarkDivideLine,
   RecordItem,
+  RecordItemColor,
   RecordBorder,
   TimeStamp
 } from "./webrtc.style";
@@ -124,7 +125,7 @@ var boxes = new Array();
 function writeMessage(color, name, message) {
   var box = new Object();
 
-  // console.log("here is color => " + color);
+  //console.log("here is color => " + color);
   box.color = color;
   box.name = name;
   box.message = message;
@@ -296,8 +297,15 @@ export class TopicDrawerBar extends Component {
               <TimeStamp>
                 {this.state.d.getHours()}:{this.state.d.getMinutes()}
               </TimeStamp>
-              <RecordItem style={{ color: box.color }}>
-                {box.name}:{box.message}
+              <RecordItem>
+                <RecordItemColor
+                  style={{
+                    color: box.color
+                  }}
+                >
+                  {box.name}:
+                </RecordItemColor>
+                {box.message}
               </RecordItem>
             </RecordBorder>
           );
