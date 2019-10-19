@@ -6,7 +6,7 @@ const initialData = {
     "name-4": "권주희",
 
     "name-5": "권소영",
-    "name-6": "김민규",
+    "name-6": "김읍읍",
     "name-7": "김규섭",
     "name-8": "조영서"
   },
