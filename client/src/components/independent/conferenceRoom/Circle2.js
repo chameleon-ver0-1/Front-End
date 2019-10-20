@@ -4,6 +4,9 @@ import people from "../../../assets/conference/people.png";
 import Conference from "./data/conference.json";
 import { withRouter } from "react-router-dom";
 import * as service from "../../../services/VideoService";
+import * as service2 from "../../../services/ConferenceRoomService";
+
+import bubble from "../../../assets/conferenceRoom/speechbubble.png";
 
 const Circle_conference = styled.div`
   border-radius: 64px;
@@ -52,14 +55,32 @@ const Circle_date = styled.div`
   border-bottom: 1px solid;
   padding-bottom: 10px;
 `;
+
+const DisplayPeopleDiv = styled.div`
+  background-image: url(${bubble});
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 10px;
+  position: absolute;
+  left: 15px;
+  object-fit: contain;
+`;
+
 export class Circle2 extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      video_data: []
+      video_data: [],
+      displayMenu: false,
+      peopleList: []
     };
+
     this.gotoVideo = this.gotoVideo.bind(this);
+    this.displayMember = this.displayMember.bind(this);
   }
 
   gotoVideo(id) {
@@ -86,15 +107,47 @@ export class Circle2 extends Component {
     );
   }
 
+  displayMember(id) {
+    console.log(id + "참여자 목록이 뜰거야!");
+    this.setState({ displayMenu: true });
+
+    service2.confShowParticipants(localStorage.getItem("projectId"), id).then(
+      res => {
+        console.log("회의 참여한 사람들 목록이 뜬다!");
+        console.log(res.data.data);
+
+        this.setState({
+          peopleList: res.data.data
+        });
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  NdisplayMember(id) {
+    console.log(id + "참여자 목록이 사라질거야!");
+    this.setState({ displayMenu: false });
+    console.log(this.state.displayMenu);
+  }
+
   render() {
     const { id, date, time, title, name, nowP, allP } = this.props;
-
+    const { displayMenu, peopleList } = this.state;
     return (
-      <div onClick={() => this.gotoVideo(id)} style={{ cursor: "pointer" }}>
+      <div
+        onClick={() => this.gotoVideo(id)}
+        style={{ cursor: "pointer" }}
+        onMouseOver={() => this.displayMember(id)}
+        onMouseOut={() => this.NdisplayMember(id)}
+      >
         <Circle_date>{date}</Circle_date>
         <Circle_conference>
           <Circle_time>{time}</Circle_time>
+
           <Circle_title>{title}</Circle_title>
+
           <Circle_name>{name}</Circle_name>
           <div className="circle_hori">
             <img src={people} className="people" />
@@ -102,6 +155,29 @@ export class Circle2 extends Component {
               {nowP}/{allP}
             </Circle_people>
           </div>
+          {displayMenu ? (
+            <div>
+              <DisplayPeopleDiv>
+                {Object.keys(peopleList).map(id => {
+                  const list = peopleList[id];
+
+                  if (list.isConfYn == "Y") {
+                    return (
+                      <div style={{ fontSize: "10px", color: "#34c88a" }}>
+                        {list.name + " " + list.name_en}
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div style={{ fontSize: "10px" }}>
+                        {list.name + " " + list.name_en}
+                      </div>
+                    );
+                  }
+                })}
+              </DisplayPeopleDiv>
+            </div>
+          ) : null}
         </Circle_conference>
       </div>
     );
