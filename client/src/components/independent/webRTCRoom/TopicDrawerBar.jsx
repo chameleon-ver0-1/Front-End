@@ -137,14 +137,15 @@ function writeMessage(color, name, message) {
 }
 
 /* STT 영역 추가하는 함수 */
-function messageBox(name, message) {
+function messageBox(color, name, message) {
   var box = new Object();
 
   box.name = name;
   box.message = message;
+  // FIXME: 지후님 여기에 컬러가 넘어와요!
 
   boxes.push(box);
-  console.log(JSON.stringify(boxes) + "***");
+  console.log(JSON.stringify(boxes) + "***> color " + color);
 }
 
 /* socket.io 서버에 유저이름, 인식된 메시지 전송하는 함수 */
