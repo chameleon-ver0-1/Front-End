@@ -98,7 +98,7 @@ export class ConferenceDoc extends Component {
             </div>
 
             {/* <ConferencePosts /> */}
-            {/* {Object.keys(this.state.documentList).map(Id => {
+            {Object.keys(this.state.documentList).map(Id => {
               const list = this.state.documentList[Id];
               return (
                 <ul className="post-ul">
@@ -137,8 +137,8 @@ export class ConferenceDoc extends Component {
                   </li>
                 </ul>
               );
-            })} */}
-            {DocData.map((docDetail, index) => {
+            })}
+            {/* {DocData.map((docDetail, index) => {
               return (
                 <ul className="post-ul">
                   <li className="post-li">
@@ -179,7 +179,7 @@ export class ConferenceDoc extends Component {
                   </li>
                 </ul>
               );
-            })}
+            })} */}
           </div>
 
           <div className="pagination-div">
