@@ -151,7 +151,8 @@ export class TopicDrawerBar extends Component {
       d: new Date(),
       chatLogs: "",
       startTime: new Date(),
-      isTopicClicked: []
+      isTopicClicked: [],
+      currentTopic: ""
     };
     this.items = [];
     for (let i = 1; i <= 5; i++) {
@@ -193,6 +194,19 @@ export class TopicDrawerBar extends Component {
     });
   };
 
+  componentWillReceiveProps = () => {
+    //FIXME:소영
+    //props를 전달받으면 현재 선택된 토픽을 초기화한다.
+    console.log("현재 토픽:", this.props.mainTopics[0]);
+
+    const initTopicClicked = [];
+    this.state.isTopicClicked.forEach(index => {
+      initTopicClicked.push(false);
+    });
+    initTopicClicked[0] = true;
+
+    this.setState({ isTopicClicked: initTopicClicked });
+  };
   componentWillMount() {
     const script = document.createElement("script");
 
@@ -238,6 +252,9 @@ export class TopicDrawerBar extends Component {
     /*******************************/
   }
   onTopicChange = e => {
+    console.log("토픽이름:", e.target.innerHTML);
+
+    //여기서부터는 토픽 선택 시, 해당 토픽 선택에 대한 스타일링을 입힌 부분.(소여이는 이 아래는 신경쓰지 않아도 됨.)
     const newIsTopicClicked = [];
     this.state.isTopicClicked.forEach(index => {
       newIsTopicClicked.push(false);
