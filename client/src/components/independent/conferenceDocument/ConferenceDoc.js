@@ -13,6 +13,7 @@ import ConferencePosts from "./ConferencePosts";
 import download_off from "../../../assets/doc/download_off.png";
 import DocumentTag from "./DocumentTag";
 import * as services from "../../../services/DocumentService";
+import moment from "moment";
 
 export class ConferenceDoc extends Component {
   constructor(props) {
@@ -100,6 +101,7 @@ export class ConferenceDoc extends Component {
             {/* <ConferencePosts /> */}
             {Object.keys(this.state.documentList).map(Id => {
               const list = this.state.documentList[Id];
+              const dateTime = new Date(list.startTime);
               return (
                 <ul className="post-ul">
                   <li className="post-li">
@@ -119,7 +121,11 @@ export class ConferenceDoc extends Component {
                           <button className="todetail">{list.title}</button>
                         </Link>
                       </li>
-                      <li className="post-row-list-item2">{list.startTime}</li>
+                      <li className="post-row-list-item2">
+                        {moment(dateTime).format("YYYY.MM.DD") +
+                          " " +
+                          moment(dateTime).format("HH:mm~")}
+                      </li>
                       <li className="post-row-list-item3">
                         <div className="post-row-list-item-tag">
                           <DocumentTag text={list.mainTopics} />

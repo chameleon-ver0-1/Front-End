@@ -42,10 +42,10 @@ export class DocumentTag extends Component {
   }
 
   render() {
-    const { tags, tagList } = this.state;
+    const { tagList } = this.state;
     return (
       <div className="tags">
-        <ReactTags tags={this.state.tagList} readOnly />
+        <ReactTags tags={tagList} readOnly />
       </div>
     );
   }
