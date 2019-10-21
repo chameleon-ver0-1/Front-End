@@ -297,16 +297,18 @@ const TopicContainer = styled.div`
 `;
 const TopicItem = styled.button`
   font-size: 12px;
-  width: 62.5px;
+  width: 90px;
   height: 100%;
+  background: #40474d;
 
-  background: #2e373e;
-  opacity: 0.5;
+  // opacity: 0.5;
 
-  color: white;
+  color: #84949d;
 
   cursor: pointer;
   outline: none;
+
+  border: solid 1px #2e373e;
 
   display: flex;
   justify-content: center;
