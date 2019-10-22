@@ -21,27 +21,27 @@ export class ProjectAdd extends Component {
     console.log(this.state.projectname);
     console.log(this.state.depart_tag);
     console.log(this.state.people_tag);
-    service
-      .projectAdd(
-        this.state.projectname,
-        this.state.depart_tag,
-        this.state.people_tag
-      )
-      .then(
-        res => {
-          console.log(res.data.data._id);
-          if (res.data.message === "프로젝트 생성 성공") {
-            this.props.history.push(`/auth/projectList`);
-            console.log("프로젝트 개설 성공");
-          } else if (res.data.message === "중복된 프로젝트명") {
-            console.log("프로젝트가 중복되었습니다.");
-          }
-        },
-        err => {
-          console.log("프로젝트 개설 실패");
-          console.log(err);
-        }
-      );
+    // service
+    //   .projectAdd(
+    //     this.state.projectname,
+    //     this.state.depart_tag,
+    //     this.state.people_tag
+    //   )
+    //   .then(
+    //     res => {
+    //       console.log(res.data.data._id);
+    //       if (res.data.message === "프로젝트 생성 성공") {
+    //         this.props.history.push(`/auth/projectList`);
+    //         console.log("프로젝트 개설 성공");
+    //       } else if (res.data.message === "중복된 프로젝트명") {
+    //         console.log("프로젝트가 중복되었습니다.");
+    //       }
+    //     },
+    //     err => {
+    //       console.log("프로젝트 개설 실패");
+    //       console.log(err);
+    //     }
+    //   );
   };
 
   //자식한테 받은 props를 state에 넣기

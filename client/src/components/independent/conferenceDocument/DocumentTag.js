@@ -8,24 +8,44 @@ export class DocumentTag extends Component {
     this.state = {
       tags: [
         //TODO: 데이터 값으로 가져오기 & 데이터 구조 확인하기
-        // { id: 1, text: "화상회의" },
-        // { id: 2, text: "카멜레온" },
-        // { id: 3, text: "Switch" }
-      ]
+        { id: 1, text: "화상회의" },
+        { id: 2, text: "카멜레온" },
+        { id: 3, text: "Switch" }
+      ],
+      tagList: []
     };
   }
 
+  id = 0;
+  getId = () => ++this.id;
+
+  componentDidMount() {
+    var newList = [];
+    Object.keys(this.props.text).map(Id => {
+      const tag = this.props.text;
+
+      newList[Id] = {
+        id: this.getId(),
+        text: tag[Id]
+      };
+    });
+    //console.log(newList);
+
+    this.setState(
+      {
+        tagList: this.state.tagList.concat(newList)
+      },
+      () => {
+        console.log(this.state.tagList);
+      }
+    );
+  }
+
   render() {
-    const { tags } = this.state;
+    const { tagList } = this.state;
     return (
       <div className="tags">
-        {/* TODO: id 값 적용 */}
-        {/* {Object.keys(DocData).map(Id => {
-          const tag = DocData[Id].tags;
-          console.log(tag);
-          return <div>d</div>;
-        })} */}
-        <ReactTags tags={this.props.text} readOnly />
+        <ReactTags tags={tagList} readOnly />
       </div>
     );
   }
