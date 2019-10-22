@@ -287,7 +287,7 @@ const EmotionSwitch = styled.div`
 //////////////////////////////////////
 const DrawerContainer = styled.div`
   background: #424c53;
-  width: 250px;
+  width: 300px;
   height: calc(100%-48px);
 `;
 const TopicContainer = styled.div`
@@ -300,8 +300,6 @@ const TopicItem = styled.button`
   width: 90px;
   height: 100%;
   background: #40474d;
-
-  // opacity: 0.5;
 
   color: #84949d;
 
@@ -356,7 +354,7 @@ const RecordItemColor = styled.div`
 const RecordBorder = styled.div`
   display: flex;
   background: #2e373e;
-  opacity: 0.5;
+  // opacity: 0.5;
   width: 100%;
   height: auto;
 
@@ -503,7 +501,7 @@ const CheckLeaveContainer = styled.div`
 `;
 const CheckLeaveDiv = styled.div`
   color: var(--light-black);
-  font-family: NanumSquareB
+  font-family: NanumSquareR
   font-size:14px;
 `;
 const CheckButtonItem = styled.button`

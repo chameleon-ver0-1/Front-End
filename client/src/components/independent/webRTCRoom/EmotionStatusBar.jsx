@@ -35,7 +35,8 @@ export class EmotionStatusBar extends Component {
           >
             <EmotionCircle
               style={{
-                visibility: status.isEmotionHearing ? "visible" : "hidden"
+                visibility: status.isEmotionHearing ? "visible" : "hidden",
+                transition: status.isEmotionHearing ? "1s" : "0.5s"
               }}
             >
               <img
@@ -47,7 +48,8 @@ export class EmotionStatusBar extends Component {
           </Animate>
           <ConnectLine
             style={{
-              visibility: status.isEmotionHearing ? "visible" : "hidden"
+              visibility: status.isEmotionHearing ? "visible" : "hidden",
+              transition: status.isEmotionHearing ? "0.5s" : "1s"
             }}
           />
 
@@ -69,7 +71,8 @@ export class EmotionStatusBar extends Component {
           <ConnectLine
             id="test"
             style={{
-              visibility: status.isEmotionHearing ? "visible" : "hidden"
+              visibility: status.isEmotionHearing ? "visible" : "hidden",
+              transition: status.isEmotionHearing ? "0.5s" : "1s"
             }}
           />
           <Animate
@@ -81,7 +84,8 @@ export class EmotionStatusBar extends Component {
           >
             <EmotionCircle
               style={{
-                visibility: status.isEmotionHearing ? "visible" : "hidden"
+                visibility: status.isEmotionHearing ? "visible" : "hidden",
+                transition: status.isEmotionHearing ? "1s" : "0.5s"
               }}
             >
               <img
