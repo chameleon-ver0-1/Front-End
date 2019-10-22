@@ -4,6 +4,7 @@ import "./conferencedocdetail.style.css";
 
 export class WordCanvas extends Component {
   componentDidMount() {
+    //console.log(this.props.keyword);
     WordCloud(this.refs["my-canvas"], {
       list: [
         ["화상회의", 18],
@@ -53,6 +54,13 @@ export class WordCanvas extends Component {
     return (
       <div className="canvas-div">
         <canvas ref="my-canvas" />
+        <div>
+          {/* {Object.keys(this.props.keyword).map(Id => {
+            const key = this.props.keyword[Id];
+            console.log(this.props.keyword);
+            return <div>dd</div>;
+          })} */}
+        </div>
       </div>
     );
   }

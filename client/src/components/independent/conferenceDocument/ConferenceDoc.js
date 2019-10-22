@@ -6,7 +6,7 @@
 
 import React, { Component, useState, useEffect } from "react";
 import "./conferencedoc.style.css";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import DocData from "./data/doc.json";
 import axios from "axios";
 import ConferencePosts from "./ConferencePosts";
@@ -25,9 +25,11 @@ export class ConferenceDoc extends Component {
     };
 
     this.pageNext = this.pageNext.bind(this);
+    this.gotoDetail = this.gotoDetail.bind(this);
     this.search = this.search.bind(this);
   }
 
+  /**회의록 목록 화면 */
   componentDidMount() {
     services.getDocumentList(localStorage.getItem("projectId"), 1).then(
       res => {
@@ -48,6 +50,7 @@ export class ConferenceDoc extends Component {
     console.log("click");
   }
 
+  /**Paging */
   pageNext = e => {
     services
       .getDocumentList(localStorage.getItem("projectId"), e.target.id)
@@ -66,6 +69,17 @@ export class ConferenceDoc extends Component {
       );
   };
 
+  /**회의록 상세 화면 이동 */
+  gotoDetail(id) {
+    localStorage.setItem("documentId", id);
+    this.props.history.push(
+      `/home/conferenceDocument/conferenceDocumentDetail/${localStorage.getItem(
+        "projectId"
+      )}`
+    );
+  }
+
+  /**회의록 검색 */
   search() {
     services
       .getDocumentSearch(localStorage.getItem("projectId"), this.state.search)
@@ -102,12 +116,13 @@ export class ConferenceDoc extends Component {
             {Object.keys(this.state.documentList).map(Id => {
               const list = this.state.documentList[Id];
               const dateTime = new Date(list.startTime);
+
               return (
                 <ul className="post-ul">
                   <li className="post-li">
                     <ul className="post-row-list">
                       <li className="post-row-list-item1">
-                        <Link
+                        {/* <Link
                           to={{
                             pathname:
                               "/home/conferenceDocument/conferenceDocumentDetail",
@@ -117,9 +132,14 @@ export class ConferenceDoc extends Component {
                             }
                           }}
                           className="linkdocumentdetail"
+                        > */}
+                        <button
+                          className="todetail"
+                          onClick={() => this.gotoDetail(list.detailId)}
                         >
-                          <button className="todetail">{list.title}</button>
-                        </Link>
+                          {list.title}
+                        </button>
+                        {/* </Link> */}
                       </li>
                       <li className="post-row-list-item2">
                         {moment(dateTime).format("YYYY.MM.DD") +
@@ -283,4 +303,4 @@ export class ConferenceDoc extends Component {
   }
 }
 
-export default ConferenceDoc;
+export default withRouter(ConferenceDoc);

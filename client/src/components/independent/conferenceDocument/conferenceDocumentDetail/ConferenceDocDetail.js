@@ -11,14 +11,52 @@ import "./conferencedocdetail.style.css";
 import download_off from "../../../../assets/doc/download_off.png";
 import PrintButton from "./PrintButton";
 import PDF from "./PDF";
+import * as services from "../../../../services/DocumentService";
+import moment from "moment";
+import WordCanvas from "./WordCanvas";
 
 class ConferenceDocDetail extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      detail: []
+    };
+  }
+
+  componentDidMount = () => {
+    services
+      .getDocumentDetail(
+        localStorage.getItem("projectId"),
+        localStorage.getItem("documentId")
+      )
+      .then(res => {
+        console.log("회의록 상세보기 입니다");
+        this.setState({
+          detail: res.data.data
+        });
+        console.log("service 안에", this.state.detail.keyword);
+      });
+  };
+
   render() {
+    const { detail } = this.state;
+    console.log("불러와지는가?", detail.contents);
+    const startTime = new Date(detail.startTime);
+    const endTime = new Date(detail.endTime);
     return (
       <div className="documentdetaildiv">
         <div className="documentDetailTitle">
-          <div className="Title1">{this.props.location.state.title}</div>
-          <div className="Title2">{this.props.location.state.date}</div>
+          <div className="Title1">{detail.title}</div>
+          <div className="Title2">
+            {moment(startTime).format("YYYY.MM.DD") +
+              " " +
+              moment(startTime).format("HH:mm") +
+              " ~ " +
+              moment(endTime).format("YYYY.MM.DD") +
+              " " +
+              moment(endTime).format("HH:mm")}
+          </div>
           <div className="save_button_div">
             <button className="save_button">
               <img src={download_off} className="downloadimg" />
@@ -28,7 +66,18 @@ class ConferenceDocDetail extends Component {
           </div>
         </div>
 
-        <PDF id={"singlePage"} />
+        <div className="togopdf">
+          <div className="wordclouddiv">
+            <div className="detail_title">키워드맵</div>
+            {/* {Object.keys(this.state.detail).map(Id => {
+              //const list = this.state.detail.keyword[Id];
+              console.log(this.state.detail.keyword);
+              return <div>ddd</div>;
+            })} */}
+
+            <WordCanvas />
+          </div>
+        </div>
       </div>
     );
   }

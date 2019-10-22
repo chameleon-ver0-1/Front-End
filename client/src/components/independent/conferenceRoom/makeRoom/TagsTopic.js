@@ -44,11 +44,12 @@ export class TagsTopic extends Component {
       },
       () => {
         console.log("tag: " + this.state.topic);
+        this.props.callbackFromParent(this.state.topic);
       }
     );
 
-    this.props.callbackFromParent(this.state.topic);
-    console.log(this.state.topic);
+    //this.props.callbackFromParent(this.state.topic);
+    //console.log(this.state.topic);
   }
 
   handleDrag(tag, currPos, newPos) {
