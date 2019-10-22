@@ -20,6 +20,8 @@ import participants from "../../../assets/conferenceRoom/videohome_participants.
 import Fade from "react-reveal/Fade";
 import InviteDialog from "./InviteDialog";
 import * as service from "../../../services/VideoService";
+
+import CheckEndDialog from "./CheckEndDialog";
 import { withRouter } from "react-router-dom";
 import {
   UpperNav,
@@ -34,7 +36,7 @@ import {
 export class VideoNav extends Component {
   constructor(props) {
     super(props);
-    this.state = { show: false, d: new Date() };
+    this.state = { show: false, d: new Date(), open: false };
   }
 
   componentDidMount() {
@@ -46,6 +48,20 @@ export class VideoNav extends Component {
     //종료되면 반복하는것도 클리어시키기
     clearInterval(this.timeID);
   }
+
+  openDialog = () => {
+    this.setState({
+      open: true
+    });
+  };
+  onCloseModal = () => {
+    this.setState({ open: false });
+    service.postVideoStop(localStorage.getItem("roomId"));
+    this.props.history.push(
+      `/home/conferenceRoom/${localStorage.getItem("projectId")}`
+    );
+  };
+
   onChangeTime = () => {
     this.setState({
       d: new Date()
@@ -57,13 +73,7 @@ export class VideoNav extends Component {
     document.getElementById("userListBtn").style.backgroundColor =
       "var(--greenish-teal)";
   };
-  //FIXME: TO소영: 여기는 회의실 종료 버튼 함수란다.
-  onStopConference = () => {
-    service.postVideoStop(localStorage.getItem("roomId"));
-    this.props.history.push(
-      `/home/conferenceRoom/${localStorage.getItem("projectId")}`
-    );
-  };
+
   render() {
     var currentTime =
       this.state.d.getHours() +
@@ -90,7 +100,11 @@ export class VideoNav extends Component {
         <Fade when={this.state.show}>
           <InviteDialog memberList={memberList} />
         </Fade>
-        <TimeDiv onClick={this.onStopConference}>{currentTime}</TimeDiv>
+        <TimeDiv onClick={this.openDialog}>{currentTime}</TimeDiv>
+        <CheckEndDialog
+          open={this.state.open}
+          onCloseModal={this.onCloseModal}
+        />
       </UpperNav>
     );
   }
