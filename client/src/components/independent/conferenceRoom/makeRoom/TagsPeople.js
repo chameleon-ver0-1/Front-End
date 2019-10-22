@@ -57,12 +57,20 @@ export class TagsPeople extends Component {
     service.confParticipants(localStorage.getItem("projectId"), tag.text).then(
       res => {
         console.log("참여자 판단 성공");
+
+        var email;
+        console.log("data가 나와야해", res.data.data.searchList);
+        Object.keys(res.data.data.searchList).map(Id => {
+          const list = res.data.data.searchList[Id];
+          email = list.email;
+        });
+
         this.setState(state => ({
           tags: [...state.tags, tag],
-          people: this.state.people.concat(tag.text)
+          people: this.state.people.concat(email) //여기에 res.data해서 이메일로 받아져오는 부분 넣어야함
           // [...state.tags, tag.text]
         }));
-        // this.props.callbackFromParent(this.state.tags);
+
         this.props.callbackFromParent(this.state.people);
         console.log("tag: " + JSON.stringify(this.state.people));
       },
