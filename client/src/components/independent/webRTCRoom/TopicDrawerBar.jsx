@@ -18,7 +18,6 @@
  * 1. io: socket에 연결하기 위한 라이브러리
  */
 import React, { Component } from "react";
-import topicCheckOff from "../../../assets/conferenceRoom/videohome_check_off.png";
 import io from "socket.io-client";
 import {
   DrawerContainer,
@@ -51,13 +50,11 @@ recognition.interimResults = true; // 끝나지 않은 상태의 음성 반환 �
 
 /** STT 인식 시작 함수*/
 recognition.onstart = function() {
-  console.log("onstart", arguments);
   isRecognizing = true;
 };
 
 /** STT 인식 종료 함수*/
 recognition.onend = function() {
-  console.log("onend", arguments);
   isRecognizing = false;
 
   if (ignoreEndProcess) {
@@ -65,15 +62,13 @@ recognition.onend = function() {
   }
 
   if (!finalTranscript) {
-    console.log("empty finalTranscript");
     return false;
   }
 };
 /** 인식된 결과 처리 함수 */
 recognition.onresult = function(event) {
-  // console.log("onresult", event);
-
   let interimTranscript = "";
+
   if (typeof event.results === "undefined") {
     recognition.onend = null;
     recognition.stop();
@@ -88,9 +83,6 @@ recognition.onresult = function(event) {
       interimTranscript += event.results[i][0].transcript;
     }
   }
-
-  // console.log("finalTranscript", finalTranscript);
-  // console.log("interimTranscript", interimTranscript);
 };
 /** 에러 처리 함수 */
 recognition.onerror = function(event) {
@@ -117,6 +109,9 @@ var serverURL = "https://s.chameleon4switch.cf/";
 var name = localStorage.getItem("name");
 var room = localStorage.getItem("roomId");
 var color;
+var isTopicChanged = false;
+var topic; // TODO: 토픽 바꾸면 여기에서 토픽값 저장하고 있어야 함. 초기값 들어있는지 확인 바람
+
 var socket = null;
 
 var boxes = new Array();
@@ -125,13 +120,11 @@ var boxes = new Array();
 function writeMessage(color, name, message) {
   var box = new Object();
 
-  //console.log("here is color => " + color);
   box.color = color;
   box.name = name;
   box.message = message;
 
   boxes.push(box);
-  // console.log(JSON.stringify(boxes) + "***");
 }
 
 /* socket.io 서버에 유저이름, 인식된 메시지 전송하는 함수 */
@@ -139,7 +132,8 @@ function sender(text) {
   socket.emit("user", {
     color: color,
     name: name,
-    message: text
+    message: text,
+    topic: topic
   });
   writeMessage(color, name, text);
 }
@@ -152,7 +146,8 @@ export class TopicDrawerBar extends Component {
       chatLogs: "",
       startTime: new Date(),
       isTopicClicked: [],
-      currentTopic: ""
+      currentTopic: "",
+      currentTopicIndex: 0
     };
     this.items = [];
     for (let i = 1; i <= 5; i++) {
@@ -169,15 +164,6 @@ export class TopicDrawerBar extends Component {
     this.timeID = setInterval(() => this.onChangeTime(), 1000);
   }
 
-  componentWillReceiveProps(nextProps) {
-    nextProps.mainTopics.forEach((topic, index) => {
-      if (index == 0) {
-        this.state.isTopicClicked.push(true);
-      } else {
-        this.state.isTopicClicked.push(false);
-      }
-    });
-  }
   componentWillUnmount() {
     //종료되면 반복하는것도 클리어시키기
     clearInterval(this.timeID);
@@ -188,19 +174,17 @@ export class TopicDrawerBar extends Component {
       return;
     }
   }
-  onChangeTime = () => {
-    this.setState({
-      d: new Date()
-    });
-  };
 
   componentWillReceiveProps = () => {
-    //FIXME:소영
     //props를 전달받으면 현재 선택된 토픽을 초기화한다.
     console.log("현재 토픽:", this.props.mainTopics[0]);
+
     this.setState({
-      currentTopic: this.props.mainTopics[0]
+      currentTopic: this.props.mainTopics[0],
+      currentTopicIndex: 0
     });
+
+    //프론트 스타일링 0번째 버튼 선택으로 초기화
     const initTopicClicked = [];
     this.state.isTopicClicked.forEach(index => {
       initTopicClicked.push(false);
@@ -209,6 +193,7 @@ export class TopicDrawerBar extends Component {
 
     this.setState({ isTopicClicked: initTopicClicked });
   };
+
   componentWillMount() {
     const script = document.createElement("script");
 
@@ -220,8 +205,6 @@ export class TopicDrawerBar extends Component {
       if (data.type === "connected") {
         color = data.color;
 
-        // console.log('here is my color! => '+color);
-
         socket.emit("connection", {
           type: "join",
           name: name,
@@ -231,11 +214,47 @@ export class TopicDrawerBar extends Component {
     });
 
     socket.on("system", function(data) {
-      writeMessage(color, "system", data.message);
+      writeMessage("#eeeeee", "system", data.message);
     });
 
     socket.on("message", function(data) {
       writeMessage(data.color, data.name, data.message);
+    });
+
+    if (isTopicChanged) {
+      socket.emit("topic", {
+        topic: this.state.currentTopic,
+        index: this.state.currentTopicIndex
+      });
+
+      isTopicChanged = false;
+    }
+
+    socket.on("changeTopic", function(data) {
+      if (topic === data.topic) {
+        console.log(
+          "현재 토픽 주제(",
+          topic,
+          ")와 같으므로 바꾸지 않음: ",
+          data.topic
+        );
+      } else {
+        console.log("토픽 변경 실행");
+        // TODO: 윤영 여기에 프론트 토픽 바꾸도록 추가 바람
+        this.setState({
+          currentTopic: data.topic,
+          currentTopicIndex: data.index
+        });
+
+        //여기서부터는 토픽 선택 시, 해당 토픽 선택에 대한 스타일링을 입힘.
+        const newIsTopicClicked = [];
+        this.state.isTopicClicked.forEach(index => {
+          newIsTopicClicked.push(false);
+        });
+        newIsTopicClicked[data.index] = true;
+
+        this.setState({ isTopicClicked: newIsTopicClicked });
+      }
     });
 
     /*******************************/
@@ -253,11 +272,20 @@ export class TopicDrawerBar extends Component {
     finalTranscript = "";
     /*******************************/
   }
+
+  /***************************************************/
+  //일반 호출 함수
+  /***************************************************/
+  onChangeTime = () => {
+    this.setState({
+      d: new Date()
+    });
+  };
+
   onTopicChange = e => {
     console.log("토픽이름:", e.target.innerHTML);
-    this.setState({
-      currentTopic: e.target.innerHTML
-    });
+    isTopicChanged = true;
+    topic = e.target.innerHTML;
 
     //여기서부터는 토픽 선택 시, 해당 토픽 선택에 대한 스타일링을 입힌 부분.(소여이는 이 아래는 신경쓰지 않아도 됨.)
     const newIsTopicClicked = [];
@@ -266,8 +294,13 @@ export class TopicDrawerBar extends Component {
     });
     newIsTopicClicked[e.target.id] = true;
 
-    this.setState({ isTopicClicked: newIsTopicClicked });
+    this.setState({
+      isTopicClicked: newIsTopicClicked,
+      currentTopic: e.target.innerHTML,
+      currentTopicIndex: e.target.id
+    });
   };
+
   render() {
     var currentDate =
       this.state.d.getFullYear() +
@@ -313,7 +346,7 @@ export class TopicDrawerBar extends Component {
         {/* RecordBox: 정적이 길게 흐르기 전까지를 기준으로 기록을 보여주는 RecordBox,즉 소영이 너가 쌓아내려갈 DIV */}
         {Object.keys(boxes).map(id => {
           const box = boxes[id];
-          // console.log(box.name + "*******");
+
           return (
             <RecordBorder>
               <TimeStamp>
