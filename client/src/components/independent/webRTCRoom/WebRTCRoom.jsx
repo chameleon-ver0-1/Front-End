@@ -34,27 +34,37 @@ export class WebRTCRoom extends Component {
       title: "",
       startTime: new Date(),
       mainTopics: [],
-      isEmotionReq: false
+      isEmotionReq: false,
+      id: ""
     };
   }
 
   componentDidMount() {
-    services.getVideoStart(localStorage.getItem("roomId")).then(
-      res => {
-        console.log("화상회의에 오신 걸 환영합니다");
-        console.log(res.data);
+    console.log("++++");
+    console.log(localStorage.getItem("projectId"));
+    console.log(localStorage.getItem("roomId"));
+    console.log("++++");
+    services
+      .postVideoData(
+        localStorage.getItem("projectId"),
+        localStorage.getItem("roomId")
+      )
+      .then(
+        res => {
+          console.log("화상회의에 오신 걸 환영합니다");
+          console.log(res.data);
 
-        this.setState({
-          memberList: res.data.data.members,
-          title: res.data.data.confTitle,
-          startTime: res.data.data.startTime,
-          mainTopics: res.data.data.mainTopics
-        });
-      },
-      err => {
-        console.log(err);
-      }
-    );
+          this.setState({
+            memberList: res.data.data.members,
+            title: res.data.data.confTitle,
+            startTime: res.data.data.startTime,
+            mainTopics: res.data.data.mainTopics
+          });
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 
   onToggle = () => {
@@ -78,10 +88,10 @@ export class WebRTCRoom extends Component {
   render() {
     // this.state.slideMenuActive = false;
 
-    const { memberList, title, startTime, mainTopics } = this.state;
+    const { memberList, title, startTime, mainTopics, roomId } = this.state;
     return (
       <VideoBaseContainer>
-        <VideoMenubar />
+        <VideoMenubar roomId={roomId} />
         <div>
           <Row>
             <VideoNav

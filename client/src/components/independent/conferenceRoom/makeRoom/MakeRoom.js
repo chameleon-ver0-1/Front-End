@@ -15,6 +15,8 @@ import SmallDatePicker from "./SmallDatePicker";
 import TagsTopic from "./TagsTopic";
 import TagsPeople from "./TagsPeople";
 import * as service from "../../../../services/ConferenceRoomService";
+import * as service2 from "../../../../services/VideoService";
+
 import { withRouter } from "react-router-dom";
 
 class MakeRoom extends Component {
@@ -29,7 +31,8 @@ class MakeRoom extends Component {
       selectedDate: new Date().toISOString(), //현재 시간
       topic_tag: [],
       people_tag: [],
-      isChecked: true
+      isChecked: true,
+      video_data: []
     };
 
     this.startNow = this.startNow.bind(this);
@@ -87,7 +90,29 @@ class MakeRoom extends Component {
           res => {
             console.log(res.data.data.id);
             localStorage.setItem("roomId", res.data.data.id);
-            this.props.history.push(`/room/${localStorage.getItem("roomId")}`);
+
+            /**회의 시작 API */
+            service2.getVideoStart(localStorage.getItem("roomId")).then(
+              res => {
+                console.log("화상회의에 오신 걸 환영합니다");
+                console.log(res.data);
+
+                this.setState({
+                  video_data: res.data
+                });
+                //this.props.callbackFromParent(this.state.video_data);
+
+                //this.props.setValue(this.state.video_data);
+                this.props.history.push(
+                  `/room/${localStorage.getItem("roomId")}`
+                );
+              },
+              err => {
+                console.log(err);
+              }
+            );
+
+            // this.props.history.push(`/room/${localStorage.getItem("roomId")}`);
             console.log("바로 넘어가는 회의실 개설 성공");
             console.log(res);
           },

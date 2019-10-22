@@ -2,12 +2,13 @@
 
 canvas {
   margin: auto;
-  weight: 500px;
+  width: 400px;
   height: 200px;
 }
+
 .canvas-div {
-  width: 711px;
-  height: 270px;
+  width: 700px;
+  height: 250px;
   background-color: #fafafa;
   display: flex;
   justify-content: center;

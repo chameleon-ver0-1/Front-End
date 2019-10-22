@@ -11,6 +11,9 @@ import doc from "../../../assets/conferenceRoom/videohome_doc_off.png";
 import logoIcon from "../../../assets/conferenceRoom/videohome_logo.png";
 import exitOn from "../../../assets/conferenceRoom/videohome_exit_on.png";
 import exitOff from "../../../assets/conferenceRoom/videdohome_exit_off.png";
+import * as service from "../../../services/VideoService";
+
+import CheckLeaveDialog from "./CheckLeaveDialog";
 
 import {
   Logo,
@@ -29,14 +32,16 @@ export class VideoMenubar extends Component {
       mouseCheck: false
     };
   }
-  onExit = () => {
+
+  openDialog = () => {
     this.setState({
       open: true
     });
   };
-  onExitCancel = () => {
+  onCloseModal = () => {
     this.setState({ open: false });
   };
+
   render() {
     return (
       <LeftNav>
@@ -50,15 +55,16 @@ export class VideoMenubar extends Component {
           <ButtonItem>
             <img width="35px" height="35px" src={sharingIcon} />
           </ButtonItem>
-          <ButtonItem>
-            <img width="35px" height="35px" src={doc} />
-          </ButtonItem>
         </LeftUpperDiv>
         <LeftBottomDiv>
-          <ButtonItem onClick={this.onExit}>
+          <ButtonItem onClick={this.openDialog}>
             <img width="29px" height="25px" src={exitOff} />
           </ButtonItem>
         </LeftBottomDiv>
+        <CheckLeaveDialog
+          open={this.state.open}
+          onCloseModal={this.onCloseModal}
+        />
       </LeftNav>
     );
   }

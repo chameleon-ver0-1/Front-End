@@ -28,6 +28,7 @@ import {
   TopicItem,
   DarkDivideLine,
   RecordItem,
+  RecordItemColor,
   RecordBorder,
   TimeStamp
 } from "./webrtc.style";
@@ -50,13 +51,11 @@ recognition.interimResults = true; // 끝나지 않은 상태의 음성 반환 �
 
 /** STT 인식 시작 함수*/
 recognition.onstart = function() {
-  console.log("onstart", arguments);
   isRecognizing = true;
 };
 
 /** STT 인식 종료 함수*/
 recognition.onend = function() {
-  console.log("onend", arguments);
   isRecognizing = false;
 
   if (ignoreEndProcess) {
@@ -64,15 +63,13 @@ recognition.onend = function() {
   }
 
   if (!finalTranscript) {
-    console.log("empty finalTranscript");
     return false;
   }
 };
 /** 인식된 결과 처리 함수 */
 recognition.onresult = function(event) {
-  console.log("onresult", event);
-
   let interimTranscript = "";
+  
   if (typeof event.results === "undefined") {
     recognition.onend = null;
     recognition.stop();
@@ -87,9 +84,6 @@ recognition.onresult = function(event) {
       interimTranscript += event.results[i][0].transcript;
     }
   }
-
-  console.log("finalTranscript", finalTranscript);
-  console.log("interimTranscript", interimTranscript);
 };
 /** 에러 처리 함수 */
 recognition.onerror = function(event) {
@@ -114,38 +108,21 @@ const onExit = () => {
 
 var serverURL = "https://s.chameleon4switch.cf/";
 var name = localStorage.getItem("name");
-var color;
 var room = localStorage.getItem("roomId");
+var color;
 var socket = null;
-
-var chatColor;
-var chatName;
-var chatMessage;
 
 var boxes = new Array();
 
 /* 인식된 메시지 프론트에 기록하는 함수*/
 function writeMessage(color, name, message) {
-  console.log("[채팅방 기록]: " + name + " -> " + message);
-
-  chatColor = color;
-  chatName = name;
-  chatMessage = message;
-
-  messageBox(chatName, chatMessage);
-  console.log("loglog => " + chatColor + ": " + chatName + ": " + chatMessage);
-}
-
-/* STT 영역 추가하는 함수 */
-function messageBox(color, name, message) {
   var box = new Object();
 
+  box.color = color;
   box.name = name;
   box.message = message;
-  // FIXME: 지후님 여기에 컬러가 넘어와요!
 
   boxes.push(box);
-  console.log(JSON.stringify(boxes) + "***> color " + color);
 }
 
 /* socket.io 서버에 유저이름, 인식된 메시지 전송하는 함수 */
@@ -227,7 +204,7 @@ export class TopicDrawerBar extends Component {
     });
 
     socket.on("system", function(data) {
-      writeMessage("#34c88a", "system", data.message);
+      writeMessage('#eeeeee', "system", data.message);
     });
 
     socket.on("message", function(data) {
@@ -303,14 +280,21 @@ export class TopicDrawerBar extends Component {
         {/* RecordBox: 정적이 길게 흐르기 전까지를 기준으로 기록을 보여주는 RecordBox,즉 소영이 너가 쌓아내려갈 DIV */}
         {Object.keys(boxes).map(id => {
           const box = boxes[id];
-          console.log(box.name + "*******");
+          // console.log(box.name + "*******");
           return (
             <RecordBorder>
               <TimeStamp>
                 {this.state.d.getHours()}:{this.state.d.getMinutes()}
               </TimeStamp>
               <RecordItem>
-                {box.name}:{box.message}
+                <RecordItemColor
+                  style={{
+                    color: box.color
+                  }}
+                >
+                  {box.name}:
+                </RecordItemColor>
+                {box.message}
               </RecordItem>
             </RecordBorder>
           );

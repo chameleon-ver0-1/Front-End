@@ -85,6 +85,34 @@ const RoundDiv = styled.button`
   cursor: pointer;
   outline: none;
 `;
+
+const TimeDiv = styled.button`
+  background: #2e373e;
+  height: 28px;
+  border: 1px solid #2e373e;
+  border-radius: 13.5px;
+  box-shadow: 1.9px 2.3px 7px black 0.2;
+
+  font-size: 16px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  outline: none;
+  width: auto;
+  color: var(--greenish-teal);
+  margin-left: 15px;
+  font-size: 16.5px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  &:hover {
+    background: #f25959;
+    color: white;
+  }
+`;
 const NavP = styled.div`
   font-size: 16.5px;
 `;
@@ -159,16 +187,23 @@ const VideoFrame = styled.div`
   height: 100vh-56px;
 `;
 const EmotionStatus = styled.div`
-  position: fixed;
-  top: 80%;
-  width: 50%;
-  text-align: center;
-  display: inline-block;
+  position: absolute;
 
+  top: 50%;
+  left: 40%;
+  width: 220px;
+
+  display: flex;
+  text-align: center;
+  align-items: baseline;
+  padding: 10px;
+  font-size: 14px;
+
+  background: black;
   color: white;
-  font-size: 15px;
-  opacity: 0.4;
-  border-radius: 45px;
+
+  opacity: 0.5;
+  border-radius: 10px;
 `;
 const VideosContainer = styled.div`
   display: flex;
@@ -177,6 +212,74 @@ const VideosContainer = styled.div`
   flex-wrap: wrap;
 
   z-index: 1;
+`;
+const EmotionCircle = styled.div`
+  background: #2e373e;
+  font-family: NanumSquareEB;
+
+  --box-main-color: rgba(0, 0, 0, 0.2);
+  --box-shadow-h-offset: 2.3px;
+  --box-shadow-v-offset: 1.9px;
+  --box-shadow-blur: 7px;
+
+  width: 47px;
+  height: 47px;
+  border-radius: 60px;
+
+  box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
+    var(--box-shadow-blur) var(--box-main-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const EmotionButton = styled.button`
+  background: #ae4747;
+  font-size: 20px;
+  color: white;
+  font-family: NanumSquareEB;
+
+  --box-main-color: rgba(0, 0, 0, 0.2);
+  --box-shadow-h-offset: 2.3px;
+  --box-shadow-v-offset: 1.9px;
+  --box-shadow-blur: 7px;
+
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+
+  box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
+    var(--box-shadow-blur) var(--box-main-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  outline: none;
+  cursor: pointer;
+  border: 0px;
+`;
+const EmotionDiv = styled.div`
+  font-size: 20px;
+  color: white;
+  font-family: NanumSquareEB;
+`;
+const ConnectLine = styled.div`
+  width: 100px;
+  height: 2px;
+  background: #2e373e;
+`;
+const EmotionSwitch = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 90%;
+
+  height: 47px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 `;
 
 //////////////////////////////////////
@@ -239,6 +342,14 @@ const RecordItem = styled.div`
   font-size: 12px;
   font-family: NanumSquareL;
   margin-left: 13px;
+  display: inline-block;
+`;
+const RecordItemColor = styled.div`
+  color: white;
+  font-size: 12px;
+  font-family: NanumSquareL;
+  display: inline-block;
+  margin-right: 5px;
 `;
 const RecordBorder = styled.div`
   display: flex;
@@ -334,6 +445,7 @@ const CircleBtn = styled.button`
   width:31px
   height: 31px;
   border: 1px solid #f25959;
+  color:white;
   border-radius: 50px;
   box-shadow: 2.3px 1.9px 7px black 0.2;
 
@@ -375,6 +487,45 @@ const TurnName = styled.div`
   font-family: NanumSqareB;
   color: white;
 `;
+
+//////////////////////////////////////
+/*CheckLeaveDialog */
+//////////////////////////////////////
+const CheckLeaveContainer = styled.div`
+  width: 314px;
+  height: 163px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+const CheckLeaveDiv = styled.div`
+  color: var(--light-black);
+  font-family: NanumSquareB
+  font-size:14px;
+`;
+const CheckButtonItem = styled.button`
+  width: 75px;
+  height: 38px;
+  color: var(--brownish-grey)
+  font-family:NanumSquareB;
+  font-size: 14px;
+  border: solid 1px var(--white-two);
+  border-radius:10px;
+
+  outline:none;
+  cursor:pointer;
+
+  &:hover {
+    background:var(--greenish-teal);
+    color:white;
+  }
+`;
+const RowButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 27px;
+`;
 export {
   MainView,
   SideBar,
@@ -384,7 +535,7 @@ export {
   Row,
   ToggleDiv
 };
-export { UpperNav, ConferenceTitle, UserCount, RoundDiv, NavP };
+export { UpperNav, ConferenceTitle, UserCount, RoundDiv, TimeDiv, NavP };
 
 export {
   InviteContainer,
@@ -405,10 +556,21 @@ export {
   TopicContainer,
   DarkDivideLine,
   RecordItem,
+  RecordItemColor,
   RecordBorder,
   TimeStamp
 };
-export { VideoFrame, EmotionStatus, VideosContainer };
+export {
+  VideoFrame,
+  EmotionStatus,
+  VideosContainer,
+  EmotionButton,
+  EmotionCircle,
+  EmotionSwitch,
+  ConnectLine,
+  EmotionDiv
+};
 
 export { CircleBtn, VideoControlContainer };
 export { VideoOrderContainer, TurnName };
+export { CheckLeaveContainer, CheckButtonItem, RowButtons, CheckLeaveDiv };
