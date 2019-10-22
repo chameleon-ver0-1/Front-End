@@ -364,7 +364,7 @@ const RecordBorder = styled.div`
 `;
 const TimeStamp = styled.div`
   font-size: 10px;
-  color: white;
+  color: #84949d;
 `;
 
 //////////////////////////////////////
