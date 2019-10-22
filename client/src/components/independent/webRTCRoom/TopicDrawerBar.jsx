@@ -51,13 +51,11 @@ recognition.interimResults = true; // 끝나지 않은 상태의 음성 반환 �
 
 /** STT 인식 시작 함수*/
 recognition.onstart = function() {
-  console.log("onstart", arguments);
   isRecognizing = true;
 };
 
 /** STT 인식 종료 함수*/
 recognition.onend = function() {
-  console.log("onend", arguments);
   isRecognizing = false;
 
   if (ignoreEndProcess) {
@@ -65,15 +63,13 @@ recognition.onend = function() {
   }
 
   if (!finalTranscript) {
-    console.log("empty finalTranscript");
     return false;
   }
 };
 /** 인식된 결과 처리 함수 */
 recognition.onresult = function(event) {
-  // console.log("onresult", event);
-
   let interimTranscript = "";
+  
   if (typeof event.results === "undefined") {
     recognition.onend = null;
     recognition.stop();
@@ -88,9 +84,6 @@ recognition.onresult = function(event) {
       interimTranscript += event.results[i][0].transcript;
     }
   }
-
-  // console.log("finalTranscript", finalTranscript);
-  // console.log("interimTranscript", interimTranscript);
 };
 /** 에러 처리 함수 */
 recognition.onerror = function(event) {
@@ -117,6 +110,8 @@ var serverURL = "https://s.chameleon4switch.cf/";
 var name = localStorage.getItem("name");
 var room = localStorage.getItem("roomId");
 var color;
+var isTopicChanged = false;
+var topic;  // TODO: 토픽 바꾸면 여기에서 토픽값 저장하고 있어야 함. 초기값 들어있는지 확인 바람
 var socket = null;
 
 var boxes = new Array();
@@ -125,13 +120,11 @@ var boxes = new Array();
 function writeMessage(color, name, message) {
   var box = new Object();
 
-  //console.log("here is color => " + color);
   box.color = color;
   box.name = name;
   box.message = message;
 
   boxes.push(box);
-  // console.log(JSON.stringify(boxes) + "***");
 }
 
 /* socket.io 서버에 유저이름, 인식된 메시지 전송하는 함수 */
@@ -139,7 +132,8 @@ function sender(text) {
   socket.emit("user", {
     color: color,
     name: name,
-    message: text
+    message: text,
+    topic: topic
   });
   writeMessage(color, name, text);
 }
@@ -220,8 +214,6 @@ export class TopicDrawerBar extends Component {
       if (data.type === "connected") {
         color = data.color;
 
-        // console.log('here is my color! => '+color);
-
         socket.emit("connection", {
           type: "join",
           name: name,
@@ -231,11 +223,28 @@ export class TopicDrawerBar extends Component {
     });
 
     socket.on("system", function(data) {
-      writeMessage(color, "system", data.message);
+      writeMessage('#eeeeee', "system", data.message);
     });
 
     socket.on("message", function(data) {
       writeMessage(data.color, data.name, data.message);
+    });
+
+    if (isTopicChanged) {
+      socket.emit("topic", {
+        topic: topic
+      });
+
+      isTopicChanged = false;
+    }
+
+    socket.on("changeTopic", function(data) {
+      if (topic === data.topic) {
+        console.log("현재 토픽 주제(", topic, ")와 같으므로 바꾸지 않음: ", data.topic);
+      } else {
+        console.log("윤영님 토픽을 바꿔주세요");
+        // TODO: 윤영 여기에 프론트 토픽 바꾸도록 추가 바람
+      }
     });
 
     /*******************************/
@@ -255,6 +264,8 @@ export class TopicDrawerBar extends Component {
   }
   onTopicChange = e => {
     console.log("토픽이름:", e.target.innerHTML);
+    isTopicChanged = true;
+    topic = e.target.innerHTML;
     this.setState({
       currentTopic: e.target.innerHTML
     });
