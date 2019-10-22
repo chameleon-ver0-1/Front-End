@@ -110,6 +110,8 @@ var serverURL = "https://s.chameleon4switch.cf/";
 var name = localStorage.getItem("name");
 var room = localStorage.getItem("roomId");
 var color;
+var isTopicChanged = false;
+var topic;  // TODO: 토픽 바꾸면 여기에서 토픽값 저장하고 있어야 함. 초기값 들어있는지 확인 바람
 var socket = null;
 
 var boxes = new Array();
@@ -130,7 +132,8 @@ function sender(text) {
   socket.emit("user", {
     color: color,
     name: name,
-    message: text
+    message: text,
+    topic: topic
   });
   writeMessage(color, name, text);
 }
@@ -227,6 +230,23 @@ export class TopicDrawerBar extends Component {
       writeMessage(data.color, data.name, data.message);
     });
 
+    if (isTopicChanged) {
+      socket.emit("topic", {
+        topic: topic
+      });
+
+      isTopicChanged = false;
+    }
+
+    socket.on("changeTopic", function(data) {
+      if (topic === data.topic) {
+        console.log("현재 토픽 주제(", topic, ")와 같으므로 바꾸지 않음: ", data.topic);
+      } else {
+        console.log("윤영님 토픽을 바꿔주세요");
+        // TODO: 윤영 여기에 프론트 토픽 바꾸도록 추가 바람
+      }
+    });
+
     /*******************************/
     /** STT 시작하는 함수 */
     /*******************************/
@@ -244,6 +264,8 @@ export class TopicDrawerBar extends Component {
   }
   onTopicChange = e => {
     console.log("토픽이름:", e.target.innerHTML);
+    isTopicChanged = true;
+    topic = e.target.innerHTML;
     this.setState({
       currentTopic: e.target.innerHTML
     });
