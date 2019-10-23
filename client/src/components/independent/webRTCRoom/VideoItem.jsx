@@ -153,7 +153,7 @@ export class VideoItem extends Component {
       video.srcObject = event.stream; //비디오에 stream을 연결한다.
 
       connection.videosContainer.style.width = "100%";
-      var width = "500px";
+      var width = "300px";
 
       var mediaElement = service.getHTMLMediaElement(video, {
         title: event.userid,
