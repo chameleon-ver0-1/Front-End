@@ -7,31 +7,30 @@ export class WordCanvas extends Component {
     //console.log(this.props.keyword);
     WordCloud(this.refs["my-canvas"], {
       list: [
-        ["화상회의", 18],
-        ["웹", 15],
-        ["플랫폼", 13],
-        ["WebRTC", 10],
-        ["협업툴", 9],
-        ["회의록", 8],
-        ["자동화", 6],
-        ["졸업 프로젝트", 5],
-        ["React", 4],
-        ["NodeJS", 3],
-        ["소켓서버", 11],
-        ["Python", 7],
-        ["알고리즘", 2],
-        ["개발자", 16],
-        ["디자인", 11]
+        ["분석기술", 18],
+        ["얼굴 인식", 17],
+        ["회의록 생성", 16],
+        ["회의록 작성", 15],
+        ["자동생성", 14],
+        ["회의록", 13],
+        ["협업 플랫폼", 12],
+        ["화상 회의", 11],
+        ["감정 분석", 10],
+        ["얼굴 표정", 9],
+        ["회의 화면", 8],
+        ["감정 인식", 7],
+        ["플랫폼 카멜레온", 6],
+        ["회의 기반", 5]
       ],
       fontFamily: "NanumSquareL",
-      weightFactor: 2,
-      fontWeight: 4,
+      weightFactor: 1.2,
+      fontWeight: 2,
       color: function(word, weight) {
-        if (weight < 5) {
+        if (weight < 8) {
           return "#c0c0c0";
-        } else if (weight >= 5 && weight < 10) {
+        } else if (weight >= 8 && weight < 13) {
           return "#696969";
-        } else if (weight >= 10 && weight < 17) {
+        } else if (weight >= 13 && weight < 18) {
           return "#88e0bc";
         } else {
           return "#23ad6e";
