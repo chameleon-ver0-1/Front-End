@@ -16,3 +16,17 @@ export function getDocumentList(Id, count) {
 export function getDocumentSearch(Id, search) {
   return DocumentAxios.get(`search/${Id}` + "?search=" + `${search}`);
 }
+
+export function getDocumentDetail(projectId, roomId) {
+  return DocumentAxios.get(`detail/${projectId}` + "/" + `${roomId}`).then(
+    res => {
+      console.log(res.data);
+
+      console.log("***************************");
+      console.log(res.data.message);
+      console.log("***************************");
+
+      return Promise.resolve(res);
+    }
+  );
+}

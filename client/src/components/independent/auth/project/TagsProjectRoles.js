@@ -76,10 +76,9 @@ export class TagsProjectRoles extends Component {
       },
       () => {
         console.log("tag: " + this.state.roles);
+        this.props.callbackFromParent(this.state.roles);
       }
     );
-
-    this.props.callbackFromParent(this.state.roles);
   }
 
   handleDrag(tag, currPos, newPos) {

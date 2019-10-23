@@ -61,11 +61,12 @@ export class TagsProjectDepart extends Component {
       },
       () => {
         console.log("tag: " + this.state.depart);
+        this.props.callbackFromParent(this.state.depart);
       }
     );
 
     //부모한테 props로 보내기
-    this.props.callbackFromParent(this.state.depart);
+    //this.props.callbackFromParent(this.state.depart);
   }
 
   handleDrag(tag, currPos, newPos) {

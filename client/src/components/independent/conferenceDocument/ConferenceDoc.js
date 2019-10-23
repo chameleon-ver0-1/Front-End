@@ -6,13 +6,14 @@
 
 import React, { Component, useState, useEffect } from "react";
 import "./conferencedoc.style.css";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import DocData from "./data/doc.json";
 import axios from "axios";
 import ConferencePosts from "./ConferencePosts";
 import download_off from "../../../assets/doc/download_off.png";
 import DocumentTag from "./DocumentTag";
 import * as services from "../../../services/DocumentService";
+import moment from "moment";
 
 export class ConferenceDoc extends Component {
   constructor(props) {
@@ -24,9 +25,11 @@ export class ConferenceDoc extends Component {
     };
 
     this.pageNext = this.pageNext.bind(this);
+    this.gotoDetail = this.gotoDetail.bind(this);
     this.search = this.search.bind(this);
   }
 
+  /**회의록 목록 화면 */
   componentDidMount() {
     services.getDocumentList(localStorage.getItem("projectId"), 1).then(
       res => {
@@ -47,6 +50,7 @@ export class ConferenceDoc extends Component {
     console.log("click");
   }
 
+  /**Paging */
   pageNext = e => {
     services
       .getDocumentList(localStorage.getItem("projectId"), e.target.id)
@@ -65,6 +69,17 @@ export class ConferenceDoc extends Component {
       );
   };
 
+  /**회의록 상세 화면 이동 */
+  gotoDetail(id) {
+    localStorage.setItem("documentId", id);
+    this.props.history.push(
+      `/home/conferenceDocument/conferenceDocumentDetail/${localStorage.getItem(
+        "projectId"
+      )}`
+    );
+  }
+
+  /**회의록 검색 */
   search() {
     services
       .getDocumentSearch(localStorage.getItem("projectId"), this.state.search)
@@ -98,14 +113,16 @@ export class ConferenceDoc extends Component {
             </div>
 
             {/* <ConferencePosts /> */}
-            {/* {Object.keys(this.state.documentList).map(Id => {
+            {Object.keys(this.state.documentList).map(Id => {
               const list = this.state.documentList[Id];
+              const dateTime = new Date(list.startTime);
+
               return (
                 <ul className="post-ul">
                   <li className="post-li">
                     <ul className="post-row-list">
                       <li className="post-row-list-item1">
-                        <Link
+                        {/* <Link
                           to={{
                             pathname:
                               "/home/conferenceDocument/conferenceDocumentDetail",
@@ -115,11 +132,20 @@ export class ConferenceDoc extends Component {
                             }
                           }}
                           className="linkdocumentdetail"
+                        > */}
+                        <button
+                          className="todetail"
+                          onClick={() => this.gotoDetail(list.detailId)}
                         >
-                          <button className="todetail">{list.title}</button>
-                        </Link>
+                          {list.title}
+                        </button>
+                        {/* </Link> */}
                       </li>
-                      <li className="post-row-list-item2">{list.startTime}</li>
+                      <li className="post-row-list-item2">
+                        {moment(dateTime).format("YYYY.MM.DD") +
+                          " " +
+                          moment(dateTime).format("HH:mm~")}
+                      </li>
                       <li className="post-row-list-item3">
                         <div className="post-row-list-item-tag">
                           <DocumentTag text={list.mainTopics} />
@@ -137,8 +163,8 @@ export class ConferenceDoc extends Component {
                   </li>
                 </ul>
               );
-            })} */}
-            {DocData.map((docDetail, index) => {
+            })}
+            {/* {DocData.map((docDetail, index) => {
               return (
                 <ul className="post-ul">
                   <li className="post-li">
@@ -179,7 +205,7 @@ export class ConferenceDoc extends Component {
                   </li>
                 </ul>
               );
-            })}
+            })} */}
           </div>
 
           <div className="pagination-div">
@@ -277,4 +303,4 @@ export class ConferenceDoc extends Component {
   }
 }
 
-export default ConferenceDoc;
+export default withRouter(ConferenceDoc);

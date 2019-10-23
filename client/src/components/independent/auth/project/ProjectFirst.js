@@ -31,7 +31,7 @@ export class ProjectFirst extends Component {
   }
 
   myCallback = dataFromChild => {
-    this.setState({ roles_tag: dataFromChild.toString() });
+    this.setState({ roles_tag: dataFromChild });
   };
 
   projectOk() {
@@ -40,7 +40,7 @@ export class ProjectFirst extends Component {
     const projectName = this.props.projectTitle;
     console.log(projectId);
     console.log(this.state.roles_tag + "+++++++++");
-    service.projectOK(projectId, this.state.roles_tag).then(
+    service.projectOK(projectId, this.state.roles_tag.toString()).then(
       res => {
         console.log("프로젝트 참여!");
 
