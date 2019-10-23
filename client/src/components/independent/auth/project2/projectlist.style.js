@@ -17,12 +17,13 @@ const ProjectListItemContainer = styled.div`
   height: 400px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;
 const ProjectListItemBtn = styled.button`
   width: 313px;
   height: 41px;
   color: var(--greenish-teal);
+
+  margin-bottom: 15px;
   border-radius: 18.8px;
   border: solid 1px var(--greenish-teal);
   font-size: 16px;
