@@ -170,8 +170,6 @@ export const Container = styled.div`
   border-radius: 10px;
 
   background: var(--light-sage);
-  opacity: 50%;
-
   box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset)
     var(--box-shadow-blur) var(--box-main-color);
 `;
