@@ -98,52 +98,45 @@ export default class AddIssueDialog extends Component {
       isAttatch: e.target.checked
     });
   };
-  postIssueItem = () => {
-    // projectId,
-    // title,
-    // dDay,
-    // content,
-    // isConfScheduled,
-    // attachment,
-    // dept,
-    // username,
-    // usernameEn,
-    // userImg
-    var projectId = localStorage.getItem("projectId");
-    var title = document.getElementById("titleInput").value;
-    var date = this.state.dDate;
-    var content = document.getElementById("contentInput").value;
-    var isConfScheduled = this.state.isConf;
-    var attachment = "test.txt";
-    var dept = "귀여움"; //FIXME: 선택된 부서 지정.
-    var username = localStorage.getItem("name");
-    var usernameEn = localStorage.getItem("nameEn");
-    var userImg = localStorage.getItem("profilImg");
-
-    console.log("pId", projectId);
-    console.log("title", title);
-    console.log("content", content);
-
-    service
-      .postIssue(
-        projectId,
-        title,
-        date,
-        content,
-        isConfScheduled,
-        attachment,
-        dept,
-        username,
-        usernameEn,
-        userImg
-      )
-      .then(res => {
-        console.log(res.data);
-      });
-  };
 
   render() {
     const { open, onCloseModal, status } = this.props;
+
+    const postIssueItem = () => {
+      var projectId = localStorage.getItem("projectId");
+      var title = document.getElementById("titleInput").value;
+      var date = this.state.dDate;
+      var content = document.getElementById("contentInput").value;
+      var isConfScheduled = this.state.isConf;
+      var attachment = "test.txt";
+      var dept = "귀여움"; //FIXME: 선택된 부서 지정.
+      var username = localStorage.getItem("name");
+      var usernameEn = localStorage.getItem("nameEn");
+      var userImg = localStorage.getItem("profilImg");
+
+      console.log("pId", projectId);
+      console.log("title", title);
+      console.log("content", content);
+
+      service
+        .postIssue(
+          projectId,
+          title,
+          date,
+          content,
+          isConfScheduled,
+          attachment,
+          dept,
+          username,
+          usernameEn,
+          userImg
+        )
+        .then(res => {
+          console.log(res.data);
+        });
+
+      onCloseModal();
+    };
 
     return (
       <Modal key={status} open={open} onClose={onCloseModal} center>
@@ -237,9 +230,7 @@ export default class AddIssueDialog extends Component {
               />
             </SelectRow>
             <SubmitBtns>
-              <ConfirmBtn onClick={this.postIssueItem} onClick={onCloseModal}>
-                확인
-              </ConfirmBtn>
+              <ConfirmBtn onClick={postIssueItem}>확인</ConfirmBtn>
               <CancelBtn onClick={onCloseModal}>취소</CancelBtn>
             </SubmitBtns>
           </div>

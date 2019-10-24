@@ -58,10 +58,10 @@ const PrintButton = ({ id, label }) => (
           // Document of a4WidthMm wide and inputHeightMm high
           if (inputHeightMm > a4HeightMm) {
             // elongated a4 (system print dialog will handle page breaks)
-            const pdf = new jsPDF("p", "mm", [inputHeightMm + 16, a4WidthMm]);
+            const pdf = new jsPDF("p", "mm", "a4");
           } else {
             // standard a4
-            const pdf = new jsPDF();
+            const pdf = new jsPDF("p", "mm", "a4");
           }
           const pdf = new jsPDF();
           pdf.addImage(imgData, "PNG", 0, 0);
