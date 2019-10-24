@@ -8,41 +8,44 @@ const PDF = ({ id, keyword, contents }) => (
     <div className="togopdf">
       <div className="wordclouddiv">
         <div className="detail_title">키워드맵</div>
-        <WordCanvas keyword={keyword} />
+        {/* {Object.keys(this.state.detail).map(Id => {
+              //const list = this.state.detail.keyword[Id];
+              console.log(this.state.detail.keyword);
+              return <div>ddd</div>;
+            })} */}
+
+        <WordCanvas />
       </div>
 
       <div>
+        <br />
         <div className="div1">
-          <div className="detail_title">l</div>
+          <div className="detail_title">l 프로젝트 개요</div>
           <div className="detail_content">
-            회의를 할 때 프로젝트 단위로 구분하면 더 효율적이지 않을까. 화상회의
-            도중에 감정을 인식하면 회의의 분위기를 알 수 있어서 좋을 것 같아.
-            회의록을 자동으로 만들어주면 사용자가 더 편리하게 사용할 것 같아.
-            부가기능으로 trello처럼 todo doing done 으로 나눠서 일정을 관리할 수
-            있으면 좋겠다. 그러면 우리 주제를 화상회의로 하자.
+            자 주목해 주세요 저희 회의 시작하겠습니다. 그러면 저희 회의
+            시작하겠습니다. 지금부터 하님 작품 보 고서 작성 관련 회의를
+            시작하겠습니다. 다들 활짝 웃어 주세요 감정 인식하고 있습니다. 네 어
+            정말 이게 힘드네요. 지금 안 뜨고 있어요 더 웃어 주세요. 이렇게 말이
+            끊겨요 뜹니다. 윤영 씨가 작품 소개와 작 품의 기대 효과에 대해서
+            간략하게 말씀해 주실 수 있을까요. 언제 뜨나요 감정은. 와우
+            협업플랫폼. 와 우 협업플랫폼 뭐야. 아우 대단하네요 나네 좀 아 이게
+            근데 그것 좀.
           </div>
         </div>
-
+        <br />
         <div className="div2">
-          <div className="detail_title">l 구현 기술</div>
+          <div className="detail_title">l 적용 기술</div>
           <div className="detail_content">
-            화상회의를 구현하려면 WebRTC기술이 필요해. 회의록 자동화는 STT로
-            실시간 음성인식하고 회의종료되면 텍스트로 저장되야겠지. Textrank가
-            문서 요약하는 알고리즘인데 그거 사용하면 회의록을 요약할 수
-            있을거야. 감정인식은 AWS Rekognition API를 사용하면 되겠다.
-            회의록에서 키워드같은 것도 추출하면 뭔가 괜찮을 것 같애.
+            와 마지막으로 적용 기술에 대해서 이야기 해보겠습니다. 제가 얘
+            기할게요 웹알티씨 화상 회의 중 aws 레콘 이전으로 차 여자 얼굴
+            인식하고 구글 오늘 거쳐 돈이되는 주제에 대한 종합 반응을 실시간 으로
+            분석하여 의견의 지지율을 의사결정의 객관적 활용하고자 합니 다.
+            잘한다 표정 무서워요 아. 구정에 해당하는 얼굴표정을 수집 해 학습
+            데이터로 활용하고 학습시키는 방식으로 진행하였습니다. 영어 발음이
+            놀라워요. 내 발음 좀 인정 받았나 봐.
           </div>
         </div>
-
-        <div className="div3">
-          <div className="detail_title">l 일정 관리</div>
-          <div className="detail_content">
-            요약 : 주제3에 대한 요약이 이곳에 들어갑니다.
-          </div>
-          <div className="detail_content">
-            요약 : 주제3에 대한 요약이 이곳에 들어갑니다.
-          </div>
-        </div>
+        <br />
       </div>
     </div>
   </Page>
