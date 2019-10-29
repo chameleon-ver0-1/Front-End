@@ -3,7 +3,7 @@ import Page from "./Page";
 import WordCanvas from "./WordCanvas";
 import "./conferencedocdetail.style.css";
 
-const PDF = ({ id, keyword, contents }) => (
+const PDF = ({ id, keywords, contents }) => (
   <Page singleMode={true} id={id}>
     <div className="togopdf">
       <div className="wordclouddiv">
@@ -13,13 +13,14 @@ const PDF = ({ id, keyword, contents }) => (
               console.log(this.state.detail.keyword);
               return <div>ddd</div>;
             })} */}
-
-        <WordCanvas />
+        {console.log(keywords)}
+        <WordCanvas keywords={keywords} />
       </div>
 
       <div>
         <br />
         <div className="div1">
+          <div>{console.log(contents)}</div>
           <div className="detail_title">l 프로젝트 개요</div>
           <div className="detail_content">
             자 주목해 주세요 저희 회의 시작하겠습니다. 그러면 저희 회의
