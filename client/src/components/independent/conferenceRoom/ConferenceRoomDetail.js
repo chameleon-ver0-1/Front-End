@@ -185,10 +185,11 @@ export class ConferenceRoomDetail extends Component {
                       {Object.keys(this.state.includeList).map(id => {
                         const includeList = this.state.includeList[id];
                         const dateTime = new Date(includeList.startTime);
+
                         //let index = 0;
                         let count = 0;
                         count++;
-                        console.log(count + " : count");
+                        //console.log(count + " : count");
                         // if (id > 3 && id <= 7) {
                         //   break;
                         // }

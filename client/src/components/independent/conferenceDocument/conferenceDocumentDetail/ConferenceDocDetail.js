@@ -13,14 +13,16 @@ import PrintButton from "./PrintButton";
 import PDF from "./PDF";
 import * as services from "../../../../services/DocumentService";
 import moment from "moment";
-import WordCanvas from "./WordCanvas";
 
 class ConferenceDocDetail extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      detail: []
+      detail: [],
+      key: [],
+      keyword: [],
+      contents: []
     };
   }
 
@@ -32,10 +34,10 @@ class ConferenceDocDetail extends Component {
       )
       .then(res => {
         console.log("회의록 상세보기 입니다");
+
         this.setState({
           detail: res.data.data
         });
-        console.log("service 안에", this.state.detail.keyword);
       });
   };
 
@@ -46,9 +48,9 @@ class ConferenceDocDetail extends Component {
     return (
       <div className="documentdetaildiv">
         <div className="documentDetailTitle">
-          {/* <div className="Title1">{detail.title}</div> */}
-          <div className="Title1">한이음 2019 공모전 회의2</div>
-          {/* <div className="Title2">
+          <div className="Title1">{detail.title}</div>
+
+          <div className="Title2">
             {moment(startTime).format("YYYY.MM.DD") +
               " " +
               moment(startTime).format("HH:mm") +
@@ -56,8 +58,8 @@ class ConferenceDocDetail extends Component {
               moment(endTime).format("YYYY.MM.DD") +
               " " +
               moment(endTime).format("HH:mm")}
-          </div> */}
-          <div className="Title2">2019.10.29 22:34 ~ 2019.10.29.23:17</div>
+          </div>
+
           <div className="save_button_div">
             <button className="save_button">
               <img src={download_off} className="downloadimg" />
@@ -66,7 +68,11 @@ class ConferenceDocDetail extends Component {
             <PrintButton id={"한이음 2019 공모전 회의2"} label={"요약본"} />
           </div>
         </div>
-        <PDF id={"한이음 2019 공모전 회의2"} />
+        <PDF
+          id={"한이음 2019 공모전 회의2"}
+          keywords={detail.keywords}
+          detail={detail.contents}
+        />
       </div>
     );
   }

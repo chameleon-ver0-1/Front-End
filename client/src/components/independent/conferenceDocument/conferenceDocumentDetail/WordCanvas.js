@@ -3,25 +3,16 @@ import WordCloud from "wordcloud";
 import "./conferencedocdetail.style.css";
 
 export class WordCanvas extends Component {
-  componentDidMount() {
-    //console.log(this.props.keyword);
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      keywords: ""
+    };
+  }
+  componentWillReceiveProps(props) {
     WordCloud(this.refs["my-canvas"], {
-      list: [
-        ["분석기술", 18],
-        ["얼굴 인식", 17],
-        ["회의록 생성", 16],
-        ["회의록 작성", 15],
-        ["자동생성", 14],
-        ["회의록", 13],
-        ["협업 플랫폼", 12],
-        ["화상 회의", 11],
-        ["감정 분석", 10],
-        ["얼굴 표정", 9],
-        ["회의 화면", 8],
-        ["감정 인식", 7],
-        ["플랫폼 카멜레온", 6],
-        ["회의 기반", 5]
-      ],
+      list: props.keywords,
       fontFamily: "NanumSquareL",
       weightFactor: 1.2,
       fontWeight: 2,
@@ -50,16 +41,10 @@ export class WordCanvas extends Component {
   }
 
   render() {
+    // if (!this.props.keywords) return null;
     return (
       <div className="canvas-div">
         <canvas ref="my-canvas" />
-        <div>
-          {/* {Object.keys(this.props.keyword).map(Id => {
-            const key = this.props.keyword[Id];
-            console.log(this.props.keyword);
-            return <div>dd</div>;
-          })} */}
-        </div>
       </div>
     );
   }
