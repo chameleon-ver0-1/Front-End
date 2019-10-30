@@ -13,7 +13,6 @@ import PrintButton from "./PrintButton";
 import PDF from "./PDF";
 import * as services from "../../../../services/DocumentService";
 import moment from "moment";
-import WordCanvas from "./WordCanvas";
 
 class ConferenceDocDetail extends Component {
   constructor(props) {
@@ -39,8 +38,6 @@ class ConferenceDocDetail extends Component {
         this.setState({
           detail: res.data.data
         });
-
-        console.log("service 안에", this.state.detail);
       });
   };
 
@@ -74,7 +71,7 @@ class ConferenceDocDetail extends Component {
         <PDF
           id={"한이음 2019 공모전 회의2"}
           keywords={detail.keywords}
-          contents={detail.contents}
+          detail={detail.contents}
         />
       </div>
     );
