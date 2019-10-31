@@ -43,15 +43,18 @@ const Circle_time = styled.div`
 
 export class Circle1 extends Component {
   render() {
+    const { id, time, title, name, nowP, allP } = this.props;
     return (
       <div>
         <Circle_conference>
-          <Circle_time>{this.props.time}</Circle_time>
-          <Circle_title>{this.props.title}</Circle_title>
-          <Circle_name>{this.props.name}</Circle_name>
+          <Circle_time>{time}</Circle_time>
+          <Circle_title>{title}</Circle_title>
+          <Circle_name>{name}</Circle_name>
           <div className="circle_hori">
             <img src={people} className="people" />
-            <Circle_people>5/6</Circle_people>
+            <Circle_people>
+              {nowP}/{allP}
+            </Circle_people>
           </div>
         </Circle_conference>
       </div>
