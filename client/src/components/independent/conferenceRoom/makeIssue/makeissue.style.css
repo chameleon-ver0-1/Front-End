@@ -24,6 +24,7 @@
   color: var(--greenish-teal);
   font-size: 14px;
   outline: none;
+  cursor: pointer;
 }
 
 .choose-issue:hover {
@@ -40,6 +41,7 @@
   color: var(--brownish-grey);
   font-size: 14px;
   outline: none;
+  cursor: pointer;
 }
 
 .issue-buttons-div {

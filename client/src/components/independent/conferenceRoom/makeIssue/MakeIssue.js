@@ -2,46 +2,33 @@ import React, { Component } from "react";
 import Modal from "react-responsive-modal";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "./makeissue.style.css";
-import InitialData from "../../issue/testItem-data";
 
 export class MakeIssue extends Component {
-  //state = InitialData;
-
   constructor(props) {
     super(props);
 
     this.state = {
       issue: "",
-      tags: [],
-      initialData: InitialData
+      tags: []
     };
   }
 
   issueClicked = e => {
-    this.setState({
-      issue: e
-    });
-    console.log(this.state.issue);
+    this.setState(
+      {
+        issue: e
+      },
+      () => {
+        console.log(this.state.issue);
+        //this.props.callbackFromParent(this.state.issue);
+      }
+    );
   };
 
-  /* TODO: 두번 클릭해야 저장되는 것 수정 -> 비동기 문제 */
-  /* TODO: tag 값 props로 넘기기 */
   onSelectIssue = () => {
     const { tags, issue } = this.state;
-    this.setState({
-      tags: tags.concat({ id: 0, text: issue })
-    });
-    console.log(tags);
-    if (tags.length > 0) {
-      this.setState({
-        tags: tags.splice(tags[0], tags[1])
-      });
-    }
-  };
-
-  bothClick = () => {
-    this.onSelectIssue();
-    // this.props.onCloseModal(); -> //TODO: 다 해결하고 주석 풀기
+    this.props.callbackFromParent(issue);
+    this.props.onCloseModal();
   };
 
   render() {
@@ -116,7 +103,7 @@ export class MakeIssue extends Component {
             </TabPanel>
           </Tabs>
           <div className="issue-buttons-div">
-            <button className="choose-issue" onClick={this.bothClick}>
+            <button className="choose-issue" onClick={this.onSelectIssue}>
               선택
             </button>
             <button className="cancel-issue" onClick={onCloseModal}>

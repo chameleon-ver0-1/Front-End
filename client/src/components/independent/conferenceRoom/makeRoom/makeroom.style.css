@@ -61,11 +61,13 @@
   border: none;
   float: right;
   outline: none;
+  cursor: pointer;
 }
 
 .getissueimg {
   width: 13px;
   height: 13px;
+  cursor: pointer;
 }
 
 .makebutton {
