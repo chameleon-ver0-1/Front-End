@@ -39,7 +39,7 @@ export class IssueItem extends Component {
 
   render() {
     const { task, index, status } = this.props;
-
+    console.log("taskID", task._id);
     return (
       <React.Fragment>
         <Draggable draggableId={task._id} index={index}>
