@@ -28,9 +28,9 @@ export class TagsTopic extends Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log("나는 topic 내부 props ! ", props.issue);
     if (props.issueCome) {
       //이슈가 들어왔을때 = issueCome이 true일때
+      console.log("나는 topic 내부 props ! ", props.issue);
       this.setState(
         state => {
           return {

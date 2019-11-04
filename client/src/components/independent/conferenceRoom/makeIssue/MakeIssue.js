@@ -98,6 +98,7 @@ export class MakeIssue extends Component {
                   const list2 = this.state.doing[id];
                   return (
                     <li
+                      key={id}
                       className="issue-item"
                       style={{ cursor: "pointer" }}
                       onClick={this.issueClicked.bind(

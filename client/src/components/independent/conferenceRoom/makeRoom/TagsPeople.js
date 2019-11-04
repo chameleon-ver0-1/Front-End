@@ -59,7 +59,7 @@ export class TagsPeople extends Component {
         console.log("참여자 판단 성공");
 
         var email;
-        console.log("data가 나와야해", res.data.data.searchList);
+        console.log("data가 나와야해", res.data.data);
         Object.keys(res.data.data.searchList).map(Id => {
           const list = res.data.data.searchList[Id];
           email = list.email;
@@ -72,7 +72,7 @@ export class TagsPeople extends Component {
         }));
 
         this.props.callbackFromParent(this.state.people);
-        console.log("tag: " + JSON.stringify(this.state.people));
+        console.log("tag: " + this.state.people);
       },
       err => {
         console.log("참여자 판단 실패");
