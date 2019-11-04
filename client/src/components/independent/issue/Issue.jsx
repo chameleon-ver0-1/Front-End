@@ -16,15 +16,17 @@ export class issue extends Component {
   state = { issueLists: [], dep: "" };
 
   componentDidMount() {
-    service.getIssueList().then(
+    console.log("현재 선택된 초기 역할", localStorage.getItem("myRole"));
+
+    service.postIssueList(localStorage.getItem("myRole")).then(
       res => {
         console.log("***************************");
         console.log(res.data.message);
         console.log("***************************");
         this.setState({ issueLists: res.data.data });
-        const current = res.data.data.roleData[0].role;
+        const current = localStorage.getItem("myRole");
         this.setState({ dep: current });
-        console.log(this.state.dep);
+        console.log("현재 선택된 이슈 리스트", this.state.dep);
       },
       err => {
         console.log("이슈 리스트 가져오기 실패");
