@@ -60,6 +60,7 @@ class MakeRoom extends Component {
     });
   };
 
+  //토픽
   myCallback = dataFromChild => {
     this.setState(
       {
@@ -72,10 +73,12 @@ class MakeRoom extends Component {
     );
   };
 
+  //참여자
   myCallback2 = dataFromChild => {
     this.setState({ people_tag: dataFromChild });
   };
 
+  //이슈에서 가져오는 토픽
   myCallback3 = dataFromChild => {
     this.setState(
       {
@@ -84,7 +87,7 @@ class MakeRoom extends Component {
         issueCome: true
       },
       () => {
-        console.log("issue in makeroom", this.state.issue);
+        console.log("issue in makeroom", this.state.issue); //tagstopic으로 보내기 위해
         console.log("issue topic in makeroom ", this.state.topic_tag);
       }
     );

@@ -112,8 +112,8 @@ export class ConferenceRoomDetail extends Component {
                         const dateTime = new Date(proceedList.startTime);
 
                         //let index = 0;
-                        let count = 0;
-                        count++;
+                        //let count = 0;
+                        //count++;
                         //console.log(count + " : count");
                         // if (id > 3 && id <= 7) {
                         //   break;
@@ -237,8 +237,8 @@ export class ConferenceRoomDetail extends Component {
                         const dateTime = new Date(includeList.startTime);
 
                         //let index = 0;
-                        let count = 0;
-                        count++;
+                        //let count = 0;
+                        //count++;
                         //console.log(count + " : count");
                         // if (id > 3 && id <= 7) {
                         //   break;

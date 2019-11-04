@@ -27,11 +27,10 @@ export class TagsTopic extends Component {
     this.handleTagClick = this.handleTagClick.bind(this);
   }
 
-  //TODO: LifeCycle
   componentWillReceiveProps(props) {
     console.log("나는 topic 내부 props ! ", props.issue);
     if (props.issueCome) {
-      //이슈가 들어왔을때 issueCome이 true일때
+      //이슈가 들어왔을때 = issueCome이 true일때
       this.setState(
         state => {
           return {
@@ -44,6 +43,7 @@ export class TagsTopic extends Component {
           //this.props.callbackFromParent(this.state.topic);
         }
       );
+      //props를 비워야함
     }
   }
 
@@ -61,10 +61,6 @@ export class TagsTopic extends Component {
   //       //this.props.callbackFromParent(this.state.topic);
   //     }
   //   );
-  // }
-
-  // getDerivedStateFromProps(nextProps, prevState){
-
   // }
 
   /* 태그 */
