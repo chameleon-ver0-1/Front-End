@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Modal from "react-responsive-modal";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "./makeissue.style.css";
+import * as services from "../../../../services/IssueService";
 
 export class MakeIssue extends Component {
   constructor(props) {
@@ -9,8 +10,27 @@ export class MakeIssue extends Component {
 
     this.state = {
       issue: "",
-      tags: []
+      tags: [],
+      todo: [],
+      doing: [],
+      done: []
     };
+  }
+
+  componentDidMount() {
+    services.getConferenceIssue(localStorage.getItem("projectId")).then(
+      res => {
+        //console.log(res.data.data);
+        this.setState({
+          todo: res.data.data.TODO,
+          doing: res.data.data.DOING,
+          done: res.data.data.DONE
+        });
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   issueClicked = e => {
@@ -50,55 +70,64 @@ export class MakeIssue extends Component {
               <Tab>DOING</Tab>
               <Tab>DONE</Tab>
             </TabList>
-            {/* <div>
-              {Object.keys(this.state.initialData.columns).map(columnId => {
-                const column = this.state.initialData.columns[columnId];
-                const tasks = column.taskIds.map(
-                  taskId => this.state.initialData.tasks[taskId]
-                );
-
-                return (
-
-                );
-              })}
-            </div> */}
 
             <TabPanel>
               <ul className="issue-list">
-                <li
-                  className="issue-item"
-                  onClick={this.issueClicked.bind(
-                    this,
-                    "a"
-                  )} /* "a"쓴 부분이 ""값을 넘긴다는 뜻. 데이터 받아올때는 "변수.값"의 형태로 */
-                >
-                  a
-                </li>
-                <li
-                  className="issue-item"
-                  onClick={this.issueClicked.bind(
-                    this,
-                    "b"
-                  )} /* "a"쓴 부분이 ""값을 넘긴다는 뜻. 데이터 받아올때는 "변수.값"의 형태로 */
-                >
-                  b
-                </li>
+                {Object.keys(this.state.todo).map(id => {
+                  const list1 = this.state.todo[id];
+                  return (
+                    <li
+                      className="issue-item"
+                      style={{ cursor: "pointer" }}
+                      onClick={this.issueClicked.bind(
+                        this,
+                        list1
+                      )} /* "a"쓴 부분이 ""값을 넘긴다는 뜻. 데이터 받아올때는 "변수.값"의 형태로 */
+                    >
+                      {list1}
+                    </li>
+                  );
+                })}
               </ul>
             </TabPanel>
 
             <TabPanel>
               <ul className="issue-list">
-                <li className="issue-item">1</li>
-                <li className="issue-item">2</li>
-                <li className="issue-item">3</li>
+                {Object.keys(this.state.doing).map(id => {
+                  const list2 = this.state.doing[id];
+                  return (
+                    <li
+                      className="issue-item"
+                      style={{ cursor: "pointer" }}
+                      onClick={this.issueClicked.bind(
+                        this,
+                        list2
+                      )} /* "a"쓴 부분이 ""값을 넘긴다는 뜻. 데이터 받아올때는 "변수.값"의 형태로 */
+                    >
+                      {list2}
+                    </li>
+                  );
+                })}
               </ul>
             </TabPanel>
 
             <TabPanel>
               <ul className="issue-list">
-                <li className="issue-item">x</li>
-                <li className="issue-item">y</li>
-                <li className="issue-item">z</li>
+                {Object.keys(this.state.done).map(id => {
+                  const list3 = this.state.done[id];
+                  return (
+                    <li
+                      className="issue-item"
+                      style={{ cursor: "pointer" }}
+                      onClick={this.issueClicked.bind(
+                        this,
+                        list3
+                      )} /* "a"쓴 부분이 ""값을 넘긴다는 뜻. 데이터 받아올때는 "변수.값"의 형태로 */
+                    >
+                      {list3}
+                    </li>
+                  );
+                })}
               </ul>
             </TabPanel>
           </Tabs>
