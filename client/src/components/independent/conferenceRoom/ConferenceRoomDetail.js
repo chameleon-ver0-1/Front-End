@@ -246,6 +246,7 @@ export class ConferenceRoomDetail extends Component {
 
                         return (
                           <Circle2
+                            key={id}
                             date={moment(dateTime).format("YYYY.MM.DD")}
                             time={moment(dateTime).format("HH:mm~")}
                             title={includeList.title}

@@ -41,7 +41,11 @@ class MakeRoom extends Component {
 
   /* 이슈에서 가져오기 */
   onOpenModal = () => {
-    this.setState({ open: true, title: "토픽을 가져올 이슈를 선택하세요" });
+    this.setState({
+      open: true,
+      title: "토픽을 가져올 이슈를 선택하세요",
+      issueCome: false
+    });
   };
 
   onCloseModal = () => {
@@ -51,12 +55,14 @@ class MakeRoom extends Component {
   /* 날짜 */
   handleChange = date => {
     this.setState({
-      startDay: date
+      startDay: date,
+      issueCome: false
     });
   };
   handleChange2 = date => {
     this.setState({
-      startDate: date
+      startDate: date,
+      issueCome: false
     });
   };
 
@@ -75,7 +81,7 @@ class MakeRoom extends Component {
 
   //참여자
   myCallback2 = dataFromChild => {
-    this.setState({ people_tag: dataFromChild });
+    this.setState({ people_tag: dataFromChild, issueCome: false });
   };
 
   //이슈에서 가져오는 토픽
@@ -180,7 +186,8 @@ class MakeRoom extends Component {
 
   startNow() {
     this.setState({
-      isChecked: !this.state.isChecked
+      isChecked: !this.state.isChecked,
+      issueCome: false
     });
     console.log(this.state.isChecked); // 체크 눌린상태 : false, 체크 떼면 true
   }
@@ -231,6 +238,8 @@ class MakeRoom extends Component {
 
           <div className="row-div">
             <div className="roomtitle2">시작 시간</div>
+
+            {/* 체크박스 건들 때 issueCome:false */}
             {isChecked ? (
               <div>
                 <DatePicker

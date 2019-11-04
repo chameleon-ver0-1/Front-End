@@ -137,6 +137,7 @@ export class Circle2 extends Component {
     const { displayMenu, peopleList } = this.state;
     return (
       <div
+        key={id}
         onClick={() => this.gotoVideo(id)}
         style={{ cursor: "pointer" }}
         onMouseOver={() => this.displayMember(id)}
@@ -169,7 +170,7 @@ export class Circle2 extends Component {
                     );
                   } else {
                     return (
-                      <div style={{ fontSize: "10px" }}>
+                      <div style={{ fontSize: "10px" }} key={id}>
                         {list.name + " " + list.name_en}
                       </div>
                     );
