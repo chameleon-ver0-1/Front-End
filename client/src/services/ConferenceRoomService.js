@@ -44,6 +44,10 @@ export function confParticipants(projectId, userName) {
     });
 }
 
+export function confProceed(projectId) {
+  return confCreateAxios.get(`conf_room/proceedList/${projectId}`);
+}
+
 /**내가 포함된 회의 목록 */
 export function confInclude(projectId) {
   return confCreateAxios.get(`conf_room/includedList/${projectId}`);

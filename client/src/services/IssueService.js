@@ -57,3 +57,8 @@ export function postUpdateIssue(columnData) {
     columnData
   });
 }
+
+/**회의실 개설하기 중 이슈 가져오기 */
+export function getConferenceIssue(projectId) {
+  return IssueAxios.get(`gettitle/${projectId}`);
+}

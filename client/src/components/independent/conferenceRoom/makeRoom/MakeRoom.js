@@ -32,7 +32,8 @@ class MakeRoom extends Component {
       topic_tag: [],
       people_tag: [],
       isChecked: true,
-      video_data: []
+      issue: [],
+      issueCome: false
     };
 
     this.startNow = this.startNow.bind(this);
@@ -59,12 +60,37 @@ class MakeRoom extends Component {
     });
   };
 
+  //토픽
   myCallback = dataFromChild => {
-    this.setState({ topic_tag: dataFromChild });
+    this.setState(
+      {
+        topic_tag: dataFromChild,
+        issueCome: false
+      },
+      () => {
+        console.log("text topic in makeroom ", this.state.topic_tag);
+      }
+    );
   };
 
+  //참여자
   myCallback2 = dataFromChild => {
     this.setState({ people_tag: dataFromChild });
+  };
+
+  //이슈에서 가져오는 토픽
+  myCallback3 = dataFromChild => {
+    this.setState(
+      {
+        issue: dataFromChild,
+        topic_tag: this.state.topic_tag.concat(dataFromChild),
+        issueCome: true
+      },
+      () => {
+        console.log("issue in makeroom", this.state.issue); //tagstopic으로 보내기 위해
+        console.log("issue topic in makeroom ", this.state.topic_tag);
+      }
+    );
   };
 
   gotoVideo = () => {
@@ -97,12 +123,6 @@ class MakeRoom extends Component {
                 console.log("화상회의에 오신 걸 환영합니다");
                 console.log(res.data);
 
-                this.setState({
-                  video_data: res.data
-                });
-                //this.props.callbackFromParent(this.state.video_data);
-
-                //this.props.setValue(this.state.video_data);
                 this.props.history.push(
                   `/room/${localStorage.getItem("roomId")}`
                 );
@@ -189,7 +209,11 @@ class MakeRoom extends Component {
           <div className="row-div">
             <div className="roomtitle2">메인 토픽</div>
             <div className="tagdiv">
-              <TagsTopic callbackFromParent={this.myCallback} />
+              <TagsTopic
+                callbackFromParent={this.myCallback}
+                issue={this.state.issue}
+                issueCome={this.state.issueCome}
+              />
 
               <button className="getissue" onClick={this.onOpenModal}>
                 <img src={searchissue} className="getissueimg" alt="" />
@@ -202,6 +226,7 @@ class MakeRoom extends Component {
             open={this.state.open}
             title={this.state.title}
             onCloseModal={this.onCloseModal}
+            callbackFromParent={this.myCallback3}
           />
 
           <div className="row-div">

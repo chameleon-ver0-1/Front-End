@@ -26,6 +26,43 @@ export class TagsTopic extends Component {
     this.handleDrag = this.handleDrag.bind(this);
     this.handleTagClick = this.handleTagClick.bind(this);
   }
+
+  componentWillReceiveProps(props) {
+    console.log("나는 topic 내부 props ! ", props.issue);
+    if (props.issueCome) {
+      //이슈가 들어왔을때 = issueCome이 true일때
+      this.setState(
+        state => {
+          return {
+            tags: [...state.tags, { id: 3, text: props.issue }], //태그 화면에 추가하기
+            topic: this.state.topic.concat(props.issue) //넘겨줄 데이터에 추가하기
+          };
+        },
+        () => {
+          console.log("tag: " + this.state.topic);
+          //this.props.callbackFromParent(this.state.topic);
+        }
+      );
+      //props를 비워야함
+    }
+  }
+
+  // componentDidUpdate() {
+  //   console.log("componentDidUpdate", this.props.issue);
+  //   this.setState(
+  //     state => {
+  //       return {
+  //         //tags: [...state.tags, { id: 0, text: this.props.issue }],//태그 화면에 추가하기
+  //         topic: this.state.topic.concat(this.props.issue) //
+  //       };
+  //     },
+  //     () => {
+  //       console.log("tag: " + this.state.topic);
+  //       //this.props.callbackFromParent(this.state.topic);
+  //     }
+  //   );
+  // }
+
   /* 태그 */
   handleDelete(i) {
     const { tags } = this.state;

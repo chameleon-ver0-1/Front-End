@@ -31,12 +31,25 @@ export class ConferenceRoomDetail extends Component {
     this.state = {
       open: false,
       title: "",
+      proceedList: [],
       includeList: []
     };
   }
 
   componentDidMount() {
     this.forceUpdate();
+
+    services.confProceed(localStorage.getItem("projectId")).then(
+      res => {
+        this.setState({
+          proceedList: res.data.data
+        });
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
     services.confInclude(localStorage.getItem("projectId")).then(
       res => {
         this.setState({
@@ -88,7 +101,44 @@ export class ConferenceRoomDetail extends Component {
             </ButtonBack>
 
             <Slider className="slider">
-              <Slide index={0} className="slide-index0">
+              {[0, 1, 2].map(id => {
+                console.log(id + "+++++++++++");
+                //TODO: 4개씩 뿌려주는거!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                return (
+                  <Slide index={id} className="slide-index0">
+                    <div className="slide_div">
+                      {Object.keys(this.state.proceedList).map(id => {
+                        const proceedList = this.state.proceedList[id];
+                        const dateTime = new Date(proceedList.startTime);
+
+                        //let index = 0;
+                        //let count = 0;
+                        //count++;
+                        //console.log(count + " : count");
+                        // if (id > 3 && id <= 7) {
+                        //   break;
+                        // }
+
+                        return (
+                          <Circle1
+                            time={moment(dateTime).format("HH:mm~")}
+                            title={proceedList.title}
+                            name={
+                              proceedList.confLeaderName +
+                              " " +
+                              proceedList.confLeaderName_en
+                            }
+                            nowP={proceedList.isConfYMembersTotal}
+                            allP={proceedList.membersTotal}
+                            id={proceedList.id}
+                          />
+                        );
+                      })}
+                    </div>
+                  </Slide>
+                );
+              })}
+              {/* <Slide index={0} className="slide-index0">
                 <div className="slide_div">
                   <Circle1
                     time="12:30~"
@@ -149,7 +199,7 @@ export class ConferenceRoomDetail extends Component {
                     name="한예지"
                   />
                 </div>
-              </Slide>
+              </Slide> */}
             </Slider>
 
             <ButtonNext className="left_right_r">
@@ -187,8 +237,8 @@ export class ConferenceRoomDetail extends Component {
                         const dateTime = new Date(includeList.startTime);
 
                         //let index = 0;
-                        let count = 0;
-                        count++;
+                        //let count = 0;
+                        //count++;
                         //console.log(count + " : count");
                         // if (id > 3 && id <= 7) {
                         //   break;

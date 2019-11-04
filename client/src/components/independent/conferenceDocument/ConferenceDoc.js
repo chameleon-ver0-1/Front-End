@@ -118,7 +118,7 @@ export class ConferenceDoc extends Component {
               const dateTime = new Date(list.startTime);
 
               return (
-                <ul className="post-ul">
+                <ul className="post-ul" key={list.id}>
                   <li className="post-li">
                     <ul className="post-row-list">
                       <li className="post-row-list-item1">
