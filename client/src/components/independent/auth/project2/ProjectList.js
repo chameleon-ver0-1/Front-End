@@ -46,6 +46,9 @@ export class ProjectList extends Component {
           localStorage.setItem("projectName", projectName);
           localStorage.setItem("projectId", projectId);
           this.props.history.push(`/home/issue/${projectId}`);
+
+          console.log("프로젝트 처음 아니니깐 넣는다", res.data.role);
+          localStorage.setItem("myRole", res.data.role);
         } else {
           //프로젝트가 처음일 때
           console.log("첫 판단 성공");
@@ -59,6 +62,8 @@ export class ProjectList extends Component {
           });
           localStorage.setItem("projectName", projectName);
           localStorage.setItem("projectId", projectId);
+
+          localStorage.setItem("myRole", res.data);
           console.log(
             "projectId",
             localStorage.getItem("projectId", projectId)

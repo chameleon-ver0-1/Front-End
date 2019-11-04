@@ -9,8 +9,10 @@ const IssueAxios = axios.create({
   timeout: 5000
 });
 
-export function getIssueList() {
-  return IssueAxios.get(`${localStorage.getItem("projectId")}`);
+export function postIssueList(dept) {
+  return IssueAxios.post(`${localStorage.getItem("projectId")}`, {
+    dept
+  });
 }
 export function getCommentList(issueId) {
   return IssueAxios.get(`get/${issueId}`);
@@ -24,7 +26,7 @@ export function postComment(taskId, username, usernameEn, userImg, content) {
     content
   });
 }
-export function postIssue(
+export function postNewIssue(
   projectId,
   title,
   dDay,
@@ -51,7 +53,7 @@ export function postIssue(
 }
 
 export function postUpdateIssue(columnData) {
-  return IssueAxios.post("savestatus", {
+  return IssueAxios.post("save", {
     columnData
   });
 }

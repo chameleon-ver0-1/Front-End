@@ -106,7 +106,6 @@ class SignIn extends Component {
 
     service.signIn(this.state.email, this.state.password).then(
       res => {
-        
         this.props.history.push("/auth/projectManage");
       },
       err => {

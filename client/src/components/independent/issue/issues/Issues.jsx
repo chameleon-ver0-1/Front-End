@@ -16,18 +16,42 @@ export class Issues extends Component {
     taskItemLists: [],
     currentDep: ""
   };
-
+  componentWillReceiveProps(nextProps) {
+    console.log("hi", nextProps.currentDep);
+    if (nextProps != null) {
+      service.postIssueList(nextProps.currentDep).then(
+        res => {
+          const {
+            columnData: taskLists,
+            taskData: taskItemLists
+          } = res.data.data;
+          console.log(
+            "현재 보여주고 있는 이슈 리스트의 역할은",
+            nextProps.currentDep
+          );
+          this.setState({ taskLists, taskItemLists });
+          this.setState({ currentDep: nextProps.currentDep });
+          console.log("초기 taskLists", this.state.taskLists);
+        },
+        err => {
+          console.log("이슈 아이템 가져오기 실패");
+        }
+      );
+    }
+  }
   componentDidMount() {
-    service.getIssueList().then(
+    service.postIssueList(localStorage.getItem("myRole")).then(
       res => {
         const {
           columnData: taskLists,
           taskData: taskItemLists
         } = res.data.data;
-
+        console.log(
+          "현재 보여주고 있는 이슈 리스트의 역할은",
+          localStorage.getItem("myRole")
+        );
         this.setState({ taskLists, taskItemLists });
-        const current = res.data.data.roleData[0].role;
-        this.setState({ currentDep: current });
+        this.setState({ currentDep: localStorage.getItem("myRole") });
         console.log("초기 taskLists", this.state.taskLists);
       },
       err => {
@@ -42,9 +66,7 @@ export class Issues extends Component {
 
   onDragEnd = result => {
     const { taskLists, updateTaskList } = this.state;
-    // const issueName = document.querySelector(".issues-body");
-    // issueName.style.color = "inherit";
-    // issueName.style.backgroundColor = "inherit";
+
     //TODO:reorder our column(열)
     const { destination, source, draggableId } = result;
     if (!destination) {
@@ -67,6 +89,7 @@ export class Issues extends Component {
     if (start === finish) {
       const newItemIds = Array.from(start.taskIds);
       newItemIds.splice(source.index, 1); //드래그하는 해당 카드를 배열에서 삭제
+
       newItemIds.splice(destination.index, 0, draggableId); //드래그를 끝낸 위치에 드래그하는 카드를 추가한다.
 
       const newColumn = {
@@ -159,6 +182,7 @@ export class Issues extends Component {
                   column={column}
                   tasks={tasksByDep[0]}
                   count={tasksByDep[0].length}
+                  currentDep={this.state.currentDep}
                 />
               </Issue3>
             );
