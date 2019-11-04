@@ -119,7 +119,7 @@ export default class AddIssueDialog extends Component {
       console.log("content", content);
 
       service
-        .postIssue(
+        .postNewIssue(
           projectId,
           title,
           date,

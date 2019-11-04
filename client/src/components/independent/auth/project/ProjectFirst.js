@@ -39,6 +39,8 @@ export class ProjectFirst extends Component {
     const projectId = this.props.id;
     const projectName = this.props.projectTitle;
     console.log(projectId);
+    console.log("프로젝트 첫 판단 참여", this.state.roles_tag[0]);
+    localStorage.setItem("myRole", this.state.roles_tag);
     console.log(this.state.roles_tag + "+++++++++");
     service.projectOK(projectId, this.state.roles_tag.toString()).then(
       res => {

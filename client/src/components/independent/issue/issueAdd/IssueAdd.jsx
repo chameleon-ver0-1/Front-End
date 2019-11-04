@@ -26,13 +26,16 @@ export class IssueAdd extends Component {
   };
 
   render() {
-    const { status } = this.props;
+    const { status, currentDep } = this.props;
     return (
       <div
         style={{
           width: "0px",
           height: "0px",
-          display: status == "TODO" ? "inline" : "none"
+          display:
+            status === "TODO" && currentDep === localStorage.getItem("myRole")
+              ? "inline"
+              : "none"
         }}
       >
         <AddBtn onClick={this.openDialog}>+ TODO 추가하기</AddBtn>
