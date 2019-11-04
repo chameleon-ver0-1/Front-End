@@ -67,6 +67,7 @@ export class Issues extends Component {
     if (start === finish) {
       const newItemIds = Array.from(start.taskIds);
       newItemIds.splice(source.index, 1); //드래그하는 해당 카드를 배열에서 삭제
+      
       newItemIds.splice(destination.index, 0, draggableId); //드래그를 끝낸 위치에 드래그하는 카드를 추가한다.
 
       const newColumn = {
