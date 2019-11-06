@@ -11,7 +11,10 @@ import {
 export class CheckEndDialog extends Component {
   //FIXME: TO소영: 여기는 회의실 나가기 버튼 함수란다.
   onExit = () => {
-    service.postVideoExit(localStorage.getItem("roomId"));
+    service.postVideoStop(localStorage.getItem("roomId")).then(res => {
+      console.log("회의를 종료합니다.");
+      console.log(res.data);
+    });
 
     this.props.history.push(
       `/home/conferenceRoom/${localStorage.getItem("projectId")}`
