@@ -22,7 +22,8 @@ class ConferenceDocDetail extends Component {
       detail: [],
       key: [],
       keyword: [],
-      contents: []
+      contents: [],
+      isCreate: false
     };
   }
 
@@ -39,6 +40,15 @@ class ConferenceDocDetail extends Component {
           detail: res.data.data
         });
       });
+
+    services.postDocumentIsCreate(localStorage.getItem("documentId")).then(
+      res => {
+        console.log("회의록이 들어왔니 안왔니 ", res.data.data);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   };
 
   render() {

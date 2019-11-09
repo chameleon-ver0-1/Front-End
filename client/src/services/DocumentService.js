@@ -30,3 +30,7 @@ export function getDocumentDetail(projectId, roomId) {
     }
   );
 }
+
+export function postDocumentIsCreate(Id) {
+  return DocumentAxios.post(`isCreate/${Id}`);
+}
