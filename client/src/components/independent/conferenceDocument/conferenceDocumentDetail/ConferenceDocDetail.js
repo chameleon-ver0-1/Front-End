@@ -22,8 +22,7 @@ class ConferenceDocDetail extends Component {
       detail: [],
       key: [],
       keyword: [],
-      contents: [],
-      isCreate: false
+      contents: []
     };
   }
 
@@ -40,21 +39,13 @@ class ConferenceDocDetail extends Component {
           detail: res.data.data
         });
       });
-
-    services.postDocumentIsCreate(localStorage.getItem("documentId")).then(
-      res => {
-        console.log("회의록이 들어왔니 안왔니 ", res.data.data);
-      },
-      err => {
-        console.log(err);
-      }
-    );
   };
 
   render() {
     const { detail } = this.state;
     const startTime = new Date(detail.startTime);
     const endTime = new Date(detail.endTime);
+
     return (
       <div className="documentdetaildiv">
         <div className="documentDetailTitle">
