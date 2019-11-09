@@ -45,6 +45,7 @@ class ConferenceDocDetail extends Component {
     const { detail } = this.state;
     const startTime = new Date(detail.startTime);
     const endTime = new Date(detail.endTime);
+
     return (
       <div className="documentdetaildiv">
         <div className="documentDetailTitle">
