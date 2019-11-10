@@ -74,6 +74,10 @@ export class TagsProjectPeople extends Component {
         } else {
           //참여자가 있으면
           console.log("참여자 판단 성공", res.data.data);
+          document.getElementById("nopeople").style.display = this.state
+            .nopeople
+            ? "none"
+            : "inline";
           this.setState(state => ({
             tags: [...state.tags, tag],
             people: this.state.people.concat(tag.text)
