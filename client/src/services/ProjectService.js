@@ -9,13 +9,7 @@ const projectAxios = axios.create({
 });
 /**프로젝트 참여자 판단 post*/
 export function projectUser(email) {
-  return projectAxios.post("project/participantCheck", { email }).then(res => {
-    console.log(res.data);
-
-    console.log("***************************");
-    console.log(res.data.message);
-    console.log("***************************");
-  });
+  return projectAxios.post("project/participantCheck", { email });
 }
 
 /**프로젝트 개설 post */
