@@ -71,28 +71,36 @@ export class ConferenceDoc extends Component {
 
   /**회의록 상세 화면 이동 */
   gotoDetail(id) {
-    services.postDocumentIsCreate(id).then(
-      res => {
-        console.log("회의록이 들어왔니 안왔니 ", res.data);
-        if (res.data.message == "회의록 생성완료") {
-          //데이터가 있으면
-          console.log("데이터가 들어있따");
-          localStorage.setItem("documentId", id);
-          this.props.history.push(
-            `/home/conferenceDocument/conferenceDocumentDetail/${localStorage.getItem(
-              "projectId"
-            )}`
-          );
-        } else {
-          //데이터가 없으면
-          console.log("데이터가 없따");
-          alert("회의록이 생성중입니다.");
-        }
-      },
-      err => {
-        console.log(err);
+    try {
+      var id = id;
+      if (id) {
+        //데이터가 있으면
+        services.postDocumentIsCreate(id).then(
+          res => {
+            console.log("회의록이 들어왔니 안왔니 ", res.data);
+
+            console.log("데이터가 들어있따");
+            localStorage.setItem("documentId", id);
+            this.props.history.push(
+              `/home/conferenceDocument/conferenceDocumentDetail/${localStorage.getItem(
+                "projectId"
+              )}`
+            );
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      } else {
+        //데이터가 없으면
+        console.log("데이터가 없따");
+        alert("회의록이 생성중입니다.");
       }
-    );
+    } catch {
+      //데이터가 없으면
+      console.log("데이터가 없따");
+      alert("회의록이 생성중입니다.");
+    }
   }
 
   /**회의록 검색 */
