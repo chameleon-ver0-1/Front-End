@@ -64,22 +64,32 @@ export class TagsProjectPeople extends Component {
     //JSON.stringify()
     service.projectUser(tag.text).then(
       res => {
-        console.log("참여자 판단 성공");
-        this.setState(state => ({
-          tags: [...state.tags, tag],
-          people: this.state.people.concat(tag.text)
-          // [...state.tags, tag.text]
-        }));
-        // this.props.callbackFromParent(this.state.tags);
-        this.props.callbackFromParent(this.state.people);
-        console.log("tag: " + JSON.stringify(this.state.people));
+        if (res.data.data == false) {
+          //참여자가 없으면
+          console.log("참여자 판단 실패", res.data.data);
+          document.getElementById("nopeople").style.display = this.state
+            .nopeople
+            ? "inline"
+            : "none";
+        } else {
+          //참여자가 있으면
+          console.log("참여자 판단 성공", res.data.data);
+          document.getElementById("nopeople").style.display = this.state
+            .nopeople
+            ? "none"
+            : "inline";
+          this.setState(state => ({
+            tags: [...state.tags, tag],
+            people: this.state.people.concat(tag.text)
+            // [...state.tags, tag.text]
+          }));
+          // this.props.callbackFromParent(this.state.tags);
+          this.props.callbackFromParent(this.state.people);
+          console.log("tag: " + JSON.stringify(this.state.people));
+        }
       },
       err => {
-        console.log("참여자 판단 실패");
         console.log(err);
-        document.getElementById("nopeople").style.display = this.state.nopeople
-          ? "inline"
-          : "none";
       }
     );
   }
