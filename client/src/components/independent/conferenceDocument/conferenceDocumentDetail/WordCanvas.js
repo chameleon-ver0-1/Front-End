@@ -14,23 +14,23 @@ export class WordCanvas extends Component {
     WordCloud(this.refs["my-canvas"], {
       list: props.keywords,
       fontFamily: "NanumSquareL",
-      weightFactor: 1.2,
-      fontWeight: 2,
-      color: function(word, weight) {
-        if (weight < 8) {
-          return "#c0c0c0";
-        } else if (weight >= 8 && weight < 13) {
+      weightFactor: 1.3,
+      fontWeight: 3,
+      color: function(word, weight, fontSize) {
+        if (weight == 8) {
           return "#696969";
-        } else if (weight >= 13 && weight < 18) {
+        } else if (weight == 9) {
+          fontSize = 11;
           return "#88e0bc";
         } else {
+          fontSize = 13;
           return "#23ad6e";
         }
       },
       rotateRatio: 0,
       // rotationSteps: 2,
       backgroundColor: "#fafafa",
-      gridSize: 18,
+      gridSize: 16,
       drawOutOfBound: true,
       hover: window.drawBox,
       click: function(item) {

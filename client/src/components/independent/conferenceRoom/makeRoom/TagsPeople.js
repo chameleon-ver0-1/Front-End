@@ -36,7 +36,8 @@ export class TagsPeople extends Component {
     this.state = {
       tags: [],
       suggestions: suggestions,
-      people: []
+      people: [],
+      nopeople: true
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
@@ -57,7 +58,9 @@ export class TagsPeople extends Component {
     service.confParticipants(localStorage.getItem("projectId"), tag.text).then(
       res => {
         console.log("참여자 판단 성공");
-
+        document.getElementById("nopeople").style.display = this.state.nopeople
+          ? "none"
+          : "inline";
         var email;
         console.log("data가 나와야해", res.data.data);
         Object.keys(res.data.data.searchList).map(Id => {
@@ -77,6 +80,9 @@ export class TagsPeople extends Component {
       err => {
         console.log("참여자 판단 실패");
         console.log(err);
+        document.getElementById("nopeople").style.display = this.state.nopeople
+          ? "inline"
+          : "none";
       }
     );
   }
@@ -99,23 +105,31 @@ export class TagsPeople extends Component {
   render() {
     const { tags, suggestions } = this.state;
     return (
-      <TAGDIV4>
-        <ReactTags
-          inline
-          tags={tags}
-          suggestions={suggestions}
-          delimiters={delimiters}
-          handleDelete={this.handleDelete}
-          handleAddition={this.handleAddition}
-          handleDrag={this.handleDrag}
-          handleTagClick={this.handleTagClick}
-          autofocus={false}
-          placeholder="참여자를 추가하세요"
-          classNames={{
-            tagInputField: "tagInputField-people"
-          }}
-        />
-      </TAGDIV4>
+      <div>
+        <TAGDIV4>
+          <ReactTags
+            inline
+            tags={tags}
+            suggestions={suggestions}
+            delimiters={delimiters}
+            handleDelete={this.handleDelete}
+            handleAddition={this.handleAddition}
+            handleDrag={this.handleDrag}
+            handleTagClick={this.handleTagClick}
+            autofocus={false}
+            placeholder="참여자를 추가하세요"
+            classNames={{
+              tagInputField: "tagInputField-people"
+            }}
+          />
+        </TAGDIV4>
+        <div
+          id="nopeople"
+          style={{ display: "none", fontSize: "11px", color: "#34c88a" }}
+        >
+          팀원이 존재하지 않습니다.
+        </div>
+      </div>
     );
   }
 }
