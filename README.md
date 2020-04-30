@@ -29,7 +29,7 @@
 
 ## [ Architecture ]             
 
-![architecture](https://github.com/Choyoonyoung98/APPJAM2019_Refactoring/blob/master/WorkFlow.jpg)
+![architecture](https://github.com/chameleon-ver0-1/Front-End/blob/develop/chameleonArchitecture.png)
 
 ## [ Develop Environment ]
 ### FrontEnd
