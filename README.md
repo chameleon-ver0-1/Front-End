@@ -8,6 +8,7 @@
 ## [ About ]
 
 **얼굴인식과 감정분석 기술을 활용한 화상회의 중심 협업 플랫폼**입니다.
+<iframe width="560" height="315" src="https://youtu.be/1Wjx9Bl95wU" frameborder="0" allowfullscreen></iframe>
 [시연영상 확인하기](https://youtu.be/1Wjx9Bl95wU)
 
 **1. 프로젝트 생성 및 참여** <br>
