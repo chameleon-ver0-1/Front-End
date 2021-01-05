@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.19.1",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "conversationjs": "^1.0.0",
     "delay": "^4.2.0",
     "glamor": "^2.20.40",
