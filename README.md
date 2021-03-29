@@ -44,7 +44,6 @@
 ## [ API ]
 - [WebRTC - RTCMultiConnection](https://github.com/muaz-khan/RTCMultiConnection)
 - [Chromem STT/TTS](https://github.com/dodortus/webrtc-lab/tree/master/frontend/views/examples/speech-recognition)
-- [Kingfisher](https://github.com/onevcat/Kingfisher)
 
 ## [ 기술 ]
 - [Google Cloud AutoML](https://cloud.google.com/automl?hl=ko)
